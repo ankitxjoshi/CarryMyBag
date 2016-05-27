@@ -83,7 +83,7 @@
                 android:layout_width="120dip"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="40dip"
-                android:layout_marginLeft="85dip"
+                android:layout_marginLeft="75dip"
                 android:background="@null"
                 android:text="Facebook"
                 android:textAllCaps="false"
