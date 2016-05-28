@@ -10,6 +10,7 @@
     <string name="welcome">Welcome</string>
     <string name="btn_logout">LOGOUT</string>
     <string name="name">Fullname</string>
+    <string name="facebook_app_id">1013965892054918</string>
 
     <string-array name="navDrawerItems">
         <item>First</item>

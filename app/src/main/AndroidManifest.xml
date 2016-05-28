@@ -11,6 +11,9 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id"/>
         <activity
             android:name=".activity.LoginActivity"
             android:label="@string/app_name"
@@ -26,18 +29,18 @@
         <activity
             android:name=".activity.MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".activity.FirstFragment"
-            android:label="@string/title_activity_first_fragment"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".activity.SecondFragment"
-            android:label="@string/title_activity_second_fragment"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".activity.ThirdFragment"
-            android:label="@string/title_activity_third_fragment"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <!--<activity-->
+            <!--android:name=".activity.FirstFragment"-->
+            <!--android:label="@string/title_activity_first_fragment"-->
+            <!--android:theme="@style/AppTheme.NoActionBar" />-->
+        <!--<activity-->
+            <!--android:name=".activity.SecondFragment"-->
+            <!--android:label="@string/title_activity_second_fragment"-->
+            <!--android:theme="@style/AppTheme.NoActionBar" />-->
+        <!--<activity-->
+            <!--android:name=".activity.ThirdFragment"-->
+            <!--android:label="@string/title_activity_third_fragment"-->
+            <!--android:theme="@style/AppTheme.NoActionBar"></activity>-->
     </application>
 
 </manifest>
