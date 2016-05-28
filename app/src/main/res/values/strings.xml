@@ -11,5 +11,21 @@
     <string name="btn_logout">LOGOUT</string>
     <string name="name">Fullname</string>
 
+    <string-array name="navDrawerItems">
+        <item>First</item>
+        <item>Second</item>
+        <item>Third</item>
 
+    </string-array>
+
+    <string-array name="navDrawerIcons">
+
+        <item>@drawable/squad</item>
+        <item>@drawable/fixtures</item>
+        <item>@drawable/table</item>
+
+    </string-array>
+    <string name="title_activity_first_fragment">FirstFragment</string>
+    <string name="title_activity_second_fragment">SecondFragment</string>
+    <string name="title_activity_third_fragment">ThirdFragment</string>
 </resources>

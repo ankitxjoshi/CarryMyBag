@@ -8,73 +8,93 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.carrymybag.R;
+import com.carrymybag.adapter.RecyclerViewAdapter;
 import com.carrymybag.helper.SQLiteHandler;
 import com.carrymybag.helper.SessionManager;
 
 import java.util.HashMap;
 
 
-public class MainActivity extends Activity {
+import android.content.res.TypedArray;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.widget.DrawerLayout;
+import android.os.Bundle;
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 
-    private TextView txtName;
-    private TextView txtEmail;
-    private Button btnLogout;
 
-    private SQLiteHandler db;
-    private SessionManager session;
+public class MainActivity extends AppCompatActivity {
 
+    Toolbar toolbar;
+    public DrawerLayout drawerLayout;
+    RecyclerView recyclerView;
+    String navTitles[];
+    TypedArray navIcons;
+    RecyclerView.Adapter recyclerViewAdapter;
+    ActionBarDrawerToggle drawerToggle;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        txtName = (TextView) findViewById(R.id.name);
-        txtEmail = (TextView) findViewById(R.id.email);
-        btnLogout = (Button) findViewById(R.id.btnLogout);
+        //Let's first set up toolbar
+        setupToolbar();
 
-        // SqLite database handler
-        db = new SQLiteHandler(getApplicationContext());
+        //Initialize Views
+        recyclerView  = (RecyclerView) findViewById(R.id.recyclerView);
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawerMainActivity);
 
-        // session manager
-        session = new SessionManager(getApplicationContext());
+        //Setup Titles and Icons of Navigation Drawer
+        navTitles = getResources().getStringArray(R.array.navDrawerItems);
+        navIcons = getResources().obtainTypedArray(R.array.navDrawerIcons);
 
-        if (!session.isLoggedIn()) {
-            logoutUser();
-        }
 
-        // Fetching user details from SQLite
-        HashMap<String, String> user = db.getUserDetails();
+        /**
+         *Here , pass the titles and icons array to the adapter .
+         *Additionally , pass the context of 'this' activity .
+         *So that , later we can use the fragmentManager of this activity to add/replace fragments.
+         */
 
-        String name = user.get("name");
-        String email = user.get("email");
+        recyclerViewAdapter = new RecyclerViewAdapter(navTitles,navIcons,this);
+        recyclerView.setAdapter(recyclerViewAdapter);
 
-        // Displaying the user details on the screen
-        txtName.setText(name);
-        txtEmail.setText(email);
+        /**
+         *It is must to set a Layout Manager For Recycler View
+         *As per docs ,
+         *RecyclerView allows client code to provide custom layout arrangements for child views.
+         *These arrangements are controlled by the RecyclerView.LayoutManager.
+         *A LayoutManager must be provided for RecyclerView to function.
+         */
 
-        // Logout button click event
-        btnLogout.setOnClickListener(new View.OnClickListener() {
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-            @Override
-            public void onClick(View v) {
-                logoutUser();
-            }
-        });
+        //Finally setup ActionBarDrawerToggle
+        setupDrawerToggle();
+
+
+        //Add the Very First i.e Squad Fragment to the Container
+        Fragment FirstFragment = new FirstFragment();
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.containerView,FirstFragment,null);
+        fragmentTransaction.commit();
+
     }
 
-    /**
-     * Logging out the user. Will set isLoggedIn flag to false in shared
-     * preferences Clears the user data from sqlite users table
-     * */
-    private void logoutUser() {
-        session.setLogin(false);
-
-        db.deleteUsers();
-
-        // Launching the login activity
-        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-        startActivity(intent);
-        finish();
+    void setupToolbar(){
+        toolbar = (Toolbar) findViewById(R.id.toolBar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
     }
+
+    void setupDrawerToggle(){
+        drawerToggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.app_name,R.string.app_name);
+        //This is necessary to change the icon of the Drawer Toggle upon state change.
+        drawerToggle.syncState();
+    }
+
 }
-

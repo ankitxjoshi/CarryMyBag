@@ -18,13 +18,25 @@
             android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".activity.RegisterActivity"/>
+        <activity android:name=".activity.RegisterActivity" />
         <activity
             android:name=".activity.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity.FirstFragment"
+            android:label="@string/title_activity_first_fragment"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity.SecondFragment"
+            android:label="@string/title_activity_second_fragment"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity.ThirdFragment"
+            android:label="@string/title_activity_third_fragment"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
