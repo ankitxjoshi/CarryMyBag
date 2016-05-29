@@ -6,6 +6,8 @@ package com.carrymybag.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.TypedArray;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.RecyclerView;
@@ -27,6 +29,11 @@ import com.carrymybag.R;
 import com.carrymybag.activity.SecondFragment;
 import com.carrymybag.activity.ThirdFragment;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
     String[] titles;
     TypedArray icons;
@@ -34,7 +41,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public TextView textViewName;
     public TextView textViewEmail;
     //TextViews
-    public NetworkImageView profilePhoto;
+    public static NetworkImageView profilePhoto;
 
     //Image Loader
     public ImageLoader imageLoader;
@@ -182,6 +189,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         if(position==0)return 0;
         else return 1;
     }
+
 
 
 }
