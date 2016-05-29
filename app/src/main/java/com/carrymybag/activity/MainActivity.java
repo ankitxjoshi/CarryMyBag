@@ -1,12 +1,16 @@
 package com.carrymybag.activity;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.android.volley.toolbox.ImageLoader;
+import com.android.volley.toolbox.NetworkImageView;
 import com.carrymybag.R;
 import com.carrymybag.adapter.RecyclerViewAdapter;
 import com.carrymybag.helper.SQLiteHandler;
@@ -36,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
     TypedArray navIcons;
     RecyclerView.Adapter recyclerViewAdapter;
     ActionBarDrawerToggle drawerToggle;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -80,8 +85,9 @@ public class MainActivity extends AppCompatActivity {
         //Add the Very First i.e Squad Fragment to the Container
         Fragment FirstFragment = new FirstFragment();
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.containerView,FirstFragment,null);
+        fragmentTransaction.replace(R.id.containerView, FirstFragment, null);
         fragmentTransaction.commit();
+
 
     }
 

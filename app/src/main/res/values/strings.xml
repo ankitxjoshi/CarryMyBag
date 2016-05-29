@@ -15,7 +15,7 @@
     <string-array name="navDrawerItems">
         <item>First</item>
         <item>Second</item>
-        <item>Third</item>
+        <item>Logout</item>
 
     </string-array>
 
