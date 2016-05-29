@@ -52,6 +52,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private SessionManager session;
     private SQLiteHandler db;
 
+    public static String User_name;
+    public static String User_email;
+
     //Signin button
     private SignInButton signInButton;
 
@@ -63,6 +66,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     //Signin constant to check the activity result
     private int RC_SIGN_IN = 100;
+    public static String User_photourl;
 
 //    //TextViews
 //    private NetworkImageView profilePhoto;
@@ -282,10 +286,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             //Getting google account
             GoogleSignInAccount acct = result.getSignInAccount();
 
-//            Displaying name and email
-//           textViewName.setText(acct.getDisplayName());
-//            textViewEmail.setText(acct.getEmail());
-//
+
 //            Initializing image loader
 //            imageLoader = CustomVolleyRequest.getInstance(this.getApplicationContext())
 //                    .getImageLoader();
@@ -297,11 +298,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 //
 //            //Loading image
 //            profilePhoto.setImageUrl(acct.getPhotoUrl().toString(), imageLoader);
+            User_name = acct.getDisplayName();
+            User_email = acct.getEmail();
+            User_photourl = acct.getPhotoUrl().toString();
             Intent intent = new Intent(LoginActivity.this,
                     MainActivity.class);
-            intent.putExtra("User_name", acct.getDisplayName());
-            intent.putExtra("User_email", acct.getEmail());
-            intent.putExtra("User_photourl", acct.getPhotoUrl().toString());
             startActivity(intent);
             finish();
 

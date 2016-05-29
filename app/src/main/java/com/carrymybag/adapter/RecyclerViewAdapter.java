@@ -4,17 +4,23 @@ package com.carrymybag.adapter;
  * Created by Ankit on 5/28/2016.
  */
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.TypedArray;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.android.volley.toolbox.ImageLoader;
+import com.android.volley.toolbox.NetworkImageView;
+import com.carrymybag.activity.CustomVolleyRequest;
 import com.carrymybag.activity.FirstFragment;
+import com.carrymybag.activity.LoginActivity;
 import com.carrymybag.activity.MainActivity;
 
 import com.carrymybag.R;
@@ -25,6 +31,13 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     String[] titles;
     TypedArray icons;
     Context context;
+    public TextView textViewName;
+    public TextView textViewEmail;
+    //TextViews
+    public NetworkImageView profilePhoto;
+
+    //Image Loader
+    public ImageLoader imageLoader;
 
     // The default constructor to receive titles,icons and context from MainActivity.
     public RecyclerViewAdapter(String[] titles, TypedArray icons, Context context){
@@ -106,6 +119,22 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         }
         else if (viewType==0) {
             View itemHeader = layoutInflater.inflate(R.layout.header_layout,null);
+            textViewName = (TextView)itemHeader.findViewById(R.id.textViewName);
+            textViewEmail = (TextView)itemHeader.findViewById(R.id.textViewEmail);
+            textViewName.setText(LoginActivity.User_name);
+            textViewEmail.setText(LoginActivity.User_email);
+            profilePhoto = (NetworkImageView)itemHeader.findViewById(R.id.profileImage);
+            //Initializing image loader
+                    imageLoader = CustomVolleyRequest.getInstance(context.getApplicationContext())
+                    .getImageLoader();
+
+            imageLoader.get(LoginActivity.User_photourl,
+                    ImageLoader.getImageListener(profilePhoto,
+                            R.mipmap.ic_launcher,
+                            R.mipmap.ic_launcher));
+
+            //Loading image
+            profilePhoto.setImageUrl(LoginActivity.User_photourl, imageLoader);
             return new ViewHolder(itemHeader,viewType,context);
         }
 
