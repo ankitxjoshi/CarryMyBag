@@ -29,18 +29,12 @@
         <activity
             android:name=".activity.MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <!--<activity-->
-            <!--android:name=".activity.FirstFragment"-->
-            <!--android:label="@string/title_activity_first_fragment"-->
-            <!--android:theme="@style/AppTheme.NoActionBar" />-->
-        <!--<activity-->
-            <!--android:name=".activity.SecondFragment"-->
-            <!--android:label="@string/title_activity_second_fragment"-->
-            <!--android:theme="@style/AppTheme.NoActionBar" />-->
-        <!--<activity-->
-            <!--android:name=".activity.ThirdFragment"-->
-            <!--android:label="@string/title_activity_third_fragment"-->
-            <!--android:theme="@style/AppTheme.NoActionBar"></activity>-->
+        <activity android:name="com.facebook.FacebookActivity"
+            android:configChanges=
+                "keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:label="@string/app_name" />
+
     </application>
 
 </manifest>
