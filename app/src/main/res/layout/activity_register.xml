@@ -87,7 +87,7 @@ android:layout_height="match_parent">
         android:background="@null"
         android:text="@string/btn_link_to_login"
         android:textAllCaps="false"
-        android:textColor="#000000"
+        android:textColor="@color/Primary"
         android:textSize="15dp" />
 
 </LinearLayout>
