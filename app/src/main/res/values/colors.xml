@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
+
     <color name="colorAccent">#FF4081</color>
     <color name="bg_login">#26ae90</color>
     <color name="bg_register">#2e3237</color>
@@ -23,6 +22,7 @@
     <color name="counter_text_bg">#626262</color>
     <color name="counter_text_color">#c5c4c4</color>
     <color name="Primary">#992416</color>
+    <color name="PrimaryLight">#d2594a</color>
 
     <color name="statusBarColor">#4169E1</color>
     <color name="toolBarColor">#4682B4</color>
