@@ -20,6 +20,5 @@ public class SecondFragment extends android.support.v4.app.Fragment {
 
         return inflater.inflate(R.layout.activity_second_fragment,null);
 
-
     }
 }
