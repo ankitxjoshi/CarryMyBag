@@ -25,4 +25,24 @@
 
     </LinearLayout>
 
+    <Button
+        android:layout_width="300dip"
+        android:layout_height="wrap_content"
+        android:text="Book Now"
+        android:background="@color/PrimaryLight"
+        android:id="@+id/bookNow"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="51dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="30dip"
+        android:text="Estimate Price"
+        android:id="@+id/estimateView"
+        android:layout_above="@+id/bookNow"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="69dp" />
+
 </RelativeLayout>

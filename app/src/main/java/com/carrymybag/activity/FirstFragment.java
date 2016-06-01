@@ -30,7 +30,7 @@ public class FirstFragment extends android.support.v4.app.Fragment {
 
         View v = inflater.inflate(R.layout.activity_first_fragment,null);
         fromCityAuto = (AutoCompleteTextView)v.findViewById(R.id.fromcityauto);
-        fromCityTo = (AutoCompleteTextView)v.findViewById(R.id.fromcityauto);
+        fromCityTo = (AutoCompleteTextView)v.findViewById(R.id.tocityauto);
         String[] cityfrom = {"Surat","Ahmedabad"};
         String[] cityto = {"Surat","Ahmedabad"};
         ArrayAdapter<String> tocityadapter = new ArrayAdapter<String>(getContext(),android.R.layout.simple_expandable_list_item_1,cityto);

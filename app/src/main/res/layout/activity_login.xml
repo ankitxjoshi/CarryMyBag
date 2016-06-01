@@ -84,7 +84,7 @@ android:layout_height="match_parent">
             android:textSize="15dp"
             android:layout_gravity="center_horizontal" />
 
-        <Button
+        <com.facebook.login.widget.LoginButton
             android:id="@+id/fb_login_button"
             android:layout_marginLeft="30dip"
             android:text="Facebook"

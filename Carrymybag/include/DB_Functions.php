@@ -16,7 +16,7 @@ class DB_Functions {
 
     // destructor
     function __destruct() {
-        
+
     }
 
     /**
@@ -88,7 +88,7 @@ class DB_Functions {
         $stmt->store_result();
 
         if ($stmt->num_rows > 0) {
-            // user existed 
+            // user existed
             $stmt->close();
             return true;
         } else {
@@ -123,6 +123,22 @@ class DB_Functions {
 
         return $hash;
     }
+    /**
+    *Getting list of all
+    *list of cities
+    */
+    public function getCityList()
+    {
+      $stmt = $this->conn->prepare("SELECT City_Name from citylist");
+      if($stmt->execute())
+      {
+        $list = $stmt->get_result()->fetch_assoc();
+        $stmt->close();
+        return $list;
+      }
+
+    }
+
 
 }
 
