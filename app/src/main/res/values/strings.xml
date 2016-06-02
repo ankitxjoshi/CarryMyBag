@@ -1,4 +1,5 @@
 <resources>
+
     <string name="app_name">CarryMyBag</string>
     <string name="hint_email">Email</string>
     <string name="hint_password">Password</string>
@@ -13,22 +14,28 @@
     <string name="facebook_app_id">1013965892054918</string>
 
     <string-array name="navDrawerItems">
-        <item>First</item>
-        <item>Second</item>
+        <item>Book Now</item>
+        <item>How it Works</item>
+        <item>Settings</item>
+        <item>About Us</item>
         <item>Logout</item>
 
     </string-array>
 
     <string-array name="navDrawerIcons">
 
-        <item>@drawable/squad</item>
-        <item>@drawable/fixtures</item>
-        <item>@drawable/table</item>
-
+        <item>@drawable/padnote</item>
+        <item>@drawable/presentation</item>
+        <item>@drawable/settings</item>
+        <item>@drawable/aboutus</item>
+        <item>@drawable/logout</item>
     </string-array>
-    <string name="title_activity_first_fragment">FirstFragment</string>
-    <string name="title_activity_second_fragment">SecondFragment</string>
-    <string name="title_activity_third_fragment">ThirdFragment</string>
+
+    <string name="title_activity_first_fragment">Book Now</string>
+    <string name="title_activity_second_fragment">How it Works</string>
+    <string name="title_activity_third_fragment">Settings</string>
+    <string name="title_activity_forth_fragment">About Us</string>
+    <string name="title_activity_fifth_fragment">Logout</string>
 
 
     <string name="btn_sign_up">Sign Up</string>
