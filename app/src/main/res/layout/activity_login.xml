@@ -27,7 +27,7 @@ android:layout_height="match_parent">
             android:id="@+id/email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/white"
+            android:textColor="@color/grey"
             android:textColorHint="@color/white"
             android:inputType="textEmailAddress"
             android:hint="@string/hint_email" />
@@ -41,7 +41,7 @@ android:layout_height="match_parent">
         <EditText
             android:id="@+id/password"
             android:layout_width="match_parent"
-            android:textColor="@color/white"
+            android:textColor="@color/grey"
             android:textColorHint="@color/white"
             android:layout_height="wrap_content"
             android:inputType="textPassword"
