@@ -41,6 +41,9 @@ import com.carrymybag.helper.SessionManager;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
 import com.facebook.FacebookSdk;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
+import com.facebook.appevents.AppEventsLogger;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -49,6 +52,17 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
 
+
+import com.facebook.AccessToken;
+import com.facebook.AccessTokenTracker;
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.FacebookSdk;
+import com.facebook.Profile;
+import com.facebook.ProfileTracker;
+import com.facebook.login.LoginResult;
+import com.facebook.login.widget.LoginButton;
 
 
 
@@ -65,6 +79,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private ProgressDialog pDialog;
     private SessionManager session;
     private SQLiteHandler db;
+    CallbackManager callbackManager;
 
     public static String User_name;
     public static String User_email;
@@ -81,21 +96,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     //Signin constant to check the activity result
     private int RC_SIGN_IN = 100;
     public static String User_photourl;
-
-//    //TextViews
-//    private NetworkImageView profilePhoto;
-//
-//    //Image Loader
-//    private ImageLoader imageLoader;
-//    private TextView textViewName;
-//    private TextView textViewEmail;
-
+    public static boolean facebookFlag;
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        FacebookSdk.sdkInitialize(getApplicationContext());
+        facebookSDKInitialize();
         setContentView(R.layout.activity_login);
 
 //        textViewName = (TextView) findViewById(R.id.textViewName);
@@ -181,9 +188,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             }
         });
 
+        LoginButton loginButton = (LoginButton) findViewById(R.id.fb_login_button);
+        loginButton.setReadPermissions("email");
+        getLoginDetails(loginButton);
+
 
 
     }
+
+
 
     /**
      * function to verify login details in mysql db
@@ -303,6 +316,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             //Calling a new function to handle signin
             handleSignInResult(result);
         }
+        if(facebookFlag==true)
+        {
+            callbackManager.onActivityResult(requestCode, resultCode, data);
+        }
     }
 
 
@@ -411,4 +428,73 @@ private class MyTextWatcher implements TextWatcher {
             getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
         }
     }
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        // Logs 'install' and 'app activate' App Events.
+        AppEventsLogger.activateApp(this);
+    }
+    protected void facebookSDKInitialize() {
+
+        FacebookSdk.sdkInitialize(getApplicationContext());
+        callbackManager = CallbackManager.Factory.create();
+    }
+    protected void getLoginDetails(LoginButton login_button){
+
+        // Callback registration
+        facebookFlag = true;
+        login_button.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+            @Override
+            public void onSuccess(LoginResult login_result) {
+                GraphRequest request = GraphRequest.newMeRequest(
+                        login_result.getAccessToken(),
+                        new GraphRequest.GraphJSONObjectCallback() {
+                            @Override
+                            public void onCompleted(JSONObject object, GraphResponse response) {
+                                Log.v("LoginActivity", response.toString());
+
+                                // Application code
+                                try {
+                                    User_email = object.getString("email");
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                                try {
+                                    User_name = object.getString("name");
+                                    Log.v("LoginActivity", User_name);
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                                try {
+                                    JSONObject picObject = object.getJSONObject("picture");
+                                    JSONObject dataObject = picObject.getJSONObject("data");
+                                    User_photourl = dataObject.getString("url");
+                                    Log.v("LoginActivity", User_photourl);
+                                    Intent intent = new Intent(LoginActivity.this,MainActivity.class);
+                                    startActivity(intent);
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        });
+                Bundle parameters = new Bundle();
+                parameters.putString("fields", "id,name,email,gender,birthday,picture");
+                request.setParameters(parameters);
+                request.executeAsync();
+
+            }
+
+            @Override
+            public void onCancel() {
+                // code for cancellation
+            }
+
+            @Override
+            public void onError(FacebookException exception) {
+                //  code to handle error
+            }
+        });
+    }
+
 }

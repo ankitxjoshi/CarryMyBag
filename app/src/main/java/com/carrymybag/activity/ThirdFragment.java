@@ -2,7 +2,6 @@ package com.carrymybag.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -16,6 +15,7 @@ import android.widget.TextView;
 import com.carrymybag.R;
 import com.carrymybag.helper.SQLiteHandler;
 import com.carrymybag.helper.SessionManager;
+import com.facebook.login.LoginManager;
 
 import java.util.HashMap;
 
@@ -28,7 +28,6 @@ public class ThirdFragment extends android.support.v4.app.Fragment {
     private SQLiteHandler db;
     private SessionManager session;
 
-    @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_third_fragment, container, false);
@@ -78,6 +77,10 @@ public class ThirdFragment extends android.support.v4.app.Fragment {
         db.deleteUsers();
 
         // Launching the login activity
+        if(LoginActivity.facebookFlag) {
+            LoginManager.getInstance().logOut();
+            LoginActivity.facebookFlag = false;
+        }
         Intent intent = new Intent(getActivity(), LoginActivity.class);
         startActivity(intent);
         getActivity().finish();
