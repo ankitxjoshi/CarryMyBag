@@ -131,17 +131,32 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             textViewName.setText(LoginActivity.User_name);
             textViewEmail.setText(LoginActivity.User_email);
             profilePhoto = (NetworkImageView)itemHeader.findViewById(R.id.profileImage);
-            //Initializing image loader
-                    imageLoader = CustomVolleyRequest.getInstance(context.getApplicationContext())
+            imageLoader = CustomVolleyRequest.getInstance(context.getApplicationContext())
                     .getImageLoader();
+            String noImageURL = "http://static.sgv2.com/img/185242/no-image.png";
+            if(LoginActivity.User_photourl!=null)
+            {
 
-            imageLoader.get(LoginActivity.User_photourl,
-                    ImageLoader.getImageListener(profilePhoto,
-                            R.mipmap.ic_launcher,
-                            R.mipmap.ic_launcher));
+                //Initializing image loader
 
-            //Loading image
-            profilePhoto.setImageUrl(LoginActivity.User_photourl, imageLoader);
+
+                imageLoader.get(LoginActivity.User_photourl,
+                        ImageLoader.getImageListener(profilePhoto,
+                                R.mipmap.ic_launcher,
+                                R.mipmap.ic_launcher));
+
+                //Loading image
+                profilePhoto.setImageUrl(LoginActivity.User_photourl, imageLoader);
+            }
+            else
+            {
+                imageLoader.get(noImageURL,
+                        ImageLoader.getImageListener(profilePhoto,
+                                R.mipmap.ic_launcher,
+                                R.mipmap.ic_launcher));
+                profilePhoto.setImageUrl(noImageURL, imageLoader);
+            }
+
             return new ViewHolder(itemHeader,viewType,context);
         }
 

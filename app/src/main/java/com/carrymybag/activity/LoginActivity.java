@@ -98,8 +98,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         FacebookSdk.sdkInitialize(getApplicationContext());
         setContentView(R.layout.activity_login);
 
-
-
 //        textViewName = (TextView) findViewById(R.id.textViewName);
 //        textViewEmail = (TextView) findViewById(R.id.textViewEmail);
 
@@ -223,6 +221,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         String email = user.getString("email");
                         String created_at = user
                                 .getString("created_at");
+                        User_name = name;
+                        User_email = email;
+                        User_photourl = null;
 
                         // Inserting row in users table
                         db.addUser(name, email, uid, created_at);
@@ -271,6 +272,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         // Adding request to request queue
         AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
     }
+
 
     private void showDialog() {
         if (!pDialog.isShowing())
