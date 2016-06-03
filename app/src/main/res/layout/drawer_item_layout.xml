@@ -8,6 +8,7 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:layout_marginLeft="16dp"
         android:id="@+id/iv_NavIcon"/>
 
@@ -15,10 +16,11 @@
         android:layout_gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="30dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
         android:id="@+id/tv_NavTitle"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="#000000"
+        android:textColor="#d80027"
         android:textSize="18sp"
         android:textStyle="bold"/>
 

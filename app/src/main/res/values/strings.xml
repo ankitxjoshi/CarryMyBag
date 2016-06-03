@@ -15,6 +15,7 @@
 
     <string-array name="navDrawerItems">
         <item>Book Now</item>
+        <item>Track Now</item>
         <item>How it Works</item>
         <item>Settings</item>
         <item>About Us</item>
@@ -25,6 +26,7 @@
     <string-array name="navDrawerIcons">
 
         <item>@drawable/padnote</item>
+        <item>@drawable/track</item>
         <item>@drawable/presentation</item>
         <item>@drawable/settings</item>
         <item>@drawable/aboutus</item>
@@ -32,10 +34,11 @@
     </string-array>
 
     <string name="title_activity_first_fragment">Book Now</string>
-    <string name="title_activity_second_fragment">How it Works</string>
-    <string name="title_activity_third_fragment">Settings</string>
-    <string name="title_activity_forth_fragment">About Us</string>
-    <string name="title_activity_fifth_fragment">Logout</string>
+    <string name="title_activity_second_fragment">Track</string>
+    <string name="title_activity_third_fragment">How it Works</string>
+    <string name="title_activity_forth_fragment">Settings</string>
+    <string name="title_activity_fifth_fragment">About Us</string>
+    <string name="title_activity_sixth_fragment">Logout</string>
 
 
     <string name="btn_sign_up">Sign Up</string>
