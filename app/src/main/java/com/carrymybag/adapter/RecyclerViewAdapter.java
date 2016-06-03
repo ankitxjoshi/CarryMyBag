@@ -27,6 +27,7 @@ import com.carrymybag.activity.MainActivity;
 
 import com.carrymybag.R;
 import com.carrymybag.activity.SecondFragment;
+import com.carrymybag.activity.SixthFragment;
 import com.carrymybag.activity.ThirdFragment;
 
 import java.io.IOException;
@@ -101,9 +102,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                     fragmentTransaction.replace(R.id.containerView,secondFragment);
                     fragmentTransaction.commit();
                     break;
-                case 3:
-                    Fragment thirdFragment = new ThirdFragment();
-                    fragmentTransaction.replace(R.id.containerView,thirdFragment);
+                case 6:
+                    Fragment sixthFragment = new SixthFragment();
+                    fragmentTransaction.replace(R.id.containerView,sixthFragment);
                     fragmentTransaction.commit();
                     break;
             }
