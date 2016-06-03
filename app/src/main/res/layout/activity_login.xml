@@ -14,7 +14,7 @@ android:layout_height="match_parent">
     android:orientation="vertical"
     android:paddingLeft="20dp"
     android:paddingRight="20dp"
-    android:paddingTop="60dp">
+    android:paddingTop="30dp">
 
 
 
@@ -65,34 +65,44 @@ android:layout_height="match_parent">
         android:id="@+id/btnLinkToRegisterScreen"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dip"
+        android:layout_marginTop="10dip"
         android:background="@null"
         android:text="@string/btn_link_to_register"
         android:textAllCaps="false"
         android:textColor="@color/Primary"
         android:textSize="15dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="OR"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:textColor="@color/grey"
+        android:id="@+id/textView"
+        android:layout_gravity="center_horizontal" />
+
+    <com.google.android.gms.common.SignInButton
+        android:id="@+id/btnGoogle"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Google+"
+        android:textSize="15dp" />
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_marginTop="40dip"
+        android:layout_marginTop="10dip"
         android:layout_height="wrap_content">
-
-        <com.google.android.gms.common.SignInButton
-            android:id="@+id/btnGoogle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Google+"
-            android:textSize="15dp"
-            android:layout_gravity="center_horizontal" />
 
         <com.facebook.login.widget.LoginButton
             android:id="@+id/fb_login_button"
-            android:layout_marginLeft="30dip"
             android:text="Facebook"
-            android:layout_width="120dip"
-            android:layout_height="55dip"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="30dp"
-            android:layout_marginBottom="30dp" />
+           />
 
 
     </LinearLayout>
