@@ -434,7 +434,6 @@ private class MyTextWatcher implements TextWatcher {
 
         // Callback registration
         facebookFlag = true;
-        session.setLogin(true);
         login_button.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult login_result) {
