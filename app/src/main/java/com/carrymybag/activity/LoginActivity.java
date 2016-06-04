@@ -105,6 +105,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         facebookSDKInitialize();
         setContentView(R.layout.activity_login);
 
+
 //        textViewName = (TextView) findViewById(R.id.textViewName);
 //        textViewEmail = (TextView) findViewById(R.id.textViewEmail);
 
@@ -118,7 +119,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         //Initializing signinbutton
         signInButton = (SignInButton) findViewById(R.id.btnGoogle);
-        signInButton.setSize(SignInButton.SIZE_WIDE);
+        signInButton.setSize(SignInButton.SIZE_STANDARD);
         signInButton.setScopes(gso.getScopeArray());
 
         //Initializing google api client
@@ -156,6 +157,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             finish();
         }
 
+
         // Login button Click Event
         btnLogin.setOnClickListener(new View.OnClickListener() {
 
@@ -189,12 +191,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         });
 
         LoginButton loginButton = (LoginButton) findViewById(R.id.fb_login_button);
+        loginButton.setHeight(75);
+        loginButton.setText("Sign in");
         loginButton.setReadPermissions("email");
         getLoginDetails(loginButton);
 
-
-
     }
+
 
 
 
@@ -329,19 +332,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         if (result.isSuccess()) {
             //Getting google account
             GoogleSignInAccount acct = result.getSignInAccount();
-
-
-//            Initializing image loader
-//            imageLoader = CustomVolleyRequest.getInstance(this.getApplicationContext())
-//                    .getImageLoader();
-//
-//            imageLoader.get(acct.getPhotoUrl().toString(),
-//                    ImageLoader.getImageListener(profilePhoto,
-//                            R.mipmap.ic_launcher,
-//                            R.mipmap.ic_launcher));
-//
-//            //Loading image
-//            profilePhoto.setImageUrl(acct.getPhotoUrl().toString(), imageLoader);
             User_name = acct.getDisplayName();
             User_email = acct.getEmail();
             User_photourl = acct.getPhotoUrl().toString();
@@ -444,6 +434,7 @@ private class MyTextWatcher implements TextWatcher {
 
         // Callback registration
         facebookFlag = true;
+        session.setLogin(true);
         login_button.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult login_result) {

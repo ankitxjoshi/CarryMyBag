@@ -1,9 +1,9 @@
-
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:app="http://schemas.android.com/apk/res-auto"
-android:layout_width="match_parent"
+
+    android:layout_width="match_parent"
+    xmlns:fb="http://schemas.android.com/tools"
     android:background="#FFFFFF"
-android:layout_height="match_parent">
+    android:layout_height="match_parent">
 
 
 
@@ -92,30 +92,47 @@ android:layout_height="match_parent">
         android:id="@+id/textView"
         android:layout_gravity="center_horizontal" />
 
-    <com.google.android.gms.common.SignInButton
-        android:id="@+id/btnGoogle"
-        android:layout_gravity="center_horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="36dp"
-        android:text="Google+"
-        android:textSize="15dp" />
 
-    <LinearLayout
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_marginTop="10dip"
-        android:layout_height="wrap_content">
+        android:orientation="horizontal"
+        android:layout_height="60dip">
+        <LinearLayout
+            android:layout_width="120dip"
+            android:layout_alignParentLeft="true"
+            android:layout_height="wrap_content">
 
-        <com.facebook.login.widget.LoginButton
-            android:id="@+id/fb_login_button"
-            android:text="Facebook"
-            android:layout_width="match_parent"
-            android:layout_height="73dp"
-            android:layout_gravity="center_horizontal"
-           />
+            <com.google.android.gms.common.SignInButton
+                android:id="@+id/btnGoogle"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Google+"
+                android:textSize="15dp" />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="120dip"
+            android:layout_alignParentRight="true"
+            android:layout_height="75dip">
+
+            <com.facebook.login.widget.LoginButton
+                xmlns:fb="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/fb_login_button"
+                android:text="Facebook"
+                android:layout_width="match_parent"
+                fb:com_facebook_login_text="Sign in"
+                android:textSize="13sp"
+                android:paddingTop="14sp"
+                android:paddingBottom="14sp"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
 
 
-
-    </LinearLayout>
+    </RelativeLayout>
 
 </LinearLayout>
 
