@@ -1,30 +1,68 @@
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:paddingBottom="3dp"
-    android:layout_height="wrap_content">
+    android:layout_height="56dip"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/headerback"
+    android:orientation="vertical"
+    android:weightSum="1">
+
+
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="56dp"
+    android:orientation="vertical"
+    android:layout_alignParentBottom="true"
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentStart="true">
 
     <TextView
         android:id="@+id/textViewName"
-        android:textStyle="bold"
-        android:text="NotWorking"
-        android:visibility="gone"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:textColor="#ffffff"
+        android:textSize="14sp"
+        android:textStyle="bold"
+
+        />
 
     <TextView
         android:id="@+id/textViewEmail"
-        android:textStyle="bold"
-        android:visibility="gone"
-        android:text="NotWorking"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:textColor="#ffffff"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="5dp"
+        android:text="akash.bangad93@gmail.com"
+        android:textSize="14sp"
+        android:textStyle="normal"
 
-    <com.android.volley.toolbox.NetworkImageView
-        android:id="@+id/profileImage"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingLeft="40dp"
         />
-
 </LinearLayout>
+    <android.support.v7.widget.CardView
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginLeft="28dp"
+        android:layout_marginTop="48dp"
+        android:elevation="12dp"
+        android:id="@+id/view2"
+        app:cardCornerRadius="40dp"
+        android:adjustViewBounds="true"
+        android:innerRadius="0dp"
+        android:shape="ring"
+        android:thicknessRatio="1.9">
+        <com.android.volley.toolbox.NetworkImageView
+            android:id="@+id/profileImage"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:scaleType="centerCrop"
+            android:adjustViewBounds="true"
+            android:paddingLeft="40dp" />
+
+    </android.support.v7.widget.CardView>
+
+
+
+
+</RelativeLayout>
