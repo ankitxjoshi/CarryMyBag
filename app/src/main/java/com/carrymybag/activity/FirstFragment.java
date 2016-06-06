@@ -31,6 +31,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -56,6 +57,7 @@ public class FirstFragment extends android.support.v4.app.Fragment {
     private ProgressDialog pDialog;
     public static ArrayList<String> list;
     private TextView estimatePrice;
+    private Button bookNowBtn;
 
 
 
@@ -80,6 +82,15 @@ public class FirstFragment extends android.support.v4.app.Fragment {
         ArrayAdapter<String> fromcityadapter = new ArrayAdapter<String>(getContext(),android.R.layout.simple_expandable_list_item_1,list);
         fromCityAuto.setAdapter(fromcityadapter);
         fromCityTo.setAdapter(tocityadapter);
+        bookNowBtn = (Button)v.findViewById(R.id.bookNow);
+        bookNowBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(),
+                        BookDetails.class);
+                startActivity(intent);
+            }
+        });
         return v;
 
     }
