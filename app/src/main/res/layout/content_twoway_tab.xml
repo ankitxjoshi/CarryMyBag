@@ -8,12 +8,83 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/scrollView">
+        android:id="@+id/scrollView"
+        android:fillViewport="true"
+        android:layout_weight="1">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Pickup Date (dd/mm/yyyy)"
+                android:textSize="30dp"
+                android:layout_marginTop="10dp"
+                android:id="@+id/date_pickup1"
+                android:inputType="text"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Choose delivery option"
+                android:textSize="30dp"/>
+
+            <RadioGroup
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:id="@+id/delivery_options1">
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/radio_1day1"
+                    android:text="1 Day delivery"
+                    android:textSize="25dp"/>
+
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/radio_fast1"
+                    android:text="Fast delivery"
+                    android:textSize="25dp"/>
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/radio_standard1"
+                    android:text="Standard delivery"
+                    android:textSize="25dp"/>
+            </RadioGroup>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="DELIVERY BY - "
+                android:textSize="30dp"
+                android:layout_marginTop="10dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:textSize="30dp"
+                android:text="Estimated date of delivery"
+                android:id="@+id/date_delivery1" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="VIEW PRICES"
+                android:textSize="20dp"
+                android:layout_marginLeft="100dp"
+                android:id="@+id/btnViewPrices1"
+                android:layout_marginTop="10dp"/>
+
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -206,16 +277,82 @@
                     android:layout_height="wrap_content"
                     android:text="LEG 2"
                     android:textSize="30dp"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginLeft="20dp"
                     android:layout_marginTop="20dp"/>
             </LinearLayout>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Pickup Date(dd/mm/yyyy)"
+                android:textSize="20dp"
+                android:id="@+id/date_pickup2"
+                android:inputType="text"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Choose delivery option"
+                android:textSize="30dp"
+                android:layout_marginTop="10dp"/>
+
+            <RadioGroup
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:id="@+id/delivery_options2">
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/radio_1day2"
+                    android:text="1 Day delivery"
+                    android:textSize="25dp"/>
+
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/radio_fast2"
+                    android:text="Fast delivery"
+                    android:textSize="25dp"/>
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/radio_standard2"
+                    android:text="Standard delivery"
+                    android:textSize="25dp"/>
+            </RadioGroup>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="DELIVERY BY - "
+                android:textSize="30dp"
+                android:layout_marginTop="10dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:textSize="30dp"
+                android:text="Estimated date of delivery"
+                android:id="@+id/date_delivery2"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="VIEW PRICES"
+                android:textSize="20dp"
+                android:layout_marginLeft="100dp"
+                android:id="@+id/btnViewPrices2"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="30dp">
-
+                android:orientation="horizontal">
                 <TextView
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
@@ -241,7 +378,6 @@
                     android:textStyle="bold"
                     android:textSize="25dp"
                     android:layout_marginLeft="25dp"/>
-
             </LinearLayout>
 
             <LinearLayout
@@ -358,11 +494,27 @@
                 android:orientation="horizontal"
                 android:layout_marginTop="20dp">
 
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="SUBMIT"
+                    android:textSize="25dp"
+                    android:layout_marginLeft="130dp"
+                    android:id="@+id/btnSubmit"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="20dp">
+
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Pickup Address"
-                    android:inputType="text"/>
+                    android:inputType="text"
+                    android:id="@+id/pickup2"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -374,22 +526,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Destination Address"
-                    android:inputType="text"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="20dp">
-
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="SUBMIT"
-                    android:textSize="25dp"
-                    android:layout_marginLeft="130dp"
-                    android:id="@+id/btnSubmit"/>
+                    android:inputType="text"
+                    android:id="@+id/destination2" />
             </LinearLayout>
 
         </LinearLayout>

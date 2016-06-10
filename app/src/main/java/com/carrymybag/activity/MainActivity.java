@@ -89,6 +89,8 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.commit();
 
 
+
+
     }
 
     void setupToolbar(){
@@ -102,5 +104,7 @@ public class MainActivity extends AppCompatActivity {
         //This is necessary to change the icon of the Drawer Toggle upon state change.
         drawerToggle.syncState();
     }
+
+
 
 }

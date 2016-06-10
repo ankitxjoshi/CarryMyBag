@@ -9,192 +9,270 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/scrollView"
-        android:fillViewport="true">
+        android:fillViewport="true"
+        android:layout_weight="1">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <LinearLayout
+            <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="30dp">
+                android:hint="Pickup Date (dd/mm/yyyy)"
+                android:textSize="30dp"
+                android:layout_marginTop="10dp"
+                android:id="@+id/date_pickup"
+                android:inputType="text"/>
 
-                <TextView
-                    android:layout_width="150dp"
-                    android:layout_height="wrap_content"
-                    android:text="BAG"
-                    android:textSize="25dp"
-                    android:textStyle="bold"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="25dp"
-                    android:text="Qty"
-                    android:textStyle="bold"
-                    android:textSize="25dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="PRICE"
-                    android:textStyle="bold"
-                    android:textSize="25dp"
-                    android:layout_marginLeft="25dp"/>
-
-            </LinearLayout>
-
-            <LinearLayout
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="15dp">
+                android:text="Choose delivery option"
+                android:textSize="30dp"/>
 
-                <TextView
-                    android:layout_width="150dp"
-                    android:layout_height="75dp"
-                    android:text="Small Bag(0-15Kg)"
-                    android:textSize="20dp"
-                    android:textStyle="bold"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:id="@+id/bag_small"/>
+            <RadioGroup
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:id="@+id/delivery_options">
 
-                <EditText
+                <RadioButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="25dp"
-                    android:hint="No."
-                    android:textSize="20dp"
-                    android:inputType="number"
-                    android:id="@+id/qty_small"/>
+                    android:id="@+id/radio_1day"
+                    android:text="1 Day delivery"
+                    android:textSize="25dp"/>
 
-                <TextView
+
+                <RadioButton
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="1000"
-                    android:textSize="20dp"
-                    android:id="@+id/price_small"
-                    android:layout_marginLeft="25dp"/>
+                    android:layout_height="wrap_content"
+                    android:id="@+id/radio_fast"
+                    android:text="Fast delivery"
+                    android:textSize="25dp"/>
 
-            </LinearLayout>
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/radio_standard"
+                    android:text="Standard delivery"
+                    android:textSize="25dp"/>
+            </RadioGroup>
 
-            <LinearLayout
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="10dp">
+                android:text="DELIVERY BY - "
+                android:textSize="30dp"
+                android:layout_marginTop="10dp"/>
 
-                <TextView
-                    android:layout_width="150dp"
-                    android:layout_height="75dp"
-                    android:text="Medium Bag(16-50Kg)"
-                    android:textSize="20dp"
-                    android:textStyle="bold"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:id="@+id/bag_medium"/>
-
-                <EditText
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="25dp"
-                    android:hint="No."
-                    android:textSize="20dp"
-                    android:inputType="number"
-                    android:id="@+id/qty_medium"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="2000"
-                    android:textSize="20dp"
-                    android:id="@+id/price_medium"
-                    android:layout_marginLeft="25dp"/>
-
-            </LinearLayout>
-
-            <LinearLayout
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="10dp">
-
-                <TextView
-                    android:layout_width="150dp"
-                    android:layout_height="75dp"
-                    android:text="Large Bag(>50Kg)"
-                    android:textSize="20dp"
-                    android:textStyle="bold"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentLeft="true"
-                    android:id="@+id/bag_large"
-                    android:layout_alignParentStart="true" />
-
-                <EditText
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="25dp"
-                    android:hint="No."
-                    android:textSize="20dp"
-                    android:inputType="number"
-                    android:id="@+id/qty_large"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="3000"
-                    android:textSize="20dp"
-                    android:layout_marginLeft="25dp"
-                    android:id="@+id/price_large"/>
-
-            </LinearLayout>
-
+                android:layout_marginTop="5dp"
+                android:textSize="30dp"
+                android:text="Estimated date of delivery"
+                android:id="@+id/date_delivery" />
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:text="SUBMIT"
-                android:textSize="25dp"
-                android:layout_marginLeft="130dp"
-                android:id="@+id/btnSubmit"/>
+                android:text="VIEW PRICES"
+                android:textSize="20dp"
+                android:layout_marginLeft="100dp"
+                android:id="@+id/btnViewPrices"
+                android:layout_marginTop="10dp"/>
+
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="30dp">
+                android:orientation="vertical">
 
-                <EditText
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Pickup Address"
-                    android:inputType="text"/>
-            </LinearLayout>
+                    android:orientation="horizontal"
+                    android:layout_marginTop="30dp">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="10dp">
+                    <TextView
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:text="BAG"
+                        android:textSize="25dp"
+                        android:textStyle="bold"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true" />
 
-                <EditText
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="25dp"
+                        android:text="Qty"
+                        android:textStyle="bold"
+                        android:textSize="25dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="PRICE"
+                        android:textStyle="bold"
+                        android:textSize="25dp"
+                        android:layout_marginLeft="25dp"/>
+
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Destination Address"
-                    android:inputType="text"/>
+                    android:orientation="horizontal"
+                    android:layout_marginTop="15dp">
+
+                    <TextView
+                        android:layout_width="150dp"
+                        android:layout_height="75dp"
+                        android:text="Small Bag(0-15Kg)"
+                        android:textSize="20dp"
+                        android:textStyle="bold"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:id="@+id/bag_small"/>
+
+                    <EditText
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="25dp"
+                        android:hint="No."
+                        android:textSize="20dp"
+                        android:inputType="number"
+                        android:id="@+id/qty_small"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="1000"
+                        android:textSize="20dp"
+                        android:id="@+id/price_small"
+                        android:layout_marginLeft="25dp"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="10dp">
+
+                    <TextView
+                        android:layout_width="150dp"
+                        android:layout_height="75dp"
+                        android:text="Medium Bag(16-50Kg)"
+                        android:textSize="20dp"
+                        android:textStyle="bold"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:id="@+id/bag_medium"/>
+
+                    <EditText
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="25dp"
+                        android:hint="No."
+                        android:textSize="20dp"
+                        android:inputType="number"
+                        android:id="@+id/qty_medium"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="2000"
+                        android:textSize="20dp"
+                        android:id="@+id/price_medium"
+                        android:layout_marginLeft="25dp"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="10dp">
+
+                    <TextView
+                        android:layout_width="150dp"
+                        android:layout_height="75dp"
+                        android:text="Large Bag(>50Kg)"
+                        android:textSize="20dp"
+                        android:textStyle="bold"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentLeft="true"
+                        android:id="@+id/bag_large"
+                        android:layout_alignParentStart="true" />
+
+                    <EditText
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="25dp"
+                        android:hint="No."
+                        android:textSize="20dp"
+                        android:inputType="number"
+                        android:id="@+id/qty_large"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="3000"
+                        android:textSize="20dp"
+                        android:layout_marginLeft="25dp"
+                        android:id="@+id/price_large"/>
+
+                </LinearLayout>
+
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:text="SUBMIT"
+                    android:textSize="25dp"
+                    android:layout_marginLeft="130dp"
+                    android:id="@+id/btnSubmit"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="30dp">
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Pickup Address"
+                        android:inputType="text"
+                        android:id="@+id/pickup1"/>
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="10dp">
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Destination Address"
+                        android:inputType="text"
+                        android:id="@+id/destination1"/>
+                </LinearLayout>
+
             </LinearLayout>
-
-
         </LinearLayout>
     </ScrollView>
 

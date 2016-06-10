@@ -15,7 +15,6 @@ import com.carrymybag.R;
 import java.util.ArrayList;
 import java.util.List;
 
-//import info.androidhive.materialtabs.R;
 
 public class BookDetails extends AppCompatActivity {
 

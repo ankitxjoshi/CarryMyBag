@@ -46,6 +46,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     //Image Loader
     public ImageLoader imageLoader;
+    public static int selected_item = 0;
 
     // The default constructor to receive titles,icons and context from MainActivity.
     public RecyclerViewAdapter(String[] titles, TypedArray icons, Context context){
@@ -179,6 +180,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             holder.navTitle.setText(titles[position - 1]);
             holder.navIcon.setImageResource(icons.getResourceId(position-1,-1));
         }
+
 
     }
 
