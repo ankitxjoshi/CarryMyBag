@@ -1,7 +1,4 @@
 <?php
-
-
-
 class DB_Functions {
 
     private $conn;
@@ -123,23 +120,39 @@ class DB_Functions {
 
         return $hash;
     }
-    /**
-    *Getting list of all
-    *list of cities
-    */
+
     public function getCityList()
     {
       $stmt = $this->conn->prepare("SELECT City_Name from citylist");
       if($stmt->execute())
       {
-        $list = $stmt->get_result()->fetch_assoc();
+        $list = $stmt->get_result();
+        $result = array();
+        while ($row = $list->fetch_array(MYSQLI_NUM))
+        {
+            foreach ($row as $r)
+            {
+                array_push($result, array("city"=>$r));
+            }
+
+        }
+       }
+
         $stmt->close();
-        return $list;
+        return $result;
       }
+      public function storeData($qtySmall,$qtyMed,$qtyLarge,$priceSmall,$priceMed,$priceLarge) {
 
-    }
+          $stmt = $this->conn->prepare("INSERT INTO orders(qtySmall,qtyMed,qtyLarge,priceSmall,priceMed,priceLarge)VALUES($qtySmall,$qtyMed,$qtyLarge,$priceSmall,$priceMed,$priceLarge)");
+          $result = $stmt->execute();
+          $stmt->close();
 
-
+          if ($result) {
+              return true;
+          }
+          else {
+              return false;
+          }
+      }
 }
-
 ?>
