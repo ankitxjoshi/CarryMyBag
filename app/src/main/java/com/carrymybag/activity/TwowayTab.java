@@ -62,6 +62,9 @@ public class TwowayTab extends Fragment implements View.OnClickListener {
     public static final String KEY_PRICELARGE = "priceLarge";
     public static final String KEY_ADDR_PICKUP = " addr_pickup";
     public static final String KEY_ADDR_DEST = "addr_dest";
+    public static final String KEY_USER = "userId";
+    public static final String KEY_PICKUP = "pickUp";
+    public static final String KEY_DROPDOWN = "dropDown";
 
     private DatePickerDialog DatePickerDialog1;
     private DatePickerDialog DatePickerDialog2;
@@ -374,52 +377,11 @@ public class TwowayTab extends Fragment implements View.OnClickListener {
         final String priceSmall =  textPriceSmall1.getText().toString().trim();
         final String priceMed =  textPriceMed1.getText().toString().trim();
         final String priceLarge =  textPriceLarge1.getText().toString().trim();
-//        final String addr_pickup =  editaddr_pickup1.getText().toString().trim();
- //       final String addr_dest =  editaddr_dest1.getText().toString().trim();
-
-
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, AppConfig.URL_Storedata,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        Toast.makeText(getActivity(),response,Toast.LENGTH_LONG).show();
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(getActivity(),error.toString(),Toast.LENGTH_LONG).show();
-                    }
-                }){
-            @Override
-            protected Map<String,String> getParams(){
-                Map<String,String> params = new HashMap<String, String>();
-                params.put(KEY_QTYSMALL,qtySmall);
-                params.put(KEY_QTYMED,qtyMed);
-                params.put(KEY_QTYLARGE,qtyLarge);
-                params.put(KEY_PRICESMALL,priceSmall);
-                params.put(KEY_PRICEMED,priceMed);
-                params.put(KEY_PRICELARGE,priceLarge);
-       //         params.put(KEY_ADDR_PICKUP,addr_pickup);
-     //           params.put(KEY_ADDR_DEST,addr_dest);
-                return params;
-            }
-
-        };
-
-        RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
-        requestQueue.add(stringRequest);
-    }
-
-    private void registerUser2(){
-        final String qtySmall =  editTextQtySmall2.getText().toString().trim();
-        final String qtyMed =  editTextQtyMed2.getText().toString().trim();
-        final String qtyLarge =  editTextQtyLarge2.getText().toString().trim();
-        final String priceSmall =  textPriceSmall2.getText().toString().trim();
-        final String priceMed =  textPriceMed2.getText().toString().trim();
-        final String priceLarge =  textPriceLarge2.getText().toString().trim();
-        final String addr_pickup =  editaddr_pickup2.getText().toString().trim();
-        final String addr_dest =  editaddr_dest2.getText().toString().trim();
+        final String addr_pickup =  editaddr_pickup1.getText().toString().trim();
+        final String addr_dest =  editaddr_dest1.getText().toString().trim();
+        final String userId = LoginActivity.User_email;
+        final String pickUp =  PicupDate1.getText().toString().trim();
+        final String dropDown =  DateOfDelivery1.getText().toString().trim();
 
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, AppConfig.URL_Storedata,
@@ -446,6 +408,59 @@ public class TwowayTab extends Fragment implements View.OnClickListener {
                 params.put(KEY_PRICELARGE,priceLarge);
                 params.put(KEY_ADDR_PICKUP,addr_pickup);
                 params.put(KEY_ADDR_DEST,addr_dest);
+                params.put(KEY_USER,userId);
+                params.put(KEY_PICKUP,pickUp);
+                params.put(KEY_DROPDOWN,dropDown);
+                return params;
+            }
+
+        };
+
+        RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
+        requestQueue.add(stringRequest);
+    }
+
+    private void registerUser2(){
+        final String qtySmall =  editTextQtySmall2.getText().toString().trim();
+        final String qtyMed =  editTextQtyMed2.getText().toString().trim();
+        final String qtyLarge =  editTextQtyLarge2.getText().toString().trim();
+        final String priceSmall =  textPriceSmall2.getText().toString().trim();
+        final String priceMed =  textPriceMed2.getText().toString().trim();
+        final String priceLarge =  textPriceLarge2.getText().toString().trim();
+        final String addr_pickup =  editaddr_pickup2.getText().toString().trim();
+        final String addr_dest =  editaddr_dest2.getText().toString().trim();
+        final String userId = LoginActivity.User_email;
+        final String pickUp =  PicupDate2.getText().toString().trim();
+        final String dropDown =  DateOfDelivery2.getText().toString().trim();
+
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, AppConfig.URL_Storedata,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Toast.makeText(getActivity(),response,Toast.LENGTH_LONG).show();
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getActivity(),error.toString(),Toast.LENGTH_LONG).show();
+                    }
+                }){
+            @Override
+            protected Map<String,String> getParams(){
+                Map<String,String> params = new HashMap<String, String>();
+                params.put(KEY_QTYSMALL,qtySmall);
+                params.put(KEY_QTYMED,qtyMed);
+                params.put(KEY_QTYLARGE,qtyLarge);
+                params.put(KEY_PRICESMALL,priceSmall);
+                params.put(KEY_PRICEMED,priceMed);
+                params.put(KEY_PRICELARGE,priceLarge);
+                params.put(KEY_ADDR_PICKUP,addr_pickup);
+                params.put(KEY_ADDR_DEST,addr_dest);
+                params.put(KEY_USER,userId);
+                params.put(KEY_PICKUP,pickUp);
+                params.put(KEY_DROPDOWN,dropDown);
                 return params;
             }
 

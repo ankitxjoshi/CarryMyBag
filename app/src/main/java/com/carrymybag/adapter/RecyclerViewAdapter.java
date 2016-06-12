@@ -127,6 +127,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             return new ViewHolder(itemLayout,viewType,context);
         }
         else if (viewType==0) {
+
             View itemHeader = layoutInflater.inflate(R.layout.header_layout,null);
             textViewName = (TextView)itemHeader.findViewById(R.id.textViewName);
             textViewEmail = (TextView)itemHeader.findViewById(R.id.textViewEmail);

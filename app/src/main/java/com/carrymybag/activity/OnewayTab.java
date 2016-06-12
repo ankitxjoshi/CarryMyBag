@@ -36,9 +36,6 @@ import java.util.Map;
 
 public class OnewayTab extends Fragment implements View.OnClickListener {
 
-    public OnewayTab() {
-        // Required empty public constructor
-    }
 
     private EditText editTextQtySmall, editTextQtyMed, editTextQtyLarge, editaddr_pickup, editaddr_dest, PicupDate;
 
@@ -62,6 +59,9 @@ public class OnewayTab extends Fragment implements View.OnClickListener {
     public static final String KEY_PRICELARGE = "priceLarge";
     public static final String KEY_ADDR_PICKUP = " addr_pickup";
     public static final String KEY_ADDR_DEST = "addr_dest";
+    public static final String KEY_USER = "userId";
+    public static final String KEY_PICKUP = "pickUp";
+    public static final String KEY_DROPDOWN = "dropDown";
 
     private DatePickerDialog DatePickerDialog;
 
@@ -222,6 +222,9 @@ public class OnewayTab extends Fragment implements View.OnClickListener {
         final String priceLarge =  textPriceLarge.getText().toString().trim();
         final String addr_pickup =  editaddr_pickup.getText().toString().trim();
         final String addr_dest =  editaddr_dest.getText().toString().trim();
+        final String userId = LoginActivity.User_email;
+        final String pickUp =  PicupDate.getText().toString().trim();
+        final String dropDown =  DateOfDelivery.getText().toString().trim();
 
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, AppConfig.URL_Storedata,
@@ -248,6 +251,9 @@ public class OnewayTab extends Fragment implements View.OnClickListener {
                 params.put(KEY_PRICELARGE,priceLarge);
                 params.put(KEY_ADDR_PICKUP,addr_pickup);
                 params.put(KEY_ADDR_DEST,addr_dest);
+                params.put(KEY_USER,userId);
+                params.put(KEY_PICKUP,pickUp);
+                params.put(KEY_DROPDOWN,dropDown);
                 return params;
             }
 
