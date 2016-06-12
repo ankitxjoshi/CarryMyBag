@@ -248,7 +248,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginTop="20dp">
+                android:layout_marginTop="10dp">
 
                 <EditText
                     android:layout_width="match_parent"
@@ -260,8 +260,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="10dp">
+                android:orientation="horizontal">
 
                 <EditText
                     android:layout_width="match_parent"
@@ -274,7 +273,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:layout_marginLeft="10dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -290,6 +290,7 @@
                 android:layout_height="wrap_content"
                 android:hint="Pickup Date(dd/mm/yyyy)"
                 android:textSize="20dp"
+                android:textColor="@color/Primary"
                 android:id="@+id/date_pickup2"
                 android:inputType="text"/>
 
@@ -297,14 +298,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Choose delivery option"
-                android:textSize="30dp"
-                android:layout_marginTop="10dp"/>
+                android:textSize="20dp"
+                android:textColor="@color/Primary"
+                android:layout_marginTop="5dp"/>
 
             <RadioGroup
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginLeft="30dp"
                 android:id="@+id/delivery_options2">
 
                 <RadioButton
@@ -312,7 +313,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/radio_1day2"
                     android:text="1 Day delivery"
-                    android:textSize="25dp"/>
+                    android:textSize="20dp"/>
 
 
                 <RadioButton
@@ -320,28 +321,30 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/radio_fast2"
                     android:text="Fast delivery"
-                    android:textSize="25dp"/>
+                    android:textSize="20dp"/>
 
                 <RadioButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/radio_standard2"
                     android:text="Standard delivery"
-                    android:textSize="25dp"/>
+                    android:textSize="20dp"/>
             </RadioGroup>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="DELIVERY BY - "
-                android:textSize="30dp"
-                android:layout_marginTop="10dp"/>
+                android:text="Delivered By - "
+                android:textSize="20dp"
+                android:textColor="@color/Primary"
+                android:layout_marginTop="0dp"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:textSize="30dp"
+                android:layout_marginTop="0dp"
+                android:textSize="25dp"
+                android:textColor="@color/Primary"
                 android:text="Estimated date of delivery"
                 android:id="@+id/date_delivery2"/>
 
@@ -350,6 +353,8 @@
                 android:layout_height="wrap_content"
                 android:text="VIEW PRICES"
                 android:textSize="20dp"
+                android:background="@color/Primary"
+                android:textColor="#FFFFFF"
                 android:layout_marginLeft="100dp"
                 android:id="@+id/btnViewPrices2"/>
 
@@ -360,7 +365,7 @@
                 <TextView
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
-                    android:text="BAG"
+                    android:text="Bag"
                     android:textSize="25dp"
                     android:textStyle="bold"
                     android:layout_alignParentTop="true"
@@ -378,7 +383,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="PRICE"
+                    android:text="Price"
                     android:textStyle="bold"
                     android:textSize="25dp"
                     android:layout_marginLeft="25dp"/>
@@ -395,7 +400,6 @@
                     android:layout_height="75dp"
                     android:text="Small Bag(0-15Kg)"
                     android:textSize="20dp"
-                    android:textStyle="bold"
                     android:layout_alignParentTop="true"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
@@ -431,7 +435,6 @@
                     android:layout_height="75dp"
                     android:text="Medium Bag(16-50Kg)"
                     android:textSize="20dp"
-                    android:textStyle="bold"
                     android:layout_alignParentTop="true"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
@@ -467,7 +470,6 @@
                     android:layout_height="75dp"
                     android:text="Large Bag(>50Kg)"
                     android:textSize="20dp"
-                    android:textStyle="bold"
                     android:layout_alignParentTop="true"
                     android:layout_alignParentLeft="true"
                     android:id="@+id/bag_large2"
@@ -501,6 +503,8 @@
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:background="@color/Primary"
+                    android:textColor="#FFFFFF"
                     android:text="SUBMIT"
                     android:textSize="25dp"
                     android:layout_marginLeft="130dp"
@@ -517,6 +521,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Pickup Address"
+                    android:textColor="@color/Primary"
                     android:inputType="text"
                     android:id="@+id/pickup2"/>
             </LinearLayout>
@@ -530,6 +535,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Destination Address"
+                    android:textColor="@color/Primary"
                     android:inputType="text"
                     android:id="@+id/destination2" />
             </LinearLayout>
