@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.carrymybag.activity.OnewayTab">
+    tools:context="com.carrymybag.activity.OnewayTab"
+    android:layout_marginLeft="10dp">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -19,7 +20,7 @@
 
             <EditText
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="11dp"
                 android:hint="Pickup Date (dd/mm/yyyy)"
                 android:textSize="30dp"
                 android:layout_marginTop="10dp"
@@ -30,12 +31,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Choose delivery option"
-                android:textSize="30dp"/>
+                android:textColor="@color/Primary"
+                android:textSize="20dp"/>
 
             <RadioGroup
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
+                android:layout_marginLeft="30dp"
                 android:id="@+id/delivery_options1">
 
                 <RadioButton
@@ -43,7 +45,8 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/radio_1day1"
                     android:text="1 Day delivery"
-                    android:textSize="25dp"/>
+                    android:textSize="20dp"
+                    />
 
 
                 <RadioButton
@@ -51,29 +54,30 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/radio_fast1"
                     android:text="Fast delivery"
-                    android:textSize="25dp"/>
+                    android:textSize="20dp" />
 
                 <RadioButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/radio_standard1"
                     android:text="Standard delivery"
-                    android:textSize="25dp"/>
+                    android:textSize="20dp"/>
             </RadioGroup>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="DELIVERY BY - "
-                android:textSize="30dp"
-                android:layout_marginTop="10dp"/>
+                android:text="Delivered By - "
+                android:textSize="20dp"
+                android:textColor="@color/Primary"
+                android:layout_marginTop="5dp"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:textSize="30dp"
-                android:text="Estimated date of delivery"
+                android:textColor="@color/Primary"
+                android:textSize="20dp"
+                android:text="Estimated date of delivery - "
                 android:id="@+id/date_delivery1" />
 
             <Button
@@ -82,6 +86,8 @@
                 android:text="VIEW PRICES"
                 android:textSize="20dp"
                 android:layout_marginLeft="100dp"
+                android:background="@color/Primary"
+                android:textColor="#FFFFFF"
                 android:id="@+id/btnViewPrices1"
                 android:layout_marginTop="10dp"/>
 
@@ -94,22 +100,22 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="LEG 1"
-                    android:textSize="30dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="10dp"/>
+                    android:text="Leg 1"
+                    android:textSize="25dp"
+                    android:textColor="@color/Primary"
+                    android:layout_marginTop="5dp"/>
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginTop="30dp">
+                android:layout_marginTop="5dp">
 
                 <TextView
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
-                    android:text="BAG"
+                    android:text="Bag"
                     android:textSize="25dp"
                     android:textStyle="bold"
                     android:layout_alignParentTop="true"
@@ -127,7 +133,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="PRICE"
+                    android:text="Price"
                     android:textStyle="bold"
                     android:textSize="25dp"
                     android:layout_marginLeft="25dp"/>
@@ -138,14 +144,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginTop="15dp">
+                android:layout_marginTop="10dp">
 
                 <TextView
                     android:layout_width="150dp"
                     android:layout_height="75dp"
                     android:text="Small Bag(0-15Kg)"
                     android:textSize="20dp"
-                    android:textStyle="bold"
                     android:layout_alignParentTop="true"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
@@ -173,15 +178,13 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="10dp">
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="150dp"
                     android:layout_height="75dp"
                     android:text="Medium Bag(16-50Kg)"
                     android:textSize="20dp"
-                    android:textStyle="bold"
                     android:layout_alignParentTop="true"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
@@ -217,7 +220,6 @@
                     android:layout_height="75dp"
                     android:text="Large Bag(>50Kg)"
                     android:textSize="20dp"
-                    android:textStyle="bold"
                     android:layout_alignParentTop="true"
                     android:layout_alignParentLeft="true"
                     android:id="@+id/bag_large1"
@@ -252,6 +254,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Pickup Address"
+                    android:textColor="@color/Primary"
                     android:inputType="text"/>
             </LinearLayout>
             <LinearLayout
@@ -264,6 +267,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Destination Address"
+                    android:textColor="@color/Primary"
                     android:inputType="text"/>
             </LinearLayout>
 
@@ -275,10 +279,10 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="LEG 2"
-                    android:textSize="30dp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="20dp"/>
+                    android:text="Leg 2"
+                    android:textColor="@color/Primary"
+                    android:textSize="25dp"
+                    android:layout_marginTop="5dp"/>
             </LinearLayout>
 
             <EditText
