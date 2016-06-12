@@ -168,7 +168,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="Price"
+                    android:text="1000"
                     android:textSize="20dp"
                     android:id="@+id/price_small1"
                     android:layout_marginLeft="25dp"/>
@@ -202,7 +202,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="Price"
+                    android:text="2000"
                     android:textSize="20dp"
                     android:id="@+id/price_medium1"
                     android:layout_marginLeft="25dp"/>
@@ -237,7 +237,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="Price"
+                    android:text="3000"
                     android:textSize="20dp"
                     android:layout_marginLeft="25dp"
                     android:id="@+id/price_large1"/>
@@ -255,6 +255,7 @@
                     android:layout_height="wrap_content"
                     android:hint="Pickup Address"
                     android:textColor="@color/Primary"
+                    android:id="@+id/pickup1"
                     android:inputType="text"/>
             </LinearLayout>
             <LinearLayout
@@ -383,7 +384,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="Price"
+                    android:text="1000"
                     android:textStyle="bold"
                     android:textSize="25dp"
                     android:layout_marginLeft="25dp"/>
@@ -417,7 +418,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="Price"
+                    android:text="2000"
                     android:textSize="20dp"
                     android:id="@+id/price_small2"
                     android:layout_marginLeft="25dp"/>
@@ -452,7 +453,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="Price"
+                    android:text="3000"
                     android:textSize="20dp"
                     android:id="@+id/price_medium2"
                     android:layout_marginLeft="25dp"/>
@@ -487,7 +488,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="Price"
+                    android:text="4000"
                     android:textSize="20dp"
                     android:layout_marginLeft="25dp"
                     android:id="@+id/price_large2"/>

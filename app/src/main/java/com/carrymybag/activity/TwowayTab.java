@@ -13,17 +13,26 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.carrymybag.R;
+import com.carrymybag.app.AppConfig;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class TwowayTab extends Fragment implements View.OnClickListener {
 
-    private EditText editTextQtySmall1, editTextQtyMed1, editTextQtyLarge1, addr_pickup1, addr_dest1, PicupDate1;
-    private EditText editTextQtySmall2, editTextQtyMed2, editTextQtyLarge2, addr_pickup2, addr_dest2, PicupDate2;
+    private EditText editTextQtySmall1, editTextQtyMed1, editTextQtyLarge1, editaddr_pickup1, editaddr_dest1, PicupDate1;
+    private EditText editTextQtySmall2, editTextQtyMed2, editTextQtyLarge2, editaddr_pickup2, editaddr_dest2, PicupDate2;
 
     private TextView textPriceSmall1, textPriceMed1, textPriceLarge1;
     private TextView textPriceSmall2, textPriceMed2, textPriceLarge2;
@@ -39,6 +48,15 @@ public class TwowayTab extends Fragment implements View.OnClickListener {
     private RadioButton one_day1, fast1, standard1, one_day2, fast2, standard2;
 
     String Pickup1, Pickup2;
+
+    public static final String KEY_QTYSMALL = "qtySmall";
+    public static final String KEY_QTYMED = "qtyMed";
+    public static final String KEY_QTYLARGE = "qtyLarge";
+    public static final String KEY_PRICESMALL = "priceSmall";
+    public static final String KEY_PRICEMED = "priceMed";
+    public static final String KEY_PRICELARGE = "priceLarge";
+    public static final String KEY_ADDR_PICKUP = " addr_pickup";
+    public static final String KEY_ADDR_DEST = "addr_dest";
 
     public TwowayTab() {
         // Required empty public constructor
@@ -69,8 +87,8 @@ public class TwowayTab extends Fragment implements View.OnClickListener {
         buttonView1 = (Button) v.findViewById(R.id.btnViewPrices1);
         buttonView1.setOnClickListener(this);
 
-        addr_pickup1 = (EditText) v.findViewById(R.id.pickup1);
-        addr_dest1 = (EditText) v.findViewById(R.id.destination1);
+        editaddr_pickup1 = (EditText) v.findViewById(R.id.pickup1);
+        editaddr_dest1 = (EditText) v.findViewById(R.id.destination1);
 
         option1 = (RadioGroup) v.findViewById(R.id.delivery_options1);
         fast1 = (RadioButton) v.findViewById(R.id.radio_fast1);
@@ -91,8 +109,8 @@ public class TwowayTab extends Fragment implements View.OnClickListener {
         buttonView2 = (Button) v.findViewById(R.id.btnViewPrices2);
         buttonView2.setOnClickListener(this);
 
-        addr_pickup2 = (EditText) v.findViewById(R.id.pickup2);
-        addr_dest2 = (EditText) v.findViewById(R.id.destination2);
+        editaddr_pickup2 = (EditText) v.findViewById(R.id.pickup2);
+        editaddr_dest2 = (EditText) v.findViewById(R.id.destination2);
 
         option2 = (RadioGroup) v.findViewById(R.id.delivery_options2);
         fast2 = (RadioButton) v.findViewById(R.id.radio_fast2);
@@ -245,6 +263,8 @@ public class TwowayTab extends Fragment implements View.OnClickListener {
                 break;
 
             case R.id.btnSubmit:
+                registerUser1();
+                registerUser2();
                 try {
                     qtySmall = Double.parseDouble(editTextQtySmall1.getText().toString());
                 } catch (final NumberFormatException e) {
@@ -315,6 +335,94 @@ public class TwowayTab extends Fragment implements View.OnClickListener {
                 Toast.makeText(getActivity(), "The total Price is Rs. " + price, Toast.LENGTH_LONG).show();
                 break;
         }
+    }
+
+    private void registerUser1(){
+        final String qtySmall =  editTextQtySmall1.getText().toString().trim();
+        final String qtyMed =  editTextQtyMed1.getText().toString().trim();
+        final String qtyLarge =  editTextQtyLarge1.getText().toString().trim();
+        final String priceSmall =  textPriceSmall1.getText().toString().trim();
+        final String priceMed =  textPriceMed1.getText().toString().trim();
+        final String priceLarge =  textPriceLarge1.getText().toString().trim();
+//        final String addr_pickup =  editaddr_pickup1.getText().toString().trim();
+ //       final String addr_dest =  editaddr_dest1.getText().toString().trim();
+
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, AppConfig.URL_Storedata,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Toast.makeText(getActivity(),response,Toast.LENGTH_LONG).show();
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getActivity(),error.toString(),Toast.LENGTH_LONG).show();
+                    }
+                }){
+            @Override
+            protected Map<String,String> getParams(){
+                Map<String,String> params = new HashMap<String, String>();
+                params.put(KEY_QTYSMALL,qtySmall);
+                params.put(KEY_QTYMED,qtyMed);
+                params.put(KEY_QTYLARGE,qtyLarge);
+                params.put(KEY_PRICESMALL,priceSmall);
+                params.put(KEY_PRICEMED,priceMed);
+                params.put(KEY_PRICELARGE,priceLarge);
+       //         params.put(KEY_ADDR_PICKUP,addr_pickup);
+     //           params.put(KEY_ADDR_DEST,addr_dest);
+                return params;
+            }
+
+        };
+
+        RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
+        requestQueue.add(stringRequest);
+    }
+
+    private void registerUser2(){
+        final String qtySmall =  editTextQtySmall2.getText().toString().trim();
+        final String qtyMed =  editTextQtyMed2.getText().toString().trim();
+        final String qtyLarge =  editTextQtyLarge2.getText().toString().trim();
+        final String priceSmall =  textPriceSmall2.getText().toString().trim();
+        final String priceMed =  textPriceMed2.getText().toString().trim();
+        final String priceLarge =  textPriceLarge2.getText().toString().trim();
+        final String addr_pickup =  editaddr_pickup2.getText().toString().trim();
+        final String addr_dest =  editaddr_dest2.getText().toString().trim();
+
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, AppConfig.URL_Storedata,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Toast.makeText(getActivity(),response,Toast.LENGTH_LONG).show();
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getActivity(),error.toString(),Toast.LENGTH_LONG).show();
+                    }
+                }){
+            @Override
+            protected Map<String,String> getParams(){
+                Map<String,String> params = new HashMap<String, String>();
+                params.put(KEY_QTYSMALL,qtySmall);
+                params.put(KEY_QTYMED,qtyMed);
+                params.put(KEY_QTYLARGE,qtyLarge);
+                params.put(KEY_PRICESMALL,priceSmall);
+                params.put(KEY_PRICEMED,priceMed);
+                params.put(KEY_PRICELARGE,priceLarge);
+                params.put(KEY_ADDR_PICKUP,addr_pickup);
+                params.put(KEY_ADDR_DEST,addr_dest);
+                return params;
+            }
+
+        };
+
+        RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
+        requestQueue.add(stringRequest);
     }
 
 }
