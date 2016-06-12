@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+
 public class BookDetails extends AppCompatActivity {
 
     private Toolbar toolbar;
@@ -27,6 +28,10 @@ public class BookDetails extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_book_details);
 
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         setupViewPager(viewPager);
@@ -37,8 +42,9 @@ public class BookDetails extends AppCompatActivity {
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new OnewayTab(), "ONE WAY");
-        adapter.addFragment(new TwowayTab(), "TWO WAY");
+        adapter.addFragment(new OnewayTab(), "OneWay");
+        adapter.addFragment(new TwowayTab(), "TwoWay");
+
         viewPager.setAdapter(adapter);
     }
 
