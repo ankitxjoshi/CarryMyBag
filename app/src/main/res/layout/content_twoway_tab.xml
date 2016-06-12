@@ -20,9 +20,9 @@
 
             <EditText
                 android:layout_width="match_parent"
-                android:layout_height="11dp"
+                android:layout_height="wrap_content"
+                android:textSize="25dp"
                 android:hint="Pickup Date (dd/mm/yyyy)"
-                android:textSize="30dp"
                 android:layout_marginTop="10dp"
                 android:id="@+id/date_pickup1"
                 android:inputType="text"/>

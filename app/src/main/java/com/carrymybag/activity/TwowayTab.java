@@ -1,12 +1,15 @@
 package com.carrymybag.activity;
 
+import android.app.DatePickerDialog;
 import android.net.ParseException;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -26,6 +29,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 
@@ -49,6 +53,7 @@ public class TwowayTab extends Fragment implements View.OnClickListener {
 
     String Pickup1, Pickup2;
 
+
     public static final String KEY_QTYSMALL = "qtySmall";
     public static final String KEY_QTYMED = "qtyMed";
     public static final String KEY_QTYLARGE = "qtyLarge";
@@ -58,6 +63,9 @@ public class TwowayTab extends Fragment implements View.OnClickListener {
     public static final String KEY_ADDR_PICKUP = " addr_pickup";
     public static final String KEY_ADDR_DEST = "addr_dest";
 
+    private DatePickerDialog DatePickerDialog1;
+    private DatePickerDialog DatePickerDialog2;
+    private SimpleDateFormat dateFormatter;
     public TwowayTab() {
         // Required empty public constructor
     }
@@ -97,6 +105,8 @@ public class TwowayTab extends Fragment implements View.OnClickListener {
 
 
         PicupDate1 = (EditText) v.findViewById(R.id.date_pickup1);
+        PicupDate1.setInputType(InputType.TYPE_NULL);
+        PicupDate1.requestFocus();
 
         editTextQtySmall2 = (EditText) v.findViewById(R.id.qty_small2);
         editTextQtyMed2 = (EditText) v.findViewById(R.id.qty_medium2);
@@ -121,6 +131,12 @@ public class TwowayTab extends Fragment implements View.OnClickListener {
         DateOfDelivery2 = (TextView) v.findViewById(R.id.date_delivery2);
 
         PicupDate2 = (EditText) v.findViewById(R.id.date_pickup2);
+        PicupDate2.setInputType(InputType.TYPE_NULL);
+        PicupDate2.requestFocus();
+
+        dateFormatter = new SimpleDateFormat("dd-MM-yyyy", Locale.US);
+
+        setDateTimeField();
         return v;
     }
 
@@ -169,6 +185,12 @@ public class TwowayTab extends Fragment implements View.OnClickListener {
 
 
     public void onClick(View v) {
+
+        if(v == PicupDate1) {
+            DatePickerDialog1.show();
+        } else if(v == PicupDate2) {
+            DatePickerDialog2.show();
+        }
 
         switch (v.getId()) {
 
@@ -335,6 +357,14 @@ public class TwowayTab extends Fragment implements View.OnClickListener {
                 Toast.makeText(getActivity(), "The total Price is Rs. " + price, Toast.LENGTH_LONG).show();
                 break;
         }
+
+        PicupDate2.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(hasFocus)
+                    DatePickerDialog2.show();
+            }
+        });
     }
 
     private void registerUser1(){
@@ -425,4 +455,31 @@ public class TwowayTab extends Fragment implements View.OnClickListener {
         requestQueue.add(stringRequest);
     }
 
+    private void setDateTimeField() {
+        PicupDate1.setOnClickListener(this);
+        PicupDate2.setOnClickListener(this);
+
+        Calendar newCalendar = Calendar.getInstance();
+        DatePickerDialog1 = new DatePickerDialog(getContext(), new android.app.DatePickerDialog.OnDateSetListener() {
+
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                Calendar newDate = Calendar.getInstance();
+                newDate.set(year, monthOfYear, dayOfMonth);
+                PicupDate1.setText(dateFormatter.format(newDate.getTime()));
+            }
+
+
+        },newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
+
+        DatePickerDialog2 = new DatePickerDialog(getContext(), new DatePickerDialog.OnDateSetListener() {
+
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                Calendar newDate = Calendar.getInstance();
+                newDate.set(year, monthOfYear, dayOfMonth);
+                PicupDate2.setText(dateFormatter.format(newDate.getTime()));
+            }
+
+        },newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
+
+    }
 }

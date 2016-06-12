@@ -1,11 +1,14 @@
 package com.carrymybag.activity;
 
+import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -26,11 +29,12 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 //import info.androidhive.materialtabs.R;
 
-public class OnewayTab extends Fragment {
+public class OnewayTab extends Fragment implements View.OnClickListener {
 
     public OnewayTab() {
         // Required empty public constructor
@@ -59,12 +63,19 @@ public class OnewayTab extends Fragment {
     public static final String KEY_ADDR_PICKUP = " addr_pickup";
     public static final String KEY_ADDR_DEST = "addr_dest";
 
+    private DatePickerDialog DatePickerDialog;
+
+    private SimpleDateFormat dateFormatter;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.content_oneway_tab, container, false);
+
+        dateFormatter = new SimpleDateFormat("dd-MM-yyyy", Locale.US);
+
 
         editTextQtySmall = (EditText) v.findViewById(R.id.qty_small);
         editTextQtyMed = (EditText) v.findViewById(R.id.qty_medium);
@@ -87,6 +98,8 @@ public class OnewayTab extends Fragment {
         DateOfDelivery = (TextView) v.findViewById(R.id.date_delivery);
 
         PicupDate = (EditText) v.findViewById(R.id.date_pickup);
+        PicupDate.setInputType(InputType.TYPE_NULL);
+        PicupDate.requestFocus();
         buttonSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -192,6 +205,8 @@ public class OnewayTab extends Fragment {
             }
         });
 
+        setDateTimeField();
+
 
 
 
@@ -276,7 +291,28 @@ public class OnewayTab extends Fragment {
         return next;
     }
 
+    private void setDateTimeField() {
+        PicupDate.setOnClickListener(this);
 
 
+        Calendar newCalendar = Calendar.getInstance();
+        DatePickerDialog = new DatePickerDialog(getContext(), new android.app.DatePickerDialog.OnDateSetListener() {
 
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                Calendar newDate = Calendar.getInstance();
+                newDate.set(year, monthOfYear, dayOfMonth);
+                PicupDate.setText(dateFormatter.format(newDate.getTime()));
+            }
+
+        },newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
+
+    }
+
+    @Override
+    public void onClick(View v) {
+
+        if(v == PicupDate) {
+            DatePickerDialog.show();
+        }
+    }
 }
