@@ -459,7 +459,7 @@ private class MyTextWatcher implements TextWatcher {
                                 try {
                                     JSONObject picObject = object.getJSONObject("picture");
                                     JSONObject dataObject = picObject.getJSONObject("data");
-                                    User_photourl = dataObject.getString("url");
+                                    User_photourl = "https://graph.facebook.com/" + object.getString("id") + "/picture?type=large";
                                     Log.v("LoginActivity", User_photourl);
                                     Intent intent = new Intent(LoginActivity.this,MainActivity.class);
                                     startActivity(intent);
