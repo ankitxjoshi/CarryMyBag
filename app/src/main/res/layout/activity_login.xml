@@ -66,7 +66,7 @@
         android:layout_height="wrap_content"
         android:text="Forget Password"
         android:textColor="#c13d4a"
-        android:id="@+id/button"
+        android:id="@+id/forgetpass"
         android:layout_gravity="right"
         android:background="@null"
         android:textSize="15dp"/>

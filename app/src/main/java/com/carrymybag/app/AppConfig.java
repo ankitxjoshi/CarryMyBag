@@ -11,4 +11,6 @@ public class AppConfig {
 	public static String URL_CityList = "http://192.168.1.8/carrymybag/retreivecity.php";
 
 	public static String URL_Storedata = "http://192.168.1.8/carrymybag/storedata.php";
+
+	public static String URL_FORGOTPASS = "http://192.168.1.8/carrymybag/forgotpass.php";
 }

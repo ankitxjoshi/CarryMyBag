@@ -1,6 +1,7 @@
 package com.carrymybag.activity;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.net.ParseException;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -69,9 +70,7 @@ public class TwowayTab extends Fragment implements View.OnClickListener {
     private DatePickerDialog DatePickerDialog1;
     private DatePickerDialog DatePickerDialog2;
     private SimpleDateFormat dateFormatter;
-    public TwowayTab() {
-        // Required empty public constructor
-    }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -142,52 +141,7 @@ public class TwowayTab extends Fragment implements View.OnClickListener {
         setDateTimeField();
         return v;
     }
-
-    public String getNextDate(String Pickup)
-    {
-        final SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-        format.setLenient(false);
-        Date date = null;
-        try {
-            try {
-                date = format.parse(Pickup);
-            } catch (java.text.ParseException e) {
-                e.printStackTrace();
-            }
-            final Calendar calendar1 = Calendar.getInstance();
-            calendar1.setTime(date);
-            calendar1.add(Calendar.DAY_OF_MONTH,1);
-            return format.format(calendar1.getTime());
-
-        } catch (ParseException e) {
-            e.printStackTrace();
-            Toast.makeText(getActivity(),"Invalid Pickup Date",Toast.LENGTH_LONG).show();
-        }
-        return ("Please correct the pickup date");
-    }
-
-    public String showExpectedDate(String date,int c)
-    {
-        String next = date;
-        if(c==1)
-        {
-            next = getNextDate(next);
-        }
-        else if(c==2)
-        {
-            for(int i=0; i<2; i++)
-                next = getNextDate(next);
-        }
-        else
-        {
-            for(int i=0;i<3;i++)
-                next = getNextDate(next);
-        }
-        return next;
-    }
-
-
-    public void onClick(View v) {
+        public void onClick(View v) {
 
         if(v == PicupDate1) {
             DatePickerDialog1.show();
@@ -199,175 +153,27 @@ public class TwowayTab extends Fragment implements View.OnClickListener {
 
             case R.id.btnViewPrices1:
 
-                try {
-                    Pickup1 = PicupDate1.getText().toString();
-                }
-                catch(NullPointerException e)
-                {
-                    Toast.makeText(getActivity(),"No Pickup date entered",Toast.LENGTH_LONG).show();
-                }
-                int choice=3;
-                String Delivery1 = null;
-                if(Pickup1.matches("\\d{2}/\\d{2}/\\d{4}")) {
-                    if (option1.getCheckedRadioButtonId() == -1) {
-                        Toast.makeText(getActivity(), "No delivery option selected", Toast.LENGTH_LONG).show();
-                    } else {
-                        if (fast1.isChecked()) {
-                            textPriceSmall1.setText("1000");
-                            textPriceMed1.setText("1100");
-                            textPriceLarge1.setText("1200");
-                            choice = 2;
-                            Delivery1 = showExpectedDate(Pickup1, choice);
-                        }
-                        if (standard1.isChecked()) {
-                            textPriceSmall1.setText("500");
-                            textPriceMed1.setText("600");
-                            textPriceLarge1.setText("700");
-                            choice = 3;
-                            Delivery1 = showExpectedDate(Pickup1, choice);
-                        }
-                        if (one_day1.isChecked()) {
-                            textPriceSmall1.setText("1500");
-                            textPriceLarge1.setText("1700");
-                            textPriceMed1.setText("1600");
-                            choice = 1;
-                            Delivery1 = showExpectedDate(Pickup1, choice);
-                        }
-                        DateOfDelivery1.setText(Delivery1);
-                    }
-                }
-                else
-                {
-                    Toast.makeText(getActivity(),"Invalid pickup date",Toast.LENGTH_LONG).show();
-                }
-                break;
+
 
             case R.id.btnViewPrices2:
 
-                try {
-                    Pickup2 = PicupDate2.getText().toString();
-                }
-                catch(NullPointerException e)
-                {
-                    Toast.makeText(getActivity(),"No Pickup date entered",Toast.LENGTH_LONG).show();
-                }
-                choice = 3;
-                String Delivery2 = null;
-                if(Pickup2.matches("\\d{2}/\\d{2}/\\d{4}")) {
-                    if (option2.getCheckedRadioButtonId() == -1) {
-                        Toast.makeText(getActivity(), "No delivery option selected", Toast.LENGTH_LONG).show();
-                    } else {
-                        if (fast2.isChecked()) {
-                            textPriceSmall2.setText("1000");
-                            textPriceMed2.setText("1100");
-                            textPriceLarge2.setText("1200");
-                            choice = 2;
-                            Delivery2 = showExpectedDate(Pickup2, choice);
-                        }
-                        if (standard2.isChecked()) {
-                            textPriceSmall2.setText("500");
-                            textPriceMed2.setText("600");
-                            textPriceLarge2.setText("700");
-                            choice = 3;
-                            Delivery2 = showExpectedDate(Pickup2, choice);
-                        }
-                        if (one_day2.isChecked()) {
-                            textPriceSmall2.setText("1500");
-                            textPriceLarge2.setText("1700");
-                            textPriceMed2.setText("1600");
-                            choice = 1;
-                            Delivery2 = showExpectedDate(Pickup2, choice);
-                        }
-                        DateOfDelivery2.setText(Delivery2);
-                    }
-                }
-                else
-                {
-                    Toast.makeText(getActivity(),"Invalid pickup date",Toast.LENGTH_LONG).show();
-                }
-                break;
+
 
             case R.id.btnSubmit:
                 registerUser1();
                 registerUser2();
-                try {
-                    qtySmall = Double.parseDouble(editTextQtySmall1.getText().toString());
-                } catch (final NumberFormatException e) {
-                    qtySmall = 0.0;
-                }
-                try {
-                    qtyMed = Double.parseDouble(editTextQtyMed1.getText().toString());
-                } catch (final NumberFormatException e) {
-                    qtyMed = 0.0;
-                }
-                try {
-                    qtyLarge = Double.parseDouble(editTextQtyLarge1.getText().toString());
-                } catch (final NumberFormatException e) {
-                    qtyLarge = 0.0;
-                }
-                try {
-                    priceSmall = Double.parseDouble(textPriceSmall1.getText().toString());
-                } catch (final NumberFormatException e) {
-                    priceSmall = 0.0;
-                }
-                try {
-                    priceMed = Double.parseDouble(textPriceMed1.getText().toString());
-                } catch (final NumberFormatException e) {
-                    priceMed = 0.0;
-                }
-                try {
-                    priceLarge = Double.parseDouble(textPriceLarge1.getText().toString());
-                } catch (final NumberFormatException e) {
-                    priceLarge = 0.0;
-                }
+                getPricesAndQuantity();
                 double totalPrice1 = priceSmall * qtySmall + priceMed * qtyMed + priceLarge * qtyLarge;
-
-                try {
-                    qtySmall = Double.parseDouble(editTextQtySmall2.getText().toString());
-                } catch (final NumberFormatException e) {
-                    qtySmall = 0.0;
-                }
-                try {
-                    qtyMed = Double.parseDouble(editTextQtyMed2.getText().toString());
-                } catch (final NumberFormatException e) {
-                    qtyMed = 0.0;
-                }
-                try {
-                    qtyLarge = Double.parseDouble(editTextQtyLarge2.getText().toString());
-                } catch (final NumberFormatException e) {
-                    qtyLarge = 0.0;
-                }
-                try {
-                    priceSmall = Double.parseDouble(textPriceSmall2.getText().toString());
-                } catch (final NumberFormatException e) {
-                    priceSmall = 0.0;
-                }
-                try {
-                    priceMed = Double.parseDouble(textPriceMed2.getText().toString());
-                } catch (final NumberFormatException e) {
-                    priceMed = 0.0;
-                }
-                try {
-                    priceLarge = Double.parseDouble(textPriceLarge2.getText().toString());
-                } catch (final NumberFormatException e) {
-                    priceLarge = 0.0;
-                }
-
                 double totalPrice2 = priceSmall * qtySmall + priceMed * qtyMed + priceLarge * qtyLarge;
                 double totalPrice = totalPrice1 + totalPrice2;
                 String price = Double.toString(totalPrice);
-
                 Toast.makeText(getActivity(), "The total Price is Rs. " + price, Toast.LENGTH_LONG).show();
+                Intent i = new Intent(getContext(),
+                        EnterDetails.class);
+                startActivity(i);
                 break;
         }
 
-        PicupDate2.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if(hasFocus)
-                    DatePickerDialog2.show();
-            }
-        });
     }
 
     private void registerUser1(){
@@ -496,5 +302,71 @@ public class TwowayTab extends Fragment implements View.OnClickListener {
 
         },newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
 
+    }
+
+    void getPricesAndQuantity()
+    {
+        try {
+            qtySmall = Double.parseDouble(editTextQtySmall1.getText().toString());
+        } catch (final NumberFormatException e) {
+            qtySmall = 0.0;
+        }
+        try {
+            qtyMed = Double.parseDouble(editTextQtyMed1.getText().toString());
+        } catch (final NumberFormatException e) {
+            qtyMed = 0.0;
+        }
+        try {
+            qtyLarge = Double.parseDouble(editTextQtyLarge1.getText().toString());
+        } catch (final NumberFormatException e) {
+            qtyLarge = 0.0;
+        }
+        try {
+            priceSmall = Double.parseDouble(textPriceSmall1.getText().toString());
+        } catch (final NumberFormatException e) {
+            priceSmall = 0.0;
+        }
+        try {
+            priceMed = Double.parseDouble(textPriceMed1.getText().toString());
+        } catch (final NumberFormatException e) {
+            priceMed = 0.0;
+        }
+        try {
+            priceLarge = Double.parseDouble(textPriceLarge1.getText().toString());
+        } catch (final NumberFormatException e) {
+            priceLarge = 0.0;
+        }
+
+
+        try {
+            qtySmall = Double.parseDouble(editTextQtySmall2.getText().toString());
+        } catch (final NumberFormatException e) {
+            qtySmall = 0.0;
+        }
+        try {
+            qtyMed = Double.parseDouble(editTextQtyMed2.getText().toString());
+        } catch (final NumberFormatException e) {
+            qtyMed = 0.0;
+        }
+        try {
+            qtyLarge = Double.parseDouble(editTextQtyLarge2.getText().toString());
+        } catch (final NumberFormatException e) {
+            qtyLarge = 0.0;
+        }
+        try {
+            priceSmall = Double.parseDouble(textPriceSmall2.getText().toString());
+        } catch (final NumberFormatException e) {
+            priceSmall = 0.0;
+        }
+        try {
+            priceMed = Double.parseDouble(textPriceMed2.getText().toString());
+        } catch (final NumberFormatException e) {
+            priceMed = 0.0;
+        }
+        try {
+            priceLarge = Double.parseDouble(textPriceLarge2.getText().toString());
+        } catch (final NumberFormatException e) {
+            priceLarge = 0.0;
+        }
     }
 }

@@ -39,6 +39,14 @@
             android:name=".activity.BookDetails"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen">
         </activity>
+        <activity
+            android:name=".activity.EnterDetails"
+            android:label="@string/app_name">
+        </activity>
+        <activity
+            android:name=".activity.PasswordReset"
+            android:label="@string/app_name">
+        </activity>
 
     </application>
 

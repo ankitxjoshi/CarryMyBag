@@ -1,6 +1,7 @@
 package com.carrymybag.activity;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.InputType;
@@ -32,7 +33,7 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
-//import info.androidhive.materialtabs.R;
+
 
 public class OnewayTab extends Fragment implements View.OnClickListener {
 
@@ -104,104 +105,24 @@ public class OnewayTab extends Fragment implements View.OnClickListener {
             @Override
             public void onClick(View v) {
 
-                        /*
-                Values to be stored in this case
-                qtySmall, qtyMed, qtyLarge, priceSmall, priceMed, priceLarge, totalPrice, PickupAddr, DestAddr
-                 */
                 registerUser();
-                try {
-                    qtySmall = Double.parseDouble(editTextQtySmall.getText().toString());
-                } catch (final NumberFormatException e) {
-                    qtySmall = 0.0;
-                }
-                try {
-                    qtyMed = Double.parseDouble(editTextQtyMed.getText().toString());
-                } catch (final NumberFormatException e) {
-                    qtyMed = 0.0;
-                }
-                try {
-                    qtyLarge = Double.parseDouble(editTextQtyLarge.getText().toString());
-                } catch (final NumberFormatException e) {
-                    qtyLarge = 0.0;
-                }
-                try {
-                    priceSmall = Double.parseDouble(textPriceSmall.getText().toString());
-                } catch (final NumberFormatException e) {
-                    priceSmall = 0.0;
-                }
-                try {
-                    priceMed = Double.parseDouble(textPriceMed.getText().toString());
-                } catch (final NumberFormatException e) {
-                    priceMed = 0.0;
-                }
-                try {
-                    priceLarge = Double.parseDouble(textPriceLarge.getText().toString());
-                } catch (final NumberFormatException e) {
-                    priceLarge = 0.0;
-                }
+                getPricesAndQuantity();
                 double totalPrice = priceSmall * qtySmall + priceMed * qtyMed + priceLarge * qtyLarge;
-
-
-
                 String price = Double.toString(totalPrice);
-
                 Toast.makeText(getActivity(), "The total Price is Rs. " + price, Toast.LENGTH_LONG).show();
+                Intent i = new Intent(getContext(),
+                        EnterDetails.class);
+                startActivity(i);
+
             }
         });
 
         buttonViewPrices = (Button) v.findViewById(R.id.btnViewPrices);
         buttonViewPrices.setOnClickListener(new View.OnClickListener() {
 
-            /*
-                Values to be stored in db in this case
-                Variable - stores what value
-                Pickup - pickup date
-                Delivery - delivery date
-                Delivery option selected - fast, 1day or standard, corresponding to option selected set true/false in db.
-                 */
-
-            /* Values to be fetched from another db storing prices for specific type of bag from one city to another for each delivery option
-             Jo values set ki h textPriceSmall, textPriceMed aur textPriceLarge ki wo db se utha k set honi h
-              */
             @Override
             public void onClick(View v) {
-                try {
-                    Pickup = PicupDate.getText().toString();
-                } catch (NullPointerException e) {
-                    Toast.makeText(getActivity(), "No Pickup date entered", Toast.LENGTH_LONG).show();
-                }
 
-                int choice = 3;
-                String Delivery = null;
-                if (Pickup.matches("\\d{2}/\\d{2}/\\d{4}")) {
-                    if (option.getCheckedRadioButtonId() == -1) {
-                        Toast.makeText(getActivity(), "No delivery option selected", Toast.LENGTH_LONG).show();
-                    } else {
-                        if (fast.isChecked()) {
-                            textPriceSmall.setText("1000");
-                            textPriceMed.setText("1100");
-                            textPriceLarge.setText("1200");
-                            choice = 2;
-                            Delivery = showExpectedDate(Pickup, choice);
-                        }
-                        if (standard.isChecked()) {
-                            textPriceSmall.setText("500");
-                            textPriceMed.setText("600");
-                            textPriceLarge.setText("700");
-                            choice = 3;
-                            Delivery = showExpectedDate(Pickup, choice);
-                        }
-                        if (one_day.isChecked()) {
-                            textPriceSmall.setText("1500");
-                            textPriceLarge.setText("1700");
-                            textPriceMed.setText("1600");
-                            choice = 1;
-                            Delivery = showExpectedDate(Pickup, choice);
-                        }
-                    }
-                } else {
-                    Toast.makeText(getActivity(), "Invalid pickup date", Toast.LENGTH_LONG).show();
-                }
             }
         });
 
@@ -263,40 +184,6 @@ public class OnewayTab extends Fragment implements View.OnClickListener {
         requestQueue.add(stringRequest);
     }
 
-
-    public String getNextDate(String Pickup) {
-        final SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-        format.setLenient(false);
-        Date date = null;
-        try {
-            date = format.parse(Pickup);
-            final Calendar calendar = Calendar.getInstance();
-            calendar.setTime(date);
-            calendar.add(Calendar.DAY_OF_MONTH, 1);
-            return format.format(calendar.getTime());
-
-        } catch (ParseException e) {
-            e.printStackTrace();
-            Toast.makeText(getActivity(), "Invalid Pickup Date", Toast.LENGTH_LONG).show();
-        }
-        return ("Please correct the pickup date");
-    }
-
-    public String showExpectedDate(String date, int c) {
-        String next = date;
-        if (c == 1) {
-            next = getNextDate(next);
-        } else if (c == 2) {
-            for (int i = 0; i < 2; i++)
-                next = getNextDate(next);
-        } else {
-            for (int i = 0; i < 3; i++)
-                next = getNextDate(next);
-        }
-        DateOfDelivery.setText(next);
-        return next;
-    }
-
     private void setDateTimeField() {
         PicupDate.setOnClickListener(this);
 
@@ -319,6 +206,40 @@ public class OnewayTab extends Fragment implements View.OnClickListener {
 
         if(v == PicupDate) {
             DatePickerDialog.show();
+        }
+    }
+
+    void getPricesAndQuantity()
+    {
+        try {
+            qtySmall = Double.parseDouble(editTextQtySmall.getText().toString());
+        } catch (final NumberFormatException e) {
+            qtySmall = 0.0;
+        }
+        try {
+            qtyMed = Double.parseDouble(editTextQtyMed.getText().toString());
+        } catch (final NumberFormatException e) {
+            qtyMed = 0.0;
+        }
+        try {
+            qtyLarge = Double.parseDouble(editTextQtyLarge.getText().toString());
+        } catch (final NumberFormatException e) {
+            qtyLarge = 0.0;
+        }
+        try {
+            priceSmall = Double.parseDouble(textPriceSmall.getText().toString());
+        } catch (final NumberFormatException e) {
+            priceSmall = 0.0;
+        }
+        try {
+            priceMed = Double.parseDouble(textPriceMed.getText().toString());
+        } catch (final NumberFormatException e) {
+            priceMed = 0.0;
+        }
+        try {
+            priceLarge = Double.parseDouble(textPriceLarge.getText().toString());
+        } catch (final NumberFormatException e) {
+            priceLarge = 0.0;
         }
     }
 }

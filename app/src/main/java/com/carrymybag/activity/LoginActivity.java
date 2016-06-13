@@ -73,6 +73,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private static final String TAG = RegisterActivity.class.getSimpleName();
     private Button btnLogin;
     private Button btnLinkToRegister;
+    private Button forgotpass;
     private EditText inputEmail;
     private EditText inputPassword;
     private TextInputLayout inputLayoutName, inputLayoutEmail, inputLayoutPassword;
@@ -105,11 +106,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         facebookSDKInitialize();
         setContentView(R.layout.activity_login);
 
-
-//        textViewName = (TextView) findViewById(R.id.textViewName);
-//        textViewEmail = (TextView) findViewById(R.id.textViewEmail);
-
-//        profilePhoto = (NetworkImageView) findViewById(R.id.profileImage);
         inputLayoutEmail = (TextInputLayout) findViewById(R.id.input_layout_email);
         inputLayoutPassword = (TextInputLayout) findViewById(R.id.input_layout_password);
 
@@ -179,6 +175,17 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         });
 
+        forgotpass = (Button)findViewById(R.id.forgetpass);
+        forgotpass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(),
+                        PasswordReset.class);
+                startActivity(i);
+                finish();
+            }
+        });
+
         // Link to Register Screen
         btnLinkToRegister.setOnClickListener(new View.OnClickListener() {
 
@@ -196,7 +203,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         loginButton.setReadPermissions("email");
         getLoginDetails(loginButton);
 
+
+
     }
+
 
 
 
@@ -457,8 +467,6 @@ private class MyTextWatcher implements TextWatcher {
                                     e.printStackTrace();
                                 }
                                 try {
-                                    JSONObject picObject = object.getJSONObject("picture");
-                                    JSONObject dataObject = picObject.getJSONObject("data");
                                     User_photourl = "https://graph.facebook.com/" + object.getString("id") + "/picture?type=large";
                                     Log.v("LoginActivity", User_photourl);
                                     Intent intent = new Intent(LoginActivity.this,MainActivity.class);

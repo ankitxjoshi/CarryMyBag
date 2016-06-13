@@ -96,16 +96,6 @@ public class FirstFragment extends android.support.v4.app.Fragment {
 
     }
 
-
-    private void showDialog() {
-        if (!pDialog.isShowing())
-            pDialog.show();
-    }
-
-    private void hideDialog() {
-        if (pDialog.isShowing())
-            pDialog.dismiss();
-    }
     public class JSONTask extends AsyncTask<String,String,String> {
 
         @Override
