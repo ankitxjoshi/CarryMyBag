@@ -8,7 +8,6 @@
         android:layout_gravity="center_horizontal|center_vertical"
         android:orientation="vertical"
         android:layout_marginTop="100dip"
-        android:background="@drawable/cutomborder"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true">
         <AutoCompleteTextView
