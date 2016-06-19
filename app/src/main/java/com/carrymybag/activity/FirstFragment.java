@@ -125,7 +125,7 @@ public class FirstFragment extends android.support.v4.app.Fragment {
                     /**
                      * below single line of code from Gson saves you from writing the json parsing yourself which is commented below
                      */
-                    list.add(finalObject.getString("city"));
+                    list.add(finalObject.getString("City_Name"));
 
                 }
                 return null;
