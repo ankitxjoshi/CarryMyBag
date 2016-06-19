@@ -16,8 +16,13 @@ if (isset($_POST['qtySmall']) && isset($_POST['qtyMed']) && isset($_POST['qtyLar
     $priceSmall = $_POST['priceSmall'];
     $priceMed = $_POST['priceMed'];
     $priceLarge = $_POST['priceLarge'];
+    $addr_pickup = $_POST['addr_pickup'];
+    $addr_dest = $_POST['addr_dest'];
+    $userId = $_POST['userId'];
+    $pickUp = $_POST['pickUp'];
+    $dropDown = $_POST['dropDown'];
 
-    $success = $db->storeData($qtySmall,$qtyMed,$qtyLarge,$priceSmall,$priceMed,$priceLarge);
+    $success = $db->storeData($qtySmall,$qtyMed,$qtyLarge,$priceSmall,$priceMed,$priceLarge,$addr_pickup,$addr_dest,$userId,$pickUp,$dropDown);
       if ($success) {
           // user stored successfully
           echo "Successfully Registered";

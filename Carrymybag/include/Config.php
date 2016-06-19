@@ -7,4 +7,8 @@ define("DB_HOST", "localhost");
 define("DB_USER", "admin");
 define("DB_PASSWORD", "password");
 define("DB_DATABASE", "carrymybag-api");
+// define("DB_HOST", "fdb13.awardspace.net");
+// define("DB_USER", "2151703_macbox");
+// define("DB_PASSWORD", "kiki2106");
+// define("DB_DATABASE", "2151703_macbox");
 ?>

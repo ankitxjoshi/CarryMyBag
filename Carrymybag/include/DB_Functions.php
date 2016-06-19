@@ -16,6 +16,52 @@ class DB_Functions {
 
     }
 
+    public function get_result( $Statement ) {
+    $RESULT = array();
+    $Statement->store_result();
+    for ( $i = 0; $i < $Statement->num_rows; $i++ ) {
+        $Metadata = $Statement->result_metadata();
+        $PARAMS = array();
+        while ( $Field = $Metadata->fetch_field() ) {
+            $PARAMS[] = &$RESULT[ $i ][ $Field->name ];
+        }
+        call_user_func_array( array( $Statement, 'bind_result' ), $PARAMS );
+        $Statement->fetch();
+    }
+    return $RESULT;
+}
+
+    public function random_string()
+	{
+	    $character_set_array = array();
+	    $character_set_array[] = array('count' => 7, 'characters' => 'abcdefghijklmnopqrstuvwxyz');
+	    $character_set_array[] = array('count' => 1, 'characters' => '0123456789');
+	    $temp_array = array();
+	    foreach ($character_set_array as $character_set) {
+	        for ($i = 0; $i < $character_set['count']; $i++) {
+	            $temp_array[] = $character_set['characters'][rand(0, strlen($character_set['characters']) - 1)];
+	        }
+	    }
+	    shuffle($temp_array);
+	    return implode('', $temp_array);
+	}
+
+	public function forgotPassword($forgotpassword, $newpassword, $salt)
+	{
+    $stmt = $this->conn->prepare("UPDATE `users` SET `encrypted_password` = '$newpassword',`salt` = '$salt' WHERE `email` = '$forgotpassword'");
+
+    $result = $stmt->execute();
+		if ($result)
+		 {
+			return true;
+		 }
+	    else
+	    {
+			return false;
+	    }
+
+	}
+
     /**
      * Storing new user
      * returns user details
@@ -36,7 +82,7 @@ class DB_Functions {
             $stmt = $this->conn->prepare("SELECT * FROM users WHERE email = ?");
             $stmt->bind_param("s", $email);
             $stmt->execute();
-            $user = $stmt->get_result()->fetch_assoc();
+            $user = $this->get_result($stmt);
             $stmt->close();
 
             return $user;
@@ -50,24 +96,27 @@ class DB_Functions {
      */
     public function getUserByEmailAndPassword($email, $password) {
 
-        $stmt = $this->conn->prepare("SELECT * FROM users WHERE email = ?");
+        
+        $sql = "SELECT * FROM users WHERE email = '$email'";
+        $result = $this->conn->query($sql);
+        if ($result->num_rows > 0) {
+        	while($row = $result->fetch_assoc()) {
+        		$salt = $row['salt'];
+            	$encrypted_password = $row['encrypted_password'];
 
-        $stmt->bind_param("s", $email);
-
-        if ($stmt->execute()) {
-            $user = $stmt->get_result()->fetch_assoc();
-            $stmt->close();
-
-            // verifying user password
-            $salt = $user['salt'];
-            $encrypted_password = $user['encrypted_password'];
-            $hash = $this->checkhashSSHA($salt, $password);
+            	$hash =$this->checkhashSSHA($salt, $password);
             // check for password equality
-            if ($encrypted_password == $hash) {
+            	if ($encrypted_password == $hash) {
                 // user authentication details are correct
-                return $user;
-            }
-        } else {
+                return $row;
+            	}
+        
+    		}
+        	
+            
+            
+        } 
+        else {
             return NULL;
         }
     }
@@ -121,32 +170,28 @@ class DB_Functions {
         return $hash;
     }
 
+    
     public function getCityList()
     {
       $stmt = $this->conn->prepare("SELECT City_Name from citylist");
       if($stmt->execute())
       {
-        $list = $stmt->get_result();
-        $result = array();
-        while ($row = $list->fetch_array(MYSQLI_NUM))
-        {
-            foreach ($row as $r)
-            {
-                array_push($result, array("city"=>$r));
-            }
-
-        }
-       }
+        $result = $this->get_result($stmt); 
+      }
 
         $stmt->close();
         return $result;
       }
-      public function storeData($qtySmall,$qtyMed,$qtyLarge,$priceSmall,$priceMed,$priceLarge) {
 
-          $stmt = $this->conn->prepare("INSERT INTO orders(qtySmall,qtyMed,qtyLarge,priceSmall,priceMed,priceLarge)VALUES($qtySmall,$qtyMed,$qtyLarge,$priceSmall,$priceMed,$priceLarge)");
+      public function storeData($qtySmall,$qtyMed,$qtyLarge,$priceSmall,$priceMed,$priceLarge,$addr_pickup,$addr_dest,$userId,$pickUp,$dropDown) {
+
+
+
+
+          $query = "INSERT INTO orders(qtySmall,qtyMed,qtyLarge,priceSmall,priceMed,priceLarge,pickaddr,destaddr,userId,pickUp)VALUES('$qtySmall','$qtyMed','$qtyLarge','$priceSmall','$priceMed','$priceLarge','$addr_pickup','$addr_dest','$userId','$pickUp')";
+          $stmt = $this->conn->prepare($query);
           $result = $stmt->execute();
           $stmt->close();
-
           if ($result) {
               return true;
           }
