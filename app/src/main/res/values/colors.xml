@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
+   <color name="lay_back">#eaeaea</color>
     <color name="colorAccent">#c13d4a</color>
     <color name="bg_login">#26ae90</color>
     <color name="bg_register">#2e3237</color>

@@ -18,35 +18,249 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <EditText
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Leg 1"
+                android:textSize="25dp"
+                android:textColor="@color/Primary"
+                android:layout_marginTop="5dp"/>
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="25dp"
-                android:hint="Pickup Date (dd/mm/yyyy)"
+                android:orientation="horizontal"
+                android:background="@color/lay_back"
+                android:layout_marginTop="10dp">
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="5dp"
+                    android:hint="Pickup Address"
+                    android:inputType="text"
+                    android:id="@+id/pickup1"/>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@color/lay_back"
+                android:layout_marginTop="10dp">
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Destination Address"
+                    android:inputType="text"
+                    android:id="@+id/destination1"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="5dp"/>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:id="@+id/date_pickup1"
-                android:inputType="text"/>
+                android:orientation="vertical"
+                android:background="@color/lay_back"
+                android:paddingLeft="15dp"
+                android:paddingRight="5dp"
+                android:paddingBottom="5dp"
+                android:paddingTop="5dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="30dp">
+
+                    <TextView
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:text="Bag"
+                        android:textSize="25dp"
+                        android:textStyle="bold"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="25dp"
+                        android:text="Qty"
+                        android:textStyle="bold"
+                        android:textSize="25dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="Price"
+                        android:textStyle="bold"
+                        android:textSize="25dp"
+                        android:layout_marginLeft="40dp"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="15dp">
+
+                    <TextView
+                        android:layout_width="150dp"
+                        android:layout_height="75dp"
+                        android:text="Small Bag(0-15Kg)"
+                        android:textSize="20dp"
+
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:id="@+id/bag_small1"/>
+
+                    <EditText
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="25dp"
+                        android:hint="No."
+                        android:textSize="20dp"
+                        android:inputType="number"
+                        android:id="@+id/qty_small1"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="49dp"
+                        android:text="1000"
+                        android:textSize="20dp"
+                        android:id="@+id/price_small1"
+                        android:layout_marginLeft="40dp"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="10dp">
+
+                    <TextView
+                        android:layout_width="150dp"
+                        android:layout_height="75dp"
+                        android:text="Medium Bag(16-50Kg)"
+                        android:textSize="20dp"
+
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:id="@+id/bag_medium1"/>
+
+                    <EditText
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="25dp"
+                        android:hint="No."
+                        android:textSize="20dp"
+                        android:inputType="number"
+                        android:id="@+id/qty_medium1"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="36dp"
+                        android:text="2000"
+                        android:textSize="20dp"
+                        android:id="@+id/price_medium1"
+                        android:layout_marginLeft="40dp"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="10dp">
+
+                    <TextView
+                        android:layout_width="150dp"
+                        android:layout_height="75dp"
+                        android:text="Large Bag(>50Kg)"
+                        android:textSize="20dp"
+
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentLeft="true"
+                        android:id="@+id/bag_large1"
+                        android:layout_alignParentStart="true" />
+
+                    <EditText
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="25dp"
+                        android:hint="No."
+                        android:textSize="20dp"
+                        android:inputType="number"
+                        android:id="@+id/qty_large1"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="42dp"
+                        android:text="3000"
+                        android:textSize="20dp"
+                        android:layout_marginLeft="40dp"
+                        android:id="@+id/price_large1"/>
+
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/lay_back"
+                android:layout_marginTop="10dp">
+
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Pickup Date (dd/mm/yyyy)"
+                    android:layout_marginTop="10dp"
+                    android:id="@+id/date_pickup1"
+                    android:inputType="text"/>
+            </LinearLayout>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/lay_back"
                 android:text="Choose delivery option"
                 android:textColor="@color/Primary"
-                android:textSize="20dp"/>
+                android:paddingBottom="5dp"
+                android:paddingLeft="5dp"
+                android:paddingTop="5dp"
+                android:paddingRight="5dp"/>
 
             <RadioGroup
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
-                android:id="@+id/delivery_options1">
+                android:paddingLeft="20dp"
+                android:background="@color/lay_back"
+                android:id="@+id/delivery_options1"
+                >
 
                 <RadioButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/radio_1day1"
                     android:text="1 Day delivery"
-                    android:textSize="20dp"
-                    />
+                    android:textSize="15dp"/>
 
 
                 <RadioButton
@@ -54,14 +268,14 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/radio_fast1"
                     android:text="Fast delivery"
-                    android:textSize="20dp" />
+                    android:textSize="15dp"/>
 
                 <RadioButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/radio_standard1"
                     android:text="Standard delivery"
-                    android:textSize="20dp"/>
+                    android:textSize="15dp"/>
             </RadioGroup>
 
             <TextView
@@ -70,206 +284,39 @@
                 android:text="Delivered By - "
                 android:textSize="20dp"
                 android:textColor="@color/Primary"
-                android:layout_marginTop="5dp"/>
+                android:layout_marginTop="0dp"
+                android:background="@color/lay_back"
+                android:paddingBottom="5dp"
+                android:paddingLeft="5dp"
+                android:paddingTop="5dp"
+                android:paddingRight="5dp"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/Primary"
+                android:layout_marginTop="0dp"
                 android:textSize="20dp"
-                android:text="Estimated date of delivery - "
-                android:id="@+id/date_delivery1" />
+                android:background="@color/lay_back"
+                android:textColor="@color/Primary"
+                android:text="Estimated date of delivery"
+                android:id="@+id/date_delivery1"
+                android:paddingBottom="5dp"
+                android:paddingLeft="5dp"
+                android:paddingTop="5dp"
+                android:paddingRight="5dp"/>
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="VIEW PRICES"
+                android:textColor="#FFFFFF"
+                android:background="@color/Primary"
                 android:textSize="20dp"
                 android:layout_marginLeft="100dp"
-                android:background="@color/Primary"
-                android:textColor="#FFFFFF"
                 android:id="@+id/btnViewPrices1"
                 android:layout_marginTop="10dp"/>
 
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Leg 1"
-                    android:textSize="25dp"
-                    android:textColor="@color/Primary"
-                    android:layout_marginTop="5dp"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="5dp">
-
-                <TextView
-                    android:layout_width="150dp"
-                    android:layout_height="wrap_content"
-                    android:text="Bag"
-                    android:textSize="25dp"
-                    android:textStyle="bold"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="25dp"
-                    android:text="Qty"
-                    android:textStyle="bold"
-                    android:textSize="25dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="Price"
-                    android:textStyle="bold"
-                    android:textSize="25dp"
-                    android:layout_marginLeft="25dp"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="10dp">
-
-                <TextView
-                    android:layout_width="150dp"
-                    android:layout_height="75dp"
-                    android:text="Small Bag(0-15Kg)"
-                    android:textSize="20dp"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:id="@+id/bag_small1"/>
-
-                <EditText
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="25dp"
-                    android:hint="No."
-                    android:textSize="20dp"
-                    android:inputType="number"
-                    android:id="@+id/qty_small1"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="1000"
-                    android:textSize="20dp"
-                    android:id="@+id/price_small1"
-                    android:layout_marginLeft="25dp"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="150dp"
-                    android:layout_height="75dp"
-                    android:text="Medium Bag(16-50Kg)"
-                    android:textSize="20dp"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:id="@+id/bag_medium1"/>
-
-                <EditText
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="25dp"
-                    android:hint="No."
-                    android:textSize="20dp"
-                    android:inputType="number"
-                    android:id="@+id/qty_medium1"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="2000"
-                    android:textSize="20dp"
-                    android:id="@+id/price_medium1"
-                    android:layout_marginLeft="25dp"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="10dp">
-
-                <TextView
-                    android:layout_width="150dp"
-                    android:layout_height="75dp"
-                    android:text="Large Bag(>50Kg)"
-                    android:textSize="20dp"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentLeft="true"
-                    android:id="@+id/bag_large1"
-                    android:layout_alignParentStart="true" />
-
-                <EditText
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="25dp"
-                    android:hint="No."
-                    android:textSize="20dp"
-                    android:inputType="number"
-                    android:id="@+id/qty_large1"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="3000"
-                    android:textSize="20dp"
-                    android:layout_marginLeft="25dp"
-                    android:id="@+id/price_large1"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="10dp">
-
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Pickup Address"
-                    android:textColor="@color/Primary"
-                    android:id="@+id/pickup1"
-                    android:inputType="text"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Destination Address"
-                    android:textColor="@color/Primary"
-                    android:inputType="text"/>
-            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -286,35 +333,242 @@
                     android:layout_marginTop="5dp"/>
             </LinearLayout>
 
-            <EditText
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Pickup Date(dd/mm/yyyy)"
-                android:textSize="20dp"
-                android:textColor="@color/Primary"
-                android:id="@+id/date_pickup2"
-                android:inputType="text"/>
+                android:orientation="horizontal"
+                android:background="@color/lay_back"
+                android:layout_marginTop="30dp">
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="5dp"
+                    android:hint="Pickup Address"
+                    android:inputType="text"
+                    android:id="@+id/pickup2"/>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@color/lay_back"
+                android:layout_marginTop="10dp">
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Destination Address"
+                    android:inputType="text"
+                    android:id="@+id/destination2"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="5dp"/>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical"
+                android:background="@color/lay_back"
+                android:paddingLeft="15dp"
+                android:paddingRight="5dp"
+                android:paddingBottom="5dp"
+                android:paddingTop="5dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="30dp">
+
+                    <TextView
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:text="Bag"
+                        android:textSize="25dp"
+                        android:textStyle="bold"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="25dp"
+                        android:text="Qty"
+                        android:textStyle="bold"
+                        android:textSize="25dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="Price"
+                        android:textStyle="bold"
+                        android:textSize="25dp"
+                        android:layout_marginLeft="40dp"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="15dp">
+
+                    <TextView
+                        android:layout_width="150dp"
+                        android:layout_height="75dp"
+                        android:text="Small Bag(0-15Kg)"
+                        android:textSize="20dp"
+
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:id="@+id/bag_small2"/>
+
+                    <EditText
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="25dp"
+                        android:hint="No."
+                        android:textSize="20dp"
+                        android:inputType="number"
+                        android:id="@+id/qty_small2"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="49dp"
+                        android:text="1000"
+                        android:textSize="20dp"
+                        android:id="@+id/price_small2"
+                        android:layout_marginLeft="40dp"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="10dp">
+
+                    <TextView
+                        android:layout_width="150dp"
+                        android:layout_height="75dp"
+                        android:text="Medium Bag(16-50Kg)"
+                        android:textSize="20dp"
+
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:id="@+id/bag_medium2"/>
+
+                    <EditText
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="25dp"
+                        android:hint="No."
+                        android:textSize="20dp"
+                        android:inputType="number"
+                        android:id="@+id/qty_medium2"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="36dp"
+                        android:text="2000"
+                        android:textSize="20dp"
+                        android:id="@+id/price_medium2"
+                        android:layout_marginLeft="40dp"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="10dp">
+
+                    <TextView
+                        android:layout_width="150dp"
+                        android:layout_height="75dp"
+                        android:text="Large Bag(>50Kg)"
+                        android:textSize="20dp"
+
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentLeft="true"
+                        android:id="@+id/bag_large2"
+                        android:layout_alignParentStart="true" />
+
+                    <EditText
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="25dp"
+                        android:hint="No."
+                        android:textSize="20dp"
+                        android:inputType="number"
+                        android:id="@+id/qty_large2"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="42dp"
+                        android:text="3000"
+                        android:textSize="20dp"
+                        android:layout_marginLeft="40dp"
+                        android:id="@+id/price_large2"/>
+
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/lay_back"
+                android:layout_marginTop="10dp">
+
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Pickup Date (dd/mm/yyyy)"
+                    android:layout_marginTop="10dp"
+                    android:id="@+id/date_pickup2"
+                    android:inputType="text"/>
+            </LinearLayout>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Choose delivery option"
                 android:textSize="20dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/lay_back"
+                android:text="Choose delivery option"
                 android:textColor="@color/Primary"
-                android:layout_marginTop="5dp"/>
+                android:paddingBottom="5dp"
+                android:paddingLeft="5dp"
+                android:paddingTop="5dp"
+                android:paddingRight="5dp"/>
 
             <RadioGroup
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
-                android:id="@+id/delivery_options2">
+                android:paddingLeft="20dp"
+                android:background="@color/lay_back"
+                android:id="@+id/delivery_options2"
+                >
 
                 <RadioButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/radio_1day2"
                     android:text="1 Day delivery"
-                    android:textSize="20dp"/>
+                    android:textSize="15dp"/>
 
 
                 <RadioButton
@@ -322,14 +576,14 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/radio_fast2"
                     android:text="Fast delivery"
-                    android:textSize="20dp"/>
+                    android:textSize="15dp"/>
 
                 <RadioButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/radio_standard2"
                     android:text="Standard delivery"
-                    android:textSize="20dp"/>
+                    android:textSize="15dp"/>
             </RadioGroup>
 
             <TextView
@@ -338,208 +592,52 @@
                 android:text="Delivered By - "
                 android:textSize="20dp"
                 android:textColor="@color/Primary"
-                android:layout_marginTop="0dp"/>
+                android:layout_marginTop="0dp"
+                android:background="@color/lay_back"
+                android:paddingBottom="5dp"
+                android:paddingLeft="5dp"
+                android:paddingTop="5dp"
+                android:paddingRight="5dp"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="0dp"
-                android:textSize="25dp"
+                android:textSize="20dp"
+                android:background="@color/lay_back"
                 android:textColor="@color/Primary"
                 android:text="Estimated date of delivery"
-                android:id="@+id/date_delivery2"/>
+                android:id="@+id/date_delivery2"
+                android:paddingBottom="5dp"
+                android:paddingLeft="5dp"
+                android:paddingTop="5dp"
+                android:paddingRight="5dp"/>
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="VIEW PRICES"
+                android:textColor="#FFFFFF"
+                android:background="@color/Primary"
                 android:textSize="20dp"
+                android:layout_marginLeft="100dp"
+                android:id="@+id/btnViewPrices2"
+                android:layout_marginTop="10dp"/>
+
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:background="@color/Primary"
                 android:textColor="#FFFFFF"
-                android:layout_marginLeft="100dp"
-                android:id="@+id/btnViewPrices2"/>
-
+                android:text="SUBMIT"
+                android:textSize="25dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="118dp"
+                android:id="@+id/btnSubmit"/>
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <TextView
-                    android:layout_width="150dp"
-                    android:layout_height="wrap_content"
-                    android:text="Bag"
-                    android:textSize="25dp"
-                    android:textStyle="bold"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="25dp"
-                    android:text="Qty"
-                    android:textStyle="bold"
-                    android:textSize="25dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="1000"
-                    android:textStyle="bold"
-                    android:textSize="25dp"
-                    android:layout_marginLeft="25dp"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="15dp">
-
-                <TextView
-                    android:layout_width="150dp"
-                    android:layout_height="75dp"
-                    android:text="Small Bag(0-15Kg)"
-                    android:textSize="20dp"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:id="@+id/bag_small2"/>
-
-                <EditText
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="25dp"
-                    android:hint="No."
-                    android:textSize="20dp"
-                    android:inputType="number"
-                    android:id="@+id/qty_small2"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="2000"
-                    android:textSize="20dp"
-                    android:id="@+id/price_small2"
-                    android:layout_marginLeft="25dp"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="10dp">
-
-                <TextView
-                    android:layout_width="150dp"
-                    android:layout_height="75dp"
-                    android:text="Medium Bag(16-50Kg)"
-                    android:textSize="20dp"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:id="@+id/bag_medium2"/>
-
-                <EditText
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="25dp"
-                    android:hint="No."
-                    android:textSize="20dp"
-                    android:inputType="number"
-                    android:id="@+id/qty_medium2"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="3000"
-                    android:textSize="20dp"
-                    android:id="@+id/price_medium2"
-                    android:layout_marginLeft="25dp"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="10dp">
-
-                <TextView
-                    android:layout_width="150dp"
-                    android:layout_height="75dp"
-                    android:text="Large Bag(>50Kg)"
-                    android:textSize="20dp"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentLeft="true"
-                    android:id="@+id/bag_large2"
-                    android:layout_alignParentStart="true" />
-
-                <EditText
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="25dp"
-                    android:hint="No."
-                    android:textSize="20dp"
-                    android:inputType="number"
-                    android:id="@+id/qty_large2"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="4000"
-                    android:textSize="20dp"
-                    android:layout_marginLeft="25dp"
-                    android:id="@+id/price_large2"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="20dp">
-
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@color/Primary"
-                    android:textColor="#FFFFFF"
-                    android:text="SUBMIT"
-                    android:textSize="25dp"
-                    android:layout_marginLeft="130dp"
-                    android:id="@+id/btnSubmit"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="20dp">
-
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Pickup Address"
-                    android:textColor="@color/Primary"
-                    android:inputType="text"
-                    android:id="@+id/pickup2"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="10dp">
-
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Destination Address"
-                    android:textColor="@color/Primary"
-                    android:inputType="text"
-                    android:id="@+id/destination2" />
-            </LinearLayout>
+                android:layout_height="80dp"></LinearLayout>
 
         </LinearLayout>
     </ScrollView>

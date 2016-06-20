@@ -17,87 +17,60 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginLeft="10dp">
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Pickup Date (dd/mm/yyyy)"
-                android:textSize="25dp"
-                android:textColor="@color/Primary"
-                android:layout_marginTop="10dp"
-                android:id="@+id/date_pickup"
-                android:inputType="text"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Choose delivery option"
-                android:textSize="25dp"
-                android:textColor="@color/Primary"/>
-
-            <RadioGroup
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:id="@+id/delivery_options">
-
-                <RadioButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/radio_1day"
-                    android:text="1 Day delivery"
-                    android:textSize="20dp"/>
-
-
-                <RadioButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/radio_fast"
-                    android:text="Fast delivery"
-                    android:textSize="20dp"/>
-
-                <RadioButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/radio_standard"
-                    android:text="Standard delivery"
-                    android:textSize="20dp"/>
-            </RadioGroup>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Delivered By - "
-                android:textSize="20dp"
-                android:textColor="@color/Primary"
-                android:layout_marginTop="0dp"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="0dp"
-                android:textSize="20dp"
-                android:textColor="@color/Primary"
-                android:text="Estimated date of delivery"
-                android:id="@+id/date_delivery" />
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="VIEW PRICES"
-                android:textColor="#FFFFFF"
-                android:background="@color/Primary"
-                android:textSize="20dp"
-                android:layout_marginLeft="100dp"
-                android:id="@+id/btnViewPrices"
-                android:layout_marginTop="10dp"/>
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp">
 
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="horizontal"
+                android:background="@color/lay_back"
+                android:layout_marginTop="30dp">
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="5dp"
+                    android:hint="Pickup Address"
+                    android:inputType="text"
+                    android:id="@+id/pickup1"/>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@color/lay_back"
+                android:layout_marginTop="10dp">
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Destination Address"
+                    android:inputType="text"
+                    android:id="@+id/destination1"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="5dp"/>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical"
+                android:background="@color/lay_back"
+                android:paddingLeft="15dp"
+                android:paddingRight="5dp"
+                android:paddingBottom="5dp"
+                android:paddingTop="5dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -129,7 +102,7 @@
                         android:text="Price"
                         android:textStyle="bold"
                         android:textSize="25dp"
-                        android:layout_marginLeft="25dp"/>
+                        android:layout_marginLeft="40dp"/>
 
                 </LinearLayout>
 
@@ -161,11 +134,11 @@
 
                     <TextView
                         android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
+                        android:layout_height="49dp"
                         android:text="1000"
                         android:textSize="20dp"
                         android:id="@+id/price_small"
-                        android:layout_marginLeft="25dp"/>
+                        android:layout_marginLeft="40dp"/>
 
                 </LinearLayout>
 
@@ -197,11 +170,11 @@
 
                     <TextView
                         android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
+                        android:layout_height="36dp"
                         android:text="2000"
                         android:textSize="20dp"
                         android:id="@+id/price_medium"
-                        android:layout_marginLeft="25dp"/>
+                        android:layout_marginLeft="40dp"/>
 
                 </LinearLayout>
 
@@ -233,63 +206,127 @@
 
                     <TextView
                         android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
+                        android:layout_height="42dp"
                         android:text="3000"
                         android:textSize="20dp"
-                        android:layout_marginLeft="25dp"
+                        android:layout_marginLeft="40dp"
                         android:id="@+id/price_large"/>
 
                 </LinearLayout>
+                </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/lay_back"
+                android:layout_marginTop="10dp">
+
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Pickup Date (dd/mm/yyyy)"
+                    android:layout_marginTop="10dp"
+                    android:id="@+id/date_pickup"
+                    android:inputType="text"/>
+            </LinearLayout>
+
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="20dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/lay_back"
+                    android:text="Choose delivery option"
+                    android:textColor="@color/Primary"
+                    android:paddingBottom="5dp"
+                    android:paddingLeft="5dp"
+                    android:paddingTop="5dp"
+                    android:paddingRight="5dp"/>
+
+                <RadioGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="20dp"
+                    android:background="@color/lay_back"
+                    android:id="@+id/delivery_options"
+                    >
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/radio_1day"
+                        android:text="1 Day delivery"
+                        android:textSize="15dp"/>
+
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/radio_fast"
+                        android:text="Fast delivery"
+                        android:textSize="15dp"/>
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/radio_standard"
+                        android:text="Standard delivery"
+                        android:textSize="15dp"/>
+                </RadioGroup>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Delivered By - "
+                    android:textSize="20dp"
+                    android:textColor="@color/Primary"
+                    android:layout_marginTop="0dp"
+                    android:background="@color/lay_back"
+                    android:paddingBottom="5dp"
+                    android:paddingLeft="5dp"
+                    android:paddingTop="5dp"
+                    android:paddingRight="5dp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="0dp"
+                    android:textSize="20dp"
+                    android:background="@color/lay_back"
+                    android:textColor="@color/Primary"
+                    android:text="Estimated date of delivery"
+                    android:id="@+id/date_delivery"
+                    android:paddingBottom="5dp"
+                    android:paddingLeft="5dp"
+                    android:paddingTop="5dp"
+                    android:paddingRight="5dp"/>
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="VIEW PRICES"
+                    android:textColor="#FFFFFF"
+                    android:background="@color/Primary"
+                    android:textSize="20dp"
+                    android:layout_marginLeft="100dp"
+                    android:id="@+id/btnViewPrices"
+                    android:layout_marginTop="10dp"/>
 
 
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="30dp"
                     android:background="@color/Primary"
                     android:textColor="#FFFFFF"
                     android:text="SUBMIT"
                     android:textSize="25dp"
-                    android:layout_marginLeft="130dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="118dp"
                     android:id="@+id/btnSubmit"/>
-
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="30dp">
+                    android:layout_height="80dp"></LinearLayout>
 
-                    <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="Pickup Address"
-                        android:textColor="@color/Primary"
-                        android:inputType="text"
-                        android:id="@+id/pickup1"/>
-                </LinearLayout>
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="10dp">
-
-                    <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Destination Address"
-                    android:textColor="@color/Primary"
-                    android:inputType="text"
-                    android:id="@+id/destination1"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="300dip">
-
-                </LinearLayout>
-
-            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 

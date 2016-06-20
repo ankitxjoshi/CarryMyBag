@@ -22,10 +22,12 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:back>
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/Primary"
                     android:text="Origin Address"
                     android:textStyle="bold"
                     android:textSize="30dp" />
@@ -110,13 +112,13 @@
                     android:id="@+id/pin_code_origin"
                     android:inputType="number"/>
             </LinearLayout>
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:layout_marginTop="30dp">
                 <TextView
+                    android:textColor="@color/Primary"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Destination Address"
