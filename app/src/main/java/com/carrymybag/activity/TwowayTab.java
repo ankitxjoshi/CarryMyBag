@@ -162,14 +162,24 @@ public class TwowayTab extends Fragment implements View.OnClickListener {
             case R.id.btnSubmit:
                 registerUser1();
                 registerUser2();
-                getPricesAndQuantity();
+                getPricesAndQuantity1();
+                Intent i = new Intent(getContext(),
+                        EnterDetails.class);
                 double totalPrice1 = priceSmall * qtySmall + priceMed * qtyMed + priceLarge * qtyLarge;
+                i.putExtra("ValSmall1",qtySmall);
+                i.putExtra("ValMed1",qtyMed);
+                i.putExtra("ValBig1",qtyLarge);
+                getPricesAndQuantity2();
                 double totalPrice2 = priceSmall * qtySmall + priceMed * qtyMed + priceLarge * qtyLarge;
+                i.putExtra("ValSmall2",qtySmall);
+                i.putExtra("ValMed2",qtyMed);
+                i.putExtra("ValBig2",qtyLarge);
+                i.putExtra("whichWay",true);
                 double totalPrice = totalPrice1 + totalPrice2;
                 String price = Double.toString(totalPrice);
                 Toast.makeText(getActivity(), "The total Price is Rs. " + price, Toast.LENGTH_LONG).show();
-                Intent i = new Intent(getContext(),
-                        EnterDetails.class);
+
+
                 startActivity(i);
                 break;
         }
@@ -304,7 +314,7 @@ public class TwowayTab extends Fragment implements View.OnClickListener {
 
     }
 
-    void getPricesAndQuantity()
+    void getPricesAndQuantity1()
     {
         try {
             qtySmall = Double.parseDouble(editTextQtySmall1.getText().toString());
@@ -337,6 +347,11 @@ public class TwowayTab extends Fragment implements View.OnClickListener {
             priceLarge = 0.0;
         }
 
+
+
+    }
+    void getPricesAndQuantity2()
+    {
 
         try {
             qtySmall = Double.parseDouble(editTextQtySmall2.getText().toString());

@@ -112,6 +112,10 @@ public class OnewayTab extends Fragment implements View.OnClickListener {
                 Toast.makeText(getActivity(), "The total Price is Rs. " + price, Toast.LENGTH_LONG).show();
                 Intent i = new Intent(getContext(),
                         EnterDetails.class);
+                i.putExtra("ValSmall",qtySmall);
+                i.putExtra("ValMed",qtyMed);
+                i.putExtra("ValBig",qtyLarge);
+                i.putExtra("whichWay",false);
                 startActivity(i);
 
             }
