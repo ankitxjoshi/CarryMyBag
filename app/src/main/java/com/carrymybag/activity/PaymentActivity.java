@@ -58,7 +58,7 @@ public class PaymentActivity extends Activity
                     "currency: 'INR'}"
             );
 
-            options.put("amount", "100");
+            options.put("amount", "5000");
             options.put("name", "CarryMyBag");
             options.put("prefill", new JSONObject("{email: 'ajankit2304@gmail.com', contact: '9876543210'}"));
 
