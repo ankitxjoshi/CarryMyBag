@@ -346,7 +346,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             User_email = acct.getEmail();
             User_photourl = acct.getPhotoUrl().toString();
             Intent intent = new Intent(LoginActivity.this,
-                    PaymentActivity.class);
+                    MainActivity.class);
             startActivity(intent);
             finish();
 
