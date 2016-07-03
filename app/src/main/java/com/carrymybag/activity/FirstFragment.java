@@ -96,7 +96,7 @@ public class FirstFragment extends android.support.v4.app.Fragment {
 
     }
 
-    public class JSONTask extends AsyncTask<String,String,String> {
+    private class JSONTask extends AsyncTask<String,String,String> {
 
         @Override
         protected String doInBackground(String... params) {
@@ -125,7 +125,7 @@ public class FirstFragment extends android.support.v4.app.Fragment {
                     /**
                      * below single line of code from Gson saves you from writing the json parsing yourself which is commented below
                      */
-                    list.add(finalObject.getString("City_Name"));
+                    list.add(finalObject.getString("city_name"));
 
                 }
                 return null;

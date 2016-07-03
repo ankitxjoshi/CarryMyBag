@@ -2,6 +2,7 @@ package com.carrymybag.activity;
 
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -17,7 +18,19 @@ import android.widget.Toast;
 import android.widget.LinearLayout.LayoutParams;
 
 import com.carrymybag.R;
+import com.carrymybag.app.AppConfig;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 
 public class EnterDetails extends AppCompatActivity implements OnItemSelectedListener {
@@ -90,6 +103,9 @@ public class EnterDetails extends AppCompatActivity implements OnItemSelectedLis
 
     boolean isTwoWay = false;                      //Change to true for a TwoWay delivery (To include Leg 2).
 
+    public static ArrayList<String> Citites;
+    public static ArrayList<String> BagType;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -97,6 +113,13 @@ public class EnterDetails extends AppCompatActivity implements OnItemSelectedLis
 
         Intent intent = getIntent();
         isTwoWay = intent.getBooleanExtra("whichWay",false);
+
+        Citites = new ArrayList<>();
+        Citites.add("Delhi");
+        BagType = new ArrayList<>();
+        BagType.add("Duffle");
+        new JSONTask().execute(AppConfig.URL_CityList);
+        new JSONTaskBag().execute(AppConfig.URL_BagList);
         if(!isTwoWay)
         {
             NumSmallBagsOrigin = (int)intent.getDoubleExtra("ValSmall",0);
@@ -115,8 +138,6 @@ public class EnterDetails extends AppCompatActivity implements OnItemSelectedLis
 
 
         String[] AddressTypes = {"Residential", "Business", "Golf Course", "School", "Hotel"};
-        String[] Citites = {"Delhi", "Mumbai", "Chennai", "Bangalore"};
-        String[] BagType = {"Roller Bag", "Duffle Bag", "Upright Bag", "Other Bag"};
 
         SmallBagOrigin = new TextView[NumSmallBagsOrigin];
         MediumBagOrigin = new TextView[NumMediumBagsOrigin];
@@ -670,6 +691,122 @@ public class EnterDetails extends AppCompatActivity implements OnItemSelectedLis
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
+
+    }
+
+    private class JSONTask extends AsyncTask<String,String,String> {
+
+        @Override
+        protected String doInBackground(String... params) {
+            HttpURLConnection connection = null;
+            BufferedReader reader = null;
+
+            try {
+                URL url = new URL(params[0]);
+                connection = (HttpURLConnection) url.openConnection();
+                connection.connect();
+                InputStream stream = connection.getInputStream();
+                reader = new BufferedReader(new InputStreamReader(stream));
+                StringBuffer buffer = new StringBuffer();
+                String line ="";
+                while ((line = reader.readLine()) != null){
+                    buffer.append(line);
+                }
+
+                String finalJson = buffer.toString();
+
+                JSONObject parentObject = new JSONObject(finalJson);
+                JSONArray parentArray = parentObject.getJSONArray("result");
+
+                for(int i=0; i<parentArray.length(); i++) {
+                    JSONObject finalObject = parentArray.getJSONObject(i);
+                    /**
+                     * below single line of code from Gson saves you from writing the json parsing yourself which is commented below
+                     */
+                    Citites.add(finalObject.getString("city_name"));
+
+                }
+                return null;
+
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            } finally {
+                if(connection != null) {
+                    connection.disconnect();
+                }
+                try {
+                    if(reader != null) {
+                        reader.close();
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            return  null;
+        }
+
+
+    }
+
+    private class JSONTaskBag extends AsyncTask<String,String,String> {
+
+        @Override
+        protected String doInBackground(String... params) {
+            HttpURLConnection connection = null;
+            BufferedReader reader = null;
+
+            try {
+                URL url = new URL(params[0]);
+                connection = (HttpURLConnection) url.openConnection();
+                connection.connect();
+                InputStream stream = connection.getInputStream();
+                reader = new BufferedReader(new InputStreamReader(stream));
+                StringBuffer buffer = new StringBuffer();
+                String line ="";
+                while ((line = reader.readLine()) != null){
+                    buffer.append(line);
+                }
+
+                String finalJson = buffer.toString();
+
+                JSONObject parentObject = new JSONObject(finalJson);
+                JSONArray parentArray = parentObject.getJSONArray("result");
+
+                for(int i=0; i<parentArray.length(); i++) {
+                    JSONObject finalObject = parentArray.getJSONObject(i);
+                    /**
+                     * below single line of code from Gson saves you from writing the json parsing yourself which is commented below
+                     */
+                    BagType.add(finalObject.getString("bag_type"));
+
+                }
+                return null;
+
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            } finally {
+                if(connection != null) {
+                    connection.disconnect();
+                }
+                try {
+                    if(reader != null) {
+                        reader.close();
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            return  null;
+        }
+
 
     }
 }

@@ -15,6 +15,7 @@
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
+
         <activity
             android:name=".activity.LoginActivity"
             android:label="@string/app_name"
@@ -39,20 +40,25 @@
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <activity
             android:name=".activity.BookDetails"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"></activity>
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
         <activity
             android:name=".activity.EnterDetails"
-            android:label="@string/app_name"></activity>
+            android:label="@string/app_name" />
         <activity
             android:name=".activity.PasswordReset"
+            android:label="@string/app_name" />
+        <activity
+            android:name=".activity.PaymentActivity"
             android:label="@string/app_name"></activity>
-        <activity android:name=".activity.PaymentActivity" android:label="@string/app_name">
-        </activity>
-        <activity android:name="com.razorpay.CheckoutActivity" android:configChanges="keyboard|keyboardHidden|orientation|screenSize"></activity>
+        <activity
+            android:name="com.razorpay.CheckoutActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize" />
+
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="0690e21ca12465fe7f3991b05d45fef1cf97758a" />
 
+        <activity android:name=".activity.ConfirmPage"></activity>
     </application>
 
 </manifest>

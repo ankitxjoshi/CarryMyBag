@@ -25,16 +25,7 @@ public class PaymentActivity extends Activity
         super.onCreate(savedInstanceState);
         Fabric.with(this, new Crashlytics());
         setContentView(R.layout.activity_payment);
-
-        // payment button created by you in xml layout
-        View button = (View) findViewById(R.id.pay_btn);
-
-        button.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View arg0) {
-                startPayment();
-            };
-        });
+        startPayment();
     }
 
     public void startPayment(){

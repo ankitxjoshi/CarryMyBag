@@ -16,12 +16,10 @@ android {
     buildTypes {
         debug {
             minifyEnabled false
-            proguardFile 'proguard-project.txt'
         }
         release {
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            proguardFile 'proguard-project.txt'
+
         }
     }
 }

@@ -162,14 +162,14 @@ public class TwowayTab extends Fragment implements View.OnClickListener {
             case R.id.btnSubmit:
                 registerUser1();
                 registerUser2();
-                getPricesAndQuantity1();
+                getPricesAndQuantity1();  // <-------------------
                 Intent i = new Intent(getContext(),
                         EnterDetails.class);
                 double totalPrice1 = priceSmall * qtySmall + priceMed * qtyMed + priceLarge * qtyLarge;
                 i.putExtra("ValSmall1",qtySmall);
                 i.putExtra("ValMed1",qtyMed);
                 i.putExtra("ValBig1",qtyLarge);
-                getPricesAndQuantity2();
+                getPricesAndQuantity2();   //<-----------------
                 double totalPrice2 = priceSmall * qtySmall + priceMed * qtyMed + priceLarge * qtyLarge;
                 i.putExtra("ValSmall2",qtySmall);
                 i.putExtra("ValMed2",qtyMed);

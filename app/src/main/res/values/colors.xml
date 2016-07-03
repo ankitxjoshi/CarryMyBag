@@ -24,7 +24,7 @@
     <color name="Primary">#c13d4a</color>
     <color name="PrimaryLight">#c13d4a</color>
     <color name="grey">#999999</color>
-
+    <color name="colorBackgroundConfirm">#cec9cb</color>
     <color name="statusBarColor">#4169E1</color>
     <color name="toolBarColor">#4682B4</color>
     <color name="colorPrimaryDark">#9e222e</color>
