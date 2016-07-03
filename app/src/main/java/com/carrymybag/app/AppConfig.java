@@ -15,4 +15,7 @@ public class AppConfig {
 	public static String URL_Storedata = "http://carrymybag.comxa.com/storedata.php";
 
 	public static String URL_FORGOTPASS = "http://carrymybag.comxa.com/forgotpass.php";
+	public static String URL_StoreLuggage = "http://carrymybag.comxa.com/luggage.php";
+	public static String URL_StoreOrder = "http://carrymybag.comxa.com/order_details.php";
+	public static String URL_StoreUser = "http://carrymybag.comxa.com/user_detail.php";
 }

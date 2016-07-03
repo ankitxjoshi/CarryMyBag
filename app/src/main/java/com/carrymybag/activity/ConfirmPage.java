@@ -7,8 +7,20 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.carrymybag.R;
+import com.carrymybag.app.AppConfig;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.locks.Condition;
 
 public class ConfirmPage extends AppCompatActivity {
 
@@ -32,6 +44,34 @@ public class ConfirmPage extends AppCompatActivity {
     public Button buttonSubmit, buttonEdit;
 
     Boolean isTwoWay = true;
+
+    //Register Details....................................................................................
+
+    // 1.For luggage.php
+
+    public static final String KEY_USERID = "user_id";
+    public static final String KEY_BAGSIZE = "bag_size";
+    public static final String KEY_BAGTYPE = "bag_type";
+    public static final String KEY_BAGCOLOR = "bag_color";
+    public static final String KEY_PRICEID = "price_id";
+
+    //2.order_details.php
+
+    public static final String KEY_TOTPRICE = "total_price";
+    public static final String KEY_PICDATE = "pic_up_date";
+    public static final String KEY_DELDATE = "delivery_date";
+    public static final String KEY_PICKADD = "pickup_add";
+    public static final String KEY_DELADD = "delivery_add";
+
+    //3.user_details.php
+
+    public static final String KEY_NAME = "name";
+    public static final String KEY_PHONE = "phone_no";
+
+    //....................................................................................................
+    public boolean luggageflag;
+    public boolean userflag;
+    public boolean orderflag;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,16 +111,6 @@ public class ConfirmPage extends AppCompatActivity {
         pickupDate1.setText(datePickup1);
         deliveryDate1.setText(dateDelivery1);
 
-        buttonSubmit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(ConfirmPage.this,
-                        PaymentActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
-
         layoutLeg2 = (LinearLayout)findViewById(R.id.layout_leg2);
         if(isTwoWay==false) {
             layoutLeg2.setVisibility(View.GONE);
@@ -114,20 +144,136 @@ public class ConfirmPage extends AppCompatActivity {
             buttonEdit.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    /*
-                    Send back to the previous activity for changes.
-                     */
+                    Intent intent = new Intent(ConfirmPage.this,
+                            EnterDetails.class);
+                    startActivity(intent);
+                    finish();
                 }
             });
 
             buttonSubmit.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    /*
-                    Move on to the next activity for payment.
-                     */
+                    if(register())
+                    {
+                        Intent intent = new Intent(ConfirmPage.this,
+                                PaymentActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
+
                 }
             });
         }
+    }
+    private boolean register()
+    {
+        return registerLuggage() && registerUser() && registerOrder();
+    }
+    private boolean registerLuggage() {
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, AppConfig.URL_StoreLuggage,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Toast.makeText(ConfirmPage.this,response,Toast.LENGTH_LONG).show();
+                        luggageflag = true;
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(ConfirmPage.this,error.toString(),Toast.LENGTH_LONG).show();
+                        luggageflag = false;
+                    }
+                }){
+            @Override
+            protected Map<String,String> getParams(){
+                Map<String,String> params = new HashMap<String, String>();
+                params.put(KEY_USERID,"data");
+                params.put(KEY_BAGSIZE,"data");
+                params.put(KEY_BAGTYPE,"data");
+                params.put(KEY_BAGCOLOR,"data");
+                params.put(KEY_PRICEID,"data");
+
+                return params;
+            }
+
+        };
+
+        RequestQueue requestQueue = Volley.newRequestQueue(ConfirmPage.this);
+        requestQueue.add(stringRequest);
+        return luggageflag;
+    }
+    private boolean registerUser() {
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, AppConfig.URL_StoreUser,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Toast.makeText(ConfirmPage.this,response,Toast.LENGTH_LONG).show();
+                        userflag = true;
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(ConfirmPage.this,error.toString(),Toast.LENGTH_LONG).show();
+                        userflag = false;
+                    }
+                }){
+            @Override
+            protected Map<String,String> getParams(){
+                Map<String,String> params = new HashMap<String, String>();
+                params.put(KEY_USERID,"data");
+                params.put(KEY_NAME,"data");
+                params.put(KEY_PHONE,"data");
+                params.put(KEY_PICKADD,"data");
+
+                return params;
+            }
+
+
+        };
+
+        RequestQueue requestQueue = Volley.newRequestQueue(ConfirmPage.this);
+        requestQueue.add(stringRequest);
+        return userflag;
+    }
+    private boolean registerOrder() {
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, AppConfig.URL_StoreOrder,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Toast.makeText(ConfirmPage.this,response,Toast.LENGTH_LONG).show();
+                        orderflag = true;
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(ConfirmPage.this,error.toString(),Toast.LENGTH_LONG).show();
+                        orderflag = false;
+                    }
+                }){
+            @Override
+            protected Map<String,String> getParams(){
+                Map<String,String> params = new HashMap<String, String>();
+                params.put(KEY_USERID,"data");
+                params.put(KEY_TOTPRICE,"data");
+                params.put(KEY_PICDATE,"data");
+                params.put(KEY_DELDATE,"data");
+                params.put(KEY_PICKADD,"data");
+                params.put(KEY_DELADD,"data");
+
+                return params;
+            }
+
+        };
+
+        RequestQueue requestQueue = Volley.newRequestQueue(ConfirmPage.this);
+        requestQueue.add(stringRequest);
+        return orderflag;
     }
 }
