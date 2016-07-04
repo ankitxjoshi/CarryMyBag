@@ -25,6 +25,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.carrymybag.R;
 import com.carrymybag.app.AppConfig;
+import com.carrymybag.helper.GlobalClass;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -61,6 +62,8 @@ public class TwowayTab extends Fragment implements View.OnClickListener {
     private DatePickerDialog DatePickerDialog2;
     private SimpleDateFormat dateFormatter;
 
+    public GlobalClass globalVariable;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -72,6 +75,7 @@ public class TwowayTab extends Fragment implements View.OnClickListener {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.layout_tab_twoway, container, false);
+        globalVariable = (GlobalClass) getActivity().getApplicationContext();
 
         editTextQtySmall1 = (EditText) v.findViewById(R.id.qty_small1);
         editTextQtyMed1 = (EditText) v.findViewById(R.id.qty_medium1);
@@ -154,15 +158,9 @@ public class TwowayTab extends Fragment implements View.OnClickListener {
                 Intent i = new Intent(getContext(),
                         EnterDetails.class);
                 double totalPrice1 = priceSmall * qtySmall + priceMed * qtyMed + priceLarge * qtyLarge;
-                i.putExtra("ValSmall1",qtySmall);
-                i.putExtra("ValMed1",qtyMed);
-                i.putExtra("ValBig1",qtyLarge);
                 getPricesAndQuantity2();
                 double totalPrice2 = priceSmall * qtySmall + priceMed * qtyMed + priceLarge * qtyLarge;
-                i.putExtra("ValSmall2",qtySmall);
-                i.putExtra("ValMed2",qtyMed);
-                i.putExtra("ValBig2",qtyLarge);
-                i.putExtra("whichWay",true);
+                globalVariable.setTwoWay(true);
                 double totalPrice = totalPrice1 + totalPrice2;
                 String price = Double.toString(totalPrice);
                 Toast.makeText(getActivity(), "The total Price is Rs. " + price, Toast.LENGTH_LONG).show();
@@ -185,6 +183,7 @@ public class TwowayTab extends Fragment implements View.OnClickListener {
                 Calendar newDate = Calendar.getInstance();
                 newDate.set(year, monthOfYear, dayOfMonth);
                 PicupDate1.setText(dateFormatter.format(newDate.getTime()));
+                globalVariable.setPickupDate1(dateFormatter.format(newDate.getTime()));
             }
 
 
@@ -196,6 +195,7 @@ public class TwowayTab extends Fragment implements View.OnClickListener {
                 Calendar newDate = Calendar.getInstance();
                 newDate.set(year, monthOfYear, dayOfMonth);
                 PicupDate2.setText(dateFormatter.format(newDate.getTime()));
+                globalVariable.setPickupDate2(dateFormatter.format(newDate.getTime()));
             }
 
         },newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
@@ -235,6 +235,14 @@ public class TwowayTab extends Fragment implements View.OnClickListener {
             priceLarge = 0.0;
         }
 
+        globalVariable.setQtySmall1(qtySmall);
+        globalVariable.setQtyMed1(qtyMed);
+        globalVariable.setQtyLarge1(qtyLarge);
+        globalVariable.setPriceSmall1(priceSmall);
+        globalVariable.setPriceMed1(priceMed);
+        globalVariable.setPriceLarge1(priceLarge);
+
+
 
 
     }
@@ -271,5 +279,12 @@ public class TwowayTab extends Fragment implements View.OnClickListener {
         } catch (final NumberFormatException e) {
             priceLarge = 0.0;
         }
+
+        globalVariable.setQtySmall2(qtySmall);
+        globalVariable.setQtyMed2(qtyMed);
+        globalVariable.setQtyLarge2(qtyLarge);
+        globalVariable.setPriceSmall2(priceSmall);
+        globalVariable.setPriceMed2(priceMed);
+        globalVariable.setPriceLarge2(priceLarge);
     }
 }

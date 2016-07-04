@@ -17,6 +17,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.carrymybag.R;
 import com.carrymybag.app.AppConfig;
+import com.carrymybag.helper.GlobalClass;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -73,10 +74,15 @@ public class ConfirmPage extends AppCompatActivity {
     public boolean userflag;
     public boolean orderflag;
 
+    public GlobalClass globalVariable;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_confirm_page);
+
+        globalVariable = (GlobalClass) getApplicationContext();
+        isTwoWay = globalVariable.isTwoWay();
 
         buttonEdit = (Button)findViewById(R.id.btn_edit);
         buttonSubmit = (Button)findViewById(R.id.btn_submit);
@@ -96,20 +102,20 @@ public class ConfirmPage extends AppCompatActivity {
         pickupDate1 = (TextView)findViewById(R.id.text_date_pickup1);
         deliveryDate1 = (TextView)findViewById(R.id.text_date_delivery1);
 
-        nameTraveller.setText(travellerName);
-        contactTraveller.setText(travellerContact);
+        nameTraveller.setText(LoginActivity.User_name);
+        contactTraveller.setText(globalVariable.getContactOrigin());
 
-        originAddress1.setText(addressOrigin1);
-        destAddress1.setText(addressDest1);
+        originAddress1.setText(globalVariable.getAddressOrigin());
+        destAddress1.setText(globalVariable.getAddressDest());
 
         originState1.setText(stateOrigin1);
         destState1.setText(stateDest1);
 
-        originPin1.setText(pinOrigin1);
-        destPin1.setText(pinDest1);
+        originPin1.setText(globalVariable.getPinOrigin());
+        destPin1.setText(globalVariable.getPinDest());
 
-        pickupDate1.setText(datePickup1);
-        deliveryDate1.setText(dateDelivery1);
+        pickupDate1.setText(globalVariable.getPickupDate1());
+        deliveryDate1.setText(globalVariable.getDeliveryDate1());
 
         layoutLeg2 = (LinearLayout)findViewById(R.id.layout_leg2);
         if(isTwoWay==false) {
@@ -129,17 +135,17 @@ public class ConfirmPage extends AppCompatActivity {
             pickupDate2 = (TextView)findViewById(R.id.text_date_pickup2);
             deliveryDate2 = (TextView)findViewById(R.id.text_date_delivery2);
 
-            originAddress2.setText(addressOrigin2);
-            destAddress2.setText(addressDest2);
+            originAddress2.setText(globalVariable.getAddressOrigin2());
+            destAddress2.setText(globalVariable.getAddressDest2());
 
             originState2.setText(stateOrigin2);
             destState2.setText(stateDest2);
 
-            originPin2.setText(pinOrigin2);
-            destPin2.setText(getPinDest2);
+            originPin2.setText(globalVariable.getPinOrigin2());
+            destPin2.setText(globalVariable.getPinDest2());
 
-            pickupDate2.setText(datePickup2);
-            deliveryDate2.setText(dateDelivery2);
+            pickupDate2.setText(globalVariable.getPickupDate2());
+            deliveryDate2.setText(globalVariable.getDeliveryDate2());
 
             buttonEdit.setOnClickListener(new View.OnClickListener() {
                 @Override

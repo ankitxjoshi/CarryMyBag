@@ -15,7 +15,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
-
+import com.carrymybag.helper.GlobalClass;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -50,30 +50,22 @@ public class OnewayTab extends Fragment implements View.OnClickListener {
 
     private RadioButton one_day, fast, standard;
 
-    String Pickup;
 
-    public static final String KEY_QTYSMALL = "qtySmall";
-    public static final String KEY_QTYMED = "qtyMed";
-    public static final String KEY_QTYLARGE = "qtyLarge";
-    public static final String KEY_PRICESMALL = "priceSmall";
-    public static final String KEY_PRICEMED = "priceMed";
-    public static final String KEY_PRICELARGE = "priceLarge";
-    public static final String KEY_ADDR_PICKUP = " addr_pickup";
-    public static final String KEY_ADDR_DEST = "addr_dest";
-    public static final String KEY_USER = "userId";
-    public static final String KEY_PICKUP = "pickUp";
-    public static final String KEY_DROPDOWN = "dropDown";
+
+
 
     private DatePickerDialog DatePickerDialog;
 
     private SimpleDateFormat dateFormatter;
 
+    public GlobalClass globalVariable;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.content_oneway_tab, container, false);
+        globalVariable = (GlobalClass) getActivity().getApplicationContext();
 
         dateFormatter = new SimpleDateFormat("dd-MM-yyyy", Locale.US);
 
@@ -105,17 +97,17 @@ public class OnewayTab extends Fragment implements View.OnClickListener {
             @Override
             public void onClick(View v) {
 
-                registerUser();
                 getPricesAndQuantity();
                 double totalPrice = priceSmall * qtySmall + priceMed * qtyMed + priceLarge * qtyLarge;
                 String price = Double.toString(totalPrice);
+                globalVariable.setTwoWay(false);
                 Toast.makeText(getActivity(), "The total Price is Rs. " + price, Toast.LENGTH_LONG).show();
                 Intent i = new Intent(getContext(),
                         EnterDetails.class);
-                i.putExtra("ValSmall",qtySmall);
-                i.putExtra("ValMed",qtyMed);
-                i.putExtra("ValBig",qtyLarge);
-                i.putExtra("whichWay",false);
+//                i.putExtra("ValSmall",qtySmall);
+//                i.putExtra("ValMed",qtyMed);
+//                i.putExtra("ValBig",qtyLarge);
+//                i.putExtra("whichWay",false);
                 startActivity(i);
 
             }
@@ -138,55 +130,7 @@ public class OnewayTab extends Fragment implements View.OnClickListener {
         return v;
     }
 
-    private void registerUser(){
-        final String qtySmall =  editTextQtySmall.getText().toString().trim();
-        final String qtyMed =  editTextQtyMed.getText().toString().trim();
-        final String qtyLarge =  editTextQtyLarge.getText().toString().trim();
-        final String priceSmall =  textPriceSmall.getText().toString().trim();
-        final String priceMed =  textPriceMed.getText().toString().trim();
-        final String priceLarge =  textPriceLarge.getText().toString().trim();
-        final String addr_pickup =  editaddr_pickup.getText().toString().trim();
-        final String addr_dest =  editaddr_dest.getText().toString().trim();
-        final String userId = LoginActivity.User_email;
-        final String pickUp =  PicupDate.getText().toString().trim();
-        final String dropDown =  DateOfDelivery.getText().toString().trim();
 
-
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, AppConfig.URL_Storedata,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        Toast.makeText(getActivity(),response,Toast.LENGTH_LONG).show();
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(getActivity(),error.toString(),Toast.LENGTH_LONG).show();
-                    }
-                }){
-            @Override
-            protected Map<String,String> getParams(){
-                Map<String,String> params = new HashMap<String, String>();
-                params.put(KEY_QTYSMALL,qtySmall);
-                params.put(KEY_QTYMED,qtyMed);
-                params.put(KEY_QTYLARGE,qtyLarge);
-                params.put(KEY_PRICESMALL,priceSmall);
-                params.put(KEY_PRICEMED,priceMed);
-                params.put(KEY_PRICELARGE,priceLarge);
-                params.put(KEY_ADDR_PICKUP,addr_pickup);
-                params.put(KEY_ADDR_DEST,addr_dest);
-                params.put(KEY_USER,userId);
-                params.put(KEY_PICKUP,pickUp);
-                params.put(KEY_DROPDOWN,dropDown);
-                return params;
-            }
-
-        };
-
-        RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
-        requestQueue.add(stringRequest);
-    }
 
     private void setDateTimeField() {
         PicupDate.setOnClickListener(this);
@@ -199,6 +143,7 @@ public class OnewayTab extends Fragment implements View.OnClickListener {
                 Calendar newDate = Calendar.getInstance();
                 newDate.set(year, monthOfYear, dayOfMonth);
                 PicupDate.setText(dateFormatter.format(newDate.getTime()));
+                globalVariable.setPickupDate1(dateFormatter.format(newDate.getTime()));
             }
 
         },newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
@@ -220,30 +165,36 @@ public class OnewayTab extends Fragment implements View.OnClickListener {
         } catch (final NumberFormatException e) {
             qtySmall = 0.0;
         }
+        globalVariable.setQtySmall1(qtySmall);
         try {
             qtyMed = Double.parseDouble(editTextQtyMed.getText().toString());
         } catch (final NumberFormatException e) {
             qtyMed = 0.0;
         }
+        globalVariable.setQtyMed1(qtyMed);
         try {
             qtyLarge = Double.parseDouble(editTextQtyLarge.getText().toString());
         } catch (final NumberFormatException e) {
             qtyLarge = 0.0;
         }
+        globalVariable.setQtyLarge1(qtyLarge);
         try {
             priceSmall = Double.parseDouble(textPriceSmall.getText().toString());
         } catch (final NumberFormatException e) {
             priceSmall = 0.0;
         }
+        globalVariable.setPriceSmall1(priceSmall);
         try {
             priceMed = Double.parseDouble(textPriceMed.getText().toString());
         } catch (final NumberFormatException e) {
             priceMed = 0.0;
         }
+        globalVariable.setPriceMed1(priceMed);
         try {
             priceLarge = Double.parseDouble(textPriceLarge.getText().toString());
         } catch (final NumberFormatException e) {
             priceLarge = 0.0;
         }
+        globalVariable.setPriceLarge1(priceLarge);
     }
 }

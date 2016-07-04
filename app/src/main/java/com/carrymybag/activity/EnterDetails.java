@@ -19,6 +19,7 @@ import android.widget.LinearLayout.LayoutParams;
 
 import com.carrymybag.R;
 import com.carrymybag.app.AppConfig;
+import com.carrymybag.helper.GlobalClass;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -106,13 +107,17 @@ public class EnterDetails extends AppCompatActivity implements OnItemSelectedLis
     public static ArrayList<String> Citites;
     public static ArrayList<String> BagType;
 
+    public GlobalClass globalVariable;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_enter_details);
+        globalVariable = (GlobalClass) getApplicationContext();
 
         Intent intent = getIntent();
-        isTwoWay = intent.getBooleanExtra("whichWay",false);
+//        isTwoWay = intent.getBooleanExtra("whichWay",false);
+        isTwoWay = globalVariable.isTwoWay();
 
         Citites = new ArrayList<>();
         Citites.add("Delhi");
@@ -122,18 +127,20 @@ public class EnterDetails extends AppCompatActivity implements OnItemSelectedLis
         new JSONTaskBag().execute(AppConfig.URL_BagList);
         if(!isTwoWay)
         {
-            NumSmallBagsOrigin = (int)intent.getDoubleExtra("ValSmall",0);
-            NumMediumBagsOrigin = (int)intent.getDoubleExtra("ValMed",0);
-            NumLargeBagsOrigin = (int)intent.getDoubleExtra("ValBig",0);
+
+            NumSmallBagsOrigin = (int) globalVariable.getQtySmall1();
+            NumMediumBagsOrigin = (int) globalVariable.getQtyMed1();
+            NumLargeBagsOrigin = (int) globalVariable.getQtyLarge1();
         }
         else
         {
-            NumSmallBagsOrigin = (int)intent.getDoubleExtra("ValSmall1",0);
-            NumMediumBagsOrigin = (int)intent.getDoubleExtra("ValMed1",0);
-            NumLargeBagsOrigin = (int)intent.getDoubleExtra("ValBig1",0);
-            NumSmallBagsDest = (int)intent.getDoubleExtra("ValSmall2",0);
-            NumMediumBagsDest = (int)intent.getDoubleExtra("ValMed2",0);
-            NumLargeBagsDest = (int)intent.getDoubleExtra("ValBig2",0);
+
+            NumSmallBagsOrigin = (int) globalVariable.getQtySmall1();
+            NumMediumBagsOrigin = (int) globalVariable.getQtyMed1();
+            NumLargeBagsOrigin = (int) globalVariable.getQtyLarge1();
+            NumSmallBagsDest = (int) globalVariable.getQtySmall2();
+            NumMediumBagsDest = (int) globalVariable.getQtyMed2();
+            NumLargeBagsDest = (int) globalVariable.getQtyLarge2();
         }
 
 
@@ -476,6 +483,7 @@ public class EnterDetails extends AppCompatActivity implements OnItemSelectedLis
                 {
                     Toast.makeText(getApplicationContext(),"Contact in Origin Details not entered",Toast.LENGTH_LONG).show();
                 }
+                globalVariable.setContactOrigin(contactOrigin);
 
                 try {
                     contactDest = ContactDest.getText().toString();
@@ -483,6 +491,7 @@ public class EnterDetails extends AppCompatActivity implements OnItemSelectedLis
                 catch(NullPointerException e){
                     Toast.makeText(getApplicationContext(),"Contact in Destination Details not entered",Toast.LENGTH_LONG).show();
                 }
+                globalVariable.setCityDest(contactDest);
 
                 try {
                     pinOrigin = PinCodeOrigin.getText().toString();
@@ -490,20 +499,21 @@ public class EnterDetails extends AppCompatActivity implements OnItemSelectedLis
                 catch(NullPointerException e){
                     Toast.makeText(getApplicationContext(),"Pin Code in Origin Details not entered",Toast.LENGTH_LONG).show();
                 }
-
+                globalVariable.setPinOrigin(pinOrigin);
                 try {
                     pinDest = PinCodeDest.getText().toString();
                 }
                 catch(NullPointerException e){
                     Toast.makeText(getApplicationContext(),"Pin Code in Destination Details not entered",Toast.LENGTH_LONG).show();
                 }
-
+                globalVariable.setPinDest(pinDest);
                 try {
                     addressOrigin = AddressOrigin.getText().toString();
                 }
                 catch(NullPointerException e){
                     Toast.makeText(getApplicationContext(),"Address in Origin Details not entered",Toast.LENGTH_LONG).show();
                 }
+                globalVariable.setAddressOrigin(addressOrigin);
 
                 try {
                     addressDest = AddressDest.getText().toString();
@@ -511,27 +521,34 @@ public class EnterDetails extends AppCompatActivity implements OnItemSelectedLis
                 catch(NullPointerException e){
                     Toast.makeText(getApplicationContext(),"Address in Destination Details not entered",Toast.LENGTH_LONG).show();
                 }
+                globalVariable.setAddressDest(addressDest);
 
                 for(i=0; i<NumSmallBagsOrigin; i++)
                 {
                     colorSmallOrigin[i] = ColorSmallBagOrigin[i].getText().toString();
                 }
+                globalVariable.setColorSmallOrigin(colorSmallOrigin);
 
                 for(i=0; i<NumMediumBagsOrigin; i++)
                 {
                     colorMediumOrigin[i] = ColorMediumBagOrigin[i].getText().toString();
                 }
+                globalVariable.setColorMediumOrigin(colorMediumOrigin);
 
                 for(i=0; i<NumLargeBagsOrigin; i++)
                 {
                     colorLargeOrigin[i] = ColorLargeBagOrigin[i].getText().toString();
                 }
-
+                globalVariable.setColorLargeOrigin(colorLargeOrigin);
                 addrTypeOrigin = AddressTypeOrigin.getSelectedItem().toString();
                 addrTypeDest = AddressTypeDest.getSelectedItem().toString();
 
                 cityOrigin = CityOrigin.getSelectedItem().toString();
                 cityDest = CityDest.getSelectedItem().toString();
+                globalVariable.setAddrTypeOrigin(addrTypeOrigin);
+                globalVariable.setAddrTypeDest(addrTypeDest);
+                globalVariable.setCityOrigin(cityOrigin);
+                globalVariable.setCityDest(cityDest);
 
                 switch(cityOrigin){
                     case "Delhi":
@@ -571,54 +588,69 @@ public class EnterDetails extends AppCompatActivity implements OnItemSelectedLis
                     } catch (NullPointerException e) {
                         Toast.makeText(getApplicationContext(), "Contact in Origin Details not entered", Toast.LENGTH_LONG).show();
                     }
+                    globalVariable.setContactOrigin2(contactOrigin2);
 
                     try {
                         contactDest2 = ContactDest2.getText().toString();
                     } catch (NullPointerException e) {
                         Toast.makeText(getApplicationContext(), "Contact in Destination Details not entered", Toast.LENGTH_LONG).show();
                     }
+                    globalVariable.setContactDest2(contactDest2);
 
                     try {
                         pinOrigin2 = PinCodeOrigin2.getText().toString();
                     } catch (NullPointerException e) {
                         Toast.makeText(getApplicationContext(), "Pin Code in Origin Details not entered", Toast.LENGTH_LONG).show();
                     }
+                    globalVariable.setPinOrigin2(pinOrigin2);
 
                     try {
                         pinDest2 = PinCodeDest2.getText().toString();
                     } catch (NullPointerException e) {
                         Toast.makeText(getApplicationContext(), "Pin Code in Destination Details not entered", Toast.LENGTH_LONG).show();
                     }
+                    globalVariable.setPinDest2(pinDest2);
 
                     try {
                         addressOrigin2 = AddressOrigin2.getText().toString();
                     } catch (NullPointerException e) {
                         Toast.makeText(getApplicationContext(), "Address in Origin Details not entered", Toast.LENGTH_LONG).show();
                     }
+                    globalVariable.setAddressOrigin2(addressOrigin2);
 
                     try {
                         addressDest2 = AddressDest2.getText().toString();
                     } catch (NullPointerException e) {
                         Toast.makeText(getApplicationContext(), "Address in Destination Details not entered", Toast.LENGTH_LONG).show();
                     }
+                    globalVariable.setAddressDest2(addressDest2);
 
                     for (i = 0; i < NumSmallBagsDest; i++) {
                         colorSmallDest[i] = ColorSmallBagDest[i].getText().toString();
                     }
+                    globalVariable.setColorSmallDest(colorSmallDest);
 
                     for (i = 0; i < NumMediumBagsDest; i++) {
                         colorMediumDest[i] = ColorMediumBagDest[i].getText().toString();
                     }
+                    globalVariable.setColorMediumDest(colorMediumDest);
 
                     for (i = 0; i < NumLargeBagsDest; i++) {
                         colorLargeDest[i] = ColorLargeBagDest[i].getText().toString();
                     }
+                    globalVariable.setColorLargeDest(colorLargeDest);
 
                     addrTypeOrigin2 = AddressTypeOrigin2.getSelectedItem().toString();
                     addrTypeDest2 = AddressTypeDest2.getSelectedItem().toString();
 
                     cityOrigin2 = CityOrigin2.getSelectedItem().toString();
                     cityDest2 = CityDest2.getSelectedItem().toString();
+
+                    globalVariable.setAddrTypeOrigin2(addrTypeOrigin2);
+                    globalVariable.setAddrTypeDest2(addrTypeDest2);
+                    globalVariable.setCityOrigin2(cityOrigin2);
+                    globalVariable.setCityDest2(cityDest2);
+
 
                     switch(cityOrigin2){
                         case "Delhi":
