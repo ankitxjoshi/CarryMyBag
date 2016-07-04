@@ -147,30 +147,31 @@ public class ConfirmPage extends AppCompatActivity {
             pickupDate2.setText(globalVariable.getPickupDate2());
             deliveryDate2.setText(globalVariable.getDeliveryDate2());
 
-            buttonEdit.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
+
+        }
+        buttonEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ConfirmPage.this,
+                        EnterDetails.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        buttonSubmit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(register())
+                {
                     Intent intent = new Intent(ConfirmPage.this,
-                            EnterDetails.class);
+                            PaymentActivity.class);
                     startActivity(intent);
                     finish();
                 }
-            });
 
-            buttonSubmit.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if(register())
-                    {
-                        Intent intent = new Intent(ConfirmPage.this,
-                                PaymentActivity.class);
-                        startActivity(intent);
-                        finish();
-                    }
-
-                }
-            });
-        }
+            }
+        });
     }
     private boolean register()
     {
@@ -178,37 +179,120 @@ public class ConfirmPage extends AppCompatActivity {
     }
     private boolean registerLuggage() {
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, AppConfig.URL_StoreLuggage,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        Toast.makeText(ConfirmPage.this,response,Toast.LENGTH_LONG).show();
-                        luggageflag = true;
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(ConfirmPage.this,error.toString(),Toast.LENGTH_LONG).show();
-                        luggageflag = false;
-                    }
-                }){
-            @Override
-            protected Map<String,String> getParams(){
-                Map<String,String> params = new HashMap<String, String>();
-                params.put(KEY_USERID,"data");
-                params.put(KEY_BAGSIZE,"data");
-                params.put(KEY_BAGTYPE,"data");
-                params.put(KEY_BAGCOLOR,"data");
-                params.put(KEY_PRICEID,"data");
+        for(int i=0;i<(int)globalVariable.getQtySmall1();i++)
+        {
+            final String bagSize = "Small";
+            final String bagType = "Duffle";
+            final String bagColor = globalVariable.getColorSmallOrigin(i);
+            final String priceID = "1";
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, AppConfig.URL_StoreLuggage,
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            Toast.makeText(ConfirmPage.this,response,Toast.LENGTH_LONG).show();
+                            luggageflag = true;
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Toast.makeText(ConfirmPage.this,error.toString(),Toast.LENGTH_LONG).show();
+                            luggageflag = false;
+                        }
+                    }){
+                @Override
+                protected Map<String,String> getParams(){
+                    Map<String,String> params = new HashMap<String, String>();
+                    params.put(KEY_USERID,LoginActivity.User_name);
+                    params.put(KEY_BAGSIZE,bagSize);
+                    params.put(KEY_BAGTYPE,bagType);
+                    params.put(KEY_BAGCOLOR,bagColor);
+                    params.put(KEY_PRICEID,priceID);
 
-                return params;
-            }
+                    return params;
+                }
 
-        };
+            };
 
-        RequestQueue requestQueue = Volley.newRequestQueue(ConfirmPage.this);
-        requestQueue.add(stringRequest);
+            RequestQueue requestQueue = Volley.newRequestQueue(ConfirmPage.this);
+            requestQueue.add(stringRequest);
+        }
+        for(int i=0;i<(int)globalVariable.getQtyMed1();i++)
+        {
+            final String bagSize = "Medium";
+            final String bagType = "Duffle";
+            final String bagColor = globalVariable.getColorMediumOrigin(i);
+            final String priceID = "1";
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, AppConfig.URL_StoreLuggage,
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            Toast.makeText(ConfirmPage.this,response,Toast.LENGTH_LONG).show();
+                            luggageflag = true;
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Toast.makeText(ConfirmPage.this,error.toString(),Toast.LENGTH_LONG).show();
+                            luggageflag = false;
+                        }
+                    }){
+                @Override
+                protected Map<String,String> getParams(){
+                    Map<String,String> params = new HashMap<String, String>();
+                    params.put(KEY_USERID,LoginActivity.User_name);
+                    params.put(KEY_BAGSIZE,bagSize);
+                    params.put(KEY_BAGTYPE,bagType);
+                    params.put(KEY_BAGCOLOR,bagColor);
+                    params.put(KEY_PRICEID,priceID);
+
+                    return params;
+                }
+
+            };
+
+            RequestQueue requestQueue = Volley.newRequestQueue(ConfirmPage.this);
+            requestQueue.add(stringRequest);
+        }
+        for(int i=0;i<(int)globalVariable.getQtyLarge1();i++)
+        {
+            final String bagSize = "Large";
+            final String bagType = "Duffle";
+            final String bagColor = globalVariable.getColorLargeOrigin(i);
+            final String priceID = "1";
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, AppConfig.URL_StoreLuggage,
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            Toast.makeText(ConfirmPage.this,response,Toast.LENGTH_LONG).show();
+                            luggageflag = true;
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Toast.makeText(ConfirmPage.this,error.toString(),Toast.LENGTH_LONG).show();
+                            luggageflag = false;
+                        }
+                    }){
+                @Override
+                protected Map<String,String> getParams(){
+                    Map<String,String> params = new HashMap<String, String>();
+                    params.put(KEY_USERID,LoginActivity.User_name);
+                    params.put(KEY_BAGSIZE,bagSize);
+                    params.put(KEY_BAGTYPE,bagType);
+                    params.put(KEY_BAGCOLOR,bagColor);
+                    params.put(KEY_PRICEID,priceID);
+
+                    return params;
+                }
+
+            };
+
+            RequestQueue requestQueue = Volley.newRequestQueue(ConfirmPage.this);
+            requestQueue.add(stringRequest);
+        }
         return luggageflag;
     }
     private boolean registerUser() {
@@ -231,10 +315,10 @@ public class ConfirmPage extends AppCompatActivity {
             @Override
             protected Map<String,String> getParams(){
                 Map<String,String> params = new HashMap<String, String>();
-                params.put(KEY_USERID,"data");
-                params.put(KEY_NAME,"data");
-                params.put(KEY_PHONE,"data");
-                params.put(KEY_PICKADD,"data");
+                params.put(KEY_USERID,LoginActivity.User_email);
+                params.put(KEY_NAME,LoginActivity.User_name);
+                params.put(KEY_PHONE,globalVariable.getContactOrigin());
+                params.put(KEY_PICKADD,globalVariable.getAddressOrigin());
 
                 return params;
             }
@@ -266,12 +350,12 @@ public class ConfirmPage extends AppCompatActivity {
             @Override
             protected Map<String,String> getParams(){
                 Map<String,String> params = new HashMap<String, String>();
-                params.put(KEY_USERID,"data");
-                params.put(KEY_TOTPRICE,"data");
-                params.put(KEY_PICDATE,"data");
-                params.put(KEY_DELDATE,"data");
-                params.put(KEY_PICKADD,"data");
-                params.put(KEY_DELADD,"data");
+                params.put(KEY_USERID,LoginActivity.User_name);
+                params.put(KEY_TOTPRICE, String.valueOf(globalVariable.getTotalPrice()));
+                params.put(KEY_PICDATE,globalVariable.getPickupDate1());
+                params.put(KEY_DELDATE,globalVariable.getPickupDate1());
+                params.put(KEY_PICKADD,globalVariable.getAddressOrigin());
+                params.put(KEY_DELADD,globalVariable.getAddressDest());
 
                 return params;
             }
