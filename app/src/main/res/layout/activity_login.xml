@@ -55,7 +55,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dip"
-        android:background="#c13d4a"
+        android:background="@color/Primary"
         android:text="@string/btn_login"
         android:textColor="@color/white" />
 
@@ -65,7 +65,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Forget Password"
-        android:textColor="#c13d4a"
+        android:textColor="@color/Primary"
         android:id="@+id/forgetpass"
         android:layout_gravity="right"
         android:background="@null"
