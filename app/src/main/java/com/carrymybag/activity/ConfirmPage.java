@@ -17,11 +17,10 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.carrymybag.R;
 import com.carrymybag.app.AppConfig;
-import com.carrymybag.helper.GlobalClass;
+import com.carrymybag.app.AppController;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.locks.Condition;
 
 public class ConfirmPage extends AppCompatActivity {
 
@@ -74,14 +73,14 @@ public class ConfirmPage extends AppCompatActivity {
     public boolean userflag;
     public boolean orderflag;
 
-    public GlobalClass globalVariable;
+    public AppController globalVariable;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_confirm_page);
 
-        globalVariable = (GlobalClass) getApplicationContext();
+        globalVariable = (AppController) getApplicationContext();
         isTwoWay = globalVariable.isTwoWay();
 
         buttonEdit = (Button)findViewById(R.id.btn_edit);
@@ -105,8 +104,8 @@ public class ConfirmPage extends AppCompatActivity {
         nameTraveller.setText(LoginActivity.User_name);
         contactTraveller.setText(globalVariable.getContactOrigin());
 
-        originAddress1.setText(globalVariable.getAddressOrigin());
-        destAddress1.setText(globalVariable.getAddressDest());
+        originAddress1.setText(globalVariable.getAddress1Origin());
+        destAddress1.setText(globalVariable.getAddress1Dest());
 
         originState1.setText(stateOrigin1);
         destState1.setText(stateDest1);
@@ -318,7 +317,7 @@ public class ConfirmPage extends AppCompatActivity {
                 params.put(KEY_USERID,LoginActivity.User_email);
                 params.put(KEY_NAME,LoginActivity.User_name);
                 params.put(KEY_PHONE,globalVariable.getContactOrigin());
-                params.put(KEY_PICKADD,globalVariable.getAddressOrigin());
+                params.put(KEY_PICKADD,globalVariable.getAddress1Origin());
 
                 return params;
             }
@@ -354,8 +353,8 @@ public class ConfirmPage extends AppCompatActivity {
                 params.put(KEY_TOTPRICE, String.valueOf(globalVariable.getTotalPrice()));
                 params.put(KEY_PICDATE,globalVariable.getPickupDate1());
                 params.put(KEY_DELDATE,globalVariable.getPickupDate1());
-                params.put(KEY_PICKADD,globalVariable.getAddressOrigin());
-                params.put(KEY_DELADD,globalVariable.getAddressDest());
+                params.put(KEY_PICKADD,globalVariable.getAddress1Origin());
+                params.put(KEY_DELADD,globalVariable.getAddress1Dest());
 
                 return params;
             }

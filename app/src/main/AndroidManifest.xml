@@ -6,7 +6,7 @@
     <uses-permission android:name="android.permission.RECEIVE_SMS" />
 
     <application
-        android:name="com.carrymybag.helper.GlobalClass"
+        android:name="com.carrymybag.app.AppController"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"

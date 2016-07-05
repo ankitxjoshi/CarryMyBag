@@ -82,8 +82,22 @@
                     <EditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Address"
-                        android:id="@+id/address_origin"
+                        android:hint="Address 1"
+                        android:id="@+id/address1_origin"
+                        android:inputType="textPostalAddress"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="10dp">
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Address 2"
+                        android:id="@+id/address2_origin"
                         android:inputType="textPostalAddress"/>
                 </LinearLayout>
 
@@ -175,8 +189,22 @@
                     <EditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Address"
-                        android:id="@+id/address_dest"
+                        android:hint="Address 1"
+                        android:id="@+id/address1_dest"
+                        android:inputType="textPostalAddress"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="10dp">
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Address 2"
+                        android:id="@+id/address2_dest"
                         android:inputType="textPostalAddress"/>
                 </LinearLayout>
 
@@ -331,8 +359,22 @@
                     <EditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Address"
-                        android:id="@+id/address_origin2"
+                        android:hint="Address 1"
+                        android:id="@+id/address1_origin2"
+                        android:inputType="textPostalAddress"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="10dp">
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Address 2"
+                        android:id="@+id/address2_origin2"
                         android:inputType="textPostalAddress"/>
                 </LinearLayout>
 
@@ -424,8 +466,22 @@
                     <EditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Address"
-                        android:id="@+id/address_dest2"
+                        android:hint="Address 1"
+                        android:id="@+id/address1_dest2"
+                        android:inputType="textPostalAddress"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="10dp">
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Address 2"
+                        android:id="@+id/address2_dest2"
                         android:inputType="textPostalAddress"/>
                 </LinearLayout>
 

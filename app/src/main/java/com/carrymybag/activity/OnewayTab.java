@@ -15,24 +15,13 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
-import com.carrymybag.helper.GlobalClass;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
-import com.carrymybag.R;
-import com.carrymybag.app.AppConfig;
 
-import java.text.ParseException;
+import com.carrymybag.R;
+import com.carrymybag.app.AppController;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.Locale;
-import java.util.Map;
-
 
 
 public class OnewayTab extends Fragment implements View.OnClickListener {
@@ -58,14 +47,14 @@ public class OnewayTab extends Fragment implements View.OnClickListener {
 
     private SimpleDateFormat dateFormatter;
 
-    public GlobalClass globalVariable;
+    public AppController globalVariable;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.content_oneway_tab, container, false);
-        globalVariable = (GlobalClass) getActivity().getApplicationContext();
+        globalVariable = (AppController) getActivity().getApplicationContext();
 
         dateFormatter = new SimpleDateFormat("dd-MM-yyyy", Locale.US);
 

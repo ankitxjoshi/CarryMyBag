@@ -2,7 +2,6 @@ package com.carrymybag.activity;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
-import android.net.ParseException;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.InputType;
@@ -17,22 +16,12 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 import com.carrymybag.R;
-import com.carrymybag.app.AppConfig;
-import com.carrymybag.helper.GlobalClass;
+import com.carrymybag.app.AppController;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.Locale;
-import java.util.Map;
 
 
 public class TwowayTab extends Fragment implements View.OnClickListener {
@@ -62,7 +51,7 @@ public class TwowayTab extends Fragment implements View.OnClickListener {
     private DatePickerDialog DatePickerDialog2;
     private SimpleDateFormat dateFormatter;
 
-    public GlobalClass globalVariable;
+    public AppController globalVariable;
 
 
     @Override
@@ -75,7 +64,7 @@ public class TwowayTab extends Fragment implements View.OnClickListener {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.layout_tab_twoway, container, false);
-        globalVariable = (GlobalClass) getActivity().getApplicationContext();
+        globalVariable = (AppController) getActivity().getApplicationContext();
 
         editTextQtySmall1 = (EditText) v.findViewById(R.id.qty_small1);
         editTextQtyMed1 = (EditText) v.findViewById(R.id.qty_medium1);
