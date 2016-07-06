@@ -19,6 +19,7 @@ import com.carrymybag.R;
 import com.carrymybag.app.AppConfig;
 import com.carrymybag.app.AppController;
 
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -44,6 +45,7 @@ public class ConfirmPage extends AppCompatActivity {
     public Button buttonSubmit, buttonEdit;
 
     Boolean isTwoWay = true;
+
 
     //Register Details....................................................................................
 
@@ -72,6 +74,7 @@ public class ConfirmPage extends AppCompatActivity {
     public boolean luggageflag;
     public boolean userflag;
     public boolean orderflag;
+    public boolean isQuerySucc;
 
     public AppController globalVariable;
     RequestQueue requestQueue;
@@ -162,24 +165,50 @@ public class ConfirmPage extends AppCompatActivity {
         buttonSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(register())
-                {
-                    Intent intent = new Intent(ConfirmPage.this,
-                            PaymentActivity.class);
-                    startActivity(intent);
-                    finish();
-                }
+
+                register(new VolleyCallback() {
+                    @Override
+                    public void onSuccess(boolean result) {
+                        if(result)
+                        {
+                            Intent intent = new Intent(ConfirmPage.this,PaymentActivity.class);
+                            startActivity(intent);
+                        }
+                    }
+                });
 
             }
         });
 
-        requestQueue = Volley.newRequestQueue(ConfirmPage.this);
+
     }
-    private boolean register()
+    private void register(final VolleyCallback callback)
     {
-        return registerLuggage() && registerUser() && registerOrder();
+        isQuerySucc = true;
+        registerOrder(new VolleyCallback(){
+        @Override
+        public void onSuccess(boolean result) {
+            isQuerySucc&=result;
+        }
+    });
+        registerLuggage(new VolleyCallback(){
+            @Override
+            public void onSuccess(boolean result) {
+                isQuerySucc&=result;
+            }
+        });
+        registerUser(new VolleyCallback(){
+            @Override
+            public void onSuccess(boolean result) {
+                isQuerySucc&=result;
+            }
+        });
+        callback.onSuccess(isQuerySucc);
     }
-    private boolean registerLuggage() {
+    private void registerLuggage(final VolleyCallback callback) {
+
+        requestQueue = Volley.newRequestQueue(ConfirmPage.this);
+
 
         for(int i=0;i<(int)globalVariable.getQtySmall1();i++)
         {
@@ -193,6 +222,7 @@ public class ConfirmPage extends AppCompatActivity {
                         public void onResponse(String response) {
                             Toast.makeText(ConfirmPage.this,response,Toast.LENGTH_LONG).show();
                             luggageflag = true;
+                            callback.onSuccess(true);
                         }
                     },
                     new Response.ErrorListener() {
@@ -229,6 +259,7 @@ public class ConfirmPage extends AppCompatActivity {
                         public void onResponse(String response) {
                             Toast.makeText(ConfirmPage.this,response,Toast.LENGTH_LONG).show();
                             luggageflag = true;
+                            callback.onSuccess(true);
                         }
                     },
                     new Response.ErrorListener() {
@@ -265,6 +296,7 @@ public class ConfirmPage extends AppCompatActivity {
                         public void onResponse(String response) {
                             Toast.makeText(ConfirmPage.this,response,Toast.LENGTH_LONG).show();
                             luggageflag = true;
+                            callback.onSuccess(true);
                         }
                     },
                     new Response.ErrorListener() {
@@ -289,9 +321,9 @@ public class ConfirmPage extends AppCompatActivity {
             };
             requestQueue.add(stringRequest);
         }
-        return luggageflag;
+
     }
-    private boolean registerUser() {
+    private void registerUser(final VolleyCallback callback) {
 
         final String userEmail = globalVariable.getUserEmail();
         final String userName = globalVariable.getUserName();
@@ -304,6 +336,7 @@ public class ConfirmPage extends AppCompatActivity {
                     public void onResponse(String response) {
                         Toast.makeText(ConfirmPage.this,response,Toast.LENGTH_LONG).show();
                         userflag = true;
+                        callback.onSuccess(true);
                     }
                 },
                 new Response.ErrorListener() {
@@ -328,9 +361,9 @@ public class ConfirmPage extends AppCompatActivity {
         };
         requestQueue = Volley.newRequestQueue(ConfirmPage.this);
         requestQueue.add(stringRequest);
-        return userflag;
+
     }
-    private boolean registerOrder() {
+    private void registerOrder(final VolleyCallback callback) {
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, AppConfig.URL_StoreOrder,
                 new Response.Listener<String>() {
@@ -338,6 +371,7 @@ public class ConfirmPage extends AppCompatActivity {
                     public void onResponse(String response) {
                         Toast.makeText(ConfirmPage.this,response,Toast.LENGTH_LONG).show();
                         orderflag = true;
+                        callback.onSuccess(true);
                     }
                 },
                 new Response.ErrorListener() {
@@ -351,7 +385,7 @@ public class ConfirmPage extends AppCompatActivity {
             protected Map<String,String> getParams(){
                 Map<String,String> params = new HashMap<String, String>();
                 params.put(KEY_USERID,LoginActivity.User_name);
-                params.put(KEY_TOTPRICE, String.valueOf(globalVariable.getTotalPrice()));
+                params.put(KEY_TOTPRICE, "1000");
                 params.put(KEY_PICDATE,globalVariable.getPickupDate1());
                 params.put(KEY_DELDATE,globalVariable.getPickupDate1());
                 params.put(KEY_PICKADD,globalVariable.getAddress1Origin());
@@ -363,6 +397,10 @@ public class ConfirmPage extends AppCompatActivity {
         };
         requestQueue = Volley.newRequestQueue(ConfirmPage.this);
         requestQueue.add(stringRequest);
-        return orderflag;
+
+    }
+
+    public interface VolleyCallback{
+        void onSuccess(boolean result);
     }
 }

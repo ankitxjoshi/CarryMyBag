@@ -21,6 +21,7 @@ import com.carrymybag.app.AppController;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 
 
@@ -129,10 +130,13 @@ public class OnewayTab extends Fragment implements View.OnClickListener {
         DatePickerDialog = new DatePickerDialog(getContext(), new android.app.DatePickerDialog.OnDateSetListener() {
 
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                Date d = new Date(year, monthOfYear, dayOfMonth);
                 Calendar newDate = Calendar.getInstance();
                 newDate.set(year, monthOfYear, dayOfMonth);
                 PicupDate.setText(dateFormatter.format(newDate.getTime()));
-                globalVariable.setPickupDate1(dateFormatter.format(newDate.getTime()));
+                SimpleDateFormat dateFormatter = new SimpleDateFormat(
+                        "yyyy-MM-dd");
+                globalVariable.setPickupDate1(dateFormatter.format(d));
             }
 
         },newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
