@@ -4,26 +4,57 @@
     android:layout_height="match_parent">
 
     <LinearLayout
-        android:layout_width="300dip"
+        android:layout_marginTop="100dp"
+        android:layout_width="325dip"
+        android:layout_height="120dp"
         android:layout_gravity="center_horizontal|center_vertical"
         android:orientation="vertical"
-        android:layout_marginTop="100dip"
-        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:background="@color/border_color">
+    <LinearLayout
+        android:background="@color/lay_back"
+        android:layout_width="320dip"
+        android:layout_gravity="center_horizontal|center_vertical"
+        android:orientation="vertical"
+        android:layout_marginTop="2.5dp"
+        android:layout_height="115dp"
         android:layout_centerHorizontal="true">
+        <LinearLayout
+            android:layout_width="310dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:background="@color/white"
+            android:layout_height="wrap_content">
         <AutoCompleteTextView
-            android:layout_width="match_parent"
+            android:layout_width="310dp"
             android:hint="From"
+            android:textSize="27dp"
+            android:layout_margin="3dp"
             android:id="@+id/fromcityauto"
+            android:background="@null"
             android:layout_height="wrap_content" />
-
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="310dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:background="@color/white"
+            android:layout_height="wrap_content">
         <AutoCompleteTextView
+            android:background="@null"
+            android:textSize="27dp"
+            android:layout_margin="3dp"
             android:layout_width="match_parent"
             android:hint="To"
             android:id="@+id/tocityauto"
             android:layout_height="wrap_content" />
-
+     </LinearLayout>
     </LinearLayout>
-
+    </LinearLayout>
     <Button
         android:layout_width="300dip"
         android:layout_height="wrap_content"

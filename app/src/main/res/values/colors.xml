@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-   <color name="lay_back">#eaeaea</color>
+   <color name="border_color">#6d6d6d</color>
+   <color name="lay_back">#dedede</color>
     <color name="colorAccent">#0d3940</color>
     <color name="bg_login">#26ae90</color>
     <color name="bg_register">#2e3237</color>
