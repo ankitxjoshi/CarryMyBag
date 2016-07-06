@@ -74,6 +74,7 @@ public class ConfirmPage extends AppCompatActivity {
     public boolean orderflag;
 
     public AppController globalVariable;
+    RequestQueue requestQueue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -171,6 +172,8 @@ public class ConfirmPage extends AppCompatActivity {
 
             }
         });
+
+        requestQueue = Volley.newRequestQueue(ConfirmPage.this);
     }
     private boolean register()
     {
@@ -202,7 +205,7 @@ public class ConfirmPage extends AppCompatActivity {
                 @Override
                 protected Map<String,String> getParams(){
                     Map<String,String> params = new HashMap<String, String>();
-                    params.put(KEY_USERID,LoginActivity.User_name);
+                    params.put(KEY_USERID,globalVariable.getUserEmail());
                     params.put(KEY_BAGSIZE,bagSize);
                     params.put(KEY_BAGTYPE,bagType);
                     params.put(KEY_BAGCOLOR,bagColor);
@@ -212,8 +215,6 @@ public class ConfirmPage extends AppCompatActivity {
                 }
 
             };
-
-            RequestQueue requestQueue = Volley.newRequestQueue(ConfirmPage.this);
             requestQueue.add(stringRequest);
         }
         for(int i=0;i<(int)globalVariable.getQtyMed1();i++)
@@ -240,7 +241,7 @@ public class ConfirmPage extends AppCompatActivity {
                 @Override
                 protected Map<String,String> getParams(){
                     Map<String,String> params = new HashMap<String, String>();
-                    params.put(KEY_USERID,LoginActivity.User_name);
+                    params.put(KEY_USERID,globalVariable.getUserEmail());
                     params.put(KEY_BAGSIZE,bagSize);
                     params.put(KEY_BAGTYPE,bagType);
                     params.put(KEY_BAGCOLOR,bagColor);
@@ -250,8 +251,6 @@ public class ConfirmPage extends AppCompatActivity {
                 }
 
             };
-
-            RequestQueue requestQueue = Volley.newRequestQueue(ConfirmPage.this);
             requestQueue.add(stringRequest);
         }
         for(int i=0;i<(int)globalVariable.getQtyLarge1();i++)
@@ -278,7 +277,7 @@ public class ConfirmPage extends AppCompatActivity {
                 @Override
                 protected Map<String,String> getParams(){
                     Map<String,String> params = new HashMap<String, String>();
-                    params.put(KEY_USERID,LoginActivity.User_name);
+                    params.put(KEY_USERID,globalVariable.getUserEmail());
                     params.put(KEY_BAGSIZE,bagSize);
                     params.put(KEY_BAGTYPE,bagType);
                     params.put(KEY_BAGCOLOR,bagColor);
@@ -288,13 +287,16 @@ public class ConfirmPage extends AppCompatActivity {
                 }
 
             };
-
-            RequestQueue requestQueue = Volley.newRequestQueue(ConfirmPage.this);
             requestQueue.add(stringRequest);
         }
         return luggageflag;
     }
     private boolean registerUser() {
+
+        final String userEmail = globalVariable.getUserEmail();
+        final String userName = globalVariable.getUserName();
+        final String userPhone = globalVariable.getContactOrigin();
+        final String userAdd = globalVariable.getAddress1Origin();
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, AppConfig.URL_StoreUser,
                 new Response.Listener<String>() {
@@ -314,18 +316,17 @@ public class ConfirmPage extends AppCompatActivity {
             @Override
             protected Map<String,String> getParams(){
                 Map<String,String> params = new HashMap<String, String>();
-                params.put(KEY_USERID,LoginActivity.User_email);
-                params.put(KEY_NAME,LoginActivity.User_name);
-                params.put(KEY_PHONE,globalVariable.getContactOrigin());
-                params.put(KEY_PICKADD,globalVariable.getAddress1Origin());
+                params.put(KEY_USERID,userEmail);
+                params.put(KEY_NAME,userName);
+                params.put(KEY_PHONE,userPhone);
+                params.put(KEY_PICKADD,userAdd);
 
                 return params;
             }
 
 
         };
-
-        RequestQueue requestQueue = Volley.newRequestQueue(ConfirmPage.this);
+        requestQueue = Volley.newRequestQueue(ConfirmPage.this);
         requestQueue.add(stringRequest);
         return userflag;
     }
@@ -360,8 +361,7 @@ public class ConfirmPage extends AppCompatActivity {
             }
 
         };
-
-        RequestQueue requestQueue = Volley.newRequestQueue(ConfirmPage.this);
+        requestQueue = Volley.newRequestQueue(ConfirmPage.this);
         requestQueue.add(stringRequest);
         return orderflag;
     }

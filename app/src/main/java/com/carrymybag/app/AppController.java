@@ -54,6 +54,24 @@ public class AppController extends Application {
 
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+	private String userName,userEmail;
+	public void setUserName(String s)
+	{
+		userName = s;
+	}
+	public void setUserEmail(String s)
+	{
+		userEmail = s;
+	}
+	public String getUserName()
+	{
+		return userName;
+	}
+	public String getUserEmail()
+	{
+		return userEmail;
+	}
+
 	private double qtySmall1, qtyMed1, qtyLarge1, priceSmall1, priceMed1, priceLarge1;
 	private double qtySmall2, qtyMed2, qtyLarge2, priceSmall2, priceMed2, priceLarge2;
 	private double totalPrice;
