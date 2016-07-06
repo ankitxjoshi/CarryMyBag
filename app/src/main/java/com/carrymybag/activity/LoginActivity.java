@@ -81,6 +81,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private SessionManager session;
     private SQLiteHandler db;
     CallbackManager callbackManager;
+    AppController globalVariable;
 
     public static String User_name;
     public static String User_email;
@@ -105,6 +106,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         facebookSDKInitialize();
         setContentView(R.layout.activity_login);
+        globalVariable = (AppController) getApplicationContext();
 
         inputLayoutEmail = (TextInputLayout) findViewById(R.id.input_layout_email);
         inputLayoutPassword = (TextInputLayout) findViewById(R.id.input_layout_password);
@@ -250,6 +252,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         User_name = name;
                         User_email = email;
                         User_photourl = null;
+                        globalVariable.setUserEmail(email);
+                        globalVariable.setUserName(name);
 
                         // Inserting row in users table
                         db.addUser(name, email, uid, created_at);
@@ -345,6 +349,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             User_name = acct.getDisplayName();
             User_email = acct.getEmail();
             User_photourl = acct.getPhotoUrl().toString();
+            globalVariable.setUserEmail(User_name);
+            globalVariable.setUserName(User_email);
             Intent intent = new Intent(LoginActivity.this,
                     MainActivity.class);
             startActivity(intent);
@@ -462,6 +468,8 @@ private class MyTextWatcher implements TextWatcher {
                                 }
                                 try {
                                     User_name = object.getString("name");
+                                    globalVariable.setUserEmail(User_name);
+                                    globalVariable.setUserName(User_email);
                                     Log.v("LoginActivity", User_name);
                                 } catch (JSONException e) {
                                     e.printStackTrace();

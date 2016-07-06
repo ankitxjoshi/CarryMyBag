@@ -746,9 +746,9 @@ public class EnterDetails extends AppCompatActivity implements OnItemSelectedLis
                         }
                         StateDest2.setText(stateDest2);
                     }
-                    Intent intent = new Intent(EnterDetails.this, ConfirmPage.class);
-                    startActivity(intent);
                 }
+                Intent intent = new Intent(EnterDetails.this, ConfirmPage.class);
+                startActivity(intent);
             }
         });
     }
