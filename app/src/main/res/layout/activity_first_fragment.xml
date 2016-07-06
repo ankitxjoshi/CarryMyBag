@@ -24,7 +24,7 @@
             android:layout_height="wrap_content">
         <AutoCompleteTextView
             android:layout_width="310dp"
-            android:hint="From"
+            android:hint="New Delhi"
             android:textSize="27dp"
             android:layout_margin="3dp"
             android:padding="3dp"
@@ -33,6 +33,19 @@
             android:layout_height="wrap_content" />
         </LinearLayout>
         </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="To"
+            android:layout_marginTop="5dp"
+
+            android:textSize="30dp"
+            android:fontFamily="GothamLight"
+            android:id="@+id/textView4"
+            android:layout_gravity="center_horizontal" />
+
         <LinearLayout
             android:layout_width="315dp"
             android:layout_height="50dp"
@@ -52,7 +65,7 @@
             android:padding="3dp"
             android:layout_margin="3dp"
             android:layout_width="match_parent"
-            android:hint="To"
+            android:hint="Mumbai"
             android:id="@+id/tocityauto"
             android:layout_height="wrap_content" />
      </LinearLayout>
@@ -78,5 +91,17 @@
         android:layout_above="@+id/bookNow"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="69dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Ship My Luggage From"
+        android:textSize="30dp"
+        android:fontFamily="GothamLight"
+        android:id="@+id/textView3"
+        android:layout_marginTop="48dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignEnd="@+id/bookNow" />
 
 </RelativeLayout>
