@@ -322,7 +322,7 @@
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="July 21,2016)"
+                    android:hint="July 21,2016"
                     android:background="@null"
                     android:textSize="25dp"
                     android:id="@+id/date_pickup"
