@@ -20,13 +20,27 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp">
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Origin"
+                android:textStyle="bold"
+                android:textSize="22dp"
+                android:layout_marginBottom="3dp"
+                android:id="@+id/textView5"
+                android:layout_marginTop="30dp"/>
 
+            <LinearLayout
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:background="@color/border_color">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:background="@color/lay_back"
-                android:layout_marginTop="30dp">
+                android:layout_margin="2dp"
+                android:background="@color/lay_back">
 
                 <EditText
                     android:layout_width="match_parent"
@@ -35,23 +49,42 @@
                     android:layout_marginBottom="5dp"
                     android:layout_marginTop="5dp"
                     android:layout_marginRight="5dp"
-                    android:hint="Pickup Address"
+                    android:hint="New Delhi"
+                    android:background="@null"
+                    android:textSize="25dp"
                     android:inputType="text"
                     android:id="@+id/pickup1"/>
             </LinearLayout>
+         </LinearLayout>
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Destnation"
+                android:textStyle="bold"
+                android:textSize="22dp"
+                android:layout_marginBottom="3dp"
+                android:id="@+id/textView5"
+                android:layout_marginTop="10dp"/>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/border_color">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:background="@color/lay_back"
-                android:layout_marginTop="10dp">
+                android:layout_margin="2dp">
 
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Destination Address"
+                    android:hint="Mumbai"
+                    android:background="@null"
+                    android:textSize="25dp"
                     android:inputType="text"
                     android:id="@+id/destination1"
                     android:layout_marginLeft="5dp"
@@ -59,14 +92,27 @@
                     android:layout_marginTop="5dp"
                     android:layout_marginRight="5dp"/>
             </LinearLayout>
-
-
+             </LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Luggage"
+                android:textStyle="bold"
+                android:textSize="22dp"
+                android:layout_marginBottom="3dp"
+                android:id="@+id/textView5"
+                android:layout_marginTop="10dp"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:background="@color/border_color">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:background="@color/lay_back"
+                android:layout_margin="3dp"
                 android:paddingLeft="15dp"
                 android:paddingRight="5dp"
                 android:paddingBottom="5dp"
@@ -122,16 +168,27 @@
                         android:layout_alignParentLeft="true"
                         android:layout_alignParentStart="true"
                         android:id="@+id/bag_small"/>
-
+                    <LinearLayout
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginLeft="22dp"
+                        android:background="@color/border_color">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/white"
+                            android:gravity="center"
+                            android:layout_margin="1dp">
                     <EditText
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="25dp"
-                        android:hint="No."
-                        android:textSize="20dp"
+                        android:hint="0"
+                        android:textSize="25dp"
+                        android:background="@null"
                         android:inputType="number"
                         android:id="@+id/qty_small"/>
-
+                        </LinearLayout>
+                    </LinearLayout>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="49dp"
@@ -158,16 +215,28 @@
                         android:layout_alignParentLeft="true"
                         android:layout_alignParentStart="true"
                         android:id="@+id/bag_medium"/>
+                    <LinearLayout
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginLeft="22dp"
+                        android:background="@color/border_color">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/white"
+                            android:gravity="center"
+                            android:layout_margin="1dp">
 
                     <EditText
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="25dp"
-                        android:hint="No."
-                        android:textSize="20dp"
+                        android:hint="0"
+                        android:textSize="25dp"
+                        android:background="@null"
                         android:inputType="number"
                         android:id="@+id/qty_medium"/>
-
+                      </LinearLayout>
+                        </LinearLayout>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="36dp"
@@ -194,16 +263,27 @@
                         android:layout_alignParentLeft="true"
                         android:id="@+id/bag_large"
                         android:layout_alignParentStart="true" />
-
+                    <LinearLayout
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginLeft="22dp"
+                        android:background="@color/border_color">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/white"
+                            android:gravity="center"
+                            android:layout_margin="1dp">
                     <EditText
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="25dp"
-                        android:hint="No."
-                        android:textSize="20dp"
+                        android:hint="0"
+                        android:background="@null"
+                        android:textSize="25dp"
                         android:inputType="number"
                         android:id="@+id/qty_large"/>
-
+                   </LinearLayout>
+                        </LinearLayout>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="42dp"
@@ -211,25 +291,44 @@
                         android:textSize="20dp"
                         android:layout_marginLeft="40dp"
                         android:id="@+id/price_large"/>
+                </LinearLayout>
+                </LinearLayout>
+                </LinearLayout>
 
-                </LinearLayout>
-                </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Pickup Date"
+                android:textStyle="bold"
+                android:textSize="22dp"
+                android:layout_marginBottom="3dp"
+                android:id="@+id/textView5"
+                android:layout_marginTop="10dp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/border_color"
+            >
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/lay_back"
-                android:layout_marginTop="10dp">
+                android:orientation="horizontal"
+                android:layout_margin="2dp"
+                android:background="@color/lay_back">
 
 
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Pickup Date (dd/mm/yyyy)"
-                    android:layout_marginTop="10dp"
+                    android:hint="July 21,2016)"
+                    android:background="@null"
+                    android:textSize="25dp"
                     android:id="@+id/date_pickup"
                     android:inputType="text"/>
             </LinearLayout>
-
+           </LinearLayout>
             <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
