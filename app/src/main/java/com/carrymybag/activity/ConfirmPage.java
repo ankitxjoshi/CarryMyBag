@@ -177,6 +177,10 @@ public class ConfirmPage extends AppCompatActivity {
                             Intent intent = new Intent(ConfirmPage.this,PaymentActivity.class);
                             startActivity(intent);
                         }
+                        else
+                        {
+                            Toast.makeText(ConfirmPage.this,"Server error please try later",Toast.LENGTH_LONG).show();
+                        }
                     }
                 });
 
@@ -192,42 +196,58 @@ public class ConfirmPage extends AppCompatActivity {
         @Override
         public void onSuccess(boolean result) {
             isQuerySucc&=result;
-        }
-    });
-        for(int i=0;i<(int)globalVariable.getQtySmall1();i++)
-        {
-            registerLuggageSmall(new VolleyCallback(){
-                @Override
-                public void onSuccess(boolean result) {
-                    isQuerySucc&=result;
-                }
-            },i);
-        }
-        for(int i=0;i<(int)globalVariable.getQtyMed1();i++)
-        {
-            registerLuggageMed(new VolleyCallback(){
-                @Override
-                public void onSuccess(boolean result) {
-                    isQuerySucc&=result;
-                }
-            },i);
-        }
-        for(int i=0;i<(int)globalVariable.getQtyLarge1();i++)
-        {
-            registerLuggageLarge(new VolleyCallback(){
-                @Override
-                public void onSuccess(boolean result) {
-                    isQuerySucc&=result;
-                }
-            },i);
-        }
-        registerUser(new VolleyCallback(){
-            @Override
-            public void onSuccess(boolean result) {
-                isQuerySucc&=result;
+            if(!result)
+            {
+                callback.onSuccess(result);
             }
+            for(int i=0;i<(int)globalVariable.getQtySmall1();i++)
+            {
+                registerLuggageSmall(new VolleyCallback(){
+                    @Override
+                    public void onSuccess(boolean result) {
+                        isQuerySucc&=result;
+                        if(!result)
+                        {
+                            callback.onSuccess(result);
+                        }
+                        for(int i=0;i<(int)globalVariable.getQtyMed1();i++)
+                        {
+                            registerLuggageMed(new VolleyCallback(){
+                                @Override
+                                public void onSuccess(boolean result) {
+                                    isQuerySucc&=result;
+                                    if(!result)
+                                    {
+                                        callback.onSuccess(result);
+                                    }
+                                    for(int i=0;i<(int)globalVariable.getQtyLarge1();i++)
+                                    {
+                                        registerLuggageLarge(new VolleyCallback(){
+                                            @Override
+                                            public void onSuccess(boolean result) {
+                                                isQuerySucc&=result;
+                                                if(!result)
+                                                {
+                                                    callback.onSuccess(result);
+                                                }
+                                                registerUser(new VolleyCallback(){
+                                                    @Override
+                                                    public void onSuccess(boolean result) {
+                                                        isQuerySucc&=result;
+                                                        callback.onSuccess(isQuerySucc);
+                                                    }
+                                                });
+                                            }
+                                        },i);
+                                    }
+                                }
+                            },i);
+                        }
+                    }
+                },i);
+            }
+        }
         });
-        callback.onSuccess(isQuerySucc);
     }
     private void registerLuggageSmall(final VolleyCallback callback, int i) {
 
@@ -424,6 +444,12 @@ public class ConfirmPage extends AppCompatActivity {
     }
     private void registerOrder(final VolleyCallback callback) {
 
+        final String user = LoginActivity.User_name;
+        final String totprice = "1000";
+        final String picDate = globalVariable.getPickupDate1();
+        final String delDate = globalVariable.getPickupDate1();
+        final String picAdd = globalVariable.getAddress1Origin();
+        final String delAdd = globalVariable.getAddress1Dest();
         StringRequest stringRequest = new StringRequest(Request.Method.POST, AppConfig.URL_StoreOrder,
                 new Response.Listener<String>() {
                     @Override
@@ -452,12 +478,12 @@ public class ConfirmPage extends AppCompatActivity {
             @Override
             protected Map<String,String> getParams(){
                 Map<String,String> params = new HashMap<String, String>();
-                params.put(KEY_USERID,LoginActivity.User_name);
-                params.put(KEY_TOTPRICE, "1000");
-                params.put(KEY_PICDATE,globalVariable.getPickupDate1());
-                params.put(KEY_DELDATE,globalVariable.getPickupDate1());
-                params.put(KEY_PICKADD,globalVariable.getAddress1Origin());
-                params.put(KEY_DELADD,globalVariable.getAddress1Dest());
+                params.put(KEY_USERID,user);
+                params.put(KEY_TOTPRICE, totprice);
+                params.put(KEY_PICDATE,picDate);
+                params.put(KEY_DELDATE,delDate);
+                params.put(KEY_PICKADD,picAdd);
+                params.put(KEY_DELADD,delAdd);
 
                 return params;
             }
