@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
 
                     //Replacing the main content with ContentFragment Which is our Inbox View;
                     case R.id.inbox:
-                        Toast.makeText(getApplicationContext(),"Inbox Selected",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(),"Book Now Selected",Toast.LENGTH_SHORT).show();
                         Fragment fragment = new FirstFragment();
                         android.support.v4.app.FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
                         fragmentTransaction.replace(R.id.frame,fragment);
@@ -72,20 +72,19 @@ public class MainActivity extends AppCompatActivity {
                     // For rest of the options we just show a toast on click
 
                     case R.id.starred:
-                        Toast.makeText(getApplicationContext(),"Stared Selected",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(),"Track Now Selected",Toast.LENGTH_SHORT).show();
                         return true;
                     case R.id.sent_mail:
-                        Toast.makeText(getApplicationContext(),"Send Selected",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(),"About Us Selected",Toast.LENGTH_SHORT).show();
                         return true;
                     case R.id.drafts:
-                        Toast.makeText(getApplicationContext(),"Drafts Selected",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(),"Contact us Selected",Toast.LENGTH_SHORT).show();
                         return true;
                     case R.id.allmail:
-                        Toast.makeText(getApplicationContext(),"All Mail Selected",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(),"Settings Selected",Toast.LENGTH_SHORT).show();
                         return true;
                     case R.id.trash:
-                        Toast.makeText(getApplicationContext(),"Trash Selected",Toast.LENGTH_SHORT).show();
-                        Toast.makeText(getApplicationContext(),"Inbox Selected",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(),"Logout Selected",Toast.LENGTH_SHORT).show();
                         fragment = new SixthFragment();
                         fragmentTransaction = getSupportFragmentManager().beginTransaction();
                         fragmentTransaction.replace(R.id.frame,fragment);
