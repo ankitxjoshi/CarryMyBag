@@ -194,12 +194,33 @@ public class ConfirmPage extends AppCompatActivity {
             isQuerySucc&=result;
         }
     });
-        registerLuggage(new VolleyCallback(){
-            @Override
-            public void onSuccess(boolean result) {
-                isQuerySucc&=result;
-            }
-        });
+        for(int i=0;i<(int)globalVariable.getQtySmall1();i++)
+        {
+            registerLuggageSmall(new VolleyCallback(){
+                @Override
+                public void onSuccess(boolean result) {
+                    isQuerySucc&=result;
+                }
+            },i);
+        }
+        for(int i=0;i<(int)globalVariable.getQtyMed1();i++)
+        {
+            registerLuggageMed(new VolleyCallback(){
+                @Override
+                public void onSuccess(boolean result) {
+                    isQuerySucc&=result;
+                }
+            },i);
+        }
+        for(int i=0;i<(int)globalVariable.getQtyLarge1();i++)
+        {
+            registerLuggageLarge(new VolleyCallback(){
+                @Override
+                public void onSuccess(boolean result) {
+                    isQuerySucc&=result;
+                }
+            },i);
+        }
         registerUser(new VolleyCallback(){
             @Override
             public void onSuccess(boolean result) {
@@ -208,13 +229,9 @@ public class ConfirmPage extends AppCompatActivity {
         });
         callback.onSuccess(isQuerySucc);
     }
-    private void registerLuggage(final VolleyCallback callback) {
+    private void registerLuggageSmall(final VolleyCallback callback, int i) {
 
-        requestQueue = Volley.newRequestQueue(ConfirmPage.this);
-
-
-        for(int i=0;i<(int)globalVariable.getQtySmall1();i++)
-        {
+            requestQueue = Volley.newRequestQueue(ConfirmPage.this);
             final String bagSize = "Small";
             final String bagType = "Duffle";
             final String bagColor = globalVariable.getColorSmallOrigin(i);
@@ -258,99 +275,102 @@ public class ConfirmPage extends AppCompatActivity {
 
             };
             requestQueue.add(stringRequest);
-        }
-        for(int i=0;i<(int)globalVariable.getQtyMed1();i++)
-        {
-            final String bagSize = "Medium";
-            final String bagType = "Duffle";
-            final String bagColor = globalVariable.getColorMediumOrigin(i);
-            final String priceID = "1";
-            StringRequest stringRequest = new StringRequest(Request.Method.POST, AppConfig.URL_StoreLuggage,
-                    new Response.Listener<String>() {
-                        @Override
-                        public void onResponse(String response) {
-                            Toast.makeText(ConfirmPage.this,response,Toast.LENGTH_LONG).show();
-                            luggageflag = true;
-                            JSONObject jObj = null;
-                            boolean error = false;
-                            try {
-                                jObj = new JSONObject(response);
-                                error = jObj.getBoolean("success");
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                            callback.onSuccess(error);
-                        }
-                    },
-                    new Response.ErrorListener() {
-                        @Override
-                        public void onErrorResponse(VolleyError error) {
-                            Toast.makeText(ConfirmPage.this,error.toString(),Toast.LENGTH_LONG).show();
-                            luggageflag = false;
-                            callback.onSuccess(false);
-                        }
-                    }){
-                @Override
-                protected Map<String,String> getParams(){
-                    Map<String,String> params = new HashMap<String, String>();
-                    params.put(KEY_USERID,globalVariable.getUserEmail());
-                    params.put(KEY_BAGSIZE,bagSize);
-                    params.put(KEY_BAGTYPE,bagType);
-                    params.put(KEY_BAGCOLOR,bagColor);
-                    params.put(KEY_PRICEID,priceID);
 
-                    return params;
-                }
+    }
+    private void registerLuggageMed(final VolleyCallback callback, int i) {
 
-            };
-            requestQueue.add(stringRequest);
-        }
-        for(int i=0;i<(int)globalVariable.getQtyLarge1();i++)
-        {
-            final String bagSize = "Large";
-            final String bagType = "Duffle";
-            final String bagColor = globalVariable.getColorLargeOrigin(i);
-            final String priceID = "1";
-            StringRequest stringRequest = new StringRequest(Request.Method.POST, AppConfig.URL_StoreLuggage,
-                    new Response.Listener<String>() {
-                        @Override
-                        public void onResponse(String response) {
-                            Toast.makeText(ConfirmPage.this,response,Toast.LENGTH_LONG).show();
-                            luggageflag = true;
-                            JSONObject jObj = null;
-                            boolean error = false;
-                            try {
-                                jObj = new JSONObject(response);
-                                error = jObj.getBoolean("success");
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                            callback.onSuccess(error);
+        requestQueue = Volley.newRequestQueue(ConfirmPage.this);
+        final String bagSize = "Medium";
+        final String bagType = "Duffle";
+        final String bagColor = globalVariable.getColorMediumOrigin(i);
+        final String priceID = "1";
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, AppConfig.URL_StoreLuggage,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Toast.makeText(ConfirmPage.this,response,Toast.LENGTH_LONG).show();
+                        luggageflag = true;
+                        JSONObject jObj = null;
+                        boolean error = false;
+                        try {
+                            jObj = new JSONObject(response);
+                            error = jObj.getBoolean("success");
+                        } catch (JSONException e) {
+                            e.printStackTrace();
                         }
-                    },
-                    new Response.ErrorListener() {
-                        @Override
-                        public void onErrorResponse(VolleyError error) {
-                            Toast.makeText(ConfirmPage.this,error.toString(),Toast.LENGTH_LONG).show();
-                            luggageflag = false;
-                            callback.onSuccess(false);
+                        callback.onSuccess(error);
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(ConfirmPage.this,error.toString(),Toast.LENGTH_LONG).show();
+                        luggageflag = false;
+                        callback.onSuccess(false);
+                    }
+                }){
+            @Override
+            protected Map<String,String> getParams(){
+                Map<String,String> params = new HashMap<String, String>();
+                params.put(KEY_USERID,globalVariable.getUserEmail());
+                params.put(KEY_BAGSIZE,bagSize);
+                params.put(KEY_BAGTYPE,bagType);
+                params.put(KEY_BAGCOLOR,bagColor);
+                params.put(KEY_PRICEID,priceID);
+
+                return params;
+            }
+
+        };
+        requestQueue.add(stringRequest);
+
+    }
+    private void registerLuggageLarge(final VolleyCallback callback, int i) {
+
+        requestQueue = Volley.newRequestQueue(ConfirmPage.this);
+        final String bagSize = "Large";
+        final String bagType = "Duffle";
+        final String bagColor = globalVariable.getColorLargeOrigin(i);
+        final String priceID = "1";
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, AppConfig.URL_StoreLuggage,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Toast.makeText(ConfirmPage.this,response,Toast.LENGTH_LONG).show();
+                        luggageflag = true;
+                        JSONObject jObj = null;
+                        boolean error = false;
+                        try {
+                            jObj = new JSONObject(response);
+                            error = jObj.getBoolean("success");
+                        } catch (JSONException e) {
+                            e.printStackTrace();
                         }
-                    }){
-                @Override
-                protected Map<String,String> getParams(){
-                    Map<String,String> params = new HashMap<String, String>();
-                    params.put(KEY_USERID,globalVariable.getUserEmail());
-                    params.put(KEY_BAGSIZE,bagSize);
-                    params.put(KEY_BAGTYPE,bagType);
-                    params.put(KEY_BAGCOLOR,bagColor);
-                    params.put(KEY_PRICEID,priceID);
+                        callback.onSuccess(error);
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(ConfirmPage.this,error.toString(),Toast.LENGTH_LONG).show();
+                        luggageflag = false;
+                        callback.onSuccess(false);
+                    }
+                }){
+            @Override
+            protected Map<String,String> getParams(){
+                Map<String,String> params = new HashMap<String, String>();
+                params.put(KEY_USERID,globalVariable.getUserEmail());
+                params.put(KEY_BAGSIZE,bagSize);
+                params.put(KEY_BAGTYPE,bagType);
+                params.put(KEY_BAGCOLOR,bagColor);
+                params.put(KEY_PRICEID,priceID);
 
-                    return params;
-                }
+                return params;
+            }
 
-            };
-            requestQueue.add(stringRequest);
-        }
+        };
+        requestQueue.add(stringRequest);
 
     }
     private void registerUser(final VolleyCallback callback) {
