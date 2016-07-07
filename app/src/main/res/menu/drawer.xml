@@ -38,11 +38,6 @@
             android:checked="false"
             android:icon="@drawable/logout"
             android:title="@string/trash_string" />
-        <item
-            android:id="@+id/spam"
-            android:checked="false"
-            android:icon="@drawable/aboutus"
-            android:title="@string/spam_string" />
 
     </group>
 </menu>

@@ -50,13 +50,13 @@
 
     <string name="navigation_item_1">Home</string>
     <string name="navigation_item_2">Events</string>
-    <string name="starred_string">Starred</string>
-    <string name="inbox_string">Inbox</string>
-    <string name="sent_mail_string">Sent mail</string>
-    <string name="draft_string">Drafts</string>
+    <string name="starred_string">Track Now</string>
+    <string name="inbox_string">Book Now</string>
+    <string name="sent_mail_string">About Us</string>
+    <string name="draft_string">Contact Us</string>
     <string name="subheader">Subheader</string>
-    <string name="trash_string">Trash</string>
-    <string name="all_mail_string">All mails</string>
+    <string name="trash_string">Logout</string>
+    <string name="all_mail_string">Settings</string>
     <string name="spam_string">Spams</string>
     <string name="closeDrawer">Navigation View</string>
     <string name="openDrawer">Navigation View Closed</string>
