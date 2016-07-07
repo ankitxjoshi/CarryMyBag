@@ -19,6 +19,8 @@ import android.widget.Toast;
 import com.carrymybag.R;
 import com.carrymybag.app.AppController;
 
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -130,13 +132,19 @@ public class OnewayTab extends Fragment implements View.OnClickListener {
         DatePickerDialog = new DatePickerDialog(getContext(), new android.app.DatePickerDialog.OnDateSetListener() {
 
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                Date d = new Date(year, monthOfYear, dayOfMonth);
                 Calendar newDate = Calendar.getInstance();
                 newDate.set(year, monthOfYear, dayOfMonth);
-                PicupDate.setText(dateFormatter.format(newDate.getTime()));
+                String sdate = dateFormatter.format(newDate.getTime());
+                Date date = null;
                 SimpleDateFormat dateFormatter = new SimpleDateFormat(
                         "yyyy-MM-dd");
-                globalVariable.setPickupDate1(dateFormatter.format(d));
+                try {
+                    date = dateFormatter.parse(sdate);
+                } catch (ParseException e) {
+                    // handle exception here !
+                }
+                PicupDate.setText(DateFormat.getDateInstance(DateFormat.MEDIUM).format(date));
+                globalVariable.setPickupDate1(DateFormat.getDateInstance(DateFormat.SHORT).format(date));
             }
 
         },newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));

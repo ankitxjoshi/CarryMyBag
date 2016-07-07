@@ -19,6 +19,9 @@ import com.carrymybag.R;
 import com.carrymybag.app.AppConfig;
 import com.carrymybag.app.AppController;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Map;
@@ -222,7 +225,15 @@ public class ConfirmPage extends AppCompatActivity {
                         public void onResponse(String response) {
                             Toast.makeText(ConfirmPage.this,response,Toast.LENGTH_LONG).show();
                             luggageflag = true;
-                            callback.onSuccess(true);
+                            JSONObject jObj = null;
+                            boolean error = false;
+                            try {
+                                jObj = new JSONObject(response);
+                                error = jObj.getBoolean("success");
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                            callback.onSuccess(error);
                         }
                     },
                     new Response.ErrorListener() {
@@ -230,6 +241,7 @@ public class ConfirmPage extends AppCompatActivity {
                         public void onErrorResponse(VolleyError error) {
                             Toast.makeText(ConfirmPage.this,error.toString(),Toast.LENGTH_LONG).show();
                             luggageflag = false;
+                            callback.onSuccess(false);
                         }
                     }){
                 @Override
@@ -259,7 +271,15 @@ public class ConfirmPage extends AppCompatActivity {
                         public void onResponse(String response) {
                             Toast.makeText(ConfirmPage.this,response,Toast.LENGTH_LONG).show();
                             luggageflag = true;
-                            callback.onSuccess(true);
+                            JSONObject jObj = null;
+                            boolean error = false;
+                            try {
+                                jObj = new JSONObject(response);
+                                error = jObj.getBoolean("success");
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                            callback.onSuccess(error);
                         }
                     },
                     new Response.ErrorListener() {
@@ -267,6 +287,7 @@ public class ConfirmPage extends AppCompatActivity {
                         public void onErrorResponse(VolleyError error) {
                             Toast.makeText(ConfirmPage.this,error.toString(),Toast.LENGTH_LONG).show();
                             luggageflag = false;
+                            callback.onSuccess(false);
                         }
                     }){
                 @Override
@@ -296,7 +317,15 @@ public class ConfirmPage extends AppCompatActivity {
                         public void onResponse(String response) {
                             Toast.makeText(ConfirmPage.this,response,Toast.LENGTH_LONG).show();
                             luggageflag = true;
-                            callback.onSuccess(true);
+                            JSONObject jObj = null;
+                            boolean error = false;
+                            try {
+                                jObj = new JSONObject(response);
+                                error = jObj.getBoolean("success");
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                            callback.onSuccess(error);
                         }
                     },
                     new Response.ErrorListener() {
@@ -304,6 +333,7 @@ public class ConfirmPage extends AppCompatActivity {
                         public void onErrorResponse(VolleyError error) {
                             Toast.makeText(ConfirmPage.this,error.toString(),Toast.LENGTH_LONG).show();
                             luggageflag = false;
+                            callback.onSuccess(false);
                         }
                     }){
                 @Override
@@ -336,7 +366,15 @@ public class ConfirmPage extends AppCompatActivity {
                     public void onResponse(String response) {
                         Toast.makeText(ConfirmPage.this,response,Toast.LENGTH_LONG).show();
                         userflag = true;
-                        callback.onSuccess(true);
+                        JSONObject jObj = null;
+                        boolean error = false;
+                        try {
+                            jObj = new JSONObject(response);
+                            error = jObj.getBoolean("success");
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        callback.onSuccess(error);
                     }
                 },
                 new Response.ErrorListener() {
@@ -344,6 +382,7 @@ public class ConfirmPage extends AppCompatActivity {
                     public void onErrorResponse(VolleyError error) {
                         Toast.makeText(ConfirmPage.this,error.toString(),Toast.LENGTH_LONG).show();
                         userflag = false;
+                        callback.onSuccess(false);
                     }
                 }){
             @Override
@@ -369,9 +408,17 @@ public class ConfirmPage extends AppCompatActivity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        Toast.makeText(ConfirmPage.this,response,Toast.LENGTH_LONG).show();
+                        Toast.makeText(ConfirmPage.this, response, Toast.LENGTH_LONG).show();
                         orderflag = true;
-                        callback.onSuccess(true);
+                        JSONObject jObj = null;
+                        boolean error = false;
+                        try {
+                            jObj = new JSONObject(response);
+                            error = jObj.getBoolean("success");
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        callback.onSuccess(error);
                     }
                 },
                 new Response.ErrorListener() {
@@ -379,6 +426,7 @@ public class ConfirmPage extends AppCompatActivity {
                     public void onErrorResponse(VolleyError error) {
                         Toast.makeText(ConfirmPage.this,error.toString(),Toast.LENGTH_LONG).show();
                         orderflag = false;
+                        callback.onSuccess(false);
                     }
                 }){
             @Override
