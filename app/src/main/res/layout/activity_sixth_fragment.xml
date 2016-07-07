@@ -38,7 +38,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dip"
-            android:background="@color/btn_logut_bg"
+            android:background="@color/colorPrimaryDark"
             android:text="@string/btn_logout"
             android:textAllCaps="false"
             android:textColor="@color/white"
