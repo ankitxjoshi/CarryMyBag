@@ -69,6 +69,7 @@ public class FirstFragment extends android.support.v4.app.Fragment {
     public static final String KEY_FROMCITY = "from_city";
     public static final String KEY_TOCITY = "to_city";
     public static final String KEY_OPTION = "do_option";
+    public static final String KEY_TYPE = "bag_id";
 
 
 
@@ -194,6 +195,7 @@ public class FirstFragment extends android.support.v4.app.Fragment {
         final String fromCity = globalVariable.getFromCity();
         final String toCity = globalVariable.getToCity();
         final String doOption = "Standard";
+        final String bagtype = "Small";
         StringRequest stringRequest = new StringRequest(Request.Method.POST, AppConfig.URL_GetPrice,
                 new Response.Listener<String>() {
                     @Override
@@ -236,6 +238,7 @@ public class FirstFragment extends android.support.v4.app.Fragment {
                 params.put(KEY_FROMCITY,fromCity);
                 params.put(KEY_TOCITY,toCity);
                 params.put(KEY_OPTION,doOption);
+                params.put(KEY_TYPE,bagtype);
 
 
                 return params;
