@@ -200,52 +200,68 @@ public class ConfirmPage extends AppCompatActivity {
             {
                 callback.onSuccess(result);
             }
-            for(int i=0;i<(int)globalVariable.getQtySmall1();i++)
+            else
             {
-                registerLuggageSmall(new VolleyCallback(){
-                    @Override
-                    public void onSuccess(boolean result) {
-                        isQuerySucc&=result;
-                        if(!result)
-                        {
-                            callback.onSuccess(result);
-                        }
-                        for(int i=0;i<(int)globalVariable.getQtyMed1();i++)
-                        {
-                            registerLuggageMed(new VolleyCallback(){
-                                @Override
-                                public void onSuccess(boolean result) {
-                                    isQuerySucc&=result;
-                                    if(!result)
-                                    {
-                                        callback.onSuccess(result);
-                                    }
-                                    for(int i=0;i<(int)globalVariable.getQtyLarge1();i++)
-                                    {
-                                        registerLuggageLarge(new VolleyCallback(){
-                                            @Override
-                                            public void onSuccess(boolean result) {
-                                                isQuerySucc&=result;
-                                                if(!result)
-                                                {
-                                                    callback.onSuccess(result);
-                                                }
-                                                registerUser(new VolleyCallback(){
-                                                    @Override
-                                                    public void onSuccess(boolean result) {
-                                                        isQuerySucc&=result;
-                                                        callback.onSuccess(isQuerySucc);
-                                                    }
-                                                });
+                for(int i=0;i<(int)globalVariable.getQtySmall1();i++)
+                {
+                    registerLuggageSmall(new VolleyCallback(){
+                        @Override
+                        public void onSuccess(boolean result) {
+                            isQuerySucc&=result;
+                            if(!result)
+                            {
+                                callback.onSuccess(result);
+                            }
+                            else
+                            {
+                                for(int i=0;i<(int)globalVariable.getQtyMed1();i++)
+                                {
+                                    registerLuggageMed(new VolleyCallback(){
+                                        @Override
+                                        public void onSuccess(boolean result) {
+                                            isQuerySucc&=result;
+                                            if(!result)
+                                            {
+                                                callback.onSuccess(result);
                                             }
-                                        },i);
-                                    }
+                                            else
+                                            {
+                                                for(int i=0;i<(int)globalVariable.getQtyLarge1();i++)
+                                                {
+                                                    registerLuggageLarge(new VolleyCallback(){
+                                                        @Override
+                                                        public void onSuccess(boolean result) {
+                                                            isQuerySucc&=result;
+                                                            if(!result)
+                                                            {
+                                                                callback.onSuccess(result);
+                                                            }
+                                                            else
+                                                            {
+                                                                registerUser(new VolleyCallback(){
+                                                                    @Override
+                                                                    public void onSuccess(boolean result) {
+                                                                        isQuerySucc&=result;
+                                                                        callback.onSuccess(isQuerySucc);
+                                                                    }
+                                                                });
+                                                            }
+
+                                                        }
+                                                    },i);
+                                                }
+                                            }
+
+                                        }
+                                    },i);
                                 }
-                            },i);
+                            }
+
                         }
-                    }
-                },i);
+                    },i);
+                }
             }
+
         }
         });
     }
@@ -446,10 +462,10 @@ public class ConfirmPage extends AppCompatActivity {
 
         final String user = LoginActivity.User_name;
         final String totprice = "1000";
-        final String picDate = globalVariable.getPickupDate1();
-        final String delDate = globalVariable.getPickupDate1();
-        final String picAdd = globalVariable.getAddress1Origin();
-        final String delAdd = globalVariable.getAddress1Dest();
+        final String picDate = "2016-06-28";
+        final String delDate = "2016-06-28";
+        final String picAdd = "test";
+        final String delAdd = "test";
         StringRequest stringRequest = new StringRequest(Request.Method.POST, AppConfig.URL_StoreOrder,
                 new Response.Listener<String>() {
                     @Override
