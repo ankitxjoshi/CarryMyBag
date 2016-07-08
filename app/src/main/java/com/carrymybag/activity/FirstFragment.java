@@ -10,6 +10,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 
 import com.android.volley.Request;
@@ -28,10 +29,12 @@ import com.carrymybag.app.AppController;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -58,6 +61,14 @@ public class FirstFragment extends android.support.v4.app.Fragment {
     public static ArrayList<String> list;
     private TextView estimatePrice;
     private Button bookNowBtn;
+    boolean flagFrom;
+    boolean flagTo;
+    RequestQueue requestQueue;
+    public AppController globalVariable;
+
+    public static final String KEY_FROMCITY = "from_city";
+    public static final String KEY_TOCITY = "to_city";
+    public static final String KEY_OPTION = "do_option";
 
 
 
@@ -65,6 +76,7 @@ public class FirstFragment extends android.support.v4.app.Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View v = inflater.inflate(R.layout.activity_first_fragment,null);
+        globalVariable = (AppController) getActivity().getApplicationContext();
         // Progress dialog
         pDialog = new ProgressDialog(getContext());
         pDialog.setCancelable(false);
@@ -74,12 +86,11 @@ public class FirstFragment extends android.support.v4.app.Fragment {
             list.add("Ahmedabad");
         }
         estimatePrice = (TextView)v.findViewById(R.id.estimateView);
-        estimatePrice.setText(LoginActivity.User_name);
         new JSONTask().execute(AppConfig.URL_CityList);
         fromCityAuto = (AutoCompleteTextView)v.findViewById(R.id.fromcityauto);
         fromCityTo = (AutoCompleteTextView)v.findViewById(R.id.tocityauto);
         ArrayAdapter<String> tocityadapter = new ArrayAdapter<String>(getContext(),android.R.layout.simple_expandable_list_item_1,list);
-        ArrayAdapter<String> fromcityadapter = new ArrayAdapter<String>(getContext(),android.R.layout.simple_expandable_list_item_1,list);
+        final ArrayAdapter<String> fromcityadapter = new ArrayAdapter<String>(getContext(),android.R.layout.simple_expandable_list_item_1,list);
         fromCityAuto.setAdapter(fromcityadapter);
         fromCityTo.setAdapter(tocityadapter);
         bookNowBtn = (Button)v.findViewById(R.id.bookNow);
@@ -89,6 +100,30 @@ public class FirstFragment extends android.support.v4.app.Fragment {
                 Intent intent = new Intent(getActivity(),
                         BookDetails.class);
                 startActivity(intent);
+            }
+        });
+        fromCityAuto.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick (AdapterView<?> parent, View view, int position, long id) {
+                flagFrom = true;
+                if(flagTo)
+                {
+                    globalVariable.setFromCity(fromCityAuto.getText().toString());
+                    globalVariable.setToCity(fromCityTo.getText().toString());
+                    getPrices();
+                }
+            }
+        });
+        fromCityTo.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick (AdapterView<?> parent, View view, int position, long id) {
+                flagTo = true;
+                if(flagFrom)
+                {
+                    globalVariable.setFromCity(fromCityAuto.getText().toString());
+                    globalVariable.setToCity(fromCityTo.getText().toString());
+                    getPrices();
+                }
             }
         });
 
@@ -152,6 +187,62 @@ public class FirstFragment extends android.support.v4.app.Fragment {
         }
 
 
+    }
+    private void getPrices()
+    {
+        requestQueue = Volley.newRequestQueue(getActivity());
+        final String fromCity = globalVariable.getFromCity();
+        final String toCity = globalVariable.getToCity();
+        final String doOption = "Standard";
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, AppConfig.URL_GetPrice,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject jObj = new JSONObject(response);
+                            boolean error = jObj.getBoolean("error");
+
+                            // Check for error node in json
+                            if (!error) {
+
+                                JSONArray result = jObj.getJSONArray("result");
+                                //JSONObject price = result.getJSONObject("price");
+                                JSONObject price = result.getJSONObject(0);
+                                String val = price.getString("price");
+                                estimatePrice.setText("Starting from Rs "+val);
+
+                            } else {
+                                // Error in login. Get the error message
+                                String errorMsg = jObj.getString("error_msg");
+                                estimatePrice.setText("We don't offer service across these cities");
+                            }
+                        } catch (JSONException e) {
+                            // JSON error
+                            e.printStackTrace();
+                            estimatePrice.setText("We don't offer service across these cities");
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getActivity(),error.toString(),Toast.LENGTH_LONG).show();
+
+                    }
+                }){
+            @Override
+            protected Map<String,String> getParams(){
+                Map<String,String> params = new HashMap<String, String>();
+                params.put(KEY_FROMCITY,fromCity);
+                params.put(KEY_TOCITY,toCity);
+                params.put(KEY_OPTION,doOption);
+
+
+                return params;
+            }
+
+        };
+        requestQueue.add(stringRequest);
     }
 
 

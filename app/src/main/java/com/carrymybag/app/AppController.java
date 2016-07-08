@@ -53,7 +53,31 @@ public class AppController extends Application {
 	}
 
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+	private String fromCity,toCity,doOption;
+	public void setFromCity(String s)
+	{
+		fromCity = s;
+	}
+	public void setToCity(String s)
+	{
+		toCity = s;
+	}
+	public void setdoOption(String s)
+	{
+		doOption = s;
+	}
+	public String getFromCity()
+	{
+		return fromCity;
+	}
+	public String getToCity()
+	{
+		return toCity;
+	}
+	public String getDoOption()
+	{
+		return doOption;
+	}
 	private String userName,userEmail;
 	public void setUserName(String s)
 	{
