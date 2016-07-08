@@ -48,6 +48,9 @@ public class ConfirmPage extends AppCompatActivity {
     public Button buttonSubmit, buttonEdit;
 
     Boolean isTwoWay = true;
+    boolean flagS;
+    boolean flagM;
+    boolean flagL;
 
 
     //Register Details....................................................................................
@@ -63,7 +66,7 @@ public class ConfirmPage extends AppCompatActivity {
     //2.order_details.php
 
     public static final String KEY_TOTPRICE = "total_price";
-    public static final String KEY_PICDATE = "pic_up_date";
+    public static final String KEY_PICDATE = "pick_up_date";
     public static final String KEY_DELDATE = "delivery_date";
     public static final String KEY_PICKADD = "pickup_add";
     public static final String KEY_DELADD = "delivery_add";
@@ -212,8 +215,9 @@ public class ConfirmPage extends AppCompatActivity {
                             {
                                 callback.onSuccess(result);
                             }
-                            else
+                            else if(!flagM)
                             {
+                                flagM = true;
                                 for(int i=0;i<(int)globalVariable.getQtyMed1();i++)
                                 {
                                     registerLuggageMed(new VolleyCallback(){
@@ -224,8 +228,9 @@ public class ConfirmPage extends AppCompatActivity {
                                             {
                                                 callback.onSuccess(result);
                                             }
-                                            else
+                                            else if(!flagL)
                                             {
+                                                flagL = true;
                                                 for(int i=0;i<(int)globalVariable.getQtyLarge1();i++)
                                                 {
                                                     registerLuggageLarge(new VolleyCallback(){
@@ -236,17 +241,6 @@ public class ConfirmPage extends AppCompatActivity {
                                                             {
                                                                 callback.onSuccess(result);
                                                             }
-                                                            else
-                                                            {
-                                                                registerUser(new VolleyCallback(){
-                                                                    @Override
-                                                                    public void onSuccess(boolean result) {
-                                                                        isQuerySucc&=result;
-                                                                        callback.onSuccess(isQuerySucc);
-                                                                    }
-                                                                });
-                                                            }
-
                                                         }
                                                     },i);
                                                 }
@@ -260,6 +254,14 @@ public class ConfirmPage extends AppCompatActivity {
                         }
                     },i);
                 }
+
+                registerUser(new VolleyCallback(){
+                    @Override
+                    public void onSuccess(boolean result) {
+                        isQuerySucc&=result;
+                        callback.onSuccess(isQuerySucc);
+                    }
+                });
             }
 
         }
