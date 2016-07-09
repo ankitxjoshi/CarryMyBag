@@ -1,6 +1,7 @@
 package com.carrymybag.activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.view.View;
 import android.os.Bundle;
 import android.widget.Toast;
@@ -69,6 +70,8 @@ public class PaymentActivity extends Activity
     public void onPaymentSuccess(String razorpayPaymentID){
         try {
             Toast.makeText(this, "Payment Successful: " + razorpayPaymentID, Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(this,TransactionSuccessful.class);
+            startActivity(intent);
         }
         catch (Exception e){
             Log.e("com.merchant", e.getMessage(), e);
