@@ -58,7 +58,7 @@
                         android:layout_marginRight="5dp"
                         android:hint="New Delhi"
                         android:background="@null"
-                        android:textSize="25dp"
+                        android:textSize="20dp"
                         android:inputType="text"
                         android:id="@+id/pickup1"/>
                 </LinearLayout>
@@ -91,7 +91,7 @@
                         android:layout_height="wrap_content"
                         android:hint="Mumbai"
                         android:background="@null"
-                        android:textSize="25dp"
+                        android:textSize="20dp"
                         android:inputType="text"
                         android:id="@+id/destination1"
                         android:layout_marginLeft="5dp"
@@ -331,7 +331,7 @@
                         android:layout_height="wrap_content"
                         android:hint="July 21,2016"
                         android:background="@null"
-                        android:textSize="25dp"
+                        android:textSize="20dp"
                         android:id="@+id/date_pickup1"
                         android:inputType="text"/>
                 </LinearLayout>
@@ -466,7 +466,7 @@
                         android:layout_marginRight="5dp"
                         android:hint="New Delhi"
                         android:background="@null"
-                        android:textSize="25dp"
+                        android:textSize="20dp"
                         android:inputType="text"
                         android:id="@+id/pickup2"/>
                 </LinearLayout>
@@ -499,7 +499,7 @@
                         android:layout_height="wrap_content"
                         android:hint="Mumbai"
                         android:background="@null"
-                        android:textSize="25dp"
+                        android:textSize="20dp"
                         android:inputType="text"
                         android:id="@+id/destination2"
                         android:layout_marginLeft="5dp"
@@ -739,7 +739,7 @@
                         android:layout_height="wrap_content"
                         android:hint="July 21,2016"
                         android:background="@null"
-                        android:textSize="25dp"
+                        android:textSize="20dp"
                         android:id="@+id/date_pickup2"
                         android:inputType="text"/>
                 </LinearLayout>

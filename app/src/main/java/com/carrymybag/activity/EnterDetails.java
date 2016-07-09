@@ -113,6 +113,7 @@ public class EnterDetails extends AppCompatActivity implements OnItemSelectedLis
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setContentView(R.layout.activity_enter_details);
         globalVariable = (AppController) getApplicationContext();
 

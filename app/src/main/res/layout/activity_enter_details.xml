@@ -62,48 +62,74 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
                 </LinearLayout>
-
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/border_color"
+                    android:layout_margin="5dp">
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:layout_marginTop="10dp">
+                    android:layout_margin="1dp"
+                    android:background="@color/white">
 
                     <EditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Contact"
+                        android:hint="Contact Number"
+                        android:textSize="20dp"
+                        android:background="@null"
                         android:id="@+id/contact_origin"
                         android:inputType="number"/>
                 </LinearLayout>
-
+                </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="10dp">
+                    android:background="@color/border_color"
+                    android:layout_margin="5dp">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_margin="1dp"
+                        android:background="@color/white">
+
 
                     <EditText
+                        android:layout_margin="2dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Address 1"
+                        android:background="@null"
+                        android:textSize="20dp"
                         android:id="@+id/address1_origin"
                         android:inputType="textPostalAddress"/>
                 </LinearLayout>
-
+                </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="10dp">
+                    android:background="@color/border_color"
+                    android:layout_margin="5dp">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_margin="1dp"
+                        android:background="@color/white">
 
                     <EditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Address 2"
+                        android:background="@null"
+                        android:textSize="20dp"
                         android:id="@+id/address2_origin"
                         android:inputType="textPostalAddress"/>
                 </LinearLayout>
+                    </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -121,7 +147,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:layout_marginTop="10dp">
+                    android:layout_marginTop="10dp"
+                    android:layout_margin="10dp">
 
                     <TextView
                         android:layout_width="match_parent"
@@ -135,28 +162,39 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="10dp">
+                    android:background="@color/border_color"
+                    android:layout_margin="5dp">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_margin="1dp"
+                        android:background="@color/white">
+
 
                     <EditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:textSize="20dp"
                         android:hint="Pin Code"
                         android:id="@+id/pin_code_origin"
                         android:inputType="number"/>
                 </LinearLayout>
+                    </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:layout_marginTop="30dp">
+                    android:layout_marginTop="30dp"
+                    android:layout_marginLeft="3dp">
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Destination Address"
                         android:textStyle="bold"
-                        android:textSize="30dp" />
+                        android:textSize="25dp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -173,44 +211,70 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="10dp">
+                    android:background="@color/border_color"
+                    android:layout_margin="5dp">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_margin="1dp"
+                        android:background="@color/white">
 
                     <EditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Contact"
+                        android:hint="Contact Number"
+                        android:background="@null"
+                        android:textSize="20dp"
                         android:id="@+id/contact_dest"
                         android:inputType="number"/>
                 </LinearLayout>
-
+                </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="10dp">
+                    android:background="@color/border_color"
+                    android:layout_margin="5dp">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_margin="1dp"
+                        android:background="@color/white">
 
                     <EditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Address 1"
+                        android:background="@null"
+                        android:textSize="20dp"
                         android:id="@+id/address1_dest"
                         android:inputType="textPostalAddress"/>
                 </LinearLayout>
-
+                </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="10dp">
+                    android:background="@color/border_color"
+                    android:layout_margin="5dp">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_margin="1dp"
+                        android:background="@color/white">
+
 
                     <EditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Address 2"
+                        android:textSize="20dp"
+                        android:background="@null"
                         android:id="@+id/address2_dest"
                         android:inputType="textPostalAddress"/>
                 </LinearLayout>
+                    </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -228,7 +292,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:layout_marginTop="10dp">
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="10dp">
 
                     <TextView
                         android:layout_width="match_parent"
@@ -242,27 +307,38 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="10dp">
+                    android:background="@color/border_color"
+                    android:layout_margin="5dp">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_margin="1dp"
+                        android:background="@color/white">
+
 
                     <EditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Pin Code"
+                        android:background="@null"
+                        android:textSize="20dp"
                         android:id="@+id/pin_code_dest"
                         android:inputType="number"/>
                 </LinearLayout>
+                    </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:layout_marginTop="30dp">
+                    android:layout_marginTop="30dp"
+                    android:layout_marginLeft="3dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="30dp"
+                        android:textSize="25dp"
                         android:textStyle="bold"
                         android:text="Bag Details"/>
                 </LinearLayout>
