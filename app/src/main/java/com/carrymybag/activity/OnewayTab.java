@@ -16,15 +16,30 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.carrymybag.R;
+import com.carrymybag.app.AppConfig;
 import com.carrymybag.app.AppController;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
+
+
 
 
 public class OnewayTab extends Fragment implements View.OnClickListener {
@@ -34,13 +49,20 @@ public class OnewayTab extends Fragment implements View.OnClickListener {
 
     private TextView textPriceSmall, textPriceMed, textPriceLarge, DateOfDelivery;
 
-    double qtySmall, qtyMed, qtyLarge, priceSmall, priceMed, priceLarge;
+    double qtySmall, qtyMed, qtyLarge, priceSmall, priceMed, priceLarge,totalPrice;
 
     private Button buttonSubmit, buttonViewPrices;
 
     private RadioGroup option;
 
     private RadioButton one_day, fast, standard;
+
+    RequestQueue requestQueue;
+
+    public static final String KEY_FROMCITY = "from_city";
+    public static final String KEY_TOCITY = "to_city";
+    public static final String KEY_OPTION = "do_option";
+    public static final String KEY_TYPE = "bag_id";
 
 
 
@@ -51,12 +73,13 @@ public class OnewayTab extends Fragment implements View.OnClickListener {
     private SimpleDateFormat dateFormatter;
 
     public AppController globalVariable;
+    RadioButton radioButton;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.content_oneway_tab, container, false);
+        final View v = inflater.inflate(R.layout.content_oneway_tab, container, false);
         globalVariable = (AppController) getActivity().getApplicationContext();
 
         dateFormatter = new SimpleDateFormat("dd-MM-yyyy", Locale.US);
@@ -92,14 +115,11 @@ public class OnewayTab extends Fragment implements View.OnClickListener {
                 getPricesAndQuantity();
                 double totalPrice = priceSmall * qtySmall + priceMed * qtyMed + priceLarge * qtyLarge;
                 String price = Double.toString(totalPrice);
+                globalVariable.setTotalPrice(totalPrice);
                 globalVariable.setTwoWay(false);
                 Toast.makeText(getActivity(), "The total Price is Rs. " + price, Toast.LENGTH_LONG).show();
                 Intent i = new Intent(getContext(),
                         EnterDetails.class);
-//                i.putExtra("ValSmall",qtySmall);
-//                i.putExtra("ValMed",qtyMed);
-//                i.putExtra("ValBig",qtyLarge);
-//                i.putExtra("whichWay",false);
                 startActivity(i);
 
             }
@@ -110,11 +130,40 @@ public class OnewayTab extends Fragment implements View.OnClickListener {
 
             @Override
             public void onClick(View v) {
-
+                totalPrice = priceSmall * qtySmall + priceMed * qtyMed + priceLarge * qtyLarge;
+                globalVariable.setTotalPrice(totalPrice);
             }
         });
 
         setDateTimeField();
+
+        final RadioGroup radioGroup = (RadioGroup) v.findViewById(R.id.delivery_options);
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
+        {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                int selectedId= radioGroup.getCheckedRadioButtonId();
+                radioButton=(RadioButton)v.findViewById(selectedId);
+                Toast.makeText(getActivity(),radioButton.getText(),Toast.LENGTH_SHORT).show();
+                if(selectedId==R.id.radio_1day)
+                {
+                    globalVariable.setdoOption("Single");
+                }
+                if(selectedId==R.id.radio_fast)
+                {
+                    globalVariable.setdoOption("Fast");
+                }
+                if(selectedId==R.id.radio_standard)
+                {
+                    globalVariable.setdoOption("Standard");
+                }
+            }
+        });
+        setPrices();
+        editaddr_pickup.setText(globalVariable.getFromCity());
+        editaddr_dest.setText(globalVariable.getToCity());
+        editaddr_pickup.setFocusable(false);
+        editaddr_dest.setFocusable(false);
 
 
 
@@ -197,5 +246,93 @@ public class OnewayTab extends Fragment implements View.OnClickListener {
             priceLarge = 0.0;
         }
         globalVariable.setPriceLarge1(priceLarge);
+    }
+
+    private void getPrices(final VolleyCallback callback, String type)
+    {
+        requestQueue = Volley.newRequestQueue(getActivity());
+        final String fromCity = globalVariable.getFromCity();
+        final String toCity = globalVariable.getToCity();
+        final String bagtype = type;
+        final String doOption = "Standard";
+        String val = "0";
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, AppConfig.URL_GetPrice,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject jObj = new JSONObject(response);
+                            boolean error = jObj.getBoolean("error");
+
+                            // Check for error node in json
+                            if (!error) {
+
+                                JSONArray result = jObj.getJSONArray("result");
+                                //JSONObject price = result.getJSONObject("price");
+                                JSONObject price = result.getJSONObject(0);
+                                String val = price.getString("price");
+                                callback.onSuccess(val);
+
+
+                            } else {
+                                // Error in login. Get the error message
+                                String errorMsg = jObj.getString("error_msg");
+
+                            }
+                        } catch (JSONException e) {
+                            // JSON error
+                            e.printStackTrace();
+
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getActivity(),error.toString(),Toast.LENGTH_LONG).show();
+
+                    }
+                }){
+            @Override
+            protected Map<String,String> getParams(){
+                Map<String,String> params = new HashMap<String, String>();
+                params.put(KEY_FROMCITY,fromCity);
+                params.put(KEY_TOCITY,toCity);
+                params.put(KEY_OPTION,doOption);
+                params.put(KEY_TYPE,bagtype);
+
+
+                return params;
+            }
+
+        };
+        requestQueue.add(stringRequest);
+    }
+    private interface VolleyCallback{
+        void onSuccess(String result);
+    }
+    private void setPrices()
+    {
+        getPrices(new VolleyCallback() {
+            @Override
+            public void onSuccess(String result) {
+                priceSmall = Double.parseDouble(result);
+                textPriceSmall.setText(result);
+            }
+        },"Small");
+        getPrices(new VolleyCallback() {
+            @Override
+            public void onSuccess(String result) {
+                priceMed = Double.parseDouble(result);
+                textPriceMed.setText(result);
+            }
+        },"Medium");
+        getPrices(new VolleyCallback() {
+            @Override
+            public void onSuccess(String result) {
+                priceLarge = Double.parseDouble(result);
+                textPriceLarge.setText(result);
+            }
+        },"Large");
     }
 }
