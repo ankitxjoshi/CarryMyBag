@@ -4,7 +4,9 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.Editable;
 import android.text.InputType;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,9 +49,9 @@ public class OnewayTab extends Fragment implements View.OnClickListener {
 
     private EditText editTextQtySmall, editTextQtyMed, editTextQtyLarge, editaddr_pickup, editaddr_dest, PicupDate;
 
-    private TextView textPriceSmall, textPriceMed, textPriceLarge, DateOfDelivery;
+    private TextView textPriceSmall, textPriceMed, textPriceLarge, DateOfDelivery,estimateView;
 
-    double qtySmall, qtyMed, qtyLarge, priceSmall, priceMed, priceLarge,totalPrice;
+    double qtySmall = 0, qtyMed = 0, qtyLarge = 0, priceSmall = 0, priceMed = 0, priceLarge = 0,totalPrice = 0;
 
     private Button buttonSubmit, buttonViewPrices;
 
@@ -104,6 +106,7 @@ public class OnewayTab extends Fragment implements View.OnClickListener {
         standard = (RadioButton) v.findViewById(R.id.radio_standard);
 
         DateOfDelivery = (TextView) v.findViewById(R.id.date_delivery);
+        estimateView = (TextView)v.findViewById(R.id.estimateView);
 
         PicupDate = (EditText) v.findViewById(R.id.date_pickup);
         PicupDate.setInputType(InputType.TYPE_NULL);
@@ -113,7 +116,7 @@ public class OnewayTab extends Fragment implements View.OnClickListener {
             public void onClick(View v) {
 
                 getPricesAndQuantity();
-                double totalPrice = priceSmall * qtySmall + priceMed * qtyMed + priceLarge * qtyLarge;
+                totalPrice = priceSmall * qtySmall + priceMed * qtyMed + priceLarge * qtyLarge;
                 String price = Double.toString(totalPrice);
                 globalVariable.setTotalPrice(totalPrice);
                 globalVariable.setTwoWay(false);
@@ -124,16 +127,79 @@ public class OnewayTab extends Fragment implements View.OnClickListener {
 
             }
         });
-
-        buttonViewPrices = (Button) v.findViewById(R.id.btnViewPrices);
-        buttonViewPrices.setOnClickListener(new View.OnClickListener() {
+        editTextQtySmall.addTextChangedListener(new TextWatcher() {
 
             @Override
-            public void onClick(View v) {
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                try{
+                    qtySmall = Double.valueOf(s.toString());
+                }catch (NumberFormatException e)
+                {
+                    qtySmall = 0;
+                }
                 totalPrice = priceSmall * qtySmall + priceMed * qtyMed + priceLarge * qtyLarge;
-                globalVariable.setTotalPrice(totalPrice);
+                String stringPrice = String.valueOf(totalPrice);
+                estimateView.setText("Trip total : Rs" + stringPrice);
+            }
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
             }
         });
+        editTextQtyMed.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                try{
+                    qtyMed = Double.valueOf(s.toString());
+                }catch (NumberFormatException e)
+                {
+                    qtyMed = 0;
+                }
+                totalPrice = priceSmall * qtySmall + priceMed * qtyMed + priceLarge * qtyLarge;
+                String stringPrice = String.valueOf(totalPrice);
+                estimateView.setText("Trip total : Rs" + stringPrice);
+            }
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+        editTextQtyLarge.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                try{
+                    qtyLarge = Double.valueOf(s.toString());
+                }catch (NumberFormatException e)
+                {
+                    qtyLarge = 0;
+                }
+                totalPrice = priceSmall * qtySmall + priceMed * qtyMed + priceLarge * qtyLarge;
+                String stringPrice = String.valueOf(totalPrice);
+                estimateView.setText("Trip total : Rs" + stringPrice);
+            }
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
 
         setDateTimeField();
 

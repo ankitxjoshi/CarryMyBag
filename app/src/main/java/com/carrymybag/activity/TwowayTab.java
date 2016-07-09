@@ -4,7 +4,9 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.Editable;
 import android.text.InputType;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,12 +18,25 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.carrymybag.R;
+import com.carrymybag.app.AppConfig;
 import com.carrymybag.app.AppController;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
 
 public class TwowayTab extends Fragment implements View.OnClickListener {
@@ -32,11 +47,12 @@ public class TwowayTab extends Fragment implements View.OnClickListener {
     private TextView textPriceSmall1, textPriceMed1, textPriceLarge1;
     private TextView textPriceSmall2, textPriceMed2, textPriceLarge2;
 
-    private TextView DateOfDelivery1, DateOfDelivery2;
+    private TextView DateOfDelivery1, DateOfDelivery2,estimateView;
 
-    double qtySmall, qtyMed, qtyLarge, priceSmall, priceMed, priceLarge;
+    double qtySmall1 = 0, qtyMed1 = 0, qtyLarge1 = 0, priceSmall, priceMed, priceLarge,totalPrice = 0;
+    double qtySmall2 = 0,qtyMed2 = 0,qtyLarge2 = 0;
 
-    private Button buttonSubmit, buttonView1, buttonView2;
+    private Button buttonSubmit;
 
     private RadioGroup option1, option2;
 
@@ -52,6 +68,13 @@ public class TwowayTab extends Fragment implements View.OnClickListener {
     private SimpleDateFormat dateFormatter;
 
     public AppController globalVariable;
+
+    RequestQueue requestQueue;
+
+    public static final String KEY_FROMCITY = "from_city";
+    public static final String KEY_TOCITY = "to_city";
+    public static final String KEY_OPTION = "do_option";
+    public static final String KEY_TYPE = "bag_id";
 
 
     @Override
@@ -77,8 +100,6 @@ public class TwowayTab extends Fragment implements View.OnClickListener {
         buttonSubmit = (Button) v.findViewById(R.id.btnSubmit);
         buttonSubmit.setOnClickListener(this);
 
-        buttonView1 = (Button) v.findViewById(R.id.btnViewPrices1);
-        buttonView1.setOnClickListener(this);
 
         editaddr_pickup1 = (EditText) v.findViewById(R.id.pickup1);
         editaddr_dest1 = (EditText) v.findViewById(R.id.destination1);
@@ -101,8 +122,6 @@ public class TwowayTab extends Fragment implements View.OnClickListener {
         textPriceMed2 = (TextView) v.findViewById(R.id.price_medium2);
         textPriceLarge2 = (TextView) v.findViewById(R.id.price_large2);
 
-        buttonView2 = (Button) v.findViewById(R.id.btnViewPrices2);
-        buttonView2.setOnClickListener(this);
 
         editaddr_pickup2 = (EditText) v.findViewById(R.id.pickup2);
         editaddr_dest2 = (EditText) v.findViewById(R.id.destination2);
@@ -120,8 +139,178 @@ public class TwowayTab extends Fragment implements View.OnClickListener {
         PicupDate2.requestFocus();
 
         dateFormatter = new SimpleDateFormat("dd-MM-yyyy", Locale.US);
+        estimateView = (TextView)v.findViewById(R.id.estimateView);
+
+
 
         setDateTimeField();
+
+        editTextQtySmall1.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                try{
+                    qtySmall1 = Double.valueOf(s.toString());
+                }catch (NumberFormatException e)
+                {
+                    qtySmall1 = 0;
+                }
+                totalPrice = priceSmall*(qtySmall1 + qtySmall2) + priceMed*(qtyMed1 + qtyMed2) + priceLarge*(qtyLarge2 + qtyLarge1);
+                String stringPrice = String.valueOf(totalPrice);
+                if(stringPrice=="")
+                    stringPrice = "0";
+                estimateView.setText("Trip total : Rs" + stringPrice);
+            }
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+        editTextQtyMed1.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                try{
+                    qtyMed1 = Double.valueOf(s.toString());
+                }catch (NumberFormatException e)
+                {
+                    qtyMed1 = 0;
+                }
+                totalPrice = priceSmall*(qtySmall1 + qtySmall2) + priceMed*(qtyMed1 + qtyMed2) + priceLarge*(qtyLarge2 + qtyLarge1);
+                String stringPrice = String.valueOf(totalPrice);
+                if(stringPrice=="")
+                    stringPrice = "0";
+                estimateView.setText("Trip total : Rs" + stringPrice);
+            }
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+        editTextQtyLarge1.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                try{
+                    qtyLarge1 = Double.valueOf(s.toString());
+                }catch (NumberFormatException e)
+                {
+                    qtyLarge1 = 0;
+                }
+                totalPrice = priceSmall*(qtySmall1 + qtySmall2) + priceMed*(qtyMed1 + qtyMed2) + priceLarge*(qtyLarge2 + qtyLarge1);
+                String stringPrice = String.valueOf(totalPrice);
+                if(stringPrice=="")
+                    stringPrice = "0";
+                estimateView.setText("Trip total : Rs" + stringPrice);
+            }
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+        editTextQtySmall2.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                try{
+                    qtySmall2 = Double.valueOf(s.toString());
+                }catch (NumberFormatException e)
+                {
+                    qtySmall2 = 0;
+                }
+                totalPrice = priceSmall*(qtySmall1 + qtySmall2) + priceMed*(qtyMed1 + qtyMed2) + priceLarge*(qtyLarge2 + qtyLarge1);
+                String stringPrice = String.valueOf(totalPrice);
+                if(stringPrice=="")
+                    stringPrice = "0";
+                estimateView.setText("Trip total : Rs" + stringPrice);
+            }
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+        editTextQtyMed2.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                try{
+                    qtyMed2 = Double.valueOf(s.toString());
+                }catch (NumberFormatException e)
+                {
+                    qtyMed2 = 0;
+                }
+                totalPrice = priceSmall*(qtySmall1 + qtySmall2) + priceMed*(qtyMed1 + qtyMed2) + priceLarge*(qtyLarge2 + qtyLarge1);
+                String stringPrice = String.valueOf(totalPrice);
+                if(stringPrice=="")
+                    stringPrice = "0";
+                estimateView.setText("Trip total : Rs" + stringPrice);
+            }
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+        editTextQtyLarge2.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                try{
+                    qtyLarge2 = Double.valueOf(s.toString());
+                }catch (NumberFormatException e)
+                {
+                    qtyLarge2 = 0;
+                }
+                totalPrice = priceSmall*(qtySmall1 + qtySmall2) + priceMed*(qtyMed1 + qtyMed2) + priceLarge*(qtyLarge2 + qtyLarge1);
+                String stringPrice = String.valueOf(totalPrice);
+                if(stringPrice=="")
+                    stringPrice = "0";
+                estimateView.setText("Trip total : Rs" + stringPrice);
+            }
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        setPrices();
+        editaddr_pickup1.setText(globalVariable.getFromCity());
+        editaddr_dest1.setText(globalVariable.getToCity());
+        editaddr_pickup1.setFocusable(false);
+        editaddr_dest1.setFocusable(false);
+        editaddr_pickup2.setText(globalVariable.getToCity());
+        editaddr_dest2.setText(globalVariable.getFromCity());
+        editaddr_pickup2.setFocusable(false);
+        editaddr_dest2.setFocusable(false);
         return v;
     }
         public void onClick(View v) {
@@ -134,24 +323,15 @@ public class TwowayTab extends Fragment implements View.OnClickListener {
 
         switch (v.getId()) {
 
-            case R.id.btnViewPrices1:
-
-
-
-            case R.id.btnViewPrices2:
-
-
-
             case R.id.btnSubmit:
                 getPricesAndQuantity1();
                 Intent i = new Intent(getContext(),
                         EnterDetails.class);
-                double totalPrice1 = priceSmall * qtySmall + priceMed * qtyMed + priceLarge * qtyLarge;
                 getPricesAndQuantity2();
-                double totalPrice2 = priceSmall * qtySmall + priceMed * qtyMed + priceLarge * qtyLarge;
                 globalVariable.setTwoWay(true);
-                double totalPrice = totalPrice1 + totalPrice2;
+                totalPrice = priceSmall*(qtySmall1 + qtySmall2) + priceMed*(qtyMed1 + qtyMed2) + priceLarge*(qtyLarge2 + qtyLarge1);
                 String price = Double.toString(totalPrice);
+                globalVariable.setTotalPrice(totalPrice);
                 Toast.makeText(getActivity(), "The total Price is Rs. " + price, Toast.LENGTH_LONG).show();
                 startActivity(i);
                 break;
@@ -194,19 +374,22 @@ public class TwowayTab extends Fragment implements View.OnClickListener {
     void getPricesAndQuantity1()
     {
         try {
-            qtySmall = Double.parseDouble(editTextQtySmall1.getText().toString());
+            qtySmall1 = Double.parseDouble(editTextQtySmall1.getText().toString());
+            globalVariable.setQtySmall1(qtySmall1);
         } catch (final NumberFormatException e) {
-            qtySmall = 0.0;
+            qtySmall2 = 0.0;
         }
         try {
-            qtyMed = Double.parseDouble(editTextQtyMed1.getText().toString());
+            qtyMed1 = Double.parseDouble(editTextQtyMed1.getText().toString());
+            globalVariable.setQtyMed1(qtyMed1);
         } catch (final NumberFormatException e) {
-            qtyMed = 0.0;
+            qtyMed2 = 0.0;
         }
         try {
-            qtyLarge = Double.parseDouble(editTextQtyLarge1.getText().toString());
+            qtyLarge1 = Double.parseDouble(editTextQtyLarge1.getText().toString());
+            globalVariable.setQtyLarge1(qtyLarge1);
         } catch (final NumberFormatException e) {
-            qtyLarge = 0.0;
+            qtyLarge1 = 0.0;
         }
         try {
             priceSmall = Double.parseDouble(textPriceSmall1.getText().toString());
@@ -224,9 +407,9 @@ public class TwowayTab extends Fragment implements View.OnClickListener {
             priceLarge = 0.0;
         }
 
-        globalVariable.setQtySmall1(qtySmall);
-        globalVariable.setQtyMed1(qtyMed);
-        globalVariable.setQtyLarge1(qtyLarge);
+        globalVariable.setQtySmall1(qtySmall1);
+        globalVariable.setQtyMed1(qtyMed1);
+        globalVariable.setQtyLarge1(qtyLarge1);
         globalVariable.setPriceSmall1(priceSmall);
         globalVariable.setPriceMed1(priceMed);
         globalVariable.setPriceLarge1(priceLarge);
@@ -239,19 +422,22 @@ public class TwowayTab extends Fragment implements View.OnClickListener {
     {
 
         try {
-            qtySmall = Double.parseDouble(editTextQtySmall2.getText().toString());
+            qtySmall2 = Double.parseDouble(editTextQtySmall2.getText().toString());
+            globalVariable.setQtySmall2(qtySmall2);
         } catch (final NumberFormatException e) {
-            qtySmall = 0.0;
+            qtySmall2 = 0.0;
         }
         try {
-            qtyMed = Double.parseDouble(editTextQtyMed2.getText().toString());
+            qtyMed2 = Double.parseDouble(editTextQtyMed2.getText().toString());
+            globalVariable.setQtyMed2(qtyMed2);
         } catch (final NumberFormatException e) {
-            qtyMed = 0.0;
+            qtyMed2 = 0.0;
         }
         try {
-            qtyLarge = Double.parseDouble(editTextQtyLarge2.getText().toString());
+            qtyLarge2 = Double.parseDouble(editTextQtyLarge2.getText().toString());
+            globalVariable.setQtyLarge2(qtyLarge2);
         } catch (final NumberFormatException e) {
-            qtyLarge = 0.0;
+            qtyLarge2 = 0.0;
         }
         try {
             priceSmall = Double.parseDouble(textPriceSmall2.getText().toString());
@@ -269,11 +455,102 @@ public class TwowayTab extends Fragment implements View.OnClickListener {
             priceLarge = 0.0;
         }
 
-        globalVariable.setQtySmall2(qtySmall);
-        globalVariable.setQtyMed2(qtyMed);
-        globalVariable.setQtyLarge2(qtyLarge);
+        globalVariable.setQtySmall2(qtySmall2);
+        globalVariable.setQtyMed2(qtyMed2);
+        globalVariable.setQtyLarge2(qtyLarge2);
         globalVariable.setPriceSmall2(priceSmall);
         globalVariable.setPriceMed2(priceMed);
         globalVariable.setPriceLarge2(priceLarge);
+    }
+
+    private void getPrices(final VolleyCallback callback, String type)
+    {
+        requestQueue = Volley.newRequestQueue(getActivity());
+        final String fromCity = globalVariable.getFromCity();
+        final String toCity = globalVariable.getToCity();
+        final String bagtype = type;
+        final String doOption = "Standard";
+        String val = "0";
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, AppConfig.URL_GetPrice,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject jObj = new JSONObject(response);
+                            boolean error = jObj.getBoolean("error");
+
+                            // Check for error node in json
+                            if (!error) {
+
+                                JSONArray result = jObj.getJSONArray("result");
+                                //JSONObject price = result.getJSONObject("price");
+                                JSONObject price = result.getJSONObject(0);
+                                String val = price.getString("price");
+                                callback.onSuccess(val);
+
+
+                            } else {
+                                // Error in login. Get the error message
+                                String errorMsg = jObj.getString("error_msg");
+
+                            }
+                        } catch (JSONException e) {
+                            // JSON error
+                            e.printStackTrace();
+
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getActivity(),error.toString(),Toast.LENGTH_LONG).show();
+
+                    }
+                }){
+            @Override
+            protected Map<String,String> getParams(){
+                Map<String,String> params = new HashMap<String, String>();
+                params.put(KEY_FROMCITY,fromCity);
+                params.put(KEY_TOCITY,toCity);
+                params.put(KEY_OPTION,doOption);
+                params.put(KEY_TYPE,bagtype);
+
+
+                return params;
+            }
+
+        };
+        requestQueue.add(stringRequest);
+    }
+    private interface VolleyCallback{
+        void onSuccess(String result);
+    }
+    private void setPrices()
+    {
+        getPrices(new VolleyCallback() {
+            @Override
+            public void onSuccess(String result) {
+                priceSmall = Double.parseDouble(result);
+                textPriceSmall1.setText(result);
+                textPriceSmall2.setText(result);
+            }
+        },"Small");
+        getPrices(new VolleyCallback() {
+            @Override
+            public void onSuccess(String result) {
+                priceMed = Double.parseDouble(result);
+                textPriceMed1.setText(result);
+                textPriceMed2.setText(result);
+            }
+        },"Medium");
+        getPrices(new VolleyCallback() {
+            @Override
+            public void onSuccess(String result) {
+                priceLarge = Double.parseDouble(result);
+                textPriceLarge1.setText(result);
+                textPriceLarge2.setText(result);
+            }
+        },"Large");
     }
 }

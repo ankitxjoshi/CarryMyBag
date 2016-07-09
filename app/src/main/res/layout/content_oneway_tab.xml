@@ -254,7 +254,6 @@
                         android:layout_height="75dp"
                         android:text="Large Bag(>50Kg)"
                         android:textSize="20dp"
-
                         android:layout_alignParentTop="true"
                         android:layout_alignParentLeft="true"
                         android:id="@+id/bag_large"
@@ -396,16 +395,11 @@
                     android:paddingTop="5dp"
                     android:paddingRight="5dp"/>
 
-                <Button
-                    android:layout_width="130dp"
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="VIEW PRICES"
-                    android:textColor="#FFFFFF"
-                    android:background="@color/Primary"
-                    android:textSize="20dp"
-                    android:layout_gravity="center"
-                    android:id="@+id/btnViewPrices"
-                    android:layout_marginTop="10dp"/>
+                    android:id="@+id/estimateView"
+                    />
 
 
                 <Button
