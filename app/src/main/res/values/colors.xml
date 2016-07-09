@@ -30,6 +30,11 @@
     <color name="toolBarColor">#4682B4</color>
     <color name="colorPrimaryDark">#114148</color>
 
+    <!--Nihal remove it after use-->
+
+    <color name="color_btn">#3ab1e9</color>
+    <color name="colorText">#2e8bb7</color>
+
 
 
 

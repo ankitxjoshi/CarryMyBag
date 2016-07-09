@@ -60,4 +60,16 @@
     <string name="spam_string">Spams</string>
     <string name="closeDrawer">Navigation View</string>
     <string name="openDrawer">Navigation View Closed</string>
+
+    <string name="contact_us">Contact Us</string>
+    <string name="contact_us_desc">For any queries or problems, contact Carry My Bag on 8687688(Phone Number) or send us an Email.</string>
+    <string name="contact_address">ABC, \nXYZ Gugaon</string>
+    <string name="about_us">About Us</string>
+    <string name="about_us_desc">We carry your luggage from your home in the city of departure, to your hotel in the city of arrival, so that you can have a relaxing journey without wasting any time!</string>
+    <string name="offer_1">1. Relaxing Journey as there is no check in bag to carry to the airport and vice-versa.</string>
+    <string name="offer_2">2. Save 2-4 hour while you travel.</string>
+    <string name="offer_3">3. Save money by using Metro service to and from the airport.</string>
+    <string name="offer_4">4. Flexible planning as no handling of luggage is required.</string>
+    <string name="transaction_successful">Your transaction is successful and order has been successfully placed.</string>
+    <string name="order_info">Your order is now being processed and you would be updted about the progress.</string>
 </resources>
