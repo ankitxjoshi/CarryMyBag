@@ -59,6 +59,7 @@
             android:value="0690e21ca12465fe7f3991b05d45fef1cf97758a" />
 
         <activity android:name=".activity.ConfirmPage"></activity>
+        <activity android:name=".activity.TransactionSuccessful"></activity>
 
     </application>
 
