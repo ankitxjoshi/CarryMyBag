@@ -40,6 +40,8 @@ import java.util.Locale;
 import java.util.Map;
 
 
+
+
 public class OnewayTab extends Fragment implements View.OnClickListener {
 
 
@@ -113,6 +115,7 @@ public class OnewayTab extends Fragment implements View.OnClickListener {
                 getPricesAndQuantity();
                 double totalPrice = priceSmall * qtySmall + priceMed * qtyMed + priceLarge * qtyLarge;
                 String price = Double.toString(totalPrice);
+                globalVariable.setTotalPrice(totalPrice);
                 globalVariable.setTwoWay(false);
                 Toast.makeText(getActivity(), "The total Price is Rs. " + price, Toast.LENGTH_LONG).show();
                 Intent i = new Intent(getContext(),
@@ -156,6 +159,11 @@ public class OnewayTab extends Fragment implements View.OnClickListener {
                 }
             }
         });
+        setPrices();
+        editaddr_pickup.setText(globalVariable.getFromCity());
+        editaddr_dest.setText(globalVariable.getToCity());
+        editaddr_pickup.setFocusable(false);
+        editaddr_dest.setFocusable(false);
 
 
 
@@ -240,7 +248,7 @@ public class OnewayTab extends Fragment implements View.OnClickListener {
         globalVariable.setPriceLarge1(priceLarge);
     }
 
-    private void getPrices(String type)
+    private void getPrices(final VolleyCallback callback, String type)
     {
         requestQueue = Volley.newRequestQueue(getActivity());
         final String fromCity = globalVariable.getFromCity();
@@ -263,6 +271,7 @@ public class OnewayTab extends Fragment implements View.OnClickListener {
                                 //JSONObject price = result.getJSONObject("price");
                                 JSONObject price = result.getJSONObject(0);
                                 String val = price.getString("price");
+                                callback.onSuccess(val);
 
 
                             } else {
@@ -298,5 +307,32 @@ public class OnewayTab extends Fragment implements View.OnClickListener {
 
         };
         requestQueue.add(stringRequest);
+    }
+    private interface VolleyCallback{
+        void onSuccess(String result);
+    }
+    private void setPrices()
+    {
+        getPrices(new VolleyCallback() {
+            @Override
+            public void onSuccess(String result) {
+                priceSmall = Double.parseDouble(result);
+                textPriceSmall.setText(result);
+            }
+        },"Small");
+        getPrices(new VolleyCallback() {
+            @Override
+            public void onSuccess(String result) {
+                priceMed = Double.parseDouble(result);
+                textPriceMed.setText(result);
+            }
+        },"Medium");
+        getPrices(new VolleyCallback() {
+            @Override
+            public void onSuccess(String result) {
+                priceLarge = Double.parseDouble(result);
+                textPriceLarge.setText(result);
+            }
+        },"Large");
     }
 }
