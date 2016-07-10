@@ -22,7 +22,7 @@ public class TransactionFailed extends AppCompatActivity implements View.OnClick
 
     @Override
     public void onClick(View v) {
-        Intent intent=new Intent(getApplicationContext(),BookDetails.class);
+        Intent intent=new Intent(getApplicationContext(),FirstFragment.class);
         startActivity(intent);
     }
 }
