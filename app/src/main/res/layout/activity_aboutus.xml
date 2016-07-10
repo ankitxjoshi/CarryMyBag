@@ -27,6 +27,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/about_us"
+                android:textColor="@color/PrimaryLight"
                 android:textStyle="bold"
                 android:textSize="30sp"/>
         </LinearLayout>
@@ -41,7 +42,7 @@
                 android:layout_width="250dp"
                 android:layout_height="250dp"
                 android:layout_centerInParent="true"
-                android:src="@drawable/padnote" />
+                android:src="@drawable/logo" />
         </RelativeLayout>
 
         <LinearLayout
@@ -54,7 +55,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="20dp"
+            android:textSize="18dp"
             android:text="@string/about_us_desc"/>
         </LinearLayout>
 
@@ -69,7 +70,7 @@
                 android:layout_height="wrap_content"
                 android:text="What we do?"
                 android:textStyle="bold"
-                android:textSize="30sp"/>
+                android:textSize="25sp"/>
         </LinearLayout>
 
         <LinearLayout
@@ -94,7 +95,7 @@
                 android:layout_height="wrap_content"
                 android:text="What we offer to you?"
                 android:textStyle="bold"
-                android:textSize="30sp"/>
+                android:textSize="20sp"/>
         </LinearLayout>
 
         <LinearLayout
@@ -107,7 +108,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="20dp"
+                android:textSize="18dp"
                 android:text="@string/offer_1"/>
         </LinearLayout>
 
