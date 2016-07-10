@@ -24,9 +24,11 @@
             android:textStyle="bold"/>
 
         <Button
-            android:layout_width="wrap_content"
+            android:layout_width="190dp"
             android:layout_height="wrap_content"
             android:text="BOOK AGAIN"
+            android:textColor="@color/white"
+            android:background="@color/colorPrimaryDark"
             android:id="@+id/btn_book_again"
             android:textSize="30dp"
             android:layout_centerHorizontal="true"
