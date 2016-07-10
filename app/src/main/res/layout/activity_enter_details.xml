@@ -78,7 +78,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Contact Number"
-                        android:textSize="20dp"
+                        android:textSize="25dp"
                         android:background="@null"
                         android:id="@+id/contact_origin"
                         android:inputType="number"/>
@@ -103,7 +103,7 @@
                         android:layout_height="wrap_content"
                         android:hint="Address 1"
                         android:background="@null"
-                        android:textSize="20dp"
+                        android:textSize="25dp"
                         android:id="@+id/address1_origin"
                         android:inputType="textPostalAddress"/>
                 </LinearLayout>
@@ -125,7 +125,7 @@
                         android:layout_height="wrap_content"
                         android:hint="Address 2"
                         android:background="@null"
-                        android:textSize="20dp"
+                        android:textSize="25dp"
                         android:id="@+id/address2_origin"
                         android:inputType="textPostalAddress"/>
                 </LinearLayout>
@@ -176,7 +176,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@null"
-                        android:textSize="20dp"
+                        android:textSize="25dp"
                         android:hint="Pin Code"
                         android:id="@+id/pin_code_origin"
                         android:inputType="number"/>
@@ -225,7 +225,7 @@
                         android:layout_height="wrap_content"
                         android:hint="Contact Number"
                         android:background="@null"
-                        android:textSize="20dp"
+                        android:textSize="25dp"
                         android:id="@+id/contact_dest"
                         android:inputType="number"/>
                 </LinearLayout>
@@ -247,7 +247,7 @@
                         android:layout_height="wrap_content"
                         android:hint="Address 1"
                         android:background="@null"
-                        android:textSize="20dp"
+                        android:textSize="25dp"
                         android:id="@+id/address1_dest"
                         android:inputType="textPostalAddress"/>
                 </LinearLayout>
@@ -269,7 +269,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Address 2"
-                        android:textSize="20dp"
+                        android:textSize="25dp"
                         android:background="@null"
                         android:id="@+id/address2_dest"
                         android:inputType="textPostalAddress"/>
@@ -322,7 +322,7 @@
                         android:layout_height="wrap_content"
                         android:hint="Pin Code"
                         android:background="@null"
-                        android:textSize="20dp"
+                        android:textSize="25dp"
                         android:id="@+id/pin_code_dest"
                         android:inputType="number"/>
                 </LinearLayout>
@@ -450,7 +450,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:hint="Contact Number"
-                                android:textSize="20dp"
+                                android:textSize="25dp"
                                 android:background="@null"
                                 android:id="@+id/contact_origin2"
                                 android:inputType="number"/>
@@ -475,7 +475,7 @@
                                 android:layout_height="wrap_content"
                                 android:hint="Address 1"
                                 android:background="@null"
-                                android:textSize="20dp"
+                                android:textSize="25dp"
                                 android:id="@+id/address1_origin2"
                                 android:inputType="textPostalAddress"/>
                         </LinearLayout>
@@ -497,7 +497,7 @@
                                 android:layout_height="wrap_content"
                                 android:hint="Address 2"
                                 android:background="@null"
-                                android:textSize="20dp"
+                                android:textSize="25dp"
                                 android:id="@+id/address2_origin2"
                                 android:inputType="textPostalAddress"/>
                         </LinearLayout>
@@ -548,7 +548,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:background="@null"
-                                android:textSize="20dp"
+                                android:textSize="25dp"
                                 android:hint="Pin Code"
                                 android:id="@+id/pin_code_origin2"
                                 android:inputType="number"/>
@@ -597,7 +597,7 @@
                                 android:layout_height="wrap_content"
                                 android:hint="Contact Number"
                                 android:background="@null"
-                                android:textSize="20dp"
+                                android:textSize="25dp"
                                 android:id="@+id/contact_dest2"
                                 android:inputType="number"/>
                         </LinearLayout>
@@ -619,7 +619,7 @@
                                 android:layout_height="wrap_content"
                                 android:hint="Address 1"
                                 android:background="@null"
-                                android:textSize="20dp"
+                                android:textSize="25dp"
                                 android:id="@+id/address1_dest2"
                                 android:inputType="textPostalAddress"/>
                         </LinearLayout>
@@ -641,7 +641,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:hint="Address 2"
-                                android:textSize="20dp"
+                                android:textSize="25dp"
                                 android:background="@null"
                                 android:id="@+id/address2_dest2"
                                 android:inputType="textPostalAddress"/>
@@ -694,7 +694,7 @@
                                 android:layout_height="wrap_content"
                                 android:hint="Pin Code"
                                 android:background="@null"
-                                android:textSize="20dp"
+                                android:textSize="25dp"
                                 android:id="@+id/pin_code_dest2"
                                 android:inputType="number"/>
                         </LinearLayout>

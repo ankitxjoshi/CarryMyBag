@@ -77,9 +77,9 @@
     <string name="text_logo">Travel anywhere without worrying about your bags!</string>
     <string name="carry_my_bag">Carrying your bags is now easier!!</string>
     <string name="book_delivery">Book a Delivery</string>
-    <string name="text_book_delivery">Book a delivery by placing an order on our android application. Our online order process is simple and easy to use.</string>
+    <string name="text_book_delivery">Book a delivery by placing an order on our android application.</string>
     <string name="pickup_delivery">Pickup and Delivery</string>
-    <string name="text_pickup_delivery">We carry your luggage from your home in the city of departure, to your hotel in the city of arrival, so that you can have a relaxing journey without wasting any time! </string>
+    <string name="text_pickup_delivery">We carry your luggage from your home in the city of departure in order to provide relaxing journey without wasting any time! </string>
     <string name="luggage_tags">Receive Luggage tags</string>
     <string name="text_luggage_tags">Decide whether to include this or not.</string>
 </resources>
