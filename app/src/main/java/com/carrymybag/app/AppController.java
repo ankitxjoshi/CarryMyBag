@@ -791,4 +791,13 @@ public class AppController extends Application {
 	private ArrayList<String> StringSmallBagTypeD;
 	private ArrayList<String> StringMediumBagTypeD;
 	private ArrayList<String> StringLargeBagTypeD;
+	private String razorId;
+	public String getRazorId()
+	{
+		return razorId;
+	}
+	public void setRazorId(String s)
+	{
+		razorId = s;
+	}
 }

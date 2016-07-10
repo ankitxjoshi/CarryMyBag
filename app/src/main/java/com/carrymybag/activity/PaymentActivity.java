@@ -1,6 +1,7 @@
 package com.carrymybag.activity;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.view.View;
 import android.os.Bundle;
@@ -9,14 +10,64 @@ import android.widget.Button;
 import android.view.View.OnClickListener;
 import android.util.Log;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.carrymybag.R;
+import com.carrymybag.app.AppConfig;
+import com.carrymybag.app.AppController;
 import com.crashlytics.android.Crashlytics;
 import com.razorpay.Checkout;
 import io.fabric.sdk.android.Fabric;
+
+import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class PaymentActivity extends Activity
 {
+
+    boolean flagS;
+    boolean flagM;
+    boolean flagL;
+
+
+    //Register Details....................................................................................
+
+    // 1.For luggage.php
+
+    public static final String KEY_USERID = "user_id";
+    public static final String KEY_BAGSIZE = "bag_size";
+    public static final String KEY_BAGTYPE = "bag_type";
+    public static final String KEY_BAGCOLOR = "bag_color";
+    public static final String KEY_PRICEID = "price_id";
+
+    //2.order_details.php
+    public static final String KEY_ORDERID = "order_id";
+    public static final String KEY_TOTPRICE = "total_price";
+    public static final String KEY_PICDATE = "pick_up_date";
+    public static final String KEY_DELDATE = "delivery_date";
+    public static final String KEY_PICKADD = "pickup_add";
+    public static final String KEY_DELADD = "delivery_add";
+
+    //3.user_details.php
+
+    public static final String KEY_NAME = "name";
+    public static final String KEY_PHONE = "phone_no";
+
+    //....................................................................................................
+    public boolean luggageflag;
+    public boolean userflag;
+    public boolean orderflag;
+    public boolean isQuerySucc;
+
+    public AppController globalVariable;
+    RequestQueue requestQueue;
 
     public PaymentActivity(){}
 
@@ -30,6 +81,8 @@ public class PaymentActivity extends Activity
     }
 
     public void startPayment(){
+
+        globalVariable = (AppController) getApplicationContext();
         /**
          * Replace with your public key
          */
@@ -72,8 +125,28 @@ public class PaymentActivity extends Activity
     public void onPaymentSuccess(String razorpayPaymentID){
         try {
             Toast.makeText(this, "Payment Successful: " + razorpayPaymentID, Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(this,TransactionSuccessful.class);
-            startActivity(intent);
+            final ProgressDialog dialog = new ProgressDialog(PaymentActivity.this);
+            dialog.setMessage("Transaction in progress do not close the screen");
+            globalVariable.setRazorId(razorpayPaymentID);
+            dialog.show();
+            register(new PaymentActivity.VolleyCallback() {
+                @Override
+                public void onSuccess(boolean result) {
+                    if(result)
+                    {
+                        dialog.dismiss();
+                        Intent intent = new Intent(PaymentActivity.this,TransactionSuccessful.class);
+                        startActivity(intent);
+                    }
+                    else
+                    {
+                        Toast.makeText(PaymentActivity.this,"Server error please try later",Toast.LENGTH_LONG).show();
+                        Intent intent = new Intent(PaymentActivity.this,TransactionFailed.class);
+                        startActivity(intent);
+                    }
+                }
+            });
+
         }
         catch (Exception e){
             Log.e("com.merchant", e.getMessage(), e);
@@ -95,4 +168,337 @@ public class PaymentActivity extends Activity
             Log.e("com.merchant", e.getMessage(), e);
         }
     }
+
+    private void register(final VolleyCallback callback)
+    {
+        isQuerySucc = true;
+        registerOrder(new VolleyCallback(){
+            @Override
+            public void onSuccess(boolean result) {
+                isQuerySucc&=result;
+                if(!result)
+                {
+                    callback.onSuccess(result);
+                }
+                else
+                {
+                    for(int i=0;i<(int)globalVariable.getQtySmall1();i++)
+                    {
+                        registerLuggageSmall(new VolleyCallback(){
+                            @Override
+                            public void onSuccess(boolean result) {
+                                isQuerySucc&=result;
+                                if(!result)
+                                {
+                                    callback.onSuccess(result);
+                                }
+                                else if(!flagM)
+                                {
+                                    flagM = true;
+                                    for(int i=0;i<(int)globalVariable.getQtyMed1();i++)
+                                    {
+                                        registerLuggageMed(new VolleyCallback(){
+                                            @Override
+                                            public void onSuccess(boolean result) {
+                                                isQuerySucc&=result;
+                                                if(!result)
+                                                {
+                                                    callback.onSuccess(result);
+                                                }
+                                                else if(!flagL)
+                                                {
+                                                    flagL = true;
+                                                    for(int i=0;i<(int)globalVariable.getQtyLarge1();i++)
+                                                    {
+                                                        registerLuggageLarge(new VolleyCallback(){
+                                                            @Override
+                                                            public void onSuccess(boolean result) {
+                                                                isQuerySucc&=result;
+                                                                if(!result)
+                                                                {
+                                                                    callback.onSuccess(result);
+                                                                }
+                                                            }
+                                                        },i);
+                                                    }
+                                                }
+
+                                            }
+                                        },i);
+                                    }
+                                }
+
+                            }
+                        },i);
+                    }
+
+                    registerUser(new VolleyCallback(){
+                        @Override
+                        public void onSuccess(boolean result) {
+                            isQuerySucc&=result;
+                            callback.onSuccess(isQuerySucc);
+                        }
+                    });
+                }
+
+            }
+        });
+    }
+    private void registerLuggageSmall(final VolleyCallback callback, int i) {
+
+        requestQueue = Volley.newRequestQueue(PaymentActivity.this);
+        final String order_id = globalVariable.getRazorId();
+        final String bagSize = "Small";
+        final String bagType = "Duffle";
+        final String bagColor = globalVariable.getColorSmallOrigin(i);
+        final String priceID = "1";
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, AppConfig.URL_StoreLuggage,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Toast.makeText(PaymentActivity.this,response,Toast.LENGTH_LONG).show();
+                        luggageflag = true;
+                        JSONObject jObj = null;
+                        boolean error = false;
+                        try {
+                            jObj = new JSONObject(response);
+                            error = jObj.getBoolean("success");
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        callback.onSuccess(error);
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(PaymentActivity.this,error.toString(),Toast.LENGTH_LONG).show();
+                        luggageflag = false;
+                        callback.onSuccess(false);
+                    }
+                }){
+            @Override
+            protected Map<String,String> getParams(){
+                Map<String,String> params = new HashMap<String, String>();
+                params.put(KEY_ORDERID,order_id);
+                params.put(KEY_USERID,globalVariable.getUserEmail());
+                params.put(KEY_BAGSIZE,bagSize);
+                params.put(KEY_BAGTYPE,bagType);
+                params.put(KEY_BAGCOLOR,bagColor);
+                params.put(KEY_PRICEID,priceID);
+
+                return params;
+            }
+
+        };
+        requestQueue.add(stringRequest);
+
+    }
+    private void registerLuggageMed(final VolleyCallback callback, int i) {
+
+        requestQueue = Volley.newRequestQueue(PaymentActivity.this);
+        final String order_id = globalVariable.getRazorId();
+        final String bagSize = "Medium";
+        final String bagType = "Duffle";
+        final String bagColor = globalVariable.getColorMediumOrigin(i);
+        final String priceID = "1";
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, AppConfig.URL_StoreLuggage,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Toast.makeText(PaymentActivity.this,response,Toast.LENGTH_LONG).show();
+                        luggageflag = true;
+                        JSONObject jObj = null;
+                        boolean error = false;
+                        try {
+                            jObj = new JSONObject(response);
+                            error = jObj.getBoolean("success");
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        callback.onSuccess(error);
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(PaymentActivity.this,error.toString(),Toast.LENGTH_LONG).show();
+                        luggageflag = false;
+                        callback.onSuccess(false);
+                    }
+                }){
+            @Override
+            protected Map<String,String> getParams(){
+                Map<String,String> params = new HashMap<String, String>();
+                params.put(KEY_ORDERID,order_id);
+                params.put(KEY_USERID,globalVariable.getUserEmail());
+                params.put(KEY_BAGSIZE,bagSize);
+                params.put(KEY_BAGTYPE,bagType);
+                params.put(KEY_BAGCOLOR,bagColor);
+                params.put(KEY_PRICEID,priceID);
+
+                return params;
+            }
+
+        };
+        requestQueue.add(stringRequest);
+
+    }
+    private void registerLuggageLarge(final VolleyCallback callback, int i) {
+
+        requestQueue = Volley.newRequestQueue(PaymentActivity.this);
+        final String order_id = globalVariable.getRazorId();
+        final String bagSize = "Large";
+        final String bagType = "Duffle";
+        final String bagColor = globalVariable.getColorLargeOrigin(i);
+        final String priceID = "1";
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, AppConfig.URL_StoreLuggage,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Toast.makeText(PaymentActivity.this,response,Toast.LENGTH_LONG).show();
+                        luggageflag = true;
+                        JSONObject jObj = null;
+                        boolean error = false;
+                        try {
+                            jObj = new JSONObject(response);
+                            error = jObj.getBoolean("success");
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        callback.onSuccess(error);
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(PaymentActivity.this,error.toString(),Toast.LENGTH_LONG).show();
+                        luggageflag = false;
+                        callback.onSuccess(false);
+                    }
+                }){
+            @Override
+            protected Map<String,String> getParams(){
+                Map<String,String> params = new HashMap<String, String>();
+                params.put(KEY_ORDERID,order_id);
+                params.put(KEY_USERID,globalVariable.getUserEmail());
+                params.put(KEY_BAGSIZE,bagSize);
+                params.put(KEY_BAGTYPE,bagType);
+                params.put(KEY_BAGCOLOR,bagColor);
+                params.put(KEY_PRICEID,priceID);
+
+                return params;
+            }
+
+        };
+        requestQueue.add(stringRequest);
+
+    }
+    private void registerUser(final VolleyCallback callback) {
+
+        final String userEmail = globalVariable.getUserEmail();
+        final String userName = globalVariable.getUserName();
+        final String userPhone = globalVariable.getContactOrigin();
+        final String userAdd = globalVariable.getAddress1Origin();
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, AppConfig.URL_StoreUser,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Toast.makeText(PaymentActivity.this,response,Toast.LENGTH_LONG).show();
+                        userflag = true;
+                        JSONObject jObj = null;
+                        boolean error = false;
+                        try {
+                            jObj = new JSONObject(response);
+                            error = jObj.getBoolean("success");
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        callback.onSuccess(error);
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(PaymentActivity.this,error.toString(),Toast.LENGTH_LONG).show();
+                        userflag = false;
+                        callback.onSuccess(false);
+                    }
+                }){
+            @Override
+            protected Map<String,String> getParams(){
+                Map<String,String> params = new HashMap<String, String>();
+                params.put(KEY_USERID,userEmail);
+                params.put(KEY_NAME,userName);
+                params.put(KEY_PHONE,userPhone);
+                params.put(KEY_PICKADD,userAdd);
+
+                return params;
+            }
+
+
+        };
+        requestQueue = Volley.newRequestQueue(PaymentActivity.this);
+        requestQueue.add(stringRequest);
+
+    }
+    private void registerOrder(final VolleyCallback callback) {
+
+        final String user = LoginActivity.User_name;
+        final String order_id = globalVariable.getRazorId();
+        final String totprice = "1000";
+        final String picDate = "2016-06-28";
+        final String delDate = "2016-06-28";
+        final String picAdd = "test";
+        final String delAdd = "test";
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, AppConfig.URL_StoreOrder,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Toast.makeText(PaymentActivity.this, response, Toast.LENGTH_LONG).show();
+                        orderflag = true;
+                        JSONObject jObj = null;
+                        boolean error = false;
+                        try {
+                            jObj = new JSONObject(response);
+                            error = jObj.getBoolean("success");
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        callback.onSuccess(error);
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(PaymentActivity.this,error.toString(),Toast.LENGTH_LONG).show();
+                        orderflag = false;
+                        callback.onSuccess(false);
+                    }
+                }){
+            @Override
+            protected Map<String,String> getParams(){
+                Map<String,String> params = new HashMap<String, String>();
+                params.put(KEY_ORDERID,order_id);
+                params.put(KEY_USERID,user);
+                params.put(KEY_TOTPRICE, totprice);
+                params.put(KEY_PICDATE,picDate);
+                params.put(KEY_DELDATE,delDate);
+                params.put(KEY_PICKADD,picAdd);
+                params.put(KEY_DELADD,delAdd);
+
+                return params;
+            }
+
+        };
+        requestQueue = Volley.newRequestQueue(PaymentActivity.this);
+        requestQueue.add(stringRequest);
+
+    }
+
+    public interface VolleyCallback{
+        void onSuccess(boolean result);
+    }
+
 }

@@ -1,17 +1,20 @@
 package com.carrymybag.activity;
 
 import android.os.Bundle;
+import android.support.annotation.StringDef;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.carrymybag.R;
+import com.carrymybag.app.AppController;
 
 public class TransactionSuccessful extends AppCompatActivity implements View.OnClickListener {
 
-    private TextView textPrice;
-    String totalPrice = "Rs. 1000";
+    private TextView textPrice,textID;
+    double totalPrice;
+    public AppController globalVariable;
 
     private Button btnBookAnother;
 
@@ -19,13 +22,18 @@ public class TransactionSuccessful extends AppCompatActivity implements View.OnC
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_transaction_successful);
-
+        globalVariable = (AppController) getApplicationContext();
+        totalPrice = globalVariable.getTotalPrice();
+        String price = String.valueOf(totalPrice);
         textPrice = (TextView)findViewById(R.id.text_price);
-        textPrice.setText(totalPrice);
+        textPrice.setText(price);
+        textID = (TextView)findViewById(R.id.transaction_id);
+        textID.setText(globalVariable.getRazorId());
 
         btnBookAnother = (Button)findViewById(R.id.book_another);
         btnBookAnother.setOnClickListener(this);
     }
+
 
     @Override
     public void onClick(View v) {
