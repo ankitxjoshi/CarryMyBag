@@ -799,7 +799,7 @@
 
             <TextView
                 android:textColor="@color/PrimaryLight"
-                android:textSize="18dp"
+                android:textSize="22dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="5dp"
                 android:textStyle="bold"
