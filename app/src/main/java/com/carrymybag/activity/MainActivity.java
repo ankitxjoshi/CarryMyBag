@@ -73,6 +73,10 @@ public class MainActivity extends AppCompatActivity {
 
                     case R.id.trackNow:
                         Toast.makeText(getApplicationContext(),"Track Now Selected",Toast.LENGTH_SHORT).show();
+                        fragment = new TrackNow();
+                        fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                        fragmentTransaction.replace(R.id.frame,fragment);
+                        fragmentTransaction.commit();
                         return true;
                     case R.id.aboutUs:
                         Toast.makeText(getApplicationContext(),"About Us Selected",Toast.LENGTH_SHORT).show();
