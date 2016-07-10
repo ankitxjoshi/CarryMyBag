@@ -23,6 +23,11 @@ public class SessionManager {
 	
 	private static final String KEY_IS_LOGGED_IN = "isLoggedIn";
 
+	// Shared preferences file name
+	private static final String PREF_NAME_Wel = "welcome";
+
+	private static final String IS_FIRST_TIME_LAUNCH = "IsFirstTimeLaunch";
+
 	public SessionManager(Context context) {
 		this._context = context;
 		pref = _context.getSharedPreferences(PREF_NAME, PRIVATE_MODE);
@@ -41,5 +46,14 @@ public class SessionManager {
 	
 	public boolean isLoggedIn(){
 		return pref.getBoolean(KEY_IS_LOGGED_IN, false);
+	}
+
+	public void setFirstTimeLaunch(boolean isFirstTime) {
+		editor.putBoolean(IS_FIRST_TIME_LAUNCH, isFirstTime);
+		editor.commit();
+	}
+
+	public boolean isFirstTimeLaunch() {
+		return pref.getBoolean(IS_FIRST_TIME_LAUNCH, true);
 	}
 }

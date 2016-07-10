@@ -72,4 +72,14 @@
     <string name="offer_4">4. Flexible planning as no handling of luggage is required.</string>
     <string name="transaction_successful">Your transaction is successful and order has been successfully placed.</string>
     <string name="order_info">Your order is now being processed and you would be updated about the progress.</string>
+    <string name="title_activity_welcome">WelcomeActivity</string>
+
+    <string name="text_logo">Travel anywhere without worrying about your bags!</string>
+    <string name="carry_my_bag">Carrying your bags is now easier!!</string>
+    <string name="book_delivery">Book a Delivery</string>
+    <string name="text_book_delivery">Book a delivery by placing an order on our android application. Our online order process is simple and easy to use.</string>
+    <string name="pickup_delivery">Pickup and Delivery</string>
+    <string name="text_pickup_delivery">We carry your luggage from your home in the city of departure, to your hotel in the city of arrival, so that you can have a relaxing journey without wasting any time! </string>
+    <string name="luggage_tags">Receive Luggage tags</string>
+    <string name="text_luggage_tags">Decide whether to include this or not.</string>
 </resources>
