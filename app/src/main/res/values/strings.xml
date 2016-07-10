@@ -71,5 +71,5 @@
     <string name="offer_3">3. Save money by using Metro service to and from the airport.</string>
     <string name="offer_4">4. Flexible planning as no handling of luggage is required.</string>
     <string name="transaction_successful">Your transaction is successful and order has been successfully placed.</string>
-    <string name="order_info">Your order is now being processed and you would be updted about the progress.</string>
+    <string name="order_info">Your order is now being processed and you would be updated about the progress.</string>
 </resources>
