@@ -41,7 +41,7 @@
                 android:layout_width="250dp"
                 android:layout_height="250dp"
                 android:layout_centerInParent="true"
-                android:src="@drawable/logo" />
+                android:src="@drawable/padnote" />
         </RelativeLayout>
 
         <LinearLayout
@@ -80,7 +80,7 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:src="@drawable/concept"/>
+                android:src="@drawable/padnote"/>
         </LinearLayout>
 
         <LinearLayout
