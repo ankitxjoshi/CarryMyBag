@@ -88,6 +88,8 @@ public class PaymentActivity extends Activity
     public void onPaymentError(int code, String response){
         try {
             Toast.makeText(this, "Payment failed: " + Integer.toString(code) + " " + response, Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(this,TransactionFailed.class);
+            startActivity(intent);
         }
         catch (Exception e){
             Log.e("com.merchant", e.getMessage(), e);
