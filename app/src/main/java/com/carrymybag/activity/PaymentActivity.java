@@ -42,6 +42,7 @@ public class PaymentActivity extends Activity
 
         final Checkout co = new Checkout();
         co.setPublicKey(public_key);
+        co.setImage(R.drawable.logo);
 
         try{
             JSONObject options = new JSONObject("{" +
@@ -53,6 +54,7 @@ public class PaymentActivity extends Activity
             options.put("amount", "5000");
             options.put("name", "CarryMyBag");
             options.put("prefill", new JSONObject("{email: 'ajankit2304@gmail.com', contact: '9876543210'}"));
+            options.put("theme",new JSONObject("{color: '#114148'}"));
 
             co.open(activity, options);
 
