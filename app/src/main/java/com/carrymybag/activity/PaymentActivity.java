@@ -448,8 +448,8 @@ public class PaymentActivity extends Activity
         final String user = LoginActivity.User_name;
         final String order_id = globalVariable.getRazorId();
         final String totprice = String.valueOf(globalVariable.getTotalPrice());
-        final String picDate = globalVariable.getPickupDate1();
-        final String delDate = globalVariable.getDeliveryDate2();
+        final String picDate = "2016-06-02";
+        final String delDate = "2016-06-02";
         final String picAdd = globalVariable.getAddress1Origin();
         final String delAdd = globalVariable.getAddress1Dest();
         StringRequest stringRequest = new StringRequest(Request.Method.POST, AppConfig.URL_StoreOrder,

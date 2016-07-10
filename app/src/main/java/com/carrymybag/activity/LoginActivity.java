@@ -349,8 +349,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             User_name = acct.getDisplayName();
             User_email = acct.getEmail();
             User_photourl = acct.getPhotoUrl().toString();
-            globalVariable.setUserEmail(User_name);
-            globalVariable.setUserName(User_email);
+            globalVariable.setUserEmail(User_email);
+            globalVariable.setUserName(User_name);
             Intent intent = new Intent(LoginActivity.this,
                     MainActivity.class);
             startActivity(intent);
@@ -468,8 +468,8 @@ private class MyTextWatcher implements TextWatcher {
                                 }
                                 try {
                                     User_name = object.getString("name");
-                                    globalVariable.setUserEmail(User_name);
-                                    globalVariable.setUserName(User_email);
+                                    globalVariable.setUserEmail(User_email);
+                                    globalVariable.setUserName(User_name);
                                     Log.v("LoginActivity", User_name);
                                 } catch (JSONException e) {
                                     e.printStackTrace();

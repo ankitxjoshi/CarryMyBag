@@ -1,5 +1,6 @@
 package com.carrymybag.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.StringDef;
 import android.support.v7.app.AppCompatActivity;
@@ -28,7 +29,8 @@ public class TransactionSuccessful extends AppCompatActivity implements View.OnC
         textPrice = (TextView)findViewById(R.id.text_price);
         textPrice.setText(price);
         textID = (TextView)findViewById(R.id.transaction_id);
-        textID.setText(globalVariable.getRazorId());
+        String tranId = globalVariable.getRazorId();
+        textID.setText(tranId);
 
         btnBookAnother = (Button)findViewById(R.id.book_another);
         btnBookAnother.setOnClickListener(this);
@@ -37,6 +39,7 @@ public class TransactionSuccessful extends AppCompatActivity implements View.OnC
 
     @Override
     public void onClick(View v) {
-
+        Intent intent = new Intent(this,MainActivity.class);
+        startActivity(intent);
     }
 }
