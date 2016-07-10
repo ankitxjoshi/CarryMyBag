@@ -48,7 +48,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/text_logo"
-                android:textSize="25dp"
+                android:textSize="18dp"
                 android:textAlignment="center"/>
 
         </LinearLayout>

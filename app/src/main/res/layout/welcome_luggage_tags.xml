@@ -49,7 +49,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/text_luggage_tags"
                 android:text="@string/text_luggage_tags"
-                android:textSize="25dp"
+                android:textSize="18dp"
                 android:textAlignment="center"/>
 
         </LinearLayout>

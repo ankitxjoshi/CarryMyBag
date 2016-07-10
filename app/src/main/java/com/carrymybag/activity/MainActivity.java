@@ -92,9 +92,6 @@ public class MainActivity extends AppCompatActivity {
                         fragmentTransaction.replace(R.id.frame,fragment);
                         fragmentTransaction.commit();
                         return true;
-                    case R.id.allmail:
-                        Toast.makeText(getApplicationContext(),"Settings Selected",Toast.LENGTH_SHORT).show();
-                        return true;
                     case R.id.logOut:
                         Toast.makeText(getApplicationContext(),"Logout Selected",Toast.LENGTH_SHORT).show();
                         fragment = new SixthFragment();

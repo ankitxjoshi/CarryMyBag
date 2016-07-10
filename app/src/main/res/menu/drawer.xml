@@ -27,12 +27,6 @@
             android:icon="@drawable/table"
             android:title="@string/draft_string" />
 
-
-        <item
-            android:id="@+id/allmail"
-            android:checked="false"
-            android:icon="@drawable/presentation"
-            android:title="@string/all_mail_string" />
         <item
             android:id="@+id/logOut"
             android:checked="false"
