@@ -36,4 +36,5 @@ public class AppConfig {
 	public static String URL_StoreUser = "http://carrymybag.co.nf//user_detail.php";
 
 	public static String URL_GetPrice = "http://carrymybag.co.nf//getprice.php";
+	public static String URL_CONTACTUS = "http://carrymybag.co.nf//contactus.php";
 }
