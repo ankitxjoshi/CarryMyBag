@@ -26,6 +26,7 @@ import io.fabric.sdk.android.Fabric;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -68,6 +69,11 @@ public class PaymentActivity extends Activity
 
     public AppController globalVariable;
     RequestQueue requestQueue;
+
+    ArrayList<String> smallBagTypeO;
+    ArrayList<String> mediumBagTypeO;
+    ArrayList<String> largeBagTypeO;
+
 
     public PaymentActivity(){}
 
@@ -249,7 +255,7 @@ public class PaymentActivity extends Activity
         requestQueue = Volley.newRequestQueue(PaymentActivity.this);
         final String order_id = globalVariable.getRazorId();
         final String bagSize = "Small";
-        final String bagType = "Duffle";
+        final String bagType = globalVariable.getStringSmallBagTypeO(i);
         final String bagColor = globalVariable.getColorSmallOrigin(i);
         final String priceID = "1";
         StringRequest stringRequest = new StringRequest(Request.Method.POST, AppConfig.URL_StoreLuggage,
@@ -299,7 +305,7 @@ public class PaymentActivity extends Activity
         requestQueue = Volley.newRequestQueue(PaymentActivity.this);
         final String order_id = globalVariable.getRazorId();
         final String bagSize = "Medium";
-        final String bagType = "Duffle";
+        final String bagType = globalVariable.getStringMediumBagTypeO(i);
         final String bagColor = globalVariable.getColorMediumOrigin(i);
         final String priceID = "1";
         StringRequest stringRequest = new StringRequest(Request.Method.POST, AppConfig.URL_StoreLuggage,
@@ -349,7 +355,7 @@ public class PaymentActivity extends Activity
         requestQueue = Volley.newRequestQueue(PaymentActivity.this);
         final String order_id = globalVariable.getRazorId();
         final String bagSize = "Large";
-        final String bagType = "Duffle";
+        final String bagType = globalVariable.getStringLargeBagTypeO(i);
         final String bagColor = globalVariable.getColorLargeOrigin(i);
         final String priceID = "1";
         StringRequest stringRequest = new StringRequest(Request.Method.POST, AppConfig.URL_StoreLuggage,

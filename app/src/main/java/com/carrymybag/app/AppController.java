@@ -791,6 +791,68 @@ public class AppController extends Application {
 	private ArrayList<String> StringSmallBagTypeD;
 	private ArrayList<String> StringMediumBagTypeD;
 	private ArrayList<String> StringLargeBagTypeD;
+
+	public void setStringSmallBagTypeO(ArrayList<String> stringList)
+	{
+		StringSmallBagTypeO = stringList;
+	}
+
+	public String getStringSmallBagTypeO(int i)
+	{
+		return StringSmallBagTypeO.get(i);
+	}
+
+	public void setStringMediumBagTypeO(ArrayList<String> stringList)
+	{
+		StringMediumBagTypeO = stringList;
+	}
+
+	public String getStringMediumBagTypeO(int i)
+	{
+		return StringMediumBagTypeO.get(i);
+	}
+
+	public void setStringLargeBagTypeO(ArrayList<String> stringList)
+	{
+		StringLargeBagTypeO = stringList;
+	}
+
+	public String getStringLargeBagTypeO(int i)
+	{
+		return StringLargeBagTypeO.get(i);
+	}
+
+
+	public void setStringSmallBagTypeD(ArrayList<String> stringList)
+	{
+		StringSmallBagTypeD = stringList;
+	}
+
+	public String getStringSmallBagTypeD(int i)
+	{
+		return StringSmallBagTypeD.get(i);
+	}
+
+	public void setStringMediumBagTypeD(ArrayList<String> stringList)
+	{
+		StringMediumBagTypeD = stringList;
+	}
+
+	public String getStringMediumBagTypeD(int i)
+	{
+		return StringMediumBagTypeD.get(i);
+	}
+
+	public void setStringLargeBagTypeD(ArrayList<String> stringList)
+	{
+		StringLargeBagTypeD = stringList;
+	}
+
+	public String getStringLargeBagTypeD(int i)
+	{
+		return StringLargeBagTypeD.get(i);
+	}
+
 	private String razorId;
 	public String getRazorId()
 	{

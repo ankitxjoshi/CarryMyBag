@@ -103,7 +103,7 @@ public class EnterDetails extends AppCompatActivity implements OnItemSelectedLis
     public String colorMediumDest[];
     public String colorLargeDest[];
 
-    boolean isTwoWay = true;
+    boolean isTwoWay = false;
 
     public static ArrayList<String> Citites;
     public static ArrayList<String> BagType;
@@ -197,19 +197,6 @@ public class EnterDetails extends AppCompatActivity implements OnItemSelectedLis
 
             TypeSmallBagOrigin[i] = new Spinner(this);
             TypeSmallBagOrigin[i].setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, BagType));
-            TypeSmallBagOrigin[i].setOnItemSelectedListener(new OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    String item = parent.getItemAtPosition(position).toString();
-                    Toast.makeText(getApplicationContext(), item, Toast.LENGTH_LONG).show();
-                    StringSmallBagTypeO.add(item);
-                }
-
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) {
-
-                }
-            });
             LayoutSmall1.addView(TypeSmallBagOrigin[i]);
         }
 
@@ -230,18 +217,6 @@ public class EnterDetails extends AppCompatActivity implements OnItemSelectedLis
 
             TypeMediumBagOrigin[i] = new Spinner(this);
             TypeMediumBagOrigin[i].setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, BagType));
-            TypeMediumBagOrigin[i].setOnItemSelectedListener(new OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    String item = parent.getItemAtPosition(position).toString();
-                    StringMediumBagTypeO.add(item);
-                }
-
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) {
-
-                }
-            });
             LayoutMedium1.addView(TypeMediumBagOrigin[i]);
         }
 
@@ -262,18 +237,6 @@ public class EnterDetails extends AppCompatActivity implements OnItemSelectedLis
 
             TypeLargeBagOrigin[i] = new Spinner(this);
             TypeLargeBagOrigin[i].setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, BagType));
-            TypeLargeBagOrigin[i].setOnItemSelectedListener(new OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    String item = parent.getItemAtPosition(position).toString();
-                    StringLargeBagTypeO.add(item);
-                }
-
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) {
-
-                }
-            });
             LayoutLarge1.addView(TypeLargeBagOrigin[i]);
         }
 
@@ -330,18 +293,6 @@ public class EnterDetails extends AppCompatActivity implements OnItemSelectedLis
 
                 TypeSmallBagDest[i] = new Spinner(this);
                 TypeSmallBagDest[i].setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, BagType));
-                TypeSmallBagDest[i].setOnItemSelectedListener(new OnItemSelectedListener() {
-                    @Override
-                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                        String item = parent.getItemAtPosition(position).toString();
-                        StringSmallBagTypeD.add(item);
-                    }
-
-                    @Override
-                    public void onNothingSelected(AdapterView<?> parent) {
-
-                    }
-                });
                 LayoutSmall2.addView(TypeSmallBagDest[i]);
             }
 
@@ -362,18 +313,6 @@ public class EnterDetails extends AppCompatActivity implements OnItemSelectedLis
 
                 TypeMediumBagDest[i] = new Spinner(this);
                 TypeMediumBagDest[i].setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, BagType));
-                TypeMediumBagDest[i].setOnItemSelectedListener(new OnItemSelectedListener() {
-                    @Override
-                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                        String item = parent.getItemAtPosition(position).toString();
-                        StringMediumBagTypeD.add(item);
-                    }
-
-                    @Override
-                    public void onNothingSelected(AdapterView<?> parent) {
-
-                    }
-                });
                 LayoutMedium2.addView(TypeMediumBagDest[i]);
             }
 
@@ -394,18 +333,6 @@ public class EnterDetails extends AppCompatActivity implements OnItemSelectedLis
 
                 TypeLargeBagDest[i] = new Spinner(this);
                 TypeLargeBagDest[i].setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, BagType));
-                TypeLargeBagDest[i].setOnItemSelectedListener(new OnItemSelectedListener() {
-                    @Override
-                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                        String item = parent.getItemAtPosition(position).toString();
-                        StringLargeBagTypeD.add(item);
-                    }
-
-                    @Override
-                    public void onNothingSelected(AdapterView<?> parent) {
-
-                    }
-                });
                 LayoutLarge2.addView(TypeLargeBagDest[i]);
             }
 
@@ -467,10 +394,59 @@ public class EnterDetails extends AppCompatActivity implements OnItemSelectedLis
             @Override
             public void onClick(View v) {
 
+                for (i = 0; i < NumSmallBagsOrigin; i++) {
+
+                    Spinner mySpinner = TypeSmallBagOrigin[i];
+                    String text = mySpinner.getSelectedItem().toString();
+                    StringSmallBagTypeO.add(text);
+
+                }
+
+                globalVariable.setStringSmallBagTypeO(StringSmallBagTypeO);
+
+                for (i = 0; i < NumMediumBagsOrigin; i++) {
+                    Spinner mySpinner = TypeMediumBagOrigin[i];
+                    String text = mySpinner.getSelectedItem().toString();
+                    StringMediumBagTypeO.add(text);
+                }
+
+                globalVariable.setStringMediumBagTypeO(StringMediumBagTypeO);
+
+                for (i = 0; i < NumLargeBagsOrigin; i++) {
+                    Spinner mySpinner = TypeLargeBagOrigin[i];
+                    String text = mySpinner.getSelectedItem().toString();
+                    StringLargeBagTypeO.add(text);
+                }
+                globalVariable.setStringLargeBagTypeO(StringLargeBagTypeO);
+
+                for (i = 0; i < NumSmallBagsDest; i++) {
+
+                    Spinner mySpinner = TypeSmallBagDest[i];
+                    String text = mySpinner.getSelectedItem().toString();
+                    StringSmallBagTypeD.add(text);
+                }
+
+                globalVariable.setStringSmallBagTypeD(StringSmallBagTypeD);
+
+                for (i = 0; i < NumMediumBagsDest; i++) {
+                    Spinner mySpinner = TypeMediumBagDest[i];
+                    String text = mySpinner.getSelectedItem().toString();
+                    StringMediumBagTypeD.add(text);
+                }
+                globalVariable.setStringMediumBagTypeD(StringMediumBagTypeD);
+
+                for (i = 0; i < NumLargeBagsDest; i++) {
+                    Spinner mySpinner = TypeLargeBagDest[i];
+                    String text = mySpinner.getSelectedItem().toString();
+                    StringLargeBagTypeD.add(text);
+                }
+                globalVariable.setStringLargeBagTypeD(StringLargeBagTypeD);
+
 
                 contactOrigin = ContactOrigin.getText().toString();
 
                 if (TextUtils.isEmpty(contactOrigin)) {
+                    ContactOrigin.requestFocus();
                     ContactOrigin.setError("Contact can not be empty");
                     return;
                 }
@@ -480,6 +456,7 @@ public class EnterDetails extends AppCompatActivity implements OnItemSelectedLis
                 address1Origin = Address1Origin.getText().toString();
 
                 if (TextUtils.isEmpty(address1Origin)) {
+                    Address1Origin.requestFocus();
                     Address1Origin.setError("Address can not be empty");
                     return;
                 }
@@ -488,6 +465,7 @@ public class EnterDetails extends AppCompatActivity implements OnItemSelectedLis
                 address2Origin = Address2Origin.getText().toString();
 
                 if (TextUtils.isEmpty(address2Origin)) {
+                    Address2Origin.requestFocus();
                     Address2Origin.setError("Address can not be empty");
                     return;
                 }
@@ -496,6 +474,7 @@ public class EnterDetails extends AppCompatActivity implements OnItemSelectedLis
                 pinOrigin = PinCodeOrigin.getText().toString();
 
                 if (TextUtils.isEmpty(pinOrigin)) {
+                    PinCodeOrigin.requestFocus();
                     PinCodeOrigin.setError("Pin code can not be empty");
                     return;
                 }
@@ -505,6 +484,7 @@ public class EnterDetails extends AppCompatActivity implements OnItemSelectedLis
                 contactDest = ContactDest.getText().toString();
 
                 if (TextUtils.isEmpty(contactDest)) {
+                    ContactDest.requestFocus();
                     ContactDest.setError("Contact can not be empty");
                     return;
                 }
@@ -514,6 +494,7 @@ public class EnterDetails extends AppCompatActivity implements OnItemSelectedLis
                 address1Dest = Address1Dest.getText().toString();
 
                 if (TextUtils.isEmpty(address1Dest)) {
+                    Address1Dest.requestFocus();
                     Address1Dest.setError("Address can not be empty");
                     return;
                 }
@@ -522,8 +503,9 @@ public class EnterDetails extends AppCompatActivity implements OnItemSelectedLis
 
                 address2Dest = Address2Dest.getText().toString();
 
-                if (TextUtils.isEmpty(address1Dest)) {
-                    Address1Dest.setError("Address can not be empty");
+                if (TextUtils.isEmpty(address2Dest)) {
+                    Address2Dest.requestFocus();
+                    Address2Dest.setError("Address can not be empty");
                     return;
                 }
 
@@ -532,6 +514,7 @@ public class EnterDetails extends AppCompatActivity implements OnItemSelectedLis
                 pinDest = PinCodeDest.getText().toString();
 
                 if (TextUtils.isEmpty(pinDest)) {
+                    PinCodeDest.requestFocus();
                     PinCodeDest.setError("Pin code can not be empty");
                     return;
                 }
@@ -610,6 +593,7 @@ public class EnterDetails extends AppCompatActivity implements OnItemSelectedLis
                     contactOrigin2 = ContactOrigin2.getText().toString();
 
                     if (TextUtils.isEmpty(contactOrigin2)) {
+                        ContactOrigin2.requestFocus();
                         ContactOrigin2.setError("Contact can not be empty");
                         return;
                     }
@@ -619,6 +603,7 @@ public class EnterDetails extends AppCompatActivity implements OnItemSelectedLis
                     address1Origin2 = Address1Origin2.getText().toString();
 
                     if (TextUtils.isEmpty(address1Origin2)) {
+                        Address1Origin2.requestFocus();
                         Address1Origin2.setError("Address can not be empty");
                         return;
                     }
@@ -627,6 +612,7 @@ public class EnterDetails extends AppCompatActivity implements OnItemSelectedLis
                     address2Origin2 = Address2Origin2.getText().toString();
 
                     if (TextUtils.isEmpty(address2Origin2)) {
+                        Address2Origin2.requestFocus();
                         Address2Origin2.setError("Address can not be empty");
                         return;
                     }
@@ -635,6 +621,7 @@ public class EnterDetails extends AppCompatActivity implements OnItemSelectedLis
                     pinOrigin2 = PinCodeOrigin2.getText().toString();
 
                     if (TextUtils.isEmpty(pinOrigin2)) {
+                        PinCodeOrigin2.requestFocus();
                         PinCodeOrigin2.setError("Pin code can not be empty");
                         return;
                     }
@@ -644,6 +631,7 @@ public class EnterDetails extends AppCompatActivity implements OnItemSelectedLis
                     contactDest2 = ContactDest2.getText().toString();
 
                     if (TextUtils.isEmpty(contactDest2)) {
+                        ContactDest2.requestFocus();
                         ContactDest2.setError("Contact can not be empty");
                         return;
                     }
@@ -653,6 +641,7 @@ public class EnterDetails extends AppCompatActivity implements OnItemSelectedLis
                     address1Dest2 = Address1Dest2.getText().toString();
 
                     if (TextUtils.isEmpty(address1Dest2)) {
+                        Address1Dest2.requestFocus();
                         Address1Dest2.setError("Address can not be empty");
                         return;
                     }
@@ -662,6 +651,7 @@ public class EnterDetails extends AppCompatActivity implements OnItemSelectedLis
                     address2Dest2 = Address2Dest2.getText().toString();
 
                     if (TextUtils.isEmpty(address2Dest2)) {
+                        Address2Dest2.requestFocus();
                         Address2Dest2.setError("Address can not be empty");
                         return;
                     }
@@ -671,6 +661,7 @@ public class EnterDetails extends AppCompatActivity implements OnItemSelectedLis
                     pinDest2 = PinCodeDest2.getText().toString();
 
                     if (TextUtils.isEmpty(pinDest2)) {
+                        PinCodeDest2.requestFocus();
                         PinCodeDest2.setError("Pin code can not be empty");
                         return;
                     }
@@ -748,163 +739,158 @@ public class EnterDetails extends AppCompatActivity implements OnItemSelectedLis
                         StateDest2.setText(stateDest2);
                     }
                 }
-                Intent intent = new Intent(EnterDetails.this, ConfirmPage.class);
+                Intent intent = new Intent(EnterDetails.this, PaymentActivity.class);
                 startActivity(intent);
             }
         });
     }
 
-        @Override
-        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-            String item = null;
-            switch (parent.getId()){
-                case R.id.address_type_origin:
-                    item = parent.getItemAtPosition(position).toString();
-                    break;
-                case R.id.address_type_dest:
-                    item = parent.getItemAtPosition(position).toString();
-                    break;
-                case R.id.city_origin:
-                    item = parent.getItemAtPosition(position).toString();
-                    break;
-                case R.id.city_dest:
-                    item = parent.getItemAtPosition(position).toString();
-                    break;
-                case R.id.address_type_origin2:
-                    item = parent.getItemAtPosition(position).toString();
-                    break;
-                case R.id.address_type_dest2:
-                    item = parent.getItemAtPosition(position).toString();
-                    break;
-                case R.id.city_origin2:
-                    item = parent.getItemAtPosition(position).toString();
-                    break;
-                case R.id.city_dest2:
-                    item = parent.getItemAtPosition(position).toString();
-                    break;
-            }
+        String item = null;
+        switch (parent.getId()) {
+            case R.id.address_type_origin:
+                item = parent.getItemAtPosition(position).toString();
+                break;
+            case R.id.address_type_dest:
+                item = parent.getItemAtPosition(position).toString();
+                break;
+            case R.id.city_origin:
+                item = parent.getItemAtPosition(position).toString();
+                break;
+            case R.id.city_dest:
+                item = parent.getItemAtPosition(position).toString();
+                break;
+            case R.id.address_type_origin2:
+                item = parent.getItemAtPosition(position).toString();
+                break;
+            case R.id.address_type_dest2:
+                item = parent.getItemAtPosition(position).toString();
+                break;
+            case R.id.city_origin2:
+                item = parent.getItemAtPosition(position).toString();
+                break;
+            case R.id.city_dest2:
+                item = parent.getItemAtPosition(position).toString();
+                break;
         }
+    }
 
-        @Override
-        public void onNothingSelected(AdapterView<?> parent) {
-
-        }
-        class JSONTask extends AsyncTask<String,String,String> {
-
-            @Override
-            protected String doInBackground(String... params) {
-                HttpURLConnection connection = null;
-                BufferedReader reader = null;
-
-                try {
-                    URL url = new URL(params[0]);
-                    connection = (HttpURLConnection) url.openConnection();
-                    connection.connect();
-                    InputStream stream = connection.getInputStream();
-                    reader = new BufferedReader(new InputStreamReader(stream));
-                    StringBuffer buffer = new StringBuffer();
-                    String line ="";
-                    while ((line = reader.readLine()) != null){
-                        buffer.append(line);
-                    }
-
-                    String finalJson = buffer.toString();
-
-                    JSONObject parentObject = new JSONObject(finalJson);
-                    JSONArray parentArray = parentObject.getJSONArray("result");
-
-                    for(int i=0; i<parentArray.length(); i++) {
-                        JSONObject finalObject = parentArray.getJSONObject(i);
-                        /**
-                         * below single line of code from Gson saves you from writing the json parsing yourself which is commented below
-                         */
-                        Citites.add(finalObject.getString("city_name"));
-
-                    }
-                    return null;
-
-                } catch (MalformedURLException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                } finally {
-                    if(connection != null) {
-                        connection.disconnect();
-                    }
-                    try {
-                        if(reader != null) {
-                            reader.close();
-                        }
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-                return  null;
-            }
-
-
-        }
-
-        class JSONTaskBag extends AsyncTask<String,String,String> {
-
-            @Override
-            protected String doInBackground(String... params) {
-                HttpURLConnection connection = null;
-                BufferedReader reader = null;
-
-                try {
-                    URL url = new URL(params[0]);
-                    connection = (HttpURLConnection) url.openConnection();
-                    connection.connect();
-                    InputStream stream = connection.getInputStream();
-                    reader = new BufferedReader(new InputStreamReader(stream));
-                    StringBuffer buffer = new StringBuffer();
-                    String line ="";
-                    while ((line = reader.readLine()) != null){
-                        buffer.append(line);
-                    }
-
-                    String finalJson = buffer.toString();
-
-                    JSONObject parentObject = new JSONObject(finalJson);
-                    JSONArray parentArray = parentObject.getJSONArray("result");
-
-                    for(int i=0; i<parentArray.length(); i++) {
-                        JSONObject finalObject = parentArray.getJSONObject(i);
-                        /**
-                         * below single line of code from Gson saves you from writing the json parsing yourself which is commented below
-                         */
-                        BagType.add(finalObject.getString("bag_type"));
-
-                    }
-                    return null;
-
-                } catch (MalformedURLException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                } finally {
-                    if(connection != null) {
-                        connection.disconnect();
-                    }
-                    try {
-                        if(reader != null) {
-                            reader.close();
-                        }
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-                return  null;
-            }
-
-
-        }
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
 
     }
 
+    class JSONTask extends AsyncTask<String, String, String> {
+
+        @Override
+        protected String doInBackground(String... params) {
+            HttpURLConnection connection = null;
+            BufferedReader reader = null;
+
+            try {
+                URL url = new URL(params[0]);
+                connection = (HttpURLConnection) url.openConnection();
+                connection.connect();
+                InputStream stream = connection.getInputStream();
+                reader = new BufferedReader(new InputStreamReader(stream));
+                StringBuffer buffer = new StringBuffer();
+                String line = "";
+                while ((line = reader.readLine()) != null) {
+                    buffer.append(line);
+                }
+
+                String finalJson = buffer.toString();
+
+                JSONObject parentObject = new JSONObject(finalJson);
+                JSONArray parentArray = parentObject.getJSONArray("result");
+
+                for (int i = 0; i < parentArray.length(); i++) {
+                    JSONObject finalObject = parentArray.getJSONObject(i);
+
+
+                    Citites.add(finalObject.getString("city_name"));
+
+                }
+                return null;
+
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            } finally {
+                if (connection != null) {
+                    connection.disconnect();
+                }
+                try {
+                    if (reader != null) {
+                        reader.close();
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            return null;
+        }
+
+
+    }
+
+    class JSONTaskBag extends AsyncTask<String, String, String> {
+
+        @Override
+        protected String doInBackground(String... params) {
+            HttpURLConnection connection = null;
+            BufferedReader reader = null;
+
+            try {
+                URL url = new URL(params[0]);
+                connection = (HttpURLConnection) url.openConnection();
+                connection.connect();
+                InputStream stream = connection.getInputStream();
+                reader = new BufferedReader(new InputStreamReader(stream));
+                StringBuffer buffer = new StringBuffer();
+                String line = "";
+                while ((line = reader.readLine()) != null) {
+                    buffer.append(line);
+                }
+
+                String finalJson = buffer.toString();
+
+                JSONObject parentObject = new JSONObject(finalJson);
+                JSONArray parentArray = parentObject.getJSONArray("result");
+
+                for (int i = 0; i < parentArray.length(); i++) {
+                    JSONObject finalObject = parentArray.getJSONObject(i);
+                    BagType.add(finalObject.getString("bag_type"));
+
+                }
+                return null;
+
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            } finally {
+                if (connection != null) {
+                    connection.disconnect();
+                }
+                try {
+                    if (reader != null) {
+                        reader.close();
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            return null;
+        }
+
+
+    }
+}
