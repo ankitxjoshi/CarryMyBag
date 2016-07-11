@@ -18,6 +18,7 @@ public class AppConfig {
 //	public static String URL_StoreLuggage = "http://carrymybag.comxa.com/luggage.php";
 //	public static String URL_StoreOrder = "http://carrymybag.comxa.com/order_details.php";
 //	public static String URL_StoreUser = "http://carrymybag.comxa.com/user_detail.php";
+	public static String URL_CONTACTUS = "http://carrymybag.comxa.com/contact.php";
 	public static String URL_LOGIN = "http://carrymybag.co.nf//login.php";
 
 	// Server user register url
@@ -36,5 +37,5 @@ public class AppConfig {
 	public static String URL_StoreUser = "http://carrymybag.co.nf//user_detail.php";
 
 	public static String URL_GetPrice = "http://carrymybag.co.nf//getprice.php";
-	public static String URL_CONTACTUS = "http://carrymybag.co.nf//contactus.php";
+//	public static String URL_CONTACTUS = "http://carrymybag.co.nf//contactus.php";
 }
