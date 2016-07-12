@@ -84,7 +84,7 @@ public class OnewayTab extends Fragment implements View.OnClickListener {
         final View v = inflater.inflate(R.layout.content_oneway_tab, container, false);
         globalVariable = (AppController) getActivity().getApplicationContext();
 
-        dateFormatter = new SimpleDateFormat("dd-MM-yyyy", Locale.US);
+        dateFormatter = new SimpleDateFormat("yyyy-mm-dd", Locale.US);
 
 
         editTextQtySmall = (EditText) v.findViewById(R.id.qty_small);
@@ -247,19 +247,26 @@ public class OnewayTab extends Fragment implements View.OnClickListener {
         DatePickerDialog = new DatePickerDialog(getContext(), new android.app.DatePickerDialog.OnDateSetListener() {
 
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                Calendar newDate = Calendar.getInstance();
-                newDate.set(year, monthOfYear, dayOfMonth);
-                String sdate = dateFormatter.format(newDate.getTime());
-                Date date = null;
-                SimpleDateFormat dateFormatter = new SimpleDateFormat(
-                        "yyyy-MM-dd");
-                try {
-                    date = dateFormatter.parse(sdate);
-                } catch (ParseException e) {
-                    // handle exception here !
+                String month = null;
+                String day = null;
+                if(monthOfYear < 10){
+
+                    month = "0" + monthOfYear;
                 }
-                PicupDate.setText(DateFormat.getDateInstance(DateFormat.MEDIUM).format(date));
-                globalVariable.setPickupDate1(DateFormat.getDateInstance(DateFormat.SHORT).format(date));
+                else
+                {
+                    month = String.valueOf(monthOfYear);
+                }
+                if(dayOfMonth < 10){
+
+                    day  = "0" + dayOfMonth ;
+                }
+                else
+                {
+                    day = String.valueOf(dayOfMonth);
+                }
+                PicupDate.setText(year + "-" + month + "-" + day);
+                globalVariable.setPickupDate1(year + "-" + month + "-" + day);
             }
 
         },newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));

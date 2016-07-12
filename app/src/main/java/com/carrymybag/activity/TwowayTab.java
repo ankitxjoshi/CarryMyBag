@@ -138,7 +138,7 @@ public class TwowayTab extends Fragment implements View.OnClickListener {
         PicupDate2.setInputType(InputType.TYPE_NULL);
         PicupDate2.requestFocus();
 
-        dateFormatter = new SimpleDateFormat("dd-MM-yyyy", Locale.US);
+        dateFormatter = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
         estimateView = (TextView)v.findViewById(R.id.estimateView);
 
 
@@ -349,10 +349,26 @@ public class TwowayTab extends Fragment implements View.OnClickListener {
         DatePickerDialog1 = new DatePickerDialog(getContext(), new android.app.DatePickerDialog.OnDateSetListener() {
 
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                Calendar newDate = Calendar.getInstance();
-                newDate.set(year, monthOfYear, dayOfMonth);
-                PicupDate1.setText(dateFormatter.format(newDate.getTime()));
-                globalVariable.setPickupDate1(dateFormatter.format(newDate.getTime()));
+                String month = null;
+                String day = null;
+                if(monthOfYear < 10){
+
+                    month = "0" + monthOfYear;
+                }
+                else
+                {
+                    month = String.valueOf(monthOfYear);
+                }
+                if(dayOfMonth < 10){
+
+                    day  = "0" + dayOfMonth ;
+                }
+                else
+                {
+                    day = String.valueOf(dayOfMonth);
+                }
+                PicupDate1.setText(year + "-" + month + "-" + day);
+                globalVariable.setPickupDate1(year + "-" + month + "-" + day);
             }
 
 
@@ -361,10 +377,26 @@ public class TwowayTab extends Fragment implements View.OnClickListener {
         DatePickerDialog2 = new DatePickerDialog(getContext(), new DatePickerDialog.OnDateSetListener() {
 
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                Calendar newDate = Calendar.getInstance();
-                newDate.set(year, monthOfYear, dayOfMonth);
-                PicupDate2.setText(dateFormatter.format(newDate.getTime()));
-                globalVariable.setPickupDate2(dateFormatter.format(newDate.getTime()));
+                String month = null;
+                String day = null;
+                if(monthOfYear < 10){
+
+                    month = "0" + monthOfYear;
+                }
+                else
+                {
+                    month = String.valueOf(monthOfYear);
+                }
+                if(dayOfMonth < 10){
+
+                    day  = "0" + dayOfMonth ;
+                }
+                else
+                {
+                    day = String.valueOf(dayOfMonth);
+                }
+                PicupDate2.setText(year + "-" + month + "-" + day);
+                globalVariable.setPickupDate2(year + "-" + month + "-" + day);
             }
 
         },newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
