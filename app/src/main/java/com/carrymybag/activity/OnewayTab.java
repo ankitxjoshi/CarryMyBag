@@ -332,6 +332,7 @@ public class OnewayTab extends Fragment implements View.OnClickListener {
                 Calendar newDate = Calendar.getInstance();
                 newDate.set(year,monthOfYear,dayOfMonth);
                 String pickupDate = df.format(newDate.getTime());
+                globalVariable.setPickupDate1(pickupDate);
                 PicupDate.setText(pickupDate);
                 Date datePickup;
                 Date dateCurrent;

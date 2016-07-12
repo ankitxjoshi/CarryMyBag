@@ -562,6 +562,7 @@ public class TwowayTab extends Fragment implements View.OnClickListener {
                 Calendar newDate = Calendar.getInstance();
                 newDate.set(year, monthOfYear, dayOfMonth);
                 String pickupDate = df.format(newDate.getTime());
+                globalVariable.setPickupDate1(pickupDate);
                 PicupDate1.setText(pickupDate);
                 Date datePickup;
                 Date dateCurrent;
@@ -596,6 +597,7 @@ public class TwowayTab extends Fragment implements View.OnClickListener {
                 Calendar newDate = Calendar.getInstance();
                 newDate.set(year, monthOfYear, dayOfMonth);
                 String pickupDate = df.format(newDate.getTime());
+                globalVariable.setPickupDate2(pickupDate);
                 PicupDate2.setText(pickupDate);
                 Date datePickup;
                 Date dateCurrent2;
