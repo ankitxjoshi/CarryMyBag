@@ -1,12 +1,5 @@
 package com.carrymybag.activity;
 
-/**
- * Created by Ankit on 6/13/2016.
- */
-/**
- * Author :Ankit Joshi
- **/
-
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -23,6 +16,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -32,7 +26,6 @@ import com.android.volley.toolbox.Volley;
 import com.carrymybag.R;
 import com.carrymybag.app.AppConfig;
 import com.carrymybag.app.AppController;
-import com.carrymybag.helper.UserFunctions;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -44,16 +37,16 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
-
-public class PasswordReset extends Activity {
+public class ChangePassword extends Activity {
 
     private static String KEY_SUCCESS = "success";
     private static String KEY_ERROR = "error";
 
-    EditText email;
+    EditText newpass;
     TextView alert;
-    Button resetpass;
-
+    Button changepass;
+    Button cancel;
+    public AppController globalVariable;
 
     /**
      * Called when the activity is first created.
@@ -62,77 +55,60 @@ public class PasswordReset extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_password_reset);
+        setContentView(R.layout.activity_change_pass);
+        globalVariable = (AppController) getApplicationContext();
 
-        Button login = (Button) findViewById(R.id.bktolog);
-        login.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                Intent myIntent = new Intent(view.getContext(), LoginActivity.class);
-                startActivityForResult(myIntent, 0);
+        cancel = (Button) findViewById(R.id.btcancel);
+        cancel.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View arg0) {
+
+                Intent login = new Intent(getApplicationContext(), LoginActivity.class);
+
+                startActivity(login);
                 finish();
             }
 
         });
 
+        newpass = (EditText) findViewById(R.id.newpass);
+        alert = (TextView) findViewById(R.id.alertpass);
+        changepass = (Button) findViewById(R.id.btchangepass);
 
-        email = (EditText) findViewById(R.id.forpas);
-        alert = (TextView) findViewById(R.id.alert);
-        resetpass = (Button) findViewById(R.id.respass);
-        resetpass.setOnClickListener(new View.OnClickListener() {
+        changepass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-
-                //NetAsync(view);
-                resetPassword();
-
+                changePassword();
             }
-
-
         });
     }
 
-    void resetPassword() {
+    void changePassword() {
         StringRequest strReq = new StringRequest(Request.Method.POST,
-                AppConfig.URL_FORGOTPASS, new Response.Listener<String>() {
+                AppConfig.URL_CHANGEPASS, new Response.Listener<String>() {
 
             @Override
             public void onResponse(String response) {
-
                 try {
-                    JSONObject jObj = new JSONObject(response);
-                    int error = jObj.getInt("error");
-
-                    // Check for error node in json
-                    if (error == 0) {
-
+                    JSONObject json = new JSONObject(response);
+                    if (json.getString(KEY_SUCCESS) != null) {
                         alert.setText("");
-                        String res = jObj.getString(KEY_SUCCESS);
-                        String red = jObj.getString(KEY_ERROR);
-
+                        String res = json.getString(KEY_SUCCESS);
+                        String red = json.getString(KEY_ERROR);
 
                         if (Integer.parseInt(res) == 1) {
 
-                            alert.setText("A recovery email is sent to you, see it for more details.");
-
+                            alert.setText("Your Password is successfully changed.");
 
                         } else if (Integer.parseInt(red) == 2) {
-                            alert.setText("Your email does not exist in our database.");
+                            alert.setText("Invalid old Password.");
                         } else {
-
-                            alert.setText("Error occured in changing Password");
+                            alert.setText("Error occured in changing Password.");
                         }
 
-                    } else {
-                        // Error in login. Get the error message
-                        String errorMsg = jObj.getString("error_msg");
-                        Toast.makeText(getApplicationContext(),
-                                errorMsg, Toast.LENGTH_LONG).show();
                     }
                 } catch (JSONException e) {
-                    // JSON error
                     e.printStackTrace();
-                    Toast.makeText(getApplicationContext(), "Json error: " + e.getMessage(), Toast.LENGTH_LONG).show();
+
                 }
 
             }
@@ -151,8 +127,8 @@ public class PasswordReset extends Activity {
             protected Map<String, String> getParams() {
                 // Posting parameters to login url
                 Map<String, String> params = new HashMap<String, String>();
-                String resetemail = email.getText().toString();
-                params.put("forgotpassword", resetemail);
+                params.put("email", globalVariable.getUserEmail());
+                params.put("newpas",newpass.getText().toString());
                 return params;
             }
 
