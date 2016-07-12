@@ -58,6 +58,7 @@ public class ChangePassword extends android.support.v4.app.Fragment {
         View view = inflater.inflate(R.layout.activity_change_pass, container, false);
 
         cancel = (Button) view.findViewById(R.id.btcancel);
+        globalVariable = (AppController) getActivity().getApplicationContext();
         cancel.setOnClickListener(new View.OnClickListener() {
             public void onClick(View arg0) {
 
@@ -128,7 +129,8 @@ public class ChangePassword extends android.support.v4.app.Fragment {
             protected Map<String, String> getParams() {
                 // Posting parameters to login url
                 Map<String, String> params = new HashMap<String, String>();
-                params.put("email", globalVariable.getUserEmail());
+                String email = globalVariable.getUserEmail();
+                params.put("email", email);
                 params.put("newpas",newpass.getText().toString());
                 return params;
             }
