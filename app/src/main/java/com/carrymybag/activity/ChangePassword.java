@@ -10,7 +10,9 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -26,6 +28,8 @@ import com.android.volley.toolbox.Volley;
 import com.carrymybag.R;
 import com.carrymybag.app.AppConfig;
 import com.carrymybag.app.AppController;
+import com.carrymybag.helper.SQLiteHandler;
+import com.carrymybag.helper.SessionManager;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -37,7 +41,7 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ChangePassword extends Activity {
+public class ChangePassword extends android.support.v4.app.Fragment {
 
     private static String KEY_SUCCESS = "success";
     private static String KEY_ERROR = "error";
@@ -48,31 +52,25 @@ public class ChangePassword extends Activity {
     Button cancel;
     public AppController globalVariable;
 
-    /**
-     * Called when the activity is first created.
-     */
+
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.activity_change_pass, container, false);
 
-        setContentView(R.layout.activity_change_pass);
-        globalVariable = (AppController) getApplicationContext();
-
-        cancel = (Button) findViewById(R.id.btcancel);
+        cancel = (Button) view.findViewById(R.id.btcancel);
         cancel.setOnClickListener(new View.OnClickListener() {
             public void onClick(View arg0) {
 
-                Intent login = new Intent(getApplicationContext(), LoginActivity.class);
+                Intent login = new Intent(getActivity().getApplicationContext(), LoginActivity.class);
 
                 startActivity(login);
-                finish();
             }
 
         });
 
-        newpass = (EditText) findViewById(R.id.newpass);
-        alert = (TextView) findViewById(R.id.alertpass);
-        changepass = (Button) findViewById(R.id.btchangepass);
+        newpass = (EditText) view.findViewById(R.id.newpass);
+        alert = (TextView)view.findViewById(R.id.alertpass);
+        changepass = (Button) view.findViewById(R.id.btchangepass);
 
         changepass.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,6 +78,9 @@ public class ChangePassword extends Activity {
                 changePassword();
             }
         });
+
+
+        return view;
     }
 
     void changePassword() {
@@ -117,7 +118,7 @@ public class ChangePassword extends Activity {
             @Override
             public void onErrorResponse(VolleyError error) {
 
-                Toast.makeText(getApplicationContext(),
+                Toast.makeText(getActivity().getApplicationContext(),
                         error.getMessage(), Toast.LENGTH_LONG).show();
 
             }
@@ -135,7 +136,7 @@ public class ChangePassword extends Activity {
         };
 
         // Adding request to request queue
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
         requestQueue.add(strReq);
     }
 

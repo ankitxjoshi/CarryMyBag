@@ -38,5 +38,6 @@ public class AppConfig {
 
 	public static String URL_GetPrice = "http://carrymybag.co.nf//getprice.php";
 	public static String URL_CHANGEPASS = "http://carrymybag.co.nf//changepass.php";
+	public static String URL_PRICEFACTOR = "http://carrymybag.co.nf//pricefactor.php";;
 //	public static String URL_CONTACTUS = "http://carrymybag.co.nf//contactus.php";
 }

@@ -76,6 +76,8 @@ public class OnewayTab extends Fragment implements View.OnClickListener {
 
     public AppController globalVariable;
     RadioButton radioButton;
+    private  int priceFactor = 1;
+    private int delDateFactor = 0;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -91,7 +93,7 @@ public class OnewayTab extends Fragment implements View.OnClickListener {
         editTextQtyMed = (EditText) v.findViewById(R.id.qty_medium);
         editTextQtyLarge = (EditText) v.findViewById(R.id.qty_large);
 
-        textPriceSmall = (TextView) v.findViewById(R.id.price_small);
+       textPriceSmall = (TextView) v.findViewById(R.id.price_small);
         textPriceMed = (TextView) v.findViewById(R.id.price_medium);
         textPriceLarge = (TextView) v.findViewById(R.id.price_large);
 
@@ -214,14 +216,32 @@ public class OnewayTab extends Fragment implements View.OnClickListener {
                 if(selectedId==R.id.radio_1day)
                 {
                     globalVariable.setdoOption("Single");
+                    modifyPrice(new VolleyCallback() {
+                        @Override
+                        public void onSuccess(String result) {
+
+                        }
+                    });
                 }
                 if(selectedId==R.id.radio_fast)
                 {
                     globalVariable.setdoOption("Fast");
+                    modifyPrice(new VolleyCallback() {
+                        @Override
+                        public void onSuccess(String result) {
+
+                        }
+                    });
                 }
                 if(selectedId==R.id.radio_standard)
                 {
                     globalVariable.setdoOption("Standard");
+                    modifyPrice(new VolleyCallback() {
+                        @Override
+                        public void onSuccess(String result) {
+
+                        }
+                    });
                 }
             }
         });
@@ -231,10 +251,57 @@ public class OnewayTab extends Fragment implements View.OnClickListener {
         editaddr_pickup.setFocusable(false);
         editaddr_dest.setFocusable(false);
 
-
-
-
         return v;
+    }
+
+    private void modifyPrice(final VolleyCallback callback) {
+
+        requestQueue = Volley.newRequestQueue(getActivity());
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, AppConfig.URL_PRICEFACTOR,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Toast.makeText(getActivity(),response,Toast.LENGTH_LONG).show();
+                        JSONObject jObj = null;
+                        boolean error = false;
+                        try {
+                            jObj = new JSONObject(response);
+                            error = jObj.getBoolean("error");
+                            if(!error)
+                            {
+                                totalPrice = totalPrice/priceFactor;
+                                priceFactor = jObj.getInt("price_factor");
+                                delDateFactor = jObj.getInt("del_date");
+                                totalPrice = totalPrice*priceFactor;
+                                globalVariable.setTotalPrice(totalPrice);
+                                estimateView.setText("Trip total : Rs" + String.valueOf(totalPrice));
+                                callback.onSuccess("1");
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        callback.onSuccess(String.valueOf(error));
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getActivity(),error.toString(),Toast.LENGTH_LONG).show();
+                        callback.onSuccess(String.valueOf(false));
+                    }
+                }){
+            @Override
+            protected Map<String,String> getParams(){
+                Map<String,String> params = new HashMap<String, String>();
+                params.put(KEY_FROMCITY,globalVariable.getFromCity());
+                params.put(KEY_TOCITY,globalVariable.getToCity());
+                params.put(KEY_OPTION,globalVariable.getDoOption());
+                return params;
+            }
+
+        };
+        requestQueue.add(stringRequest);
+
     }
 
 

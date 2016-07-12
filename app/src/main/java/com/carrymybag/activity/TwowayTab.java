@@ -61,6 +61,7 @@ public class TwowayTab extends Fragment implements View.OnClickListener {
     private RadioButton one_day1, fast1, standard1, one_day2, fast2, standard2;
 
     String Pickup1, Pickup2;
+    RadioButton radioButton;
 
 
 
@@ -72,6 +73,10 @@ public class TwowayTab extends Fragment implements View.OnClickListener {
     public AppController globalVariable;
 
     RequestQueue requestQueue;
+    private  int priceFactor1 = 1;
+    private int delDateFactor1 = 0;
+    private  int priceFactor2 = 1;
+    private int delDateFactor2 = 0;
 
     public static final String KEY_FROMCITY = "from_city";
     public static final String KEY_TOCITY = "to_city";
@@ -88,7 +93,7 @@ public class TwowayTab extends Fragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.layout_tab_twoway, container, false);
+        final View v = inflater.inflate(R.layout.layout_tab_twoway, container, false);
         globalVariable = (AppController) getActivity().getApplicationContext();
 
         editTextQtySmall1 = (EditText) v.findViewById(R.id.qty_small1);
@@ -313,6 +318,89 @@ public class TwowayTab extends Fragment implements View.OnClickListener {
         editaddr_dest2.setText(globalVariable.getFromCity());
         editaddr_pickup2.setFocusable(false);
         editaddr_dest2.setFocusable(false);
+
+
+        final RadioGroup radioGroup1 = (RadioGroup) v.findViewById(R.id.delivery_options1);
+        radioGroup1.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
+        {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                int selectedId= radioGroup1.getCheckedRadioButtonId();
+                radioButton=(RadioButton)v.findViewById(selectedId);
+                Toast.makeText(getActivity(),radioButton.getText(),Toast.LENGTH_SHORT).show();
+                if(selectedId==R.id.radio_1day1)
+                {
+                    globalVariable.setdoOption("Single");
+                    modifyPrice1(new VolleyCallback() {
+                        @Override
+                        public void onSuccess(String result) {
+
+                        }
+                    });
+                }
+                if(selectedId==R.id.radio_fast1)
+                {
+                    globalVariable.setdoOption("Fast");
+                    modifyPrice1(new VolleyCallback() {
+                        @Override
+                        public void onSuccess(String result) {
+
+                        }
+                    });
+                }
+                if(selectedId==R.id.radio_standard1)
+                {
+                    globalVariable.setdoOption("Standard");
+                    modifyPrice1(new VolleyCallback() {
+                        @Override
+                        public void onSuccess(String result) {
+
+                        }
+                    });
+                }
+
+            }
+        });
+        final RadioGroup radioGroup2 = (RadioGroup) v.findViewById(R.id.delivery_options2);
+        radioGroup2.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
+        {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                int selectedId= radioGroup2.getCheckedRadioButtonId();
+                radioButton=(RadioButton)v.findViewById(selectedId);
+                Toast.makeText(getActivity(),radioButton.getText(),Toast.LENGTH_SHORT).show();
+                if(selectedId==R.id.radio_1day2)
+                {
+                    globalVariable.setdoOption("Single");
+                    modifyPrice2(new VolleyCallback() {
+                        @Override
+                        public void onSuccess(String result) {
+
+                        }
+                    });
+                }
+                if(selectedId==R.id.radio_fast2)
+                {
+                    globalVariable.setdoOption("Fast");
+                    modifyPrice2(new VolleyCallback() {
+                        @Override
+                        public void onSuccess(String result) {
+
+                        }
+                    });
+                }
+                if(selectedId==R.id.radio_standard2)
+                {
+                    globalVariable.setdoOption("Standard");
+                    modifyPrice2(new VolleyCallback() {
+                        @Override
+                        public void onSuccess(String result) {
+
+                        }
+                    });
+                }
+            }
+        });
         return v;
     }
         public void onClick(View v) {
@@ -342,7 +430,102 @@ public class TwowayTab extends Fragment implements View.OnClickListener {
     }
 
 
+    private void modifyPrice1(final VolleyCallback callback) {
 
+        requestQueue = Volley.newRequestQueue(getActivity());
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, AppConfig.URL_PRICEFACTOR,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Toast.makeText(getActivity(),response,Toast.LENGTH_LONG).show();
+                        JSONObject jObj = null;
+                        boolean error = false;
+                        try {
+                            jObj = new JSONObject(response);
+                            error = jObj.getBoolean("error");
+                            if(!error)
+                            {
+                                priceFactor1 = jObj.getInt("price_factor");
+                                delDateFactor1 = jObj.getInt("del_date");
+                                totalPrice = priceSmall*(qtySmall1*priceFactor1 + qtySmall2*priceFactor2) + priceMed*(qtyMed1*priceFactor1 + qtyMed2*priceFactor2) + priceLarge*(qtyLarge2*priceFactor1 + qtyLarge1*priceFactor2);
+                                globalVariable.setTotalPrice(totalPrice);
+                                estimateView.setText("Trip total : Rs" + String.valueOf(totalPrice));
+                                callback.onSuccess("1");
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        callback.onSuccess(String.valueOf(error));
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getActivity(),error.toString(),Toast.LENGTH_LONG).show();
+                        callback.onSuccess(String.valueOf(false));
+                    }
+                }){
+            @Override
+            protected Map<String,String> getParams(){
+                Map<String,String> params = new HashMap<String, String>();
+                params.put(KEY_FROMCITY,globalVariable.getFromCity());
+                params.put(KEY_TOCITY,globalVariable.getToCity());
+                params.put(KEY_OPTION,globalVariable.getDoOption());
+                return params;
+            }
+
+        };
+        requestQueue.add(stringRequest);
+
+    }
+    private void modifyPrice2(final VolleyCallback callback) {
+
+        requestQueue = Volley.newRequestQueue(getActivity());
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, AppConfig.URL_PRICEFACTOR,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Toast.makeText(getActivity(),response,Toast.LENGTH_LONG).show();
+                        JSONObject jObj = null;
+                        boolean error = false;
+                        try {
+                            jObj = new JSONObject(response);
+                            error = jObj.getBoolean("error");
+                            if(!error)
+                            {
+                                priceFactor2 = jObj.getInt("price_factor");
+                                delDateFactor2 = jObj.getInt("del_date");
+                                totalPrice = priceSmall*(qtySmall1*priceFactor1 + qtySmall2*priceFactor2) + priceMed*(qtyMed1*priceFactor1 + qtyMed2*priceFactor2) + priceLarge*(qtyLarge2*priceFactor1 + qtyLarge1*priceFactor2);
+                                globalVariable.setTotalPrice(totalPrice);
+                                estimateView.setText("Trip total : Rs" + String.valueOf(totalPrice));
+                                callback.onSuccess("1");
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        callback.onSuccess(String.valueOf(error));
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getActivity(),error.toString(),Toast.LENGTH_LONG).show();
+                        callback.onSuccess(String.valueOf(false));
+                    }
+                }){
+            @Override
+            protected Map<String,String> getParams(){
+                Map<String,String> params = new HashMap<String, String>();
+                params.put(KEY_FROMCITY,globalVariable.getFromCity());
+                params.put(KEY_TOCITY,globalVariable.getToCity());
+                params.put(KEY_OPTION,globalVariable.getDoOption());
+                return params;
+            }
+
+        };
+        requestQueue.add(stringRequest);
+
+    }
     private void setDateTimeField() {
         PicupDate1.setOnClickListener(this);
         PicupDate2.setOnClickListener(this);
@@ -374,27 +557,6 @@ public class TwowayTab extends Fragment implements View.OnClickListener {
 
                 }
 
-                /*monthOfYear += 1;
-                String month = null;
-                String day = null;
-                if(monthOfYear < 10){
-
-                    month = "0" + monthOfYear;
-                }
-                else
-                {
-                    month = String.valueOf(monthOfYear);
-                }
-                if(dayOfMonth < 10){
-
-                    day  = "0" + dayOfMonth ;
-                }
-                else
-                {
-                    day = String.valueOf(dayOfMonth);
-                }
-                PicupDate.setText(year + "-" + month + "-" + day);*/
-                //globalVariable.setPickupDate1(year + "-" + month + "-" + day);
             }
 
         }, newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
