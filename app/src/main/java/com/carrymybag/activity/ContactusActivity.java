@@ -106,7 +106,7 @@ public class ContactusActivity extends android.support.v4.app.Fragment {
 
         final String user = stringName;
         final String email = stringEmail;
-        final String message = stringMsg + "<br>Contact info is : " + stringContact;
+        final String message = stringMsg + "<\n>Contact info is : " + stringContact;
         StringRequest stringRequest = new StringRequest(Request.Method.POST, AppConfig.URL_CONTACTUS,
                 new Response.Listener<String>() {
                     @Override

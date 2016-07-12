@@ -26,12 +26,18 @@
             android:checked="false"
             android:icon="@drawable/table"
             android:title="@string/draft_string" />
+        <item
+            android:id="@+id/settings"
+            android:checked="false"
+            android:icon="@drawable/settings"
+            android:title="Settings"/>
 
         <item
             android:id="@+id/logOut"
             android:checked="false"
             android:icon="@drawable/logout"
             android:title="@string/trash_string" />
+
 
     </group>
 </menu>
