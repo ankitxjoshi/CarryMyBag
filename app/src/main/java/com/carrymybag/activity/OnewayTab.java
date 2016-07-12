@@ -53,11 +53,15 @@ public class OnewayTab extends Fragment implements View.OnClickListener {
 
     double qtySmall = 0, qtyMed = 0, qtyLarge = 0, priceSmall = 0, priceMed = 0, priceLarge = 0,totalPrice = 0;
 
+    int flag = 1;
+
     private Button buttonSubmit, buttonViewPrices;
 
     private RadioGroup option;
 
     private RadioButton one_day, fast, standard;
+
+    Date dateDelivery;
 
     RequestQueue requestQueue;
 
@@ -93,7 +97,7 @@ public class OnewayTab extends Fragment implements View.OnClickListener {
         editTextQtyMed = (EditText) v.findViewById(R.id.qty_medium);
         editTextQtyLarge = (EditText) v.findViewById(R.id.qty_large);
 
-       textPriceSmall = (TextView) v.findViewById(R.id.price_small);
+        textPriceSmall = (TextView) v.findViewById(R.id.price_small);
         textPriceMed = (TextView) v.findViewById(R.id.price_medium);
         textPriceLarge = (TextView) v.findViewById(R.id.price_large);
 
@@ -123,9 +127,15 @@ public class OnewayTab extends Fragment implements View.OnClickListener {
                 globalVariable.setTotalPrice(totalPrice);
                 globalVariable.setTwoWay(false);
                 Toast.makeText(getActivity(), "The total Price is Rs. " + price, Toast.LENGTH_LONG).show();
-                Intent i = new Intent(getContext(),
-                        EnterDetails.class);
-                startActivity(i);
+                if(flag==1) {
+                    Intent i = new Intent(getContext(),
+                            EnterDetails.class);
+                    startActivity(i);
+                }
+                else if(flag==0)
+                {
+                    Toast.makeText(getActivity(),"Pickup Date cannot be less than today's date",Toast.LENGTH_LONG).show();
+                }
 
             }
         });
@@ -269,10 +279,9 @@ public class OnewayTab extends Fragment implements View.OnClickListener {
                             error = jObj.getBoolean("error");
                             if(!error)
                             {
-                                totalPrice = totalPrice/priceFactor;
                                 priceFactor = jObj.getInt("price_factor");
                                 delDateFactor = jObj.getInt("del_date");
-                                totalPrice = totalPrice*priceFactor;
+                                totalPrice = (priceSmall*qtySmall+priceMed*qtyMed+priceLarge*qtyLarge)*priceFactor;
                                 globalVariable.setTotalPrice(totalPrice);
                                 estimateView.setText("Trip total : Rs" + String.valueOf(totalPrice));
                                 callback.onSuccess("1");
@@ -332,6 +341,14 @@ public class OnewayTab extends Fragment implements View.OnClickListener {
                     if(datePickup.compareTo(dateCurrent)<1)
                     {
                         Toast.makeText(getActivity(),"Pickup date should be greater than today's date",Toast.LENGTH_LONG).show();
+                        flag = 0;
+                    }
+                    else
+                    {
+                        flag = 1;
+                        dateDelivery = addDays(datePickup,delDateFactor);
+                        globalVariable.setDeliveryDate1(String .valueOf(df.format(dateDelivery)));
+                        DateOfDelivery.setText(String .valueOf(df.format(dateDelivery)));
                     }
 
                 }
@@ -343,7 +360,6 @@ public class OnewayTab extends Fragment implements View.OnClickListener {
             }
 
         },newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
-
     }
 
     @Override
@@ -481,4 +497,14 @@ public class OnewayTab extends Fragment implements View.OnClickListener {
             }
         },"Large");
     }
+
+    public static Date addDays(Date date, int days)
+    {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        cal.add(Calendar.DATE,days);
+        return cal.getTime();
+    }
+
+
 }

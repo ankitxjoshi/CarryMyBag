@@ -721,7 +721,7 @@ public class PaymentActivity extends Activity
         final String order_id = globalVariable.getRazorId();
         final String totprice = String.valueOf(globalVariable.getTotalPrice());
         final String picDate = globalVariable.getPickupDate1();
-        final String delDate = globalVariable.getPickupDate1();    //Problem Here
+        final String delDate = globalVariable.getDeliveryDate1();    //Problem Here
         final String picAdd = globalVariable.getAddress1Origin();
         final String delAdd = globalVariable.getAddress1Dest();
         StringRequest stringRequest = new StringRequest(Request.Method.POST, AppConfig.URL_StoreOrder,
@@ -774,7 +774,7 @@ public class PaymentActivity extends Activity
         final String order_id = globalVariable.getRazorId();
         final String totprice = String.valueOf(globalVariable.getTotalPrice());
         final String picDate = globalVariable.getPickupDate2();
-        final String delDate = globalVariable.getPickupDate2();    //Problem Here
+        final String delDate = globalVariable.getDeliveryDate2();    //Problem Here
         final String picAdd = globalVariable.getAddress2Origin();
         final String delAdd = globalVariable.getAddress2Dest();
         StringRequest stringRequest = new StringRequest(Request.Method.POST, AppConfig.URL_StoreOrder,

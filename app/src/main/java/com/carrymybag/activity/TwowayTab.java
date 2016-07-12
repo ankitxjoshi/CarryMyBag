@@ -63,7 +63,9 @@ public class TwowayTab extends Fragment implements View.OnClickListener {
     String Pickup1, Pickup2;
     RadioButton radioButton;
 
+    int flag1 = 1, flag2 = 1;
 
+    Date dateDelivery1, dateDelivery2;
 
 
     private DatePickerDialog DatePickerDialog1;
@@ -93,7 +95,7 @@ public class TwowayTab extends Fragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        final View v = inflater.inflate(R.layout.layout_tab_twoway, container, false);
+        final View v = inflater.inflate(R.layout.content_twoway_tab, container, false);
         globalVariable = (AppController) getActivity().getApplicationContext();
 
         editTextQtySmall1 = (EditText) v.findViewById(R.id.qty_small1);
@@ -403,7 +405,7 @@ public class TwowayTab extends Fragment implements View.OnClickListener {
         });
         return v;
     }
-        public void onClick(View v) {
+    public void onClick(View v) {
 
         if(v == PicupDate1) {
             DatePickerDialog1.show();
@@ -415,15 +417,32 @@ public class TwowayTab extends Fragment implements View.OnClickListener {
 
             case R.id.btnSubmit:
                 getPricesAndQuantity1();
-                Intent i = new Intent(getContext(),
-                        EnterDetails.class);
+
+                if(flag1==0)
+                {
+                    Toast.makeText(getActivity(),"Pickup Date for Leg 1 less than today's date",Toast.LENGTH_LONG).show();
+                }
+
+                else if(flag2==0)
+                {
+                    Toast.makeText(getActivity(),"Pickup Date for Leg 2 less than today's date",Toast.LENGTH_LONG).show();
+                }
+
+                if(flag1==1) {
+                    if(flag2==1) {
+                        Intent i = new Intent(getContext(),
+                                EnterDetails.class);
+                        startActivity(i);
+                    }
+                }
+
                 getPricesAndQuantity2();
                 globalVariable.setTwoWay(true);
                 totalPrice = priceSmall*(qtySmall1 + qtySmall2) + priceMed*(qtyMed1 + qtyMed2) + priceLarge*(qtyLarge2 + qtyLarge1);
                 String price = Double.toString(totalPrice);
                 globalVariable.setTotalPrice(totalPrice);
                 Toast.makeText(getActivity(), "The total Price is Rs. " + price, Toast.LENGTH_LONG).show();
-                startActivity(i);
+
                 break;
         }
 
@@ -550,7 +569,14 @@ public class TwowayTab extends Fragment implements View.OnClickListener {
                     datePickup = df.parse(pickupDate);
                     dateCurrent = df.parse(currentDate);
                     if (datePickup.compareTo(dateCurrent) < 1) {
+                        flag1 = 0;
                         Toast.makeText(getActivity(), "Pickup date should be greater than today's date", Toast.LENGTH_LONG).show();
+                    }
+                    else {
+                        flag1 = 1;
+                        dateDelivery1 = addDays(datePickup,delDateFactor1);
+                        globalVariable.setDeliveryDate1(String .valueOf(df.format(dateDelivery1)));
+                        DateOfDelivery1.setText(String .valueOf(df.format(dateDelivery1)));
                     }
 
                 } catch (ParseException e) {
@@ -577,7 +603,15 @@ public class TwowayTab extends Fragment implements View.OnClickListener {
                     datePickup = df.parse(pickupDate);
                     dateCurrent2 = df.parse(currentDate2);
                     if (datePickup.compareTo(dateCurrent2) < 1) {
+                        flag2 = 0;
                         Toast.makeText(getActivity(), "Pickup date should be greater than today's date", Toast.LENGTH_LONG).show();
+                    }
+                    else
+                    {
+                        flag2 = 1;
+                        dateDelivery2 = addDays(datePickup,delDateFactor2);
+                        globalVariable.setDeliveryDate2(String .valueOf(df.format(dateDelivery2)));
+                        DateOfDelivery2.setText(String .valueOf(df.format(dateDelivery2)));
                     }
 
                 } catch (ParseException e) {
@@ -771,5 +805,13 @@ public class TwowayTab extends Fragment implements View.OnClickListener {
                 textPriceLarge2.setText(result);
             }
         },"Large");
+    }
+
+    public static Date addDays(Date date, int days)
+    {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        cal.add(Calendar.DATE,days);
+        return cal.getTime();
     }
 }
