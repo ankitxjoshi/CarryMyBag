@@ -118,7 +118,6 @@ public class EnterDetails extends AppCompatActivity implements OnItemSelectedLis
         globalVariable = (AppController) getApplicationContext();
 
         Intent intent = getIntent();
-//        isTwoWay = intent.getBooleanExtra("whichWay",false);
         isTwoWay = globalVariable.isTwoWay();
 
         Citites = new ArrayList<>();
@@ -739,7 +738,7 @@ public class EnterDetails extends AppCompatActivity implements OnItemSelectedLis
                         StateDest2.setText(stateDest2);
                     }
                 }
-                Intent intent = new Intent(EnterDetails.this, PaymentActivity.class);
+                Intent intent = new Intent(EnterDetails.this, ConfirmPage.class);
                 startActivity(intent);
             }
         });
