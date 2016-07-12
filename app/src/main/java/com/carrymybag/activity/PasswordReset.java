@@ -103,10 +103,10 @@ public class PasswordReset extends Activity {
 
                     try {
                         JSONObject jObj = new JSONObject(response);
-                        boolean error = jObj.getBoolean("error");
+                        int error = jObj.getInt("error");
 
                         // Check for error node in json
-                        if (!error) {
+                        if (error==0) {
 
                             alert.setText("");
                             String res = jObj.getString(KEY_SUCCESS);
