@@ -32,8 +32,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -345,10 +347,34 @@ public class TwowayTab extends Fragment implements View.OnClickListener {
         PicupDate1.setOnClickListener(this);
         PicupDate2.setOnClickListener(this);
 
+
         Calendar newCalendar = Calendar.getInstance();
+
+        final SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        final String currentDate = df.format(newCalendar.getTime());
+        PicupDate1.setText(currentDate);
+
         DatePickerDialog1 = new DatePickerDialog(getContext(), new android.app.DatePickerDialog.OnDateSetListener() {
 
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                Calendar newDate = Calendar.getInstance();
+                newDate.set(year, monthOfYear, dayOfMonth);
+                String pickupDate = df.format(newDate.getTime());
+                PicupDate1.setText(pickupDate);
+                Date datePickup;
+                Date dateCurrent;
+                try {
+                    datePickup = df.parse(pickupDate);
+                    dateCurrent = df.parse(currentDate);
+                    if (datePickup.compareTo(dateCurrent) < 1) {
+                        Toast.makeText(getActivity(), "Pickup date should be greater than today's date", Toast.LENGTH_LONG).show();
+                    }
+
+                } catch (ParseException e) {
+
+                }
+
+                /*monthOfYear += 1;
                 String month = null;
                 String day = null;
                 if(monthOfYear < 10){
@@ -367,39 +393,38 @@ public class TwowayTab extends Fragment implements View.OnClickListener {
                 {
                     day = String.valueOf(dayOfMonth);
                 }
-                PicupDate1.setText(year + "-" + month + "-" + day);
-                globalVariable.setPickupDate1(year + "-" + month + "-" + day);
+                PicupDate.setText(year + "-" + month + "-" + day);*/
+                //globalVariable.setPickupDate1(year + "-" + month + "-" + day);
             }
 
+        }, newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
 
-        },newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
+        final String currentDate2 = df.format(newCalendar.getTime());
+        PicupDate2.setText(currentDate2);
 
-        DatePickerDialog2 = new DatePickerDialog(getContext(), new DatePickerDialog.OnDateSetListener() {
+        DatePickerDialog2 = new DatePickerDialog(getContext(), new android.app.DatePickerDialog.OnDateSetListener() {
 
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                String month = null;
-                String day = null;
-                if(monthOfYear < 10){
+                Calendar newDate = Calendar.getInstance();
+                newDate.set(year, monthOfYear, dayOfMonth);
+                String pickupDate = df.format(newDate.getTime());
+                PicupDate2.setText(pickupDate);
+                Date datePickup;
+                Date dateCurrent2;
+                try {
+                    datePickup = df.parse(pickupDate);
+                    dateCurrent2 = df.parse(currentDate2);
+                    if (datePickup.compareTo(dateCurrent2) < 1) {
+                        Toast.makeText(getActivity(), "Pickup date should be greater than today's date", Toast.LENGTH_LONG).show();
+                    }
 
-                    month = "0" + monthOfYear;
-                }
-                else
-                {
-                    month = String.valueOf(monthOfYear);
-                }
-                if(dayOfMonth < 10){
+                } catch (ParseException e) {
 
-                    day  = "0" + dayOfMonth ;
                 }
-                else
-                {
-                    day = String.valueOf(dayOfMonth);
-                }
-                PicupDate2.setText(year + "-" + month + "-" + day);
-                globalVariable.setPickupDate2(year + "-" + month + "-" + day);
+
             }
 
-        },newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
+        }, newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
 
     }
 

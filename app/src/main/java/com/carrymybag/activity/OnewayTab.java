@@ -240,33 +240,39 @@ public class OnewayTab extends Fragment implements View.OnClickListener {
 
 
     private void setDateTimeField() {
+
         PicupDate.setOnClickListener(this);
 
 
         Calendar newCalendar = Calendar.getInstance();
+
+        final SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        final String currentDate = df.format(newCalendar.getTime());
+        PicupDate.setText(currentDate);
+
         DatePickerDialog = new DatePickerDialog(getContext(), new android.app.DatePickerDialog.OnDateSetListener() {
 
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                String month = null;
-                String day = null;
-                if(monthOfYear < 10){
+                Calendar newDate = Calendar.getInstance();
+                newDate.set(year,monthOfYear,dayOfMonth);
+                String pickupDate = df.format(newDate.getTime());
+                PicupDate.setText(pickupDate);
+                Date datePickup;
+                Date dateCurrent;
+                try {
+                    datePickup = df.parse(pickupDate);
+                    dateCurrent = df.parse(currentDate);
+                    if(datePickup.compareTo(dateCurrent)<1)
+                    {
+                        Toast.makeText(getActivity(),"Pickup date should be greater than today's date",Toast.LENGTH_LONG).show();
+                    }
 
-                    month = "0" + monthOfYear;
                 }
-                else
+                catch (ParseException e)
                 {
-                    month = String.valueOf(monthOfYear);
-                }
-                if(dayOfMonth < 10){
 
-                    day  = "0" + dayOfMonth ;
                 }
-                else
-                {
-                    day = String.valueOf(dayOfMonth);
-                }
-                PicupDate.setText(year + "-" + month + "-" + day);
-                globalVariable.setPickupDate1(year + "-" + month + "-" + day);
+
             }
 
         },newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
