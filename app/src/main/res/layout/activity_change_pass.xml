@@ -43,7 +43,7 @@
         android:layout_alignParentLeft="true"/>
 
     <Button
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
         android:layout_marginLeft="15dp"
         android:layout_width="150dp"
         android:layout_height="40dp"
@@ -51,7 +51,7 @@
         android:textColor="#FFFFFF"
         android:background="@color/Primary"
         android:id="@+id/btchangepass"
-        android:layout_below="@+id/newpass"
+        android:layout_below="@+id/alertpass"
         android:layout_alignParentLeft="true"
         android:textSize="13dp"/>
 
@@ -65,7 +65,7 @@
         android:textColor="#000000"/>
 
     <Button
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
         android:layout_marginRight="15dp"
         android:layout_width="150dp"
         android:layout_height="40dp"
@@ -73,7 +73,7 @@
         android:id="@+id/btcancel"
         android:background="@color/Primary"
         android:textColor="#FFFFFF"
-        android:layout_below="@+id/newpass"
+        android:layout_below="@+id/alertpass"
         android:layout_alignParentRight="true"
         android:textSize="13dp"/>
 </RelativeLayout>
