@@ -98,9 +98,17 @@ public class FirstFragment extends android.support.v4.app.Fragment {
         bookNowBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(),
-                        BookDetails.class);
-                startActivity(intent);
+                if(fromCityTo.getText().toString()==null || fromCityAuto.getText().toString()==null || !flagFrom || !flagTo)
+                {
+                    Toast.makeText(getContext(),"Please fill the cities to proceed",Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    Intent intent = new Intent(getActivity(),
+                            BookDetails.class);
+                    startActivity(intent);
+                }
+
             }
         });
         fromCityAuto.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -216,11 +224,15 @@ public class FirstFragment extends android.support.v4.app.Fragment {
                             } else {
                                 // Error in login. Get the error message
                                 String errorMsg = jObj.getString("error_msg");
+                                flagTo = false;
+                                flagFrom = false;
                                 estimatePrice.setText("We don't offer service across these cities");
                             }
                         } catch (JSONException e) {
                             // JSON error
                             e.printStackTrace();
+                            flagTo = false;
+                            flagFrom = false;
                             estimatePrice.setText("We don't offer service across these cities");
                         }
                     }
