@@ -76,9 +76,9 @@ public class TwowayTab extends Fragment implements View.OnClickListener {
 
     RequestQueue requestQueue;
     private  int priceFactor1 = 1;
-    private int delDateFactor1 = 0;
+    private int delDateFactor1 = 5;
     private  int priceFactor2 = 1;
-    private int delDateFactor2 = 0;
+    private int delDateFactor2 = 5;
 
     public static final String KEY_FROMCITY = "from_city";
     public static final String KEY_TOCITY = "to_city";

@@ -81,7 +81,7 @@ public class OnewayTab extends Fragment implements View.OnClickListener {
     public AppController globalVariable;
     RadioButton radioButton;
     private  int priceFactor = 1;
-    private int delDateFactor = 0;
+    private int delDateFactor = 5;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
