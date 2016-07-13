@@ -35,15 +35,33 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.content.Intent;
+import android.graphics.Typeface;
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.LinearLayout.LayoutParams;
+import android.widget.Spinner;
+import android.widget.TextView;
+
+import java.util.ArrayList;
+
 public class EnterDetails extends AppCompatActivity implements OnItemSelectedListener {
 
     public EditText ContactOrigin, Address1Origin, Address2Origin, PinCodeOrigin;
     public EditText ContactDest, Address1Dest, Address2Dest, PinCodeDest;
-    public TextView StateOrigin, StateDest;
+    public EditText StateOrigin, StateDest;
 
     public EditText ContactOrigin2, Address1Origin2, Address2Origin2, PinCodeOrigin2;
     public EditText ContactDest2, Address1Dest2, Address2Dest2, PinCodeDest2;
-    public TextView StateOrigin2, StateDest2;
+    public EditText StateOrigin2, StateDest2;
 
     public Button btnSubmit;
 
@@ -108,17 +126,17 @@ public class EnterDetails extends AppCompatActivity implements OnItemSelectedLis
     public static ArrayList<String> Citites;
     public static ArrayList<String> BagType;
 
-    public AppController globalVariable;
+       public AppController globalVariable;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setContentView(R.layout.activity_enter_details);
-        globalVariable = (AppController) getApplicationContext();
+              globalVariable = (AppController) getApplicationContext();
 
         Intent intent = getIntent();
-        isTwoWay = globalVariable.isTwoWay();
+              isTwoWay = globalVariable.isTwoWay();
 
         Citites = new ArrayList<>();
         Citites.add("Delhi");
@@ -263,13 +281,13 @@ public class EnterDetails extends AppCompatActivity implements OnItemSelectedLis
         Address1Origin = (EditText) findViewById(R.id.address1_origin);
         Address2Origin = (EditText) findViewById(R.id.address2_origin);
         PinCodeOrigin = (EditText) findViewById(R.id.pin_code_origin);
-        StateOrigin = (TextView) findViewById(R.id.state_origin);
+        StateOrigin = (EditText) findViewById(R.id.state_origin);
 
         ContactDest = (EditText) findViewById(R.id.contact_dest);
         Address1Dest = (EditText) findViewById(R.id.address1_dest);
         Address2Dest = (EditText) findViewById(R.id.address2_dest);
         PinCodeDest = (EditText) findViewById(R.id.pin_code_dest);
-        StateDest = (TextView) findViewById(R.id.state_dest);
+        StateDest = (EditText) findViewById(R.id.state_dest);
 
         if (isTwoWay == false) {
             LinearLayout LayoutLeg2 = (LinearLayout) findViewById(R.id.layout_leg2);
@@ -355,13 +373,13 @@ public class EnterDetails extends AppCompatActivity implements OnItemSelectedLis
             Address1Origin2 = (EditText) findViewById(R.id.address1_origin2);
             Address2Origin2 = (EditText) findViewById(R.id.address2_origin2);
             PinCodeOrigin2 = (EditText) findViewById(R.id.pin_code_origin2);
-            StateOrigin2 = (TextView) findViewById(R.id.state_origin2);
+            StateOrigin2 = (EditText) findViewById(R.id.state_origin2);
 
             ContactDest2 = (EditText) findViewById(R.id.contact_dest2);
             Address1Dest2 = (EditText) findViewById(R.id.address1_dest2);
             Address2Dest2 = (EditText) findViewById(R.id.address2_dest2);
             PinCodeDest2 = (EditText) findViewById(R.id.pin_code_dest2);
-            StateDest2 = (TextView) findViewById(R.id.state_dest2);
+            StateDest2 = (EditText) findViewById(R.id.state_dest2);
         }
 
         for (i = 0; i < NumSmallBagsOrigin; i++) {
@@ -401,7 +419,7 @@ public class EnterDetails extends AppCompatActivity implements OnItemSelectedLis
 
                 }
 
-                globalVariable.setStringSmallBagTypeO(StringSmallBagTypeO);
+                    globalVariable.setStringSmallBagTypeO(StringSmallBagTypeO);
 
                 for (i = 0; i < NumMediumBagsOrigin; i++) {
                     Spinner mySpinner = TypeMediumBagOrigin[i];
@@ -409,14 +427,14 @@ public class EnterDetails extends AppCompatActivity implements OnItemSelectedLis
                     StringMediumBagTypeO.add(text);
                 }
 
-                globalVariable.setStringMediumBagTypeO(StringMediumBagTypeO);
+                    globalVariable.setStringMediumBagTypeO(StringMediumBagTypeO);
 
                 for (i = 0; i < NumLargeBagsOrigin; i++) {
                     Spinner mySpinner = TypeLargeBagOrigin[i];
                     String text = mySpinner.getSelectedItem().toString();
                     StringLargeBagTypeO.add(text);
                 }
-                globalVariable.setStringLargeBagTypeO(StringLargeBagTypeO);
+                    globalVariable.setStringLargeBagTypeO(StringLargeBagTypeO);
 
                 for (i = 0; i < NumSmallBagsDest; i++) {
 
@@ -425,21 +443,21 @@ public class EnterDetails extends AppCompatActivity implements OnItemSelectedLis
                     StringSmallBagTypeD.add(text);
                 }
 
-                globalVariable.setStringSmallBagTypeD(StringSmallBagTypeD);
+                    globalVariable.setStringSmallBagTypeD(StringSmallBagTypeD);
 
                 for (i = 0; i < NumMediumBagsDest; i++) {
                     Spinner mySpinner = TypeMediumBagDest[i];
                     String text = mySpinner.getSelectedItem().toString();
                     StringMediumBagTypeD.add(text);
                 }
-                globalVariable.setStringMediumBagTypeD(StringMediumBagTypeD);
+                   globalVariable.setStringMediumBagTypeD(StringMediumBagTypeD);
 
                 for (i = 0; i < NumLargeBagsDest; i++) {
                     Spinner mySpinner = TypeLargeBagDest[i];
                     String text = mySpinner.getSelectedItem().toString();
                     StringLargeBagTypeD.add(text);
                 }
-                globalVariable.setStringLargeBagTypeD(StringLargeBagTypeD);
+                   globalVariable.setStringLargeBagTypeD(StringLargeBagTypeD);
 
 
                 contactOrigin = ContactOrigin.getText().toString();
@@ -450,7 +468,7 @@ public class EnterDetails extends AppCompatActivity implements OnItemSelectedLis
                     return;
                 }
 
-                globalVariable.setContactOrigin(contactOrigin);
+                    globalVariable.setContactOrigin(contactOrigin);
 
                 address1Origin = Address1Origin.getText().toString();
 
@@ -459,7 +477,7 @@ public class EnterDetails extends AppCompatActivity implements OnItemSelectedLis
                     Address1Origin.setError("Address can not be empty");
                     return;
                 }
-                globalVariable.setAddress1Origin(address1Origin);
+                    globalVariable.setAddress1Origin(address1Origin);
 
                 address2Origin = Address2Origin.getText().toString();
 
@@ -468,7 +486,7 @@ public class EnterDetails extends AppCompatActivity implements OnItemSelectedLis
                     Address2Origin.setError("Address can not be empty");
                     return;
                 }
-                globalVariable.setAddress2Origin(address2Origin);
+                    globalVariable.setAddress2Origin(address2Origin);
 
                 pinOrigin = PinCodeOrigin.getText().toString();
 
@@ -478,7 +496,7 @@ public class EnterDetails extends AppCompatActivity implements OnItemSelectedLis
                     return;
                 }
 
-                globalVariable.setPinOrigin(pinOrigin);
+                    globalVariable.setPinOrigin(pinOrigin);
 
                 contactDest = ContactDest.getText().toString();
 
@@ -488,7 +506,7 @@ public class EnterDetails extends AppCompatActivity implements OnItemSelectedLis
                     return;
                 }
 
-                globalVariable.setContactDest(contactDest);
+                    globalVariable.setContactDest(contactDest);
 
                 address1Dest = Address1Dest.getText().toString();
 
@@ -498,7 +516,7 @@ public class EnterDetails extends AppCompatActivity implements OnItemSelectedLis
                     return;
                 }
 
-                globalVariable.setAddress1Dest(address1Dest);
+                    globalVariable.setAddress1Dest(address1Dest);
 
                 address2Dest = Address2Dest.getText().toString();
 
@@ -508,7 +526,7 @@ public class EnterDetails extends AppCompatActivity implements OnItemSelectedLis
                     return;
                 }
 
-                globalVariable.setAddress2Dest(address2Dest);
+                    globalVariable.setAddress2Dest(address2Dest);
 
                 pinDest = PinCodeDest.getText().toString();
 
@@ -518,7 +536,7 @@ public class EnterDetails extends AppCompatActivity implements OnItemSelectedLis
                     return;
                 }
 
-                globalVariable.setPinDest(pinDest);
+                    globalVariable.setPinDest(pinDest);
 
                 for (i = 0; i < NumSmallBagsOrigin; i++) {
                     colorSmallOrigin[i] = ColorSmallBagOrigin[i].getText().toString();
@@ -527,7 +545,7 @@ public class EnterDetails extends AppCompatActivity implements OnItemSelectedLis
                         return;
                     }
                 }
-                globalVariable.setColorSmallOrigin(colorSmallOrigin);
+                    globalVariable.setColorSmallOrigin(colorSmallOrigin);
 
                 for (i = 0; i < NumMediumBagsOrigin; i++) {
                     colorMediumOrigin[i] = ColorMediumBagOrigin[i].getText().toString();
@@ -536,7 +554,7 @@ public class EnterDetails extends AppCompatActivity implements OnItemSelectedLis
                         return;
                     }
                 }
-                globalVariable.setColorMediumOrigin(colorMediumOrigin);
+                    globalVariable.setColorMediumOrigin(colorMediumOrigin);
 
                 for (i = 0; i < NumLargeBagsOrigin; i++) {
                     colorLargeOrigin[i] = ColorLargeBagOrigin[i].getText().toString();
@@ -556,37 +574,10 @@ public class EnterDetails extends AppCompatActivity implements OnItemSelectedLis
                 globalVariable.setCityOrigin(cityOrigin);
                 globalVariable.setCityDest(cityDest);
 
-                switch (cityOrigin) {
-                    case "Delhi":
-                        stateOrigin = "Delhi";
-                        break;
-                    case "Mumbai":
-                        stateOrigin = "Maharashtra";
-                        break;
-                    case "Chennai":
-                        stateOrigin = "Tamil Nadu";
-                        break;
-                    case "Bangalore":
-                        stateOrigin = "Karnataka";
-                        break;
-                }
-                StateOrigin.setText(stateOrigin);
-
-                switch (cityDest) {
-                    case "Delhi":
-                        stateDest = "Delhi";
-                        break;
-                    case "Mumbai":
-                        stateDest = "Maharashtra";
-                        break;
-                    case "Chennai":
-                        stateDest = "Tamil Nadu";
-                        break;
-                    case "Bangalore":
-                        stateDest = "Karnataka";
-                        break;
-                }
-                StateDest.setText(stateDest);
+                stateOrigin = StateOrigin.getText().toString();
+                stateDest = StateDest.getText().toString();
+                globalVariable.setStateOrigin(stateOrigin);
+                globalVariable.setStateDest(stateDest);
 
                 if (isTwoWay == true) {
                     contactOrigin2 = ContactOrigin2.getText().toString();
@@ -597,7 +588,7 @@ public class EnterDetails extends AppCompatActivity implements OnItemSelectedLis
                         return;
                     }
 
-                    globalVariable.setContactOrigin2(contactOrigin2);
+                      globalVariable.setContactOrigin2(contactOrigin2);
 
                     address1Origin2 = Address1Origin2.getText().toString();
 
@@ -615,7 +606,7 @@ public class EnterDetails extends AppCompatActivity implements OnItemSelectedLis
                         Address2Origin2.setError("Address can not be empty");
                         return;
                     }
-                    globalVariable.setAddress2Origin2(address2Origin2);
+                       globalVariable.setAddress2Origin2(address2Origin2);
 
                     pinOrigin2 = PinCodeOrigin2.getText().toString();
 
@@ -625,7 +616,7 @@ public class EnterDetails extends AppCompatActivity implements OnItemSelectedLis
                         return;
                     }
 
-                    globalVariable.setPinOrigin2(pinOrigin2);
+                         globalVariable.setPinOrigin2(pinOrigin2);
 
                     contactDest2 = ContactDest2.getText().toString();
 
@@ -635,7 +626,7 @@ public class EnterDetails extends AppCompatActivity implements OnItemSelectedLis
                         return;
                     }
 
-                    globalVariable.setContactDest2(contactDest2);
+                       globalVariable.setContactDest2(contactDest2);
 
                     address1Dest2 = Address1Dest2.getText().toString();
 
@@ -645,7 +636,7 @@ public class EnterDetails extends AppCompatActivity implements OnItemSelectedLis
                         return;
                     }
 
-                    globalVariable.setAddressDest2(address1Dest2);
+                        globalVariable.setAddressDest2(address1Dest2);
 
                     address2Dest2 = Address2Dest2.getText().toString();
 
@@ -655,7 +646,7 @@ public class EnterDetails extends AppCompatActivity implements OnItemSelectedLis
                         return;
                     }
 
-                    globalVariable.setAddress2Dest2(address2Dest2);
+                      globalVariable.setAddress2Dest2(address2Dest2);
 
                     pinDest2 = PinCodeDest2.getText().toString();
 
@@ -665,7 +656,7 @@ public class EnterDetails extends AppCompatActivity implements OnItemSelectedLis
                         return;
                     }
 
-                    globalVariable.setPinDest2(pinDest2);
+                        globalVariable.setPinDest2(pinDest2);
 
                     for (i = 0; i < NumSmallBagsDest; i++) {
                         colorSmallDest[i] = ColorSmallBagDest[i].getText().toString();
@@ -674,7 +665,7 @@ public class EnterDetails extends AppCompatActivity implements OnItemSelectedLis
                             return;
                         }
                     }
-                    globalVariable.setColorSmallDest(colorSmallDest);
+                         globalVariable.setColorSmallDest(colorSmallDest);
 
                     for (i = 0; i < NumMediumBagsDest; i++) {
                         colorMediumDest[i] = ColorMediumBagDest[i].getText().toString();
@@ -682,7 +673,7 @@ public class EnterDetails extends AppCompatActivity implements OnItemSelectedLis
                             ColorMediumBagDest[i].setError("Bag color can not be empty");
                             return;
                         }
-                        globalVariable.setColorMediumDest(colorMediumDest);
+                                globalVariable.setColorMediumDest(colorMediumDest);
 
                         for (i = 0; i < NumLargeBagsDest; i++) {
                             colorLargeDest[i] = ColorLargeBagDest[i].getText().toString();
@@ -691,7 +682,7 @@ public class EnterDetails extends AppCompatActivity implements OnItemSelectedLis
                                 return;
                             }
                         }
-                        globalVariable.setColorLargeDest(colorLargeDest);
+                                 globalVariable.setColorLargeDest(colorLargeDest);
 
                         addrTypeOrigin2 = AddressTypeOrigin2.getSelectedItem().toString();
                         addrTypeDest2 = AddressTypeDest2.getSelectedItem().toString();
@@ -705,37 +696,11 @@ public class EnterDetails extends AppCompatActivity implements OnItemSelectedLis
                         globalVariable.setCityDest2(cityDest2);
 
 
-                        switch (cityOrigin2) {
-                            case "Delhi":
-                                stateOrigin2 = "Delhi";
-                                break;
-                            case "Mumbai":
-                                stateOrigin2 = "Maharashtra";
-                                break;
-                            case "Chennai":
-                                stateOrigin2 = "Tamil Nadu";
-                                break;
-                            case "Bangalore":
-                                stateOrigin2 = "Karnataka";
-                                break;
-                        }
-                        StateOrigin2.setText(stateOrigin2);
+                        stateOrigin2 = StateOrigin2.getText().toString();
+                        stateDest2 = StateDest2.getText().toString();
+                        globalVariable.setStateOrigin2(stateOrigin2);
+                        globalVariable.setStateDest2(stateDest2);
 
-                        switch (cityDest) {
-                            case "Delhi":
-                                stateDest2 = "Delhi";
-                                break;
-                            case "Mumbai":
-                                stateDest2 = "Maharashtra";
-                                break;
-                            case "Chennai":
-                                stateDest2 = "Tamil Nadu";
-                                break;
-                            case "Bangalore":
-                                stateDest2 = "Karnataka";
-                                break;
-                        }
-                        StateDest2.setText(stateDest2);
                     }
                 }
                 Intent intent = new Intent(EnterDetails.this, ConfirmPage.class);

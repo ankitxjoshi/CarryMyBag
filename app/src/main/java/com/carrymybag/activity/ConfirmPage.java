@@ -79,11 +79,11 @@ public class ConfirmPage extends AppCompatActivity {
         nameTraveller.setText(LoginActivity.User_name);
         contactTraveller.setText(globalVariable.getContactOrigin());
 
-        originAddress1.setText(globalVariable.getAddress1Origin());
-        destAddress1.setText(globalVariable.getAddress1Dest());
+        originAddress1.setText(globalVariable.getAddress1Origin() +" " +globalVariable.getAddress2Origin());
+        destAddress1.setText(globalVariable.getAddress1Dest() + " " + globalVariable.getAddress2Dest());
 
-        originState1.setText(stateOrigin1);
-        destState1.setText(stateDest1);
+        originState1.setText(globalVariable.getStateOrigin());
+        destState1.setText(globalVariable.getStateDest());
 
         originPin1.setText(globalVariable.getPinOrigin());
         destPin1.setText(globalVariable.getPinDest());
@@ -109,11 +109,11 @@ public class ConfirmPage extends AppCompatActivity {
             pickupDate2 = (TextView)findViewById(R.id.text_date_pickup2);
             deliveryDate2 = (TextView)findViewById(R.id.text_date_delivery2);
 
-            originAddress2.setText(globalVariable.getAddressOrigin2());
-            destAddress2.setText(globalVariable.getAddressDest2());
+            originAddress2.setText(globalVariable.getAddressOrigin2() + " " + globalVariable.getAddress2Origin2());
+            destAddress2.setText(globalVariable.getAddressDest2() + " " + globalVariable.getAddress2Dest2());
 
-            originState2.setText(stateOrigin2);
-            destState2.setText(stateDest2);
+            originState2.setText(globalVariable.getStateOrigin2());
+            destState2.setText(globalVariable.getStateDest2());
 
             originPin2.setText(globalVariable.getPinOrigin2());
             destPin2.setText(globalVariable.getPinDest2());

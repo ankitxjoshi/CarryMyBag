@@ -494,45 +494,45 @@ public class AppController extends Application {
 		cityDest2 = city;
 	}
 
-//    public String getStateOrigin()
-//    {
-//        return stateOrigin;
-//    }
-//
-//    public void setStateOrigin(String state)
-//    {
-//        stateOrigin = state;
-//    }
-//
-//    public String getStateDest()
-//    {
-//        return stateDest;
-//    }
-//
-//    public void setStateDest(String state)
-//    {
-//        stateDest = state;
-//    }
-//
-//    public String getStateOrigin2()
-//    {
-//        return stateOrigin2;
-//    }
-//
-//    public void setStateOrigin2(String state)
-//    {
-//        stateOrigin2 = state;
-//    }
-//
-//    public String getStateDest2()
-//    {
-//        return stateDest2;
-//    }
-//
-//    public void setStateDest2(String state)
-//    {
-//        stateDest2 = state;
-//    }
+    public String getStateOrigin()
+    {
+        return stateOrigin;
+    }
+
+    public void setStateOrigin(String state)
+    {
+        stateOrigin = state;
+    }
+
+    public String getStateDest()
+    {
+        return stateDest;
+    }
+
+    public void setStateDest(String state)
+    {
+        stateDest = state;
+    }
+
+    public String getStateOrigin2()
+    {
+        return stateOrigin2;
+    }
+
+    public void setStateOrigin2(String state)
+    {
+        stateOrigin2 = state;
+    }
+
+    public String getStateDest2()
+    {
+        return stateDest2;
+    }
+
+    public void setStateDest2(String state)
+    {
+        stateDest2 = state;
+    }
 
 	public String getAddrTypeOrigin()
 	{
