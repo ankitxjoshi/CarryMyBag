@@ -42,16 +42,16 @@
   <color name="bg_screen4">#c873f4</color>
 
   <!-- dots inactive colors -->
-  <color name="dot_dark_screen1">#f64c73</color>
-   <color name="dot_dark_screen2">#f64c73</color>
-  <color name="dot_dark_screen3">#f64c73</color>
-  <color name="dot_dark_screen4">#f64c73</color>
+  <color name="dot_dark_screen1">#1f373b</color>
+   <color name="dot_dark_screen2">#1f373b</color>
+  <color name="dot_dark_screen3">#1f373b</color>
+  <color name="dot_dark_screen4">#1f373b</color>
 
  <!-- dots active colors -->
-  <color name="dot_light_screen1">#f98da5</color>
-  <color name="dot_light_screen2">#f98da5</color>
-  <color name="dot_light_screen3">#f98da5</color>
-  <color name="dot_light_screen4">#f98da5</color>
+  <color name="dot_light_screen1">#195865</color>
+  <color name="dot_light_screen2">#195865</color>
+  <color name="dot_light_screen3">#195865</color>
+  <color name="dot_light_screen4">#195865</color>
 
 
  <array name="array_dot_active">
