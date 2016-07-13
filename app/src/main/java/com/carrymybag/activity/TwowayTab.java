@@ -64,6 +64,7 @@ public class TwowayTab extends Fragment implements View.OnClickListener {
     RadioButton radioButton;
 
     int flag1 = 1, flag2 = 1;
+    SimpleDateFormat df;
 
     Date dateDelivery1, dateDelivery2;
 
@@ -71,6 +72,7 @@ public class TwowayTab extends Fragment implements View.OnClickListener {
     private DatePickerDialog DatePickerDialog1;
     private DatePickerDialog DatePickerDialog2;
     private SimpleDateFormat dateFormatter;
+    Date datePickup;
 
     public AppController globalVariable;
 
@@ -97,6 +99,7 @@ public class TwowayTab extends Fragment implements View.OnClickListener {
         // Inflate the layout for this fragment
         final View v = inflater.inflate(R.layout.content_twoway_tab, container, false);
         globalVariable = (AppController) getActivity().getApplicationContext();
+        df = new SimpleDateFormat("yyyy-MM-dd");
 
         editTextQtySmall1 = (EditText) v.findViewById(R.id.qty_small1);
         editTextQtyMed1 = (EditText) v.findViewById(R.id.qty_medium1);
@@ -329,13 +332,16 @@ public class TwowayTab extends Fragment implements View.OnClickListener {
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 int selectedId= radioGroup1.getCheckedRadioButtonId();
                 radioButton=(RadioButton)v.findViewById(selectedId);
-                Toast.makeText(getActivity(),radioButton.getText(),Toast.LENGTH_SHORT).show();
                 if(selectedId==R.id.radio_1day1)
                 {
                     globalVariable.setdoOption("Single");
                     modifyPrice1(new VolleyCallback() {
                         @Override
                         public void onSuccess(String result) {
+
+                            dateDelivery1 = addDays(datePickup,delDateFactor1);
+                            globalVariable.setDeliveryDate1(String .valueOf(df.format(dateDelivery1)));
+                            DateOfDelivery1.setText(String .valueOf(df.format(dateDelivery1)));
 
                         }
                     });
@@ -347,6 +353,10 @@ public class TwowayTab extends Fragment implements View.OnClickListener {
                         @Override
                         public void onSuccess(String result) {
 
+                            dateDelivery1 = addDays(datePickup,delDateFactor1);
+                            globalVariable.setDeliveryDate1(String .valueOf(df.format(dateDelivery1)));
+                            DateOfDelivery1.setText(String .valueOf(df.format(dateDelivery1)));
+
                         }
                     });
                 }
@@ -356,6 +366,10 @@ public class TwowayTab extends Fragment implements View.OnClickListener {
                     modifyPrice1(new VolleyCallback() {
                         @Override
                         public void onSuccess(String result) {
+
+                            dateDelivery1 = addDays(datePickup,delDateFactor1);
+                            globalVariable.setDeliveryDate1(String .valueOf(df.format(dateDelivery1)));
+                            DateOfDelivery1.setText(String .valueOf(df.format(dateDelivery1)));
 
                         }
                     });
@@ -370,13 +384,16 @@ public class TwowayTab extends Fragment implements View.OnClickListener {
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 int selectedId= radioGroup2.getCheckedRadioButtonId();
                 radioButton=(RadioButton)v.findViewById(selectedId);
-                Toast.makeText(getActivity(),radioButton.getText(),Toast.LENGTH_SHORT).show();
                 if(selectedId==R.id.radio_1day2)
                 {
                     globalVariable.setdoOption("Single");
                     modifyPrice2(new VolleyCallback() {
                         @Override
                         public void onSuccess(String result) {
+
+                            dateDelivery2 = addDays(datePickup,delDateFactor2);
+                            globalVariable.setDeliveryDate2(String .valueOf(df.format(dateDelivery2)));
+                            DateOfDelivery2.setText(String .valueOf(df.format(dateDelivery2)));
 
                         }
                     });
@@ -388,6 +405,10 @@ public class TwowayTab extends Fragment implements View.OnClickListener {
                         @Override
                         public void onSuccess(String result) {
 
+                            dateDelivery2 = addDays(datePickup,delDateFactor2);
+                            globalVariable.setDeliveryDate2(String .valueOf(df.format(dateDelivery2)));
+                            DateOfDelivery2.setText(String .valueOf(df.format(dateDelivery2)));
+
                         }
                     });
                 }
@@ -397,6 +418,10 @@ public class TwowayTab extends Fragment implements View.OnClickListener {
                     modifyPrice2(new VolleyCallback() {
                         @Override
                         public void onSuccess(String result) {
+
+                            dateDelivery2 = addDays(datePickup,delDateFactor2);
+                            globalVariable.setDeliveryDate2(String .valueOf(df.format(dateDelivery2)));
+                            DateOfDelivery2.setText(String .valueOf(df.format(dateDelivery2)));
 
                         }
                     });
@@ -456,7 +481,6 @@ public class TwowayTab extends Fragment implements View.OnClickListener {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        Toast.makeText(getActivity(),response,Toast.LENGTH_LONG).show();
                         JSONObject jObj = null;
                         boolean error = false;
                         try {
@@ -480,7 +504,6 @@ public class TwowayTab extends Fragment implements View.OnClickListener {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(getActivity(),error.toString(),Toast.LENGTH_LONG).show();
                         callback.onSuccess(String.valueOf(false));
                     }
                 }){
@@ -504,7 +527,6 @@ public class TwowayTab extends Fragment implements View.OnClickListener {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        Toast.makeText(getActivity(),response,Toast.LENGTH_LONG).show();
                         JSONObject jObj = null;
                         boolean error = false;
                         try {
@@ -528,7 +550,6 @@ public class TwowayTab extends Fragment implements View.OnClickListener {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(getActivity(),error.toString(),Toast.LENGTH_LONG).show();
                         callback.onSuccess(String.valueOf(false));
                     }
                 }){

@@ -69,7 +69,8 @@ public class OnewayTab extends Fragment implements View.OnClickListener {
     public static final String KEY_TOCITY = "to_city";
     public static final String KEY_OPTION = "do_option";
     public static final String KEY_TYPE = "bag_id";
-
+    Date datePickup;
+    SimpleDateFormat df;
 
 
 
@@ -91,6 +92,7 @@ public class OnewayTab extends Fragment implements View.OnClickListener {
         globalVariable = (AppController) getActivity().getApplicationContext();
 
         dateFormatter = new SimpleDateFormat("yyyy-mm-dd", Locale.US);
+        df = new SimpleDateFormat("yyyy-MM-dd");
 
 
         editTextQtySmall = (EditText) v.findViewById(R.id.qty_small);
@@ -126,7 +128,6 @@ public class OnewayTab extends Fragment implements View.OnClickListener {
                 String price = Double.toString(totalPrice);
                 globalVariable.setTotalPrice(totalPrice);
                 globalVariable.setTwoWay(false);
-                Toast.makeText(getActivity(), "The total Price is Rs. " + price, Toast.LENGTH_LONG).show();
                 if(flag==1) {
                     Intent i = new Intent(getContext(),
                             EnterDetails.class);
@@ -222,13 +223,16 @@ public class OnewayTab extends Fragment implements View.OnClickListener {
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 int selectedId= radioGroup.getCheckedRadioButtonId();
                 radioButton=(RadioButton)v.findViewById(selectedId);
-                Toast.makeText(getActivity(),radioButton.getText(),Toast.LENGTH_SHORT).show();
                 if(selectedId==R.id.radio_1day)
                 {
                     globalVariable.setdoOption("Single");
                     modifyPrice(new VolleyCallback() {
                         @Override
                         public void onSuccess(String result) {
+
+                            dateDelivery = addDays(datePickup,delDateFactor);
+                            globalVariable.setDeliveryDate1(String .valueOf(df.format(dateDelivery)));
+                            DateOfDelivery.setText(String .valueOf(df.format(dateDelivery)));
 
                         }
                     });
@@ -240,6 +244,10 @@ public class OnewayTab extends Fragment implements View.OnClickListener {
                         @Override
                         public void onSuccess(String result) {
 
+                            dateDelivery = addDays(datePickup,delDateFactor);
+                            globalVariable.setDeliveryDate1(String .valueOf(df.format(dateDelivery)));
+                            DateOfDelivery.setText(String .valueOf(df.format(dateDelivery)));
+
                         }
                     });
                 }
@@ -249,6 +257,10 @@ public class OnewayTab extends Fragment implements View.OnClickListener {
                     modifyPrice(new VolleyCallback() {
                         @Override
                         public void onSuccess(String result) {
+
+                            dateDelivery = addDays(datePickup,delDateFactor);
+                            globalVariable.setDeliveryDate1(String .valueOf(df.format(dateDelivery)));
+                            DateOfDelivery.setText(String .valueOf(df.format(dateDelivery)));
 
                         }
                     });
@@ -271,7 +283,6 @@ public class OnewayTab extends Fragment implements View.OnClickListener {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        Toast.makeText(getActivity(),response,Toast.LENGTH_LONG).show();
                         JSONObject jObj = null;
                         boolean error = false;
                         try {
@@ -295,7 +306,6 @@ public class OnewayTab extends Fragment implements View.OnClickListener {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(getActivity(),error.toString(),Toast.LENGTH_LONG).show();
                         callback.onSuccess(String.valueOf(false));
                     }
                 }){
@@ -322,7 +332,6 @@ public class OnewayTab extends Fragment implements View.OnClickListener {
 
         Calendar newCalendar = Calendar.getInstance();
 
-        final SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         final String currentDate = df.format(newCalendar.getTime());
         PicupDate.setText(currentDate);
 
@@ -334,7 +343,6 @@ public class OnewayTab extends Fragment implements View.OnClickListener {
                 String pickupDate = df.format(newDate.getTime());
                 globalVariable.setPickupDate1(pickupDate);
                 PicupDate.setText(pickupDate);
-                Date datePickup;
                 Date dateCurrent;
                 try {
                     datePickup = df.parse(pickupDate);
