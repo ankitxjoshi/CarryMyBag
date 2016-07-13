@@ -148,6 +148,7 @@ public class FirstFragment extends android.support.v4.app.Fragment {
             BufferedReader reader = null;
 
             try {
+                list.clear();
                 URL url = new URL(params[0]);
                 connection = (HttpURLConnection) url.openConnection();
                 connection.connect();
