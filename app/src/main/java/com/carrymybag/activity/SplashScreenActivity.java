@@ -13,7 +13,7 @@ import java.util.TimerTask;
 public class SplashScreenActivity extends Activity {
 
     // Set Duration of the Splash Screen
-    long Delay = 1500;
+    long Delay = 1200;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
