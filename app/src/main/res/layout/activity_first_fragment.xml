@@ -87,6 +87,7 @@
         android:layout_height="wrap_content"
         android:textSize="30dip"
         android:text="Estimate Price"
+        android:textAlignment="center"
         android:id="@+id/estimateView"
         android:layout_above="@+id/bookNow"
         android:layout_centerHorizontal="true"

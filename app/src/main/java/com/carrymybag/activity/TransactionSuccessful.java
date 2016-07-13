@@ -35,7 +35,11 @@ public class TransactionSuccessful extends AppCompatActivity implements View.OnC
         btnBookAnother = (Button)findViewById(R.id.book_another);
         btnBookAnother.setOnClickListener(this);
     }
-
+    @Override
+    public void onBackPressed(){
+        Intent intent=new Intent(getApplicationContext(),MainActivity.class);
+        startActivity(intent);
+    }
 
     @Override
     public void onClick(View v) {

@@ -19,10 +19,15 @@ public class TransactionFailed extends AppCompatActivity implements View.OnClick
         btnBookAgain = (Button)findViewById(R.id.btn_book_again);
         btnBookAgain.setOnClickListener(this);
     }
+    @Override
+    public void onBackPressed(){
+        Intent intent=new Intent(getApplicationContext(),MainActivity.class);
+        startActivity(intent);
+    }
 
     @Override
     public void onClick(View v) {
-        Intent intent=new Intent(getApplicationContext(),FirstFragment.class);
+        Intent intent=new Intent(getApplicationContext(),MainActivity.class);
         startActivity(intent);
     }
 }
