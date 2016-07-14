@@ -128,7 +128,7 @@ public class OnewayTab extends Fragment implements View.OnClickListener {
                 String price = Double.toString(totalPrice);
                 globalVariable.setTotalPrice(totalPrice);
                 globalVariable.setTwoWay(false);
-                if(flag==1 && qtySmall>0 && qtyMed>0 && qtyLarge>0) {
+                if(flag==1 && (qtySmall>0 || qtyMed>0 || qtyLarge>0)) {
                     Intent i = new Intent(getContext(),
                             EnterDetails.class);
                     startActivity(i);

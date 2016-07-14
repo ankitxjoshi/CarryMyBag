@@ -450,7 +450,7 @@ public class TwowayTab extends Fragment implements View.OnClickListener {
                 totalPrice = priceSmall*(qtySmall1 + qtySmall2) + priceMed*(qtyMed1 + qtyMed2) + priceLarge*(qtyLarge2 + qtyLarge1);
                 String price = Double.toString(totalPrice);
                 globalVariable.setTotalPrice(totalPrice);
-                if(flag1==1 && qtyLarge1>0 && qtyMed1>0 && qtySmall1>0) {
+                if(flag1==1 && (qtyLarge1>0 || qtyMed1>0 || qtySmall1>0)) {
                     if (flag2 == 1 && qtyLarge2>0 && qtyMed2>0 && qtySmall2>0) {
                         Intent i = new Intent(getContext(),
                                 EnterDetails.class);
