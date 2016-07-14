@@ -92,14 +92,14 @@ public class MainActivity extends AppCompatActivity {
                         fragmentTransaction.replace(R.id.frame,fragment);
                         fragmentTransaction.commit();
                         return true;
-                    case R.id.settings:
+                    /*case R.id.settings:
                         Toast.makeText(getApplicationContext(),"Setting Selected",Toast.LENGTH_SHORT).show();
                         fragment=new ChangePassword();
                         //android.support.v4.app.FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
                         fragmentTransaction = getSupportFragmentManager().beginTransaction();
                         fragmentTransaction.replace(R.id.frame,fragment);
                         fragmentTransaction.commit();
-                        return true;
+                        return true;*/
                     case R.id.logOut:
                         Toast.makeText(getApplicationContext(),"Logout Selected",Toast.LENGTH_SHORT).show();
                         fragment = new SixthFragment();
