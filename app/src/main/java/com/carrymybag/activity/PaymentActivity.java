@@ -380,7 +380,6 @@ public class PaymentActivity extends Activity
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        Toast.makeText(PaymentActivity.this,response,Toast.LENGTH_LONG).show();
                         luggageflag = true;
                         JSONObject jObj = null;
                         boolean error = false;
@@ -396,7 +395,6 @@ public class PaymentActivity extends Activity
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(PaymentActivity.this,error.toString(),Toast.LENGTH_LONG).show();
                         luggageflag = false;
                         callback.onSuccess(false);
                     }
@@ -430,7 +428,6 @@ public class PaymentActivity extends Activity
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        Toast.makeText(PaymentActivity.this,response,Toast.LENGTH_LONG).show();
                         luggageflag = true;
                         JSONObject jObj = null;
                         boolean error = false;
@@ -446,7 +443,6 @@ public class PaymentActivity extends Activity
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(PaymentActivity.this,error.toString(),Toast.LENGTH_LONG).show();
                         luggageflag = false;
                         callback.onSuccess(false);
                     }
@@ -480,7 +476,6 @@ public class PaymentActivity extends Activity
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        Toast.makeText(PaymentActivity.this,response,Toast.LENGTH_LONG).show();
                         luggageflag = true;
                         JSONObject jObj = null;
                         boolean error = false;
@@ -496,7 +491,6 @@ public class PaymentActivity extends Activity
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(PaymentActivity.this,error.toString(),Toast.LENGTH_LONG).show();
                         luggageflag = false;
                         callback.onSuccess(false);
                     }
@@ -530,7 +524,6 @@ public class PaymentActivity extends Activity
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        Toast.makeText(PaymentActivity.this,response,Toast.LENGTH_LONG).show();
                         luggageflag = true;
                         JSONObject jObj = null;
                         boolean error = false;
@@ -546,7 +539,6 @@ public class PaymentActivity extends Activity
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(PaymentActivity.this,error.toString(),Toast.LENGTH_LONG).show();
                         luggageflag = false;
                         callback.onSuccess(false);
                     }
@@ -580,7 +572,6 @@ public class PaymentActivity extends Activity
             new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
-                    Toast.makeText(PaymentActivity.this,response,Toast.LENGTH_LONG).show();
                     luggageflag = true;
                     JSONObject jObj = null;
                     boolean error = false;
@@ -596,7 +587,6 @@ public class PaymentActivity extends Activity
             new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
-                    Toast.makeText(PaymentActivity.this,error.toString(),Toast.LENGTH_LONG).show();
                     luggageflag = false;
                     callback.onSuccess(false);
                 }
@@ -630,7 +620,6 @@ public class PaymentActivity extends Activity
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        Toast.makeText(PaymentActivity.this,response,Toast.LENGTH_LONG).show();
                         luggageflag = true;
                         JSONObject jObj = null;
                         boolean error = false;
@@ -646,7 +635,6 @@ public class PaymentActivity extends Activity
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(PaymentActivity.this,error.toString(),Toast.LENGTH_LONG).show();
                         luggageflag = false;
                         callback.onSuccess(false);
                     }
@@ -679,7 +667,6 @@ public class PaymentActivity extends Activity
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        Toast.makeText(PaymentActivity.this,response,Toast.LENGTH_LONG).show();
                         userflag = true;
                         JSONObject jObj = null;
                         boolean error = false;
@@ -695,7 +682,6 @@ public class PaymentActivity extends Activity
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(PaymentActivity.this,error.toString(),Toast.LENGTH_LONG).show();
                         userflag = false;
                         callback.onSuccess(false);
                     }
@@ -730,7 +716,6 @@ public class PaymentActivity extends Activity
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        Toast.makeText(PaymentActivity.this, response, Toast.LENGTH_LONG).show();
                         orderflag = true;
                         JSONObject jObj = null;
                         boolean error = false;
@@ -783,7 +768,6 @@ public class PaymentActivity extends Activity
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        Toast.makeText(PaymentActivity.this, response, Toast.LENGTH_LONG).show();
                         orderflag = true;
                         JSONObject jObj = null;
                         boolean error = false;
@@ -799,7 +783,6 @@ public class PaymentActivity extends Activity
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(PaymentActivity.this,error.toString(),Toast.LENGTH_LONG).show();
                         orderflag = false;
                         callback.onSuccess(false);
                     }
