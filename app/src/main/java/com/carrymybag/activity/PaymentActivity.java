@@ -105,14 +105,16 @@ public class PaymentActivity extends Activity
 
         try{
             JSONObject options = new JSONObject("{" +
-                    "description: 'Demoing Charges'," +
+                    "description: 'Travel Charges'," +
                     "image: 'https://rzp-mobile.s3.amazonaws.com/images/rzp.png'," +
                     "currency: 'INR'}"
             );
-
-            options.put("amount", "5000");
+            JSONObject customerDetail = new JSONObject();
+            customerDetail.put("email",globalVariable.getUserEmail());
+            customerDetail.put("contact",globalVariable.getContactOrigin());
+            options.put("amount", globalVariable.getTotalPrice()*1000);
             options.put("name", "CarryMyBag");
-            options.put("prefill", new JSONObject("{email: 'ajankit2304@gmail.com', contact: '9876543210'}"));
+            options.put("prefill", customerDetail);
             options.put("theme",new JSONObject("{color: '#114148'}"));
 
             co.open(activity, options);
