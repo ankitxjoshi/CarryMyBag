@@ -37,10 +37,7 @@ public class BookDetails extends AppCompatActivity {
         toolbar.setTitleTextColor(getResources().getColor(R.color.white));
         setSupportActionBar(toolbar);
         getSupportActionBar().setStackedBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.white)));
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        final Drawable upArrow = getResources().getDrawable(R.drawable.abc_ic_ab_back_material);
-        upArrow.setColorFilter(Color.parseColor("#FFFFFF"), PorterDuff.Mode.SRC_ATOP);
-        getSupportActionBar().setHomeAsUpIndicator(upArrow);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
 
 
         viewPager = (ViewPager) findViewById(R.id.viewpager);
