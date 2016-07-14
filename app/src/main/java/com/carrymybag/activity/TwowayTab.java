@@ -69,6 +69,7 @@ public class TwowayTab extends Fragment implements View.OnClickListener {
     SimpleDateFormat df;
 
     Date dateDelivery1, dateDelivery2;
+    String currentDate,currentDate2;
 
 
     private DatePickerDialog DatePickerDialog1;
@@ -444,8 +445,20 @@ public class TwowayTab extends Fragment implements View.OnClickListener {
 
             case R.id.btnSubmit:
                 getPricesAndQuantity1();
+                getPricesAndQuantity2();
+                globalVariable.setTwoWay(true);
+                totalPrice = priceSmall*(qtySmall1 + qtySmall2) + priceMed*(qtyMed1 + qtyMed2) + priceLarge*(qtyLarge2 + qtyLarge1);
+                String price = Double.toString(totalPrice);
+                globalVariable.setTotalPrice(totalPrice);
+                if(flag1==1 && (qtyLarge1>0 || qtyMed1>0 || qtySmall1>0)) {
+                    if (flag2 == 1 && qtyLarge2>0 && qtyMed2>0 && qtySmall2>0) {
+                        Intent i = new Intent(getContext(),
+                                EnterDetails.class);
+                        startActivity(i);
+                    }
+                }
 
-                if(flag1==0)
+                else if(flag1==0)
                 {
                     Toast.makeText(getActivity(),"Pickup Date for Leg 1 less than today's date",Toast.LENGTH_LONG).show();
                 }
@@ -455,20 +468,13 @@ public class TwowayTab extends Fragment implements View.OnClickListener {
                     Toast.makeText(getActivity(),"Pickup Date for Leg 2 less than today's date",Toast.LENGTH_LONG).show();
                 }
 
-                if(flag1==1) {
-                    if(flag2==1) {
-                        Intent i = new Intent(getContext(),
-                                EnterDetails.class);
-                        startActivity(i);
-                    }
+                else if(qtyLarge1==0 && qtySmall1==0 && qtyMed1==0){
+                    Toast.makeText(getActivity(),"Atleast one bag needed to place an order for Leg 1",Toast.LENGTH_LONG).show();
                 }
 
-                getPricesAndQuantity2();
-                globalVariable.setTwoWay(true);
-                totalPrice = priceSmall*(qtySmall1 + qtySmall2) + priceMed*(qtyMed1 + qtyMed2) + priceLarge*(qtyLarge2 + qtyLarge1);
-                String price = Double.toString(totalPrice);
-                globalVariable.setTotalPrice(totalPrice);
-                Toast.makeText(getActivity(), "The total Price is Rs. " + price, Toast.LENGTH_LONG).show();
+                else if(qtyLarge2==0 && qtySmall2==0 && qtyMed2==0){
+                    Toast.makeText(getActivity(),"Atleast one bag needed to place an order for Leg 2",Toast.LENGTH_LONG).show();
+                }
 
                 break;
         }
@@ -576,7 +582,7 @@ public class TwowayTab extends Fragment implements View.OnClickListener {
         Calendar newCalendar = Calendar.getInstance();
 
         final SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-        final String currentDate = df.format(newCalendar.getTime());
+        currentDate = df.format(newCalendar.getTime());
         PicupDate1.setText(currentDate);
 
         DatePickerDialog1 = new DatePickerDialog(getContext(), new android.app.DatePickerDialog.OnDateSetListener() {
@@ -587,7 +593,6 @@ public class TwowayTab extends Fragment implements View.OnClickListener {
                 String pickupDate = df.format(newDate.getTime());
                 globalVariable.setPickupDate1(pickupDate);
                 PicupDate1.setText(pickupDate);
-                Date datePickup;
                 Date dateCurrent;
                 try {
                     datePickup = df.parse(pickupDate);
@@ -611,7 +616,7 @@ public class TwowayTab extends Fragment implements View.OnClickListener {
 
         }, newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
 
-        final String currentDate2 = df.format(newCalendar.getTime());
+        currentDate2 = df.format(newCalendar.getTime());
         PicupDate2.setText(currentDate2);
 
         DatePickerDialog2 = new DatePickerDialog(getContext(), new android.app.DatePickerDialog.OnDateSetListener() {
@@ -622,7 +627,6 @@ public class TwowayTab extends Fragment implements View.OnClickListener {
                 String pickupDate = df.format(newDate.getTime());
                 globalVariable.setPickupDate2(pickupDate);
                 PicupDate2.setText(pickupDate);
-                Date datePickup;
                 Date dateCurrent2;
                 try {
                     datePickup = df.parse(pickupDate);
