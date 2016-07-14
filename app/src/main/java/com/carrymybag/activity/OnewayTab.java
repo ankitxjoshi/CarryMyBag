@@ -71,7 +71,7 @@ public class OnewayTab extends Fragment implements View.OnClickListener {
     public static final String KEY_TYPE = "bag_id";
     Date datePickup;
     SimpleDateFormat df;
-
+    String currentDate;
 
 
 
@@ -128,7 +128,7 @@ public class OnewayTab extends Fragment implements View.OnClickListener {
                 String price = Double.toString(totalPrice);
                 globalVariable.setTotalPrice(totalPrice);
                 globalVariable.setTwoWay(false);
-                if(flag==1) {
+                if(flag==1 && qtySmall>0 && qtyMed>0 && qtyLarge>0) {
                     Intent i = new Intent(getContext(),
                             EnterDetails.class);
                     startActivity(i);
@@ -136,6 +136,10 @@ public class OnewayTab extends Fragment implements View.OnClickListener {
                 else if(flag==0)
                 {
                     Toast.makeText(getActivity(),"Pickup Date cannot be less than today's date",Toast.LENGTH_LONG).show();
+                }
+                else if(qtyLarge==0 && qtySmall==0 && qtyMed==0)
+                {
+                    Toast.makeText(getActivity(),"Atleast one bag needed to place an order",Toast.LENGTH_LONG).show();
                 }
 
             }
@@ -332,7 +336,7 @@ public class OnewayTab extends Fragment implements View.OnClickListener {
 
         Calendar newCalendar = Calendar.getInstance();
 
-        final String currentDate = df.format(newCalendar.getTime());
+        currentDate = df.format(newCalendar.getTime());
         PicupDate.setText(currentDate);
 
         DatePickerDialog = new DatePickerDialog(getContext(), new android.app.DatePickerDialog.OnDateSetListener() {

@@ -6,6 +6,8 @@ package com.carrymybag.activity;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.pm.PackageInstaller;
+import android.content.pm.PackageInstaller.Session;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -44,6 +46,8 @@ import com.facebook.FacebookSdk;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import com.facebook.appevents.AppEventsLogger;
+import com.facebook.login.LoginManager;
+import com.google.android.gms.appdatasearch.GetRecentContextCall;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -150,10 +154,16 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         // Check if user is already logged in or not
         if (session.isLoggedIn()) {
             // User is already logged in. Take him to main activity
+            HashMap<String, String> user = db.getUserDetails();
+            String name = user.get("name");
+            String email = user.get("email");
+            globalVariable.setUserName(name);
+            globalVariable.setUserEmail(email);
             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
             startActivity(intent);
             finish();
         }
+       
 
 
         // Login button Click Event
@@ -502,5 +512,7 @@ private class MyTextWatcher implements TextWatcher {
             }
         });
     }
+
+
 
 }
