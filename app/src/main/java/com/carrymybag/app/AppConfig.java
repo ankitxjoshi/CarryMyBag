@@ -46,7 +46,7 @@ public class AppConfig {
 	/////////////////////////////////////////////////////////////////////////////////////////
 
 //	public static String URL_CONTACTUS = "http://hladnitkkr.in//contact.php";
-//	public static String URL_LOGIN = "http://hladnitkkr.in//login.php";
+//	public static String URL_LOGIN = "http://hladnitkkr.in/login.php";
 //	// Server user register url
 //	public static String URL_REGISTER = "http://hladnitkkr.in//register.php";
 //	// Server user retrieve city url
@@ -59,6 +59,6 @@ public class AppConfig {
 //	public static String URL_GetPrice = "http://hladnitkkr.in//getprice.php";
 //	public static String URL_CHANGEPASS = "http://hladnitkkr.in//changepass.php";
 //	public static String URL_PRICEFACTOR = "http://hladnitkkr.in//pricefactor.php";
-////
+//
 
 }

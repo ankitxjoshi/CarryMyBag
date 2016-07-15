@@ -280,6 +280,29 @@ public class FirstFragment extends android.support.v4.app.Fragment {
         requestQueue.add(stringRequest);
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        getView().setFocusableInTouchMode(true);
+        getView().requestFocus();
+        getView().setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                //YOUR CODE
+                if (keyCode == KeyEvent.KEYCODE_BACK) {
+                    Intent intent = new Intent(getActivity(), MainActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    intent.putExtra("LOGOUT", true);
+                    startActivity(intent);
+
+                    getActivity().finish();
+                    return true;
+                }
+                return false;
+            }
+        });
+    }
+
 
 
 }

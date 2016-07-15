@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
 import com.carrymybag.R;
+import com.carrymybag.app.AppController;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -24,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
     private NavigationView navigationView;
     private DrawerLayout drawerLayout;
     public static NetworkImageView profilePhoto;
+    public AppController globalVariable;
 
     //Image Loader
     public ImageLoader imageLoader;
@@ -40,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
         // Initializing Toolbar and setting it as the actionbar
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        globalVariable = (AppController)getApplicationContext();
 
         //Initializing NavigationView
         navigationView = (NavigationView) findViewById(R.id.navigation_view);
@@ -122,8 +125,8 @@ public class MainActivity extends AppCompatActivity {
         View headerView = navigationView.inflateHeaderView(R.layout.header);
         TextView Name = (TextView) headerView.findViewById(R.id.textViewName);
         TextView Email = (TextView) headerView.findViewById(R.id.textViewEmail);
-        Name.setText(LoginActivity.User_name);
-        Email.setText(LoginActivity.User_email);
+        Name.setText(globalVariable.getUserName());
+        Email.setText(globalVariable.getUserEmail());
         profilePhoto = (NetworkImageView)headerView.findViewById(R.id.profileImage);
         imageLoader = CustomVolleyRequest.getInstance(this)
                 .getImageLoader();
