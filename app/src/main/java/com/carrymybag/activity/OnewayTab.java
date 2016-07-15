@@ -64,6 +64,7 @@ public class OnewayTab extends Fragment implements View.OnClickListener {
     Date dateDelivery;
 
     RequestQueue requestQueue;
+    private boolean dateEntered;
 
     public static final String KEY_FROMCITY = "from_city";
     public static final String KEY_TOCITY = "to_city";
@@ -124,7 +125,8 @@ public class OnewayTab extends Fragment implements View.OnClickListener {
             public void onClick(View v) {
 
                 getPricesAndQuantity();
-                totalPrice = priceSmall * qtySmall + priceMed * qtyMed + priceLarge * qtyLarge;
+                totalPrice = (priceSmall*qtySmall+priceMed*qtyMed+priceLarge*qtyLarge)*priceFactor;
+                globalVariable.setTotalPrice(totalPrice);
                 String price = Double.toString(totalPrice);
                 globalVariable.setTotalPrice(totalPrice);
                 globalVariable.setTwoWay(false);
@@ -154,7 +156,7 @@ public class OnewayTab extends Fragment implements View.OnClickListener {
                 {
                     qtySmall = 0;
                 }
-                totalPrice = priceSmall * qtySmall + priceMed * qtyMed + priceLarge * qtyLarge;
+                totalPrice = (priceSmall*qtySmall+priceMed*qtyMed+priceLarge*qtyLarge)*priceFactor;
                 String stringPrice = String.valueOf(totalPrice);
                 estimateView.setText("Trip total : Rs" + stringPrice);
             }
@@ -178,7 +180,7 @@ public class OnewayTab extends Fragment implements View.OnClickListener {
                 {
                     qtyMed = 0;
                 }
-                totalPrice = priceSmall * qtySmall + priceMed * qtyMed + priceLarge * qtyLarge;
+                totalPrice = (priceSmall*qtySmall+priceMed*qtyMed+priceLarge*qtyLarge)*priceFactor;
                 String stringPrice = String.valueOf(totalPrice);
                 estimateView.setText("Trip total : Rs" + stringPrice);
             }
@@ -202,7 +204,7 @@ public class OnewayTab extends Fragment implements View.OnClickListener {
                 {
                     qtyLarge = 0;
                 }
-                totalPrice = priceSmall * qtySmall + priceMed * qtyMed + priceLarge * qtyLarge;
+                totalPrice = (priceSmall*qtySmall+priceMed*qtyMed+priceLarge*qtyLarge)*priceFactor;
                 String stringPrice = String.valueOf(totalPrice);
                 estimateView.setText("Trip total : Rs" + stringPrice);
             }
@@ -227,47 +229,59 @@ public class OnewayTab extends Fragment implements View.OnClickListener {
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 int selectedId= radioGroup.getCheckedRadioButtonId();
                 radioButton=(RadioButton)v.findViewById(selectedId);
-                if(selectedId==R.id.radio_1day)
+                if(dateEntered)
                 {
-                    globalVariable.setdoOption("Single");
-                    modifyPrice(new VolleyCallback() {
-                        @Override
-                        public void onSuccess(String result) {
+                    if(selectedId==R.id.radio_1day)
+                    {
+                        if(dateEntered)
+                        {
+                            globalVariable.setdoOption("Single");
+                            modifyPrice(new VolleyCallback() {
+                                @Override
+                                public void onSuccess(String result) {
 
-                            dateDelivery = addDays(datePickup,delDateFactor);
-                            globalVariable.setDeliveryDate1(String .valueOf(df.format(dateDelivery)));
-                            DateOfDelivery.setText(String .valueOf(df.format(dateDelivery)));
+                                    dateDelivery = addDays(datePickup,delDateFactor);
+                                    globalVariable.setDeliveryDate1(String .valueOf(df.format(dateDelivery)));
+                                    DateOfDelivery.setText(String .valueOf(df.format(dateDelivery)));
 
+                                }
+                            });
                         }
-                    });
+
+
+                    }
+                    if(selectedId==R.id.radio_fast)
+                    {
+                        globalVariable.setdoOption("Fast");
+                        modifyPrice(new VolleyCallback() {
+                            @Override
+                            public void onSuccess(String result) {
+
+                                dateDelivery = addDays(datePickup,delDateFactor);
+                                globalVariable.setDeliveryDate1(String .valueOf(df.format(dateDelivery)));
+                                DateOfDelivery.setText(String .valueOf(df.format(dateDelivery)));
+
+                            }
+                        });
+                    }
+                    if(selectedId==R.id.radio_standard)
+                    {
+                        globalVariable.setdoOption("Standard");
+                        modifyPrice(new VolleyCallback() {
+                            @Override
+                            public void onSuccess(String result) {
+
+                                dateDelivery = addDays(datePickup,delDateFactor);
+                                globalVariable.setDeliveryDate1(String .valueOf(df.format(dateDelivery)));
+                                DateOfDelivery.setText(String .valueOf(df.format(dateDelivery)));
+
+                            }
+                        });
+                    }
                 }
-                if(selectedId==R.id.radio_fast)
-                {
-                    globalVariable.setdoOption("Fast");
-                    modifyPrice(new VolleyCallback() {
-                        @Override
-                        public void onSuccess(String result) {
-
-                            dateDelivery = addDays(datePickup,delDateFactor);
-                            globalVariable.setDeliveryDate1(String .valueOf(df.format(dateDelivery)));
-                            DateOfDelivery.setText(String .valueOf(df.format(dateDelivery)));
-
-                        }
-                    });
-                }
-                if(selectedId==R.id.radio_standard)
-                {
-                    globalVariable.setdoOption("Standard");
-                    modifyPrice(new VolleyCallback() {
-                        @Override
-                        public void onSuccess(String result) {
-
-                            dateDelivery = addDays(datePickup,delDateFactor);
-                            globalVariable.setDeliveryDate1(String .valueOf(df.format(dateDelivery)));
-                            DateOfDelivery.setText(String .valueOf(df.format(dateDelivery)));
-
-                        }
-                    });
+                else {
+                    Toast.makeText(getActivity(), "Please mention the date first", Toast.LENGTH_SHORT).show();
+                    radioButton.setChecked(false);
                 }
             }
         });
@@ -347,6 +361,7 @@ public class OnewayTab extends Fragment implements View.OnClickListener {
                 String pickupDate = df.format(newDate.getTime());
                 globalVariable.setPickupDate1(pickupDate);
                 PicupDate.setText(pickupDate);
+                dateEntered = true;
                 Date dateCurrent;
                 try {
                     datePickup = df.parse(pickupDate);

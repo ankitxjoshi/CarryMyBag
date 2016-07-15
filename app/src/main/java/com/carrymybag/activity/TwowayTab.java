@@ -84,6 +84,7 @@ public class TwowayTab extends Fragment implements View.OnClickListener {
     private int delDateFactor1 = 5;
     private  int priceFactor2 = 1;
     private int delDateFactor2 = 5;
+    boolean dateEntered1,dateEntered2;
 
     public static final String KEY_FROMCITY = "from_city";
     public static final String KEY_TOCITY = "to_city";
@@ -170,7 +171,7 @@ public class TwowayTab extends Fragment implements View.OnClickListener {
                 {
                     qtySmall1 = 0;
                 }
-                totalPrice = priceSmall*(qtySmall1 + qtySmall2) + priceMed*(qtyMed1 + qtyMed2) + priceLarge*(qtyLarge2 + qtyLarge1);
+                totalPrice = priceSmall*(qtySmall1*priceFactor1 + qtySmall2*priceFactor2) + priceMed*(qtyMed1*priceFactor1 + qtyMed2*priceFactor2) + priceLarge*(qtyLarge2*priceFactor1 + qtyLarge1*priceFactor2);
                 String stringPrice = String.valueOf(totalPrice);
                 if(stringPrice=="")
                     stringPrice = "0";
@@ -196,7 +197,7 @@ public class TwowayTab extends Fragment implements View.OnClickListener {
                 {
                     qtyMed1 = 0;
                 }
-                totalPrice = priceSmall*(qtySmall1 + qtySmall2) + priceMed*(qtyMed1 + qtyMed2) + priceLarge*(qtyLarge2 + qtyLarge1);
+                totalPrice = priceSmall*(qtySmall1*priceFactor1 + qtySmall2*priceFactor2) + priceMed*(qtyMed1*priceFactor1 + qtyMed2*priceFactor2) + priceLarge*(qtyLarge2*priceFactor1 + qtyLarge1*priceFactor2);
                 String stringPrice = String.valueOf(totalPrice);
                 if(stringPrice=="")
                     stringPrice = "0";
@@ -222,7 +223,7 @@ public class TwowayTab extends Fragment implements View.OnClickListener {
                 {
                     qtyLarge1 = 0;
                 }
-                totalPrice = priceSmall*(qtySmall1 + qtySmall2) + priceMed*(qtyMed1 + qtyMed2) + priceLarge*(qtyLarge2 + qtyLarge1);
+                totalPrice = priceSmall*(qtySmall1*priceFactor1 + qtySmall2*priceFactor2) + priceMed*(qtyMed1*priceFactor1 + qtyMed2*priceFactor2) + priceLarge*(qtyLarge2*priceFactor1 + qtyLarge1*priceFactor2);
                 String stringPrice = String.valueOf(totalPrice);
                 if(stringPrice=="")
                     stringPrice = "0";
@@ -248,7 +249,7 @@ public class TwowayTab extends Fragment implements View.OnClickListener {
                 {
                     qtySmall2 = 0;
                 }
-                totalPrice = priceSmall*(qtySmall1 + qtySmall2) + priceMed*(qtyMed1 + qtyMed2) + priceLarge*(qtyLarge2 + qtyLarge1);
+                totalPrice = priceSmall*(qtySmall1*priceFactor1 + qtySmall2*priceFactor2) + priceMed*(qtyMed1*priceFactor1 + qtyMed2*priceFactor2) + priceLarge*(qtyLarge2*priceFactor1 + qtyLarge1*priceFactor2);
                 String stringPrice = String.valueOf(totalPrice);
                 if(stringPrice=="")
                     stringPrice = "0";
@@ -274,7 +275,7 @@ public class TwowayTab extends Fragment implements View.OnClickListener {
                 {
                     qtyMed2 = 0;
                 }
-                totalPrice = priceSmall*(qtySmall1 + qtySmall2) + priceMed*(qtyMed1 + qtyMed2) + priceLarge*(qtyLarge2 + qtyLarge1);
+                totalPrice = priceSmall*(qtySmall1*priceFactor1 + qtySmall2*priceFactor2) + priceMed*(qtyMed1*priceFactor1 + qtyMed2*priceFactor2) + priceLarge*(qtyLarge2*priceFactor1 + qtyLarge1*priceFactor2);
                 String stringPrice = String.valueOf(totalPrice);
                 if(stringPrice=="")
                     stringPrice = "0";
@@ -300,7 +301,7 @@ public class TwowayTab extends Fragment implements View.OnClickListener {
                 {
                     qtyLarge2 = 0;
                 }
-                totalPrice = priceSmall*(qtySmall1 + qtySmall2) + priceMed*(qtyMed1 + qtyMed2) + priceLarge*(qtyLarge2 + qtyLarge1);
+                totalPrice = priceSmall*(qtySmall1*priceFactor1 + qtySmall2*priceFactor2) + priceMed*(qtyMed1*priceFactor1 + qtyMed2*priceFactor2) + priceLarge*(qtyLarge2*priceFactor1 + qtyLarge1*priceFactor2);
                 String stringPrice = String.valueOf(totalPrice);
                 if(stringPrice=="")
                     stringPrice = "0";
@@ -335,48 +336,56 @@ public class TwowayTab extends Fragment implements View.OnClickListener {
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 int selectedId= radioGroup1.getCheckedRadioButtonId();
                 radioButton=(RadioButton)v.findViewById(selectedId);
-                if(selectedId==R.id.radio_1day1)
+                if(dateEntered1)
                 {
-                    globalVariable.setdoOption("Single");
-                    modifyPrice1(new VolleyCallback() {
-                        @Override
-                        public void onSuccess(String result) {
+                    if(selectedId==R.id.radio_1day1)
+                    {
+                        globalVariable.setdoOption("Single");
+                        modifyPrice1(new VolleyCallback() {
+                            @Override
+                            public void onSuccess(String result) {
 
-                            dateDelivery1 = addDays(datePickup,delDateFactor1);
-                            globalVariable.setDeliveryDate1(String .valueOf(df.format(dateDelivery1)));
-                            DateOfDelivery1.setText(String .valueOf(df.format(dateDelivery1)));
+                                dateDelivery1 = addDays(datePickup,delDateFactor1);
+                                globalVariable.setDeliveryDate1(String .valueOf(df.format(dateDelivery1)));
+                                DateOfDelivery1.setText(String .valueOf(df.format(dateDelivery1)));
 
-                        }
-                    });
+                            }
+                        });
+                    }
+                    if(selectedId==R.id.radio_fast1)
+                    {
+                        globalVariable.setdoOption("Fast");
+                        modifyPrice1(new VolleyCallback() {
+                            @Override
+                            public void onSuccess(String result) {
+
+                                dateDelivery1 = addDays(datePickup,delDateFactor1);
+                                globalVariable.setDeliveryDate1(String .valueOf(df.format(dateDelivery1)));
+                                DateOfDelivery1.setText(String .valueOf(df.format(dateDelivery1)));
+
+                            }
+                        });
+                    }
+                    if(selectedId==R.id.radio_standard1)
+                    {
+                        globalVariable.setdoOption("Standard");
+                        modifyPrice1(new VolleyCallback() {
+                            @Override
+                            public void onSuccess(String result) {
+
+                                dateDelivery1 = addDays(datePickup,delDateFactor1);
+                                globalVariable.setDeliveryDate1(String .valueOf(df.format(dateDelivery1)));
+                                DateOfDelivery1.setText(String .valueOf(df.format(dateDelivery1)));
+
+                            }
+                        });
+                    }
                 }
-                if(selectedId==R.id.radio_fast1)
-                {
-                    globalVariable.setdoOption("Fast");
-                    modifyPrice1(new VolleyCallback() {
-                        @Override
-                        public void onSuccess(String result) {
-
-                            dateDelivery1 = addDays(datePickup,delDateFactor1);
-                            globalVariable.setDeliveryDate1(String .valueOf(df.format(dateDelivery1)));
-                            DateOfDelivery1.setText(String .valueOf(df.format(dateDelivery1)));
-
-                        }
-                    });
+                else {
+                    Toast.makeText(getActivity(), "Please mention the date first", Toast.LENGTH_SHORT).show();
+                    radioButton.setChecked(false);
                 }
-                if(selectedId==R.id.radio_standard1)
-                {
-                    globalVariable.setdoOption("Standard");
-                    modifyPrice1(new VolleyCallback() {
-                        @Override
-                        public void onSuccess(String result) {
 
-                            dateDelivery1 = addDays(datePickup,delDateFactor1);
-                            globalVariable.setDeliveryDate1(String .valueOf(df.format(dateDelivery1)));
-                            DateOfDelivery1.setText(String .valueOf(df.format(dateDelivery1)));
-
-                        }
-                    });
-                }
 
             }
         });
@@ -387,48 +396,56 @@ public class TwowayTab extends Fragment implements View.OnClickListener {
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 int selectedId= radioGroup2.getCheckedRadioButtonId();
                 radioButton=(RadioButton)v.findViewById(selectedId);
-                if(selectedId==R.id.radio_1day2)
+                if(dateEntered2)
                 {
-                    globalVariable.setdoOption("Single");
-                    modifyPrice2(new VolleyCallback() {
-                        @Override
-                        public void onSuccess(String result) {
+                    if(selectedId==R.id.radio_1day2)
+                    {
+                        globalVariable.setdoOption("Single");
+                        modifyPrice2(new VolleyCallback() {
+                            @Override
+                            public void onSuccess(String result) {
 
-                            dateDelivery2 = addDays(datePickup,delDateFactor2);
-                            globalVariable.setDeliveryDate2(String .valueOf(df.format(dateDelivery2)));
-                            DateOfDelivery2.setText(String .valueOf(df.format(dateDelivery2)));
+                                dateDelivery2 = addDays(datePickup,delDateFactor2);
+                                globalVariable.setDeliveryDate2(String .valueOf(df.format(dateDelivery2)));
+                                DateOfDelivery2.setText(String .valueOf(df.format(dateDelivery2)));
 
-                        }
-                    });
+                            }
+                        });
+                    }
+                    if(selectedId==R.id.radio_fast2)
+                    {
+                        globalVariable.setdoOption("Fast");
+                        modifyPrice2(new VolleyCallback() {
+                            @Override
+                            public void onSuccess(String result) {
+
+                                dateDelivery2 = addDays(datePickup,delDateFactor2);
+                                globalVariable.setDeliveryDate2(String .valueOf(df.format(dateDelivery2)));
+                                DateOfDelivery2.setText(String .valueOf(df.format(dateDelivery2)));
+
+                            }
+                        });
+                    }
+                    if(selectedId==R.id.radio_standard2)
+                    {
+                        globalVariable.setdoOption("Standard");
+                        modifyPrice2(new VolleyCallback() {
+                            @Override
+                            public void onSuccess(String result) {
+
+                                dateDelivery2 = addDays(datePickup,delDateFactor2);
+                                globalVariable.setDeliveryDate2(String .valueOf(df.format(dateDelivery2)));
+                                DateOfDelivery2.setText(String .valueOf(df.format(dateDelivery2)));
+
+                            }
+                        });
+                    }
                 }
-                if(selectedId==R.id.radio_fast2)
-                {
-                    globalVariable.setdoOption("Fast");
-                    modifyPrice2(new VolleyCallback() {
-                        @Override
-                        public void onSuccess(String result) {
-
-                            dateDelivery2 = addDays(datePickup,delDateFactor2);
-                            globalVariable.setDeliveryDate2(String .valueOf(df.format(dateDelivery2)));
-                            DateOfDelivery2.setText(String .valueOf(df.format(dateDelivery2)));
-
-                        }
-                    });
+                else {
+                    Toast.makeText(getActivity(), "Please mention the date first", Toast.LENGTH_SHORT).show();
+                    radioButton.setChecked(false);
                 }
-                if(selectedId==R.id.radio_standard2)
-                {
-                    globalVariable.setdoOption("Standard");
-                    modifyPrice2(new VolleyCallback() {
-                        @Override
-                        public void onSuccess(String result) {
 
-                            dateDelivery2 = addDays(datePickup,delDateFactor2);
-                            globalVariable.setDeliveryDate2(String .valueOf(df.format(dateDelivery2)));
-                            DateOfDelivery2.setText(String .valueOf(df.format(dateDelivery2)));
-
-                        }
-                    });
-                }
             }
         });
         return v;
@@ -447,7 +464,7 @@ public class TwowayTab extends Fragment implements View.OnClickListener {
                 getPricesAndQuantity1();
                 getPricesAndQuantity2();
                 globalVariable.setTwoWay(true);
-                totalPrice = priceSmall*(qtySmall1 + qtySmall2) + priceMed*(qtyMed1 + qtyMed2) + priceLarge*(qtyLarge2 + qtyLarge1);
+                totalPrice = priceSmall*(qtySmall1*priceFactor1 + qtySmall2*priceFactor2) + priceMed*(qtyMed1*priceFactor1 + qtyMed2*priceFactor2) + priceLarge*(qtyLarge2*priceFactor1 + qtyLarge1*priceFactor2);
                 String price = Double.toString(totalPrice);
                 globalVariable.setTotalPrice(totalPrice);
                 if(flag1==1 && (qtyLarge1>0 || qtyMed1>0 || qtySmall1>0)) {

@@ -76,7 +76,7 @@ public class ConfirmPage extends AppCompatActivity {
         pickupDate1 = (TextView)findViewById(R.id.text_date_pickup1);
         deliveryDate1 = (TextView)findViewById(R.id.text_date_delivery1);
 
-        nameTraveller.setText(LoginActivity.User_name);
+        nameTraveller.setText(globalVariable.getUserName());
         contactTraveller.setText(globalVariable.getContactOrigin());
 
         originAddress1.setText(globalVariable.getAddress1Origin() +" " +globalVariable.getAddress2Origin());

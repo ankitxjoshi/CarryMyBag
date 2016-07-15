@@ -111,10 +111,11 @@ public class PaymentActivity extends Activity
                     "image: 'https://rzp-mobile.s3.amazonaws.com/images/rzp.png'," +
                     "currency: 'INR'}"
             );
+            double amount = globalVariable.getTotalPrice()*100;
             JSONObject customerDetail = new JSONObject();
             customerDetail.put("email",globalVariable.getUserEmail());
             customerDetail.put("contact",globalVariable.getContactOrigin());
-            options.put("amount", globalVariable.getTotalPrice()*1000);
+            options.put("amount", amount);
             options.put("name", "CarryMyBag");
             options.put("prefill", customerDetail);
             options.put("theme",new JSONObject("{color: '#114148'}"));
