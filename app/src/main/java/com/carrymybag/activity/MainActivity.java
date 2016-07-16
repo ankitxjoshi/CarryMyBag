@@ -196,6 +196,7 @@ public class MainActivity extends AppCompatActivity {
         if ((keyCode == KeyEvent.KEYCODE_BACK))
         {
             finish();
+            System.exit(0);
         }
         return super.onKeyDown(keyCode, event);
     }
