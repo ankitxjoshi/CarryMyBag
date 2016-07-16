@@ -91,6 +91,8 @@ public class TwowayTab extends Fragment implements View.OnClickListener {
     public static final String KEY_OPTION = "do_option";
     public static final String KEY_TYPE = "bag_id";
 
+    boolean isRadio1,isRadio2;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -338,6 +340,7 @@ public class TwowayTab extends Fragment implements View.OnClickListener {
                 radioButton=(RadioButton)v.findViewById(selectedId);
                 if(dateEntered1)
                 {
+                    isRadio1 = true;
                     if(selectedId==R.id.radio_1day1)
                     {
                         globalVariable.setdoOption("Single");
@@ -398,6 +401,7 @@ public class TwowayTab extends Fragment implements View.OnClickListener {
                 radioButton=(RadioButton)v.findViewById(selectedId);
                 if(dateEntered2)
                 {
+                    isRadio2 = true;
                     if(selectedId==R.id.radio_1day2)
                     {
                         globalVariable.setdoOption("Single");
@@ -467,11 +471,22 @@ public class TwowayTab extends Fragment implements View.OnClickListener {
                 totalPrice = priceSmall*(qtySmall1*priceFactor1 + qtySmall2*priceFactor2) + priceMed*(qtyMed1*priceFactor1 + qtyMed2*priceFactor2) + priceLarge*(qtyLarge2*priceFactor1 + qtyLarge1*priceFactor2);
                 String price = Double.toString(totalPrice);
                 globalVariable.setTotalPrice(totalPrice);
-                if(flag1==1 && (qtyLarge1>0 || qtyMed1>0 || qtySmall1>0)) {
-                    if (flag2 == 1 && (qtyLarge2>0 || qtyMed2>0 || qtySmall2>0)) {
+                if(flag1==1 && isRadio1 && (qtyLarge1>0 || qtyMed1>0 || qtySmall1>0)) {
+                    if (flag2 == 1 && isRadio2 && (qtyLarge2>0 || qtyMed2>0 || qtySmall2>0)) {
                         Intent i = new Intent(getContext(),
                                 EnterDetails.class);
                         startActivity(i);
+                    }
+                    else if(flag2==0)
+                    {
+                        Toast.makeText(getActivity(),"Pickup Date for Leg 2 less than today's date",Toast.LENGTH_LONG).show();
+                    }
+                    else if(qtyLarge2==0 && qtySmall2==0 && qtyMed2==0){
+                        Toast.makeText(getActivity(),"Atleast one bag needed to place an order for Leg 2",Toast.LENGTH_LONG).show();
+                    }
+                    else if(!isRadio2)
+                    {
+                        Toast.makeText(getActivity(),"Select one delivery option for return trip",Toast.LENGTH_LONG).show();
                     }
                 }
 
@@ -480,18 +495,18 @@ public class TwowayTab extends Fragment implements View.OnClickListener {
                     Toast.makeText(getActivity(),"Pickup Date for Leg 1 less than today's date",Toast.LENGTH_LONG).show();
                 }
 
-                else if(flag2==0)
-                {
-                    Toast.makeText(getActivity(),"Pickup Date for Leg 2 less than today's date",Toast.LENGTH_LONG).show();
-                }
+
 
                 else if(qtyLarge1==0 && qtySmall1==0 && qtyMed1==0){
                     Toast.makeText(getActivity(),"Atleast one bag needed to place an order for Leg 1",Toast.LENGTH_LONG).show();
                 }
 
-                else if(qtyLarge2==0 && qtySmall2==0 && qtyMed2==0){
-                    Toast.makeText(getActivity(),"Atleast one bag needed to place an order for Leg 2",Toast.LENGTH_LONG).show();
+
+                else if(!isRadio1)
+                {
+                    Toast.makeText(getActivity(),"Select one delivery option for first trip",Toast.LENGTH_LONG).show();
                 }
+
 
                 break;
         }

@@ -73,6 +73,7 @@ public class OnewayTab extends Fragment implements View.OnClickListener {
     Date datePickup;
     SimpleDateFormat df;
     String currentDate;
+    boolean isRadio;
 
 
 
@@ -130,7 +131,7 @@ public class OnewayTab extends Fragment implements View.OnClickListener {
                 String price = Double.toString(totalPrice);
                 globalVariable.setTotalPrice(totalPrice);
                 globalVariable.setTwoWay(false);
-                if(flag==1 && (qtySmall>0 || qtyMed>0 || qtyLarge>0)) {
+                if(flag==1 && isRadio && (qtySmall>0 || qtyMed>0 || qtyLarge>0)) {
                     Intent i = new Intent(getContext(),
                             EnterDetails.class);
                     startActivity(i);
@@ -142,6 +143,10 @@ public class OnewayTab extends Fragment implements View.OnClickListener {
                 else if(qtyLarge==0 && qtySmall==0 && qtyMed==0)
                 {
                     Toast.makeText(getActivity(),"Atleast one bag needed to place an order",Toast.LENGTH_LONG).show();
+                }
+                else if(!isRadio)
+                {
+                    Toast.makeText(getActivity(),"Select one delivery option",Toast.LENGTH_LONG).show();
                 }
 
             }
@@ -231,6 +236,7 @@ public class OnewayTab extends Fragment implements View.OnClickListener {
                 radioButton=(RadioButton)v.findViewById(selectedId);
                 if(dateEntered)
                 {
+                    isRadio = true;
                     if(selectedId==R.id.radio_1day)
                     {
                         if(dateEntered)
