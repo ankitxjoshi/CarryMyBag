@@ -468,7 +468,7 @@ public class TwowayTab extends Fragment implements View.OnClickListener {
                 String price = Double.toString(totalPrice);
                 globalVariable.setTotalPrice(totalPrice);
                 if(flag1==1 && (qtyLarge1>0 || qtyMed1>0 || qtySmall1>0)) {
-                    if (flag2 == 1 && qtyLarge2>0 && qtyMed2>0 && qtySmall2>0) {
+                    if (flag2 == 1 && (qtyLarge2>0 || qtyMed2>0 || qtySmall2>0)) {
                         Intent i = new Intent(getContext(),
                                 EnterDetails.class);
                         startActivity(i);
@@ -614,6 +614,7 @@ public class TwowayTab extends Fragment implements View.OnClickListener {
                 try {
                     datePickup = df.parse(pickupDate);
                     dateCurrent = df.parse(currentDate);
+                    dateEntered1 = true;
                     if (datePickup.compareTo(dateCurrent) < 1) {
                         flag1 = 0;
                         Toast.makeText(getActivity(), "Pickup date should be greater than today's date", Toast.LENGTH_LONG).show();
@@ -644,6 +645,7 @@ public class TwowayTab extends Fragment implements View.OnClickListener {
                 String pickupDate = df.format(newDate.getTime());
                 globalVariable.setPickupDate2(pickupDate);
                 PicupDate2.setText(pickupDate);
+                dateEntered2 = true;
                 Date dateCurrent2;
                 try {
                     datePickup = df.parse(pickupDate);

@@ -29,5 +29,6 @@ public class TransactionFailed extends AppCompatActivity implements View.OnClick
     public void onClick(View v) {
         Intent intent=new Intent(getApplicationContext(),MainActivity.class);
         startActivity(intent);
+        finish();
     }
 }

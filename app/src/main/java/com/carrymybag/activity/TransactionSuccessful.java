@@ -45,5 +45,6 @@ public class TransactionSuccessful extends AppCompatActivity implements View.OnC
     public void onClick(View v) {
         Intent intent = new Intent(this,MainActivity.class);
         startActivity(intent);
+        finish();
     }
 }
