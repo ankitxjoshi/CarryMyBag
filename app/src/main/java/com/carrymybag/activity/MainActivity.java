@@ -38,6 +38,9 @@ public class MainActivity extends AppCompatActivity {
         if (getIntent().getBooleanExtra("LOGOUT", false))
         {
             finish();
+            moveTaskToBack(true);
+            android.os.Process.killProcess(android.os.Process.myPid());
+            System.exit(1);
         }
 
         // Initializing Toolbar and setting it as the actionbar
@@ -196,7 +199,9 @@ public class MainActivity extends AppCompatActivity {
         if ((keyCode == KeyEvent.KEYCODE_BACK))
         {
             finish();
-            System.exit(0);
+            moveTaskToBack(true);
+            android.os.Process.killProcess(android.os.Process.myPid());
+            System.exit(1);
         }
         return super.onKeyDown(keyCode, event);
     }
