@@ -1,5 +1,6 @@
 package com.carrymybag.activity;
 
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
@@ -40,6 +41,10 @@ public class MainActivity extends AppCompatActivity {
             finish();
             moveTaskToBack(true);
             android.os.Process.killProcess(android.os.Process.myPid());
+            Intent startMain = new Intent(Intent.ACTION_MAIN);
+            startMain.addCategory(Intent.CATEGORY_HOME);
+            startMain.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(startMain);
             System.exit(1);
         }
 
@@ -201,6 +206,10 @@ public class MainActivity extends AppCompatActivity {
             finish();
             moveTaskToBack(true);
             android.os.Process.killProcess(android.os.Process.myPid());
+            Intent startMain = new Intent(Intent.ACTION_MAIN);
+            startMain.addCategory(Intent.CATEGORY_HOME);
+            startMain.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(startMain);
             System.exit(1);
         }
         return super.onKeyDown(keyCode, event);
