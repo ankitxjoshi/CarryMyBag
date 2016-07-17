@@ -38,14 +38,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         if (getIntent().getBooleanExtra("LOGOUT", false))
         {
-            finish();
-            moveTaskToBack(true);
-            android.os.Process.killProcess(android.os.Process.myPid());
-            Intent startMain = new Intent(Intent.ACTION_MAIN);
-            startMain.addCategory(Intent.CATEGORY_HOME);
-            startMain.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(startMain);
-            System.exit(1);
+            Intent intent = new Intent(Intent.ACTION_MAIN);
+            intent.addCategory(Intent.CATEGORY_HOME);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
         }
 
         // Initializing Toolbar and setting it as the actionbar
@@ -203,14 +199,10 @@ public class MainActivity extends AppCompatActivity {
     {
         if ((keyCode == KeyEvent.KEYCODE_BACK))
         {
-            finish();
-            moveTaskToBack(true);
-            android.os.Process.killProcess(android.os.Process.myPid());
-            Intent startMain = new Intent(Intent.ACTION_MAIN);
-            startMain.addCategory(Intent.CATEGORY_HOME);
-            startMain.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(startMain);
-            System.exit(1);
+            Intent intent = new Intent(Intent.ACTION_MAIN);
+            intent.addCategory(Intent.CATEGORY_HOME);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
         }
         return super.onKeyDown(keyCode, event);
     }
