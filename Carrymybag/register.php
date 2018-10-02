@@ -11,9 +11,9 @@ $response = array("error" => FALSE);
 if (isset($_POST['name']) && isset($_POST['email']) && isset($_POST['password'])) {
 
     // receiving the post params
-    $name = $_POST['name'];
-    $email = $_POST['email'];
-    $password = $_POST['password'];
+    $name = htmlentities($_POST['name']);
+    $email = htmlentities($_POST['email']);
+    $password = htmlentities($_POST['password']);
 
     // check if user is already existed with the same email
     if ($db->isUserExisted($email)) {
@@ -46,4 +46,3 @@ if (isset($_POST['name']) && isset($_POST['email']) && isset($_POST['password'])
     echo json_encode($response);
 }
 ?>
-
