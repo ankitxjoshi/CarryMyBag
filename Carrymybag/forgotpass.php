@@ -1,7 +1,7 @@
 <?php
   require_once 'include/DB_Functions.php';
   $db = new DB_Functions();
-  $forgotpassword = $_POST['forgotpassword'];
+  $forgotpassword = htmlentities($_POST['forgotpassword']);
   $randomcode = $db->random_string();
   $hash = $db->hashSSHA($randomcode);
   $encrypted_password = $hash["encrypted"]; // encrypted password
